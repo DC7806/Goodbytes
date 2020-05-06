@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rspec-support', '~> 3.9', '>= 3.9.3'
   gem 'faker', '~> 2.11'
   gem 'factory_bot_rails', '~> 5.2'
+  gem 'shoulda-matchers', '~> 4.3'
 end
 
 group :development do
