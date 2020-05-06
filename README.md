@@ -40,23 +40,27 @@
 
 ## Our Team
 
-- Shuhan Hu 胡舒涵
-  GitHub: https://github.com/RocketSH
-  email: 1119han@gmail.com
-  blog: https://rocketgirl.io/
+**Shuhan Hu 胡舒涵**
 
-- ErenWeng 翁千荏
-  GitHub: https://github.com/ErenWeng
-  email: f245986@gmail.com
+  GitHub: https://github.com/RocketSH \
+  email: 1119han@gmail.com \
+  blog: https://rocketgirl.io/ 
+  
+**ErenWeng 翁千荏**
+
+  GitHub: https://github.com/ErenWeng \
+  email: f245986@gmail.com \
   blog: https://medium.com/@f245986
   
-- Koten Liao 廖哲偉
-  GitHub: https://github.com/Koten0224
-  email: koten0224@gmail.com
+**Koten Liao 廖哲偉**
+
+  GitHub: https://github.com/Koten0224 \
+  email: koten0224@gmail.com \
   blog: https://medium.com/@koten0224
 
-- 許家禎
-  GitHub: https://github.com/luuuuuuuna
+**許家禎**
+
+  GitHub: https://github.com/luuuuuuuna \
   email: leyleo129@hotmail.com
 
 ---
