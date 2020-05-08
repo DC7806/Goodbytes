@@ -6,5 +6,9 @@ class User < ApplicationRecord
   
   #associations
   has_many :user_organization_refs
-  has_many :users, through: :user_organization_refs
+  has_many :organization, through: :user_organization_refs
+
+  #validations
+  validates :email, presence: true, uniqueness: true, length: { minimum: 1, maximum: 100 }
+  validates :encrypted_password, presence: true, length: { minimum: 1, maximum: 100 }
 end
