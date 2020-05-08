@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import 'jquery-ui'
+import 'bootstrap/dist/css/bootstrap.css'
 
 require("@rails/ujs").start()
 // require("turbolinks").start()
