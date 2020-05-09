@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :user_organization_ref do
-    user { nil }
+  factory :organizations_user do
     organization { nil }
+    user { nil }
   end
 end

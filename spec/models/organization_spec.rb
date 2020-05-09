@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
   describe 'association' do
-    it { should have_many(:user).through(:user_organization_refs) }
+    it { should have_many(:users).through(:organizations_users) }
   end
 
   describe 'validation' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:user) }
   end
 
   describe 'column_specification' do

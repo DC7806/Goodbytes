@@ -30,15 +30,6 @@ ActiveRecord::Schema.define(version: 2020_05_08_120923) do
     t.index ["user_id"], name: "index_organizations_users_on_user_id"
   end
 
-  create_table "user_organization_refs", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "organization_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["organization_id"], name: "index_user_organization_refs_on_organization_id"
-    t.index ["user_id"], name: "index_user_organization_refs_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,6 +49,4 @@ ActiveRecord::Schema.define(version: 2020_05_08_120923) do
 
   add_foreign_key "organizations_users", "organizations"
   add_foreign_key "organizations_users", "users"
-  add_foreign_key "user_organization_refs", "organizations"
-  add_foreign_key "user_organization_refs", "users"
 end
