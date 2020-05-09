@@ -10,5 +10,5 @@ class User < ApplicationRecord
 
   #validations
   validates :email, presence: true, uniqueness: true, length: { minimum: 1, maximum: 100 }
-  validates :encrypted_password, presence: true, length: { minimum: 1, maximum: 100 }
+  validates :encrypted_password, presence: true, length: { minimum: 6, maximum: 128 }
 end
