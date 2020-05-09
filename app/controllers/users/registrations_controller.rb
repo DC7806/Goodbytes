@@ -5,19 +5,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @invite_org_id = params[:invite_org_id]
+    super
+  end
 
   # POST /resource
   def create
-
+    
+    invite_org_id = params[:invite_org_id]
     super
-
     user = resource
     email = user.email
     self_org = Organization.find_by(name: email)
-    invite_org_id = params[:invite_org_id]
 
     if not self_org
       self_org = Organization.new(name: email)
@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     orgs = []
     orgs << [self_org,"admin"]
-    orgs << [Organization.find(invite_org_id), "member"] if invite_org_id
+    orgs << [Organization.find(invite_org_id.to_i), "member"] if invite_org_id.present?
 
     orgs.each do |org, role|
       relationship_params = {
@@ -51,10 +51,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
+  def destroy
+    Organization.destroy_by(name: resource.email)
+    super
 
-  # end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

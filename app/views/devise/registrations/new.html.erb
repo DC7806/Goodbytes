@@ -20,6 +20,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  <input type="hidden" name="invite_org_id" value="<%= @invite_org_id %>">
 
   <div class="actions">
     <%= f.submit "Sign up" %>
