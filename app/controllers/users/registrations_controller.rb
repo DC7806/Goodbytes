@@ -11,20 +11,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+
     super
+
     user = resource
     email = user.email
-    org = Organization.find_by(name: email)
-    if not org
-      org = Organization.new(name: email)
-      org.save
+    self_org = Organization.find_by(name: email)
+    invite_org_id = params[:invite_org_id]
+
+    if not self_org
+      self_org = Organization.new(name: email)
+      self_org.save
     end
-    relationship = OrganizationsUser.new(
-      user_id: user.id, 
-      organization_id: org.id,
-      role: "admin"
-    )
-    relationship.save
+
+    orgs = []
+    orgs << [self_org,"admin"]
+    orgs << [Organization.find(invite_org_id), "member"] if invite_org_id
+
+    orgs.each do |org, role|
+      relationship_params = {
+        user_id: user.id, 
+        organization_id: org.id
+      }
+      relationship   = OrganizationsUser.find_by(relationship_params)
+      relationship ||= OrganizationsUser.new(relationship_params)
+      relationship.role = role
+      relationship.save
+    end
   end
 
   # GET /resource/edit

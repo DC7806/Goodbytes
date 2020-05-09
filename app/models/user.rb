@@ -5,7 +5,7 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
   
   #associations
-  has_many :organizations_users
+  has_many :organizations_users, dependent: :destroy
   has_many :organizations, through: :organizations_users
   
   #validations

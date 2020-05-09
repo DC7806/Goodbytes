@@ -1,6 +1,6 @@
 class Organization < ApplicationRecord
   #associations
-  has_many :organizations_users
+  has_many :organizations_users, dependent: :destroy
   has_many :users, through: :organizations_users
   
   #validations
