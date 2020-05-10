@@ -5,19 +5,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    @invite_org_id = params[:invite_org_id]
-    @email = params[:email]
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
   def create
     
     invite_org_id = params[:invite_org_id]
+    invite_token = params[:invite_token]
     user = User.find_by(email: params[:user][:email])
 
-    if not user
+    if user
+      user.update(password: params[:user][:password])
+    else
       super
       user = resource
     end
@@ -95,4 +96,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
 end

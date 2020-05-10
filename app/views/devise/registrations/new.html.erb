@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @email , disabled: !!@email%>
   </div>
 
   <div class="field">
@@ -21,10 +21,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
   <input type="hidden" name="invite_org_id" value="<%= @invite_org_id %>">
+  <input type="hidden" name="invite_token" value="<%= @invite_token %>">
 
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%#= render "devise/shared/links" %>
