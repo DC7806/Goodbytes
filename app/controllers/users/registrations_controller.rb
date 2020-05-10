@@ -7,6 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     @invite_org_id = params[:invite_org_id]
+    @email = params[:email]
     super
   end
 
@@ -14,29 +15,36 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     
     invite_org_id = params[:invite_org_id]
-    super
-    user = resource
-    email = user.email
-    self_org = Organization.find_by(name: email)
+    user = User.find_by(email: params[:user][:email])
 
-    if not self_org
-      self_org = Organization.new(name: email)
-      self_org.save
+    if not user
+      super
+      user = resource
     end
 
-    orgs = []
-    orgs << [self_org,"admin"]
-    orgs << [Organization.find(invite_org_id.to_i), "member"] if invite_org_id.present?
+    if user
+      email = user.email
+      self_org = Organization.find_by(name: email)
 
-    orgs.each do |org, role|
-      relationship_params = {
-        user_id: user.id, 
-        organization_id: org.id
-      }
-      relationship   = OrganizationsUser.find_by(relationship_params)
-      relationship ||= OrganizationsUser.new(relationship_params)
-      relationship.role = role
-      relationship.save
+      if not self_org
+        self_org = Organization.new(name: email)
+        self_org.save
+      end
+
+      orgs = []
+      orgs << [self_org,"admin"]
+      orgs << [Organization.find(invite_org_id.to_i), "member"] if invite_org_id.present?
+
+      orgs.each do |org, role|
+        relationship_params = {
+          user_id: user.id, 
+          organization_id: org.id
+        }
+        relationship   = OrganizationsUser.find_by(relationship_params)
+        relationship ||= OrganizationsUser.new(relationship_params)
+        relationship.role = role
+        relationship.save
+      end
     end
   end
 

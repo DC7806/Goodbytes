@@ -25,6 +25,15 @@ class Organization < ApplicationRecord
     end
     return result
   end
+
+  # def relationship_with(user_obj)
+  #   OrganizationsUser.find_by(organization_id: id, user_id: user_ojb.id)
+  # end
+
+  # def can_change_role_by(user_obj)
+  #   relationship_with(user_obj).role == "admin"
+  # end
+  
 end
 
 # select users.id,users.email,users.name,rel.role
