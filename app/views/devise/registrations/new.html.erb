@@ -4,8 +4,12 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @email , disabled: !!@email%>
+    <% if @email %>
+      <%= f.hidden_field :email, value: @email %>
+    <% else %>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @email %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -20,7 +24,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-  <input type="hidden" name="invite_org_id" value="<%= @invite_org_id %>">
+  <input type="hidden" name="organization_id" value="<%= @organization_id %>">
   <input type="hidden" name="invite_token" value="<%= @invite_token %>">
 
   <div class="actions">

@@ -1,29 +1,76 @@
 
 <h1>首頁歐</h1>
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-  </head>
-  <body>
-  <%= form_tag(invited_path, method: "post", target: "_blank") do |f| %>
-    <input type="hidden" name="invite_org_id" value="<%= @organization_id %>">
-    <input type="hidden" name="email" value="<%= @email %>">
-    <input type="hidden" name="invite_token" value="<%= @invite_token %>">
-    <input class="btn btn-primary" type="submit" value="這是測試用post註冊">
+<p>邀請信內容測試</p>
+<%= form_tag(organization_invited_path, method: "post", target: "_blank") do %>
+  <input type="hidden" name="organization_id" value="<%= @organization_id %>">
+  <input type="hidden" name="email" value="<%= @email %>">
+  <input type="hidden" name="invite_token" value="<%= @invite_token %>">
+  <input class="btn btn-primary" type="submit" value="請按我註冊">
+<% end %>
+<p>######################</p>
+<% myself = current_user %>
+<% if myself %>
+  <% organizations_collection = myself.organizations.includes(:organizations_users).includes(:users) %>
+  <p>寄送邀請信</p>
+  <%= form_tag(organization_send_invite_path, method: "post") do %>
+    <div>
+      <%= email_field_tag :email %>
+    </div>
+    <div>
+      <select name="organization_id" id="">
+        <option style="display:none">請選擇寄信代表</option>
+        <% organizations_collection.each do |org| %>
+          <option value="<%= org.id %>"><%= org.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <input class="btn btn-primary" type="submit" value="寄信啊">
   <% end %>
+  <p>######################</p>
+  <p>你的組織與成員名單</p>
+  <table class="table">
+    <% organizations_collection.each do |org| %>
+      <% role_table = {} %>
+      <% org.organizations_users.each do |relationship| %>
+        <% role_table[relationship.user_id] = relationship.role %>
+      <% end %>
+      <thead>
+        <tr>
+          <th>名稱：</th>
+          <th><%= org.name %></th>
+        </tr>
+        <tr>
+          <th>成員EMAIL</th>
+          <th>成員名稱</th>
+          <th>權限</th>
+          <th>動作</th>
+        </tr>
+      </thead>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
-</html>
+      <tbody>
+        <% org.users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.name %></td>
+            <% if ['admin','member'].include?(role_table[user.id]) %>
+              <td><%= role_table[user.id] %></td>
+            <% elsif user.id != myself.id %>
+              <td><%= link_to "邀請中.再次寄信", organization_send_invite_path(email: user.email, organization_id: org.id), method: "post"%></td>
+            <% else %>
+              <td><%= link_to "確認加入", organization_join_url(organization_id: org.id,email: myself.email,invite_token: role_table[myself.id]) %></td>
+            <% end %>
+            <% if role_table[myself.id]=='admin' %>
+              <% if user != myself %>
+                <td>
+                  <%= link_to "刪除", organization_fire_path(organization_id: org.id, user_id: user.id), method: "delete" %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% end %>
+  </table>
+    
+<% end %>

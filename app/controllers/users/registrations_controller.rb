@@ -11,20 +11,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    # 必要參數: email password
+    # 非必要參數: organization_id invite_token
     
-    invite_org_id = params[:invite_org_id]
-    invite_token = params[:invite_token]
-    user = User.find_by(email: params[:user][:email])
+    organization_id = params[:organization_id].to_i
+    invite_token  = params[:invite_token]
+    user          = User.find_by(email: params[:user][:email])
 
-    if user
-      user.update(password: params[:user][:password])
+    if user 
+      invited_record = user.organizations_users.first
+      # 再次檢查使用者的token是否跟當初縙出的一樣
+      if (
+        (not role_list.include?(invite_token)) && 
+        invited_record.role            == invite_token && 
+        invited_record.organization_id == organization_id
+      )
+        user.update(password: params[:user][:password])
+      else
+        redirect_to root_path, notice: "無效的操作"
+        return
+      end
     else
       super
       user = resource
     end
 
     if user
-      email = user.email
+      email    = user.email
       self_org = Organization.find_by(name: email)
 
       if not self_org
@@ -32,20 +45,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
         self_org.save
       end
 
-      orgs = []
+      orgs  = []
       orgs << [self_org,"admin"]
-      orgs << [Organization.find(invite_org_id.to_i), "member"] if invite_org_id.present?
+      orgs << [Organization.find(organization_id.to_i), "member"] if organization_id.present?
 
       orgs.each do |org, role|
         relationship_params = {
-          user_id: user.id, 
+          user_id:         user.id, 
           organization_id: org.id
         }
-        relationship   = OrganizationsUser.find_by(relationship_params)
-        relationship ||= OrganizationsUser.new(relationship_params)
+        relationship      = OrganizationsUser.find_by(relationship_params)
+        relationship    ||= OrganizationsUser.new(relationship_params)
         relationship.role = role
         relationship.save
       end
+      redirect_to root_path, notice: "歡迎加入歐！！"
     end
   end
 
@@ -63,7 +77,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     Organization.destroy_by(name: resource.email)
     super
-
   end
 
   # GET /resource/cancel

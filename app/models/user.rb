@@ -14,8 +14,7 @@ class User < ApplicationRecord
 
   attr_accessor :role
   
-  alias_method :native_organizations, :organizations
-  def organizations
+  def organizations_with_purview
     result = Organization.find_by_sql("
         select org.*,rel.role
         from organizations org

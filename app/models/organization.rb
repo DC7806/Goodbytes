@@ -9,8 +9,7 @@ class Organization < ApplicationRecord
 
   attr_accessor :purview #權限
   
-  alias_method :native_users, :users
-  def users
+  def users_with_role
     result = User.find_by_sql("
         select users.*,rel.role
         from users
@@ -36,10 +35,3 @@ class Organization < ApplicationRecord
   
 end
 
-# select users.id,users.email,users.name,rel.role
-# from users
-# inner join organizations_users rel
-# on users.id=rel.user_id 
-# inner join organizations org
-# on org.id=rel.organization_id 
-# where org.id=5
