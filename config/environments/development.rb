@@ -37,6 +37,16 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
     # 5/8 set up the default URL options for the Devise mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mailgun.org',
+    port:                 587,
+    domain:               'koten.com',
+    user_name:            ENV["MAILGUN_ID"],
+    password:             ENV["MAILGUN_PASSWORD"],
+    authentication:       'plain',
+    enable_starttls_auto: true 
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -11,22 +11,36 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    user = resource
-    email = user.email
-    org = Organization.find_by(name: email)
-    if not org
-      org = Organization.new(name: email)
-      org.save
-    end
-    relationship = OrganizationsUser.new(
-      user_id: user.id, 
-      organization_id: org.id,
-      role: "admin"
-    )
-    relationship.save
-  end
 
+    super
+
+    user = resource
+    token = params[:invite_token]
+    if token.present?
+      invite = Invites.find_by(token: token)
+      if invite
+        @org = Organization.find(invite.item_id) 
+        invite.destroy
+      end
+    end
+
+    self_org = Organization.new(name: user.email)
+    self_org.save
+
+    orgs  = []
+    orgs << [self_org, "admin" ]
+    orgs << [    @org, "member"] if @org
+
+    orgs.each do |org, role|
+      relationship = OrganizationsUser.new(
+        organization_id: org.id,
+        user_id:         user.id, 
+        role:            role
+      )
+      relationship.save
+    end
+    
+  end
   # GET /resource/edit
   # def edit
   #   super
@@ -38,10 +52,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-
-  # end
+  def destroy
+    Organization.destroy_by(name: resource.email)
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -73,4 +87,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
 end
