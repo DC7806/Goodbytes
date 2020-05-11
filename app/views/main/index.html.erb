@@ -1,18 +1,16 @@
 
 <h1>首頁歐</h1>
 <p>邀請信內容測試</p>
-<%= form_tag(organization_invited_path, method: "post", target: "_blank") do %>
-  <input type="hidden" name="organization_id" value="<%= @organization_id %>">
-  <input type="hidden" name="email" value="<%= @email %>">
-  <input type="hidden" name="invite_token" value="<%= @invite_token %>">
-  <input class="btn btn-primary" type="submit" value="請按我註冊">
-<% end %>
+<%= link_to "請按我註冊加入", organization_invited_url(
+      email: "hellotest@hotmail.com",
+      invite_token: "94539487"
+      ) %>
 <p>######################</p>
 <% myself = current_user %>
 <% if myself %>
   <% organizations_collection = myself.organizations.includes(:organizations_users).includes(:users) %>
   <p>寄送邀請信</p>
-  <%= form_tag(organization_send_invite_path, method: "post") do %>
+  <%= form_tag(invite_send_path, method: "post") do %>
     <div>
       <%= email_field_tag :email %>
     </div>
@@ -27,6 +25,26 @@
     <input class="btn btn-primary" type="submit" value="寄信啊">
   <% end %>
   <p>######################</p>
+  <p>邀請名單</p>
+  <table>
+    <% myself.send_invites.each do |invite| %>
+      <tr>
+        <td><%= invite.reciever %></td>
+        <td>
+          <%= form_tag(invite_send_path, method: "post") do %>
+            <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
+            <input type="hidden" name="email" value="<%= invite.reciever %>">
+            <input class="btn btn-primary" type="submit" value="再次邀請">
+          <% end %>
+        </td>
+        <td><%= link_to "取消邀請", invite_cancel_path(invite_id: invite.id), data: {confirm: "確定？"}, method: 'delete' %></td>
+      </tr>
+    <% end %>
+
+    
+  </table>
+
+  <p>######################</p>
   <p>你的組織與成員名單</p>
   <table class="table">
     <% organizations_collection.each do |org| %>
@@ -38,6 +56,7 @@
         <tr>
           <th>名稱：</th>
           <th><%= org.name %></th>
+          <th>你的權限：<%= role_table[myself.id] %></th>
         </tr>
         <tr>
           <th>成員EMAIL</th>
@@ -52,13 +71,8 @@
           <tr>
             <td><%= user.email %></td>
             <td><%= user.name %></td>
-            <% if ['admin','member'].include?(role_table[user.id]) %>
-              <td><%= role_table[user.id] %></td>
-            <% elsif user.id != myself.id %>
-              <td><%= link_to "邀請中.再次寄信", organization_send_invite_path(email: user.email, organization_id: org.id), method: "post"%></td>
-            <% else %>
-              <td><%= link_to "確認加入", organization_join_url(organization_id: org.id,email: myself.email,invite_token: role_table[myself.id]) %></td>
-            <% end %>
+            <td><%= role_table[user.id] %></td>
+
             <% if role_table[myself.id]=='admin' %>
               <% if user != myself %>
                 <td>

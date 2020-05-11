@@ -12,19 +12,16 @@ class OrganizationRolesController < ApplicationController
 
   def destroy
     # 必要參數: organization_id, user_id
-    org  = Organization.find(params[:organization_id].to_i)
-    user = org.users_with_role
-              .find do |u| 
-                u.id == params[:user_id].to_i 
-              end
-
-    # 驗證token借role欄位放，所以如果沒有確認信件就不會變成上述角色          
-    if role_list.include? user.role
-      org.users.delete(user) # 開除員工
+    relationship = get_relationship(user_id)
+       
+    if relationship.role == 'admin'
+      notice = "不能開除admin！"
     else
-      user.destroy # 取消邀請，直接把當初創建的暫存user資料刪除
+      relationship.destroy # 開除員工
+      notice = "成功刪除！"
     end
-    redirect_to root_path, notice: "成功刪除！"
+    
+    redirect_to root_path, notice: notice
   end
 
   private

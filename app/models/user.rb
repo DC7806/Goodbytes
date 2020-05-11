@@ -7,6 +7,7 @@ class User < ApplicationRecord
   #associations
   has_many :organizations_users, dependent: :destroy
   has_many :organizations, through: :organizations_users
+  has_many :send_invites, class_name: "Invite", foreign_key: "sender_id"
   
   #validations
   validates :email, presence: true, uniqueness: true, length: { minimum: 1, maximum: 100 }

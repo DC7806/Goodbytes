@@ -11,58 +11,38 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # 必要參數: email password
-    # 非必要參數: organization_id invite_token
+
+    super
+
+    user = resource
+    token = params[:invite_token]
+    if token.present?
+      invite = Invites.find_by(token: token)
+      if invite
+        @org = Organization.find(invite.item_id) 
+        invite.destroy
+      end
+    end
+
+    self_org = Organization.new(name: user.email)
+    self_org.save
+
+    orgs  = []
+    orgs << [self_org, "admin" ]
+    orgs << [    @org, "member"] if @org
+
+    orgs.each do |org, role|
+      relationship_params = {
+        user_id:         user.id, 
+        organization_id: org.id
+      }
+      relationship      = OrganizationsUser.new(relationship_params)
+      relationship.role = role
+      relationship.save
+    end
     
-    organization_id = params[:organization_id].to_i
-    invite_token  = params[:invite_token]
-    user          = User.find_by(email: params[:user][:email])
-
-    if user 
-      invited_record = user.organizations_users.first
-      # 再次檢查使用者的token是否跟當初縙出的一樣
-      if (
-        (not role_list.include?(invite_token)) && 
-        invited_record.role            == invite_token && 
-        invited_record.organization_id == organization_id
-      )
-        user.update(password: params[:user][:password])
-      else
-        redirect_to root_path, notice: "無效的操作"
-        return
-      end
-    else
-      super
-      user = resource
-    end
-
-    if user
-      email    = user.email
-      self_org = Organization.find_by(name: email)
-
-      if not self_org
-        self_org = Organization.new(name: email)
-        self_org.save
-      end
-
-      orgs  = []
-      orgs << [self_org,"admin"]
-      orgs << [Organization.find(organization_id.to_i), "member"] if organization_id.present?
-
-      orgs.each do |org, role|
-        relationship_params = {
-          user_id:         user.id, 
-          organization_id: org.id
-        }
-        relationship      = OrganizationsUser.find_by(relationship_params)
-        relationship    ||= OrganizationsUser.new(relationship_params)
-        relationship.role = role
-        relationship.save
-      end
-      redirect_to root_path, notice: "歡迎加入歐！！"
-    end
+    redirect_to root_path, notice: "歡迎加入歐！！"
   end
-
   # GET /resource/edit
   # def edit
   #   super

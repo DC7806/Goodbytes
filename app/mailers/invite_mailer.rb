@@ -1,6 +1,5 @@
 class InviteMailer < ApplicationMailer
-  def send_invite(name, organization_id, email, invite_token, registable)
-    @organization_id = organization_id
+  def send_invite(name, email, invite_token, registable)
     @email = email
     @invite_token = invite_token
     @user_exist = !registable

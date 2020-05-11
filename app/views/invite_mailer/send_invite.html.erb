@@ -14,7 +14,6 @@
     <%= link_to "請按我去接受邀請", root_url %>
   <% else %>
     <%= link_to "請按我註冊加入", organization_invited_url(
-      organization_id: @organization_id,
       email: @email,
       invite_token: @invite_token
       ) %>
