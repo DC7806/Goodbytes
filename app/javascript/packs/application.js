@@ -3,7 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import "jquery-ui";
+// import "jquery-ui";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 

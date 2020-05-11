@@ -14,39 +14,19 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="notice"><%= notice %></div>
-        <div class="alert"><%= alert %></div>
-        <div class="navbar-text pull-right">
-          <% if user_signed_in? %>Hello, <strong><% current_user.email %></strong>
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-          <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-          <% end %>
-        </div>
-        <aside id="sidebar"><%= link_to root_path, class: "sidebar__logo" do %>
-            <%= image_tag "glide-g-brands.svg"%>
-            <h3>Goodbite</h3>  
-          <% end %>
-            <nav class="sidebar__menu">
-              <a>Emails</a>
-              <a>Saved Links</a>
-              <a>Sources</a>
-              <a>Settings</a>
-            </nav>
-
-            <nav class="sidebar__menu sidebar__menu--push-down">
-              <a>New Newsletter</a>
-              <a>Billing</a>
-              <a>Account Settings</a>
-              <a>Sign Out</a>
-            </nav>
-        </aside>
-        <main><%= yield %></main>
-      </div>
-    </div> 
+    <div class="layout">
+      <%= render "shared/sidebar" %>
+      <main>
+        <%# <%= content_for :top %> 
+        <div class="container">
+          <div class="row">
+            <%= render "shared/user_section" %>
+            <div class="notice"><%= notice %></div>
+            <div class="alert"><%= alert %></div>
+            <%= yield %>
+          </div>
+        </div> 
+      </main>
+    </div>
   </body>
 </html>

@@ -19,10 +19,6 @@ a {
 
 #sidebar {
   width: 250px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
   background: #f5f7f9;
   border-right: 1px solid #d6dce0;
   display: flex;
@@ -31,18 +27,12 @@ a {
   .sidebar__logo {
     display: flex;
     position: relative;
-    padding: 1.5em 0;
+    padding: 1.5em 1.5em;
     text-align: center;
     color: inherit;
 
     img {
-      width: 30px;
-      height: 20px;
-    }
-
-    h3 {
-      padding-left: .5em;
-      padding-right: 1em;
+      height: 2rem;
     }
   }
 
