@@ -12,7 +12,7 @@ class OrganizationRolesController < ApplicationController
 
   def destroy
     # 必要參數: organization_id, user_id
-    relationship = get_relationship(user_id)
+    relationship = get_relationship(params[:user_id])
        
     if relationship.role == 'admin'
       notice = "不能開除admin！"
