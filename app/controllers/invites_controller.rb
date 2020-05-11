@@ -36,7 +36,7 @@ class InvitesController < ApplicationController
   end
 
   def destroy # 刪除邀請
-    Invite.find(params[:invite_id]).destroy
+    Invite.find_by(token: @invite_token).destroy
     redirect_to root_path, notice: "刪除成功！"
   end
 
@@ -48,12 +48,18 @@ class InvitesController < ApplicationController
   end
 
   def join_to_organization # 已註冊受邀者點邀請到這邊
+    invite = Invite.find_by(token: @invite_token)
+    unless invite
+      redirect_to root_path, notice: "無效的操作"
+      return
+    end
     relationship = OrganizationsUser.new(
-      organization_id: @organization_id, 
+      organization_id: invite.item_id, 
       user_id:         current_user.id,
       role:            'member'
     )
     relationship.save
+    invite.destroy
     redirect_to root_path, notice: "歡迎加入 #{@name} "
   end
 

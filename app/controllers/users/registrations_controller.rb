@@ -40,7 +40,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       relationship.save
     end
     
-    redirect_to root_path, notice: "歡迎加入歐！！"
   end
   # GET /resource/edit
   # def edit

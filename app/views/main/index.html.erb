@@ -24,6 +24,24 @@
     </div>
     <input class="btn btn-primary" type="submit" value="寄信啊">
   <% end %>
+
+  <p>######################</p>
+  <p>等待審核的邀請</p>
+  <table class="table">
+    <tr>
+      <th>寄件者</th>
+      <th>組織</th>
+      <th>動作</th>
+    </tr>
+    <% myself.recieve_invites.each do |invite| %>
+      <tr>
+        <td><%= invite.email %></td>
+        <td><%= invite.org_name %></td>
+        <td><%= link_to "同意", organization_join_path(invite_token: invite.token) %></td>
+        <td><%= link_to "不同意", invite_cancel_path(invite_token: invite.token), method: 'delete' %></td>
+      </tr>
+    <% end %>
+  </table>
   <p>######################</p>
   <p>邀請名單</p>
   <table>
@@ -37,7 +55,7 @@
             <input class="btn btn-primary" type="submit" value="再次邀請">
           <% end %>
         </td>
-        <td><%= link_to "取消邀請", invite_cancel_path(invite_id: invite.id), data: {confirm: "確定？"}, method: 'delete' %></td>
+        <td><%= link_to "取消邀請", invite_cancel_path(invite_token: invite.token), data: {confirm: "確定？"}, method: 'delete' %></td>
       </tr>
     <% end %>
 

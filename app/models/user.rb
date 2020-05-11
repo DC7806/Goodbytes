@@ -17,7 +17,7 @@ class User < ApplicationRecord
   
   def organizations_with_purview
     result = Organization.find_by_sql("
-        select org.*,rel.role
+        select org.*, rel.role purview
         from organizations org
         inner join organizations_users rel
         on org.id=rel.organization_id 
@@ -29,5 +29,17 @@ class User < ApplicationRecord
         organization.purview = organization.attributes["role"]
       end
       return result
+  end
+  def recieve_invites
+    recieve_records = Invite.find_by_sql("
+        select users.email email, org.name org_name,org.id org_id, invs.token, invs.id
+        from invites invs
+        inner join organizations org
+        on org.id=invs.item_id and invs.item_type='Organization'
+        inner join users
+        on users.id=invs.sender_id
+        where invs.reciever='#{email}'
+      ")
+      recieve_records.map{|x|Result.new(x.attributes)}
   end
 end
