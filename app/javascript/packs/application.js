@@ -3,16 +3,15 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import 'jquery-ui'
-import 'bootstrap/dist/css/bootstrap.css'
+// import "jquery-ui";
+import "bootstrap/dist/css/bootstrap.css";
+import "../styles/index.sass";
 
-require("@rails/ujs").start()
-// require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
-require("scripts")
-require("styles")
-
+require("@rails/ujs").start();
+// require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
+require("scripts");
 
 // webpack testing all complete!! { Koten }
 // console.log(`jQuery testing.. ${$}`)
