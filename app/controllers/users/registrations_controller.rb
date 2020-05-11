@@ -32,12 +32,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     orgs << [    @org, "member"] if @org
 
     orgs.each do |org, role|
-      relationship_params = {
+      relationship = OrganizationsUser.new(
+        organization_id: org.id,
         user_id:         user.id, 
-        organization_id: org.id
-      }
-      relationship      = OrganizationsUser.new(relationship_params)
-      relationship.role = role
+        role:            role
+      )
       relationship.save
     end
     

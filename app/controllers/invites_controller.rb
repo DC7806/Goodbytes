@@ -3,20 +3,23 @@ class InvitesController < ApplicationController
   before_action :params_injection
   def create
     # 必要參數: name organization_id email 
-    # 發送邀請時使用此方法，會創一個預先準備好的user記錄以便後續追蹤confirm狀況
-    # 不用怕重複，在registration controller我有改寫
     user            = User.find_by(email: @email)
     @invite_token   = generate_token(10)
     registable      = !user
     organization = Organization.find(@organization_id)
-    relationship = organization.users_with_role
-                               .find{ |u| u.email == @email }
+    relationship = organization.users
+                               .find_by(email: @email)
     unless relationship 
-      organization.invites.create(
-        token: @invite_token,
-        sender_id: current_user.id,
-        reciever: @email
-      )
+      last_invite = organization.invites.find_by(reciever: @email)
+      if last_invite
+        @invite_token = last_invite.token
+      else
+        organization.invites.create(
+          token: @invite_token,
+          sender_id: current_user.id,
+          reciever: @email
+        )
+      end
 
       InviteMailerJob.perform_later(
         Organization.find(@organization_id).name,

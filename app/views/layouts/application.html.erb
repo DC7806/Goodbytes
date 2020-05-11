@@ -10,16 +10,22 @@
   </head>
 
   <body>
-    <nav>
-      <% if current_user %>
-        <div><%= link_to "登出", destroy_user_session_path, method: :delete, class:"btn" %></div>
-      <% else %>
-        <div><%= link_to "註冊", new_user_registration_path, class:"btn" %></div>
-        <div><%= link_to "登入", new_user_session_path, class:"btn" %></div>
-      <% end %>
-    </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+      <nav class="row fixed-top bg-light justify-content-between px-5 py-2">
+        <% if current_user %>
+          <div><%= current_user.email %>您好！</div>
+          <div><%= link_to "登出", destroy_user_session_path, method: :delete, class:"btn" %></div>
+        <% else %>
+          <div></div>
+          <div class="row">
+            <div><%= link_to "註冊", new_user_registration_path, class:"btn" %></div>
+            <div><%= link_to "登入", new_user_session_path, class:"btn" %></div>
+          </div>
+        <% end %>
+      </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+  </div>
   </body>
 </html>
