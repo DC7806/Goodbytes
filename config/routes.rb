@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   
   root   "dashboard#index"
-  get    "/test",                   to: "main#index"
+  get    "/test",                   to: "test#index"
   post   "/invite/send",            to: "invites#create"
   delete "/invite/cancel",          to: "invites#destroy"
   get    "/organization/join",      to: "invites#join_to_organization"
