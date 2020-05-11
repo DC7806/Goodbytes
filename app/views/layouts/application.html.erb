@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
     <title>Goodbite</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <p class="navbar-text pull-right">
-      <% if user_signed_in? %>
-        您好，<strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
-    </p>
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="notice"><%= notice %></div>
+        <div class="alert"><%= alert %></div>
+        <div class="navbar-text pull-right">
+          <% if user_signed_in? %>Hello, <strong><% current_user.email %></strong>
+          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+          <% end %>
+        </div>
+        <div id="sidebar">
+          <div id="logo">
+            <%= link_to root_path do %>
+              <%= image_tag "glide-g-brands.svg"%> 
+            <% end %>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+          <ul>
+            <li>Emails</li>
+            <li>Saved Links</li>
+            <li>Sources</li>
+            <li>Settings</li>
+          </ul>
+
+          <ul>
+            <li>New Newsletter</li>
+            <li>Billing</li>
+            <li>Account Settings</li>
+            <li></li>
+          </ul>
+        </div>
+        <div><%= yield %></div>
+      </div>
+    </div> 
   </body>
 </html>
