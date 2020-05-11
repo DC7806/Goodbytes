@@ -19,13 +19,11 @@
       <main>
         <%# <%= content_for :top %> 
         <div class="container">
-          <div class="row">
             <%= render "shared/user_section" %>
             <div class="notice"><%= notice %></div>
             <div class="alert"><%= alert %></div>
             <%= yield %>
-          </div>
-        </div> 
+        </div>
       </main>
     </div>
   </body>
