@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_120923) do
+ActiveRecord::Schema.define(version: 2020_05_11_024802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invites", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "token"
+    t.bigint "sender_id", null: false
+    t.string "reciever", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_type", "item_id"], name: "index_invites_on_item_type_and_item_id"
+    t.index ["sender_id"], name: "index_invites_on_sender_id"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
@@ -26,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_120923) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "role"
     t.index ["organization_id"], name: "index_organizations_users_on_organization_id"
     t.index ["user_id"], name: "index_organizations_users_on_user_id"
   end
@@ -42,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_120923) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
