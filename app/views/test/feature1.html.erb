@@ -1,0 +1,107 @@
+
+<p>邀請信內容測試</p>
+<%= link_to "請按我註冊加入", organization_invited_url(
+      email: "hellotest@hotmail.com",
+      invite_token: "94539487"
+      ) %>
+<p>######################</p>
+<% myself = current_user %>
+<% if myself %>
+  <% organizations_collection = myself.organizations.includes(:organizations_users).includes(:users) %>
+  <p>寄送邀請信</p>
+  <%= form_tag(invite_send_path, method: "post") do %>
+    <div>
+      <%= email_field_tag :email %>
+    </div>
+    <div>
+      <select name="organization_id" id="">
+        <option style="display:none">請選擇寄信代表</option>
+        <% organizations_collection.each do |org| %>
+          <option value="<%= org.id %>"><%= org.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <input class="btn btn-primary" type="submit" value="寄信啊">
+  <% end %>
+
+  <p>######################</p>
+  <p>等待審核的邀請</p>
+  <table class="table">
+    <tr>
+      <th>寄件者</th>
+      <th>組織</th>
+      <th>動作</th>
+    </tr>
+    <% myself.recieve_invites.each do |invite| %>
+      <tr>
+        <td><%= invite.email %></td>
+        <td><%= invite.org_name %></td>
+        <td><%= link_to "同意", organization_join_path(invite_token: invite.token) %></td>
+        <td><%= link_to "不同意", invite_cancel_path(invite_token: invite.token), method: 'delete' %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p>######################</p>
+  <p>邀請名單</p>
+  <table>
+    <% myself.send_invites.each do |invite| %>
+      <tr>
+        <td><%= invite.reciever %></td>
+        <td>
+          <%= form_tag(invite_send_path, method: "post") do %>
+            <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
+            <input type="hidden" name="email" value="<%= invite.reciever %>">
+            <input class="btn btn-primary" type="submit" value="再次邀請">
+          <% end %>
+        </td>
+        <td><%= link_to "取消邀請", invite_cancel_path(invite_token: invite.token), data: {confirm: "確定？"}, method: 'delete' %></td>
+      </tr>
+    <% end %>
+
+    
+  </table>
+
+  <p>######################</p>
+  <p>你的組織與成員名單</p>
+  <table class="table">
+    <% organizations_collection.each do |org| %>
+      <% role_table = {} %>
+      <% org.organizations_users.each do |relationship| %>
+        <% role_table[relationship.user_id] = relationship.role %>
+      <% end %>
+      <thead>
+        <tr>
+          <th>名稱：</th>
+          <th><%= org.name %></th>
+          <th>你的權限：<%= role_table[myself.id] %></th>
+        </tr>
+        <tr>
+          <th>成員EMAIL</th>
+          <th>成員名稱</th>
+          <th>權限</th>
+          <th>動作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% org.users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.name %></td>
+            <td><%= role_table[user.id] %></td>
+
+            <% if role_table[myself.id]=='admin' %>
+              <% if user != myself %>
+                <td>
+                  <%= link_to "刪除", organization_fire_path(organization_id: org.id, user_id: user.id), method: "delete" %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% end %>
+  </table>
+    
+<% end %>

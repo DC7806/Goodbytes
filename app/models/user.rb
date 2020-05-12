@@ -26,7 +26,7 @@ class User < ApplicationRecord
         where users.id=#{id}
       ")
       result.each do |organization|
-        organization.purview = organization.attributes["role"]
+        organization.purview = organization.attributes["purview"]
       end
       return result
   end
