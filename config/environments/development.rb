@@ -41,9 +41,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.mailgun.org',
     port:                 587,
-    domain:               'koten.com',
-    user_name:            ENV["MAILGUN_ID"],
-    password:             ENV["MAILGUN_PASSWORD"],
+    domain:               'mailby.goodbyt.es',
+    user_name:            ENV["MG_INVITE_ID"],
+    password:             ENV["MG_INVITE_PASSWORD"],
     authentication:       'plain',
     enable_starttls_auto: true 
   }
