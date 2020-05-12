@@ -27,13 +27,9 @@ a {
   .sidebar__logo {
     display: flex;
     position: relative;
-    padding: 1.5em 1.5em;
-    text-align: center;
+    padding: 1.5em 3em;
+    justify-content: end;
     color: inherit;
-
-    img {
-      height: 2rem;
-    }
   }
 
   a {
