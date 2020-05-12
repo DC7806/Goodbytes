@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_024802) do
+ActiveRecord::Schema.define(version: 2020_05_12_094541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_channels_on_organization_id"
+  end
+
+  create_table "channels_org_users", force: :cascade do |t|
+    t.bigint "channel_id", null: false
+    t.bigint "organizations_user_id", null: false
+    t.string "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_channels_org_users_on_channel_id"
+    t.index ["organizations_user_id"], name: "index_channels_org_users_on_organizations_user_id"
+  end
 
   create_table "invites", force: :cascade do |t|
     t.string "item_type", null: false
@@ -61,6 +80,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_024802) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "channels", "organizations"
+  add_foreign_key "channels_org_users", "channels"
+  add_foreign_key "channels_org_users", "organizations_users"
   add_foreign_key "organizations_users", "organizations"
   add_foreign_key "organizations_users", "users"
 end
