@@ -2,22 +2,25 @@ class InvitesController < ApplicationController
 
   before_action :params_injection
   skip_before_action :authenticate_user!, only: [:sign_up_and_join]
-  
+  # before_action :admin?
   def create
     # 必要參數: name organization_id email 
-    user            = User.find_by(email: @email)
-    @invite_token   = generate_token(10)
-    registable      = !user
-    organization = Organization.find(@organization_id)
-    relationship = organization.users
-                               .find_by(email: @email)
+    
+
+    invite_token  = generate_token(10)
+    user          = User.find_by(email: @email)
+    organization  = Organization.find(@organization_id)
+    relationship  = organization.users
+                                .find_by(email: @email)
+
     unless relationship 
       last_invite = organization.invites.find_by(reciever: @email)
+
       if last_invite
-        @invite_token = last_invite.token
+        invite_token = last_invite.token
       else
         organization.invites.create(
-          token: @invite_token,
+          token: invite_token,
           sender_id: current_user.id,
           reciever: @email
         )
@@ -26,20 +29,27 @@ class InvitesController < ApplicationController
       InviteMailerJob.perform_later(
         Organization.find(@organization_id).name,
         @email, 
-        @invite_token, 
-        registable
+        invite_token, 
+        !user
       )
 
-      redirect_to root_path, notice: "邀請信件已寄出"
+      message = "邀請信件已寄出"
     else
-      redirect_to root_path, notice: "此成員已加入！"
+      message = "此成員已加入！"
     end
-    
+    redirect_to root_path, notice: message
   end
 
   def destroy # 刪除邀請
-    Invite.find_by(token: @invite_token).destroy
-    redirect_to root_path, notice: "刪除成功！"
+
+    if @invite
+      @invite.destroy
+      message = "刪除成功！"
+    else
+      message = "操作失敗！"
+    end
+
+    redirect_to root_path, notice: message
   end
 
   def sign_up_and_join # 受邀者點連結註冊到這邊
@@ -50,19 +60,20 @@ class InvitesController < ApplicationController
   end
 
   def join_to_organization # 已註冊受邀者點邀請到這邊
-    invite = Invite.find_by(token: @invite_token)
-    unless invite
+    unless @invite
       redirect_to root_path, notice: "無效的操作"
       return
     end
+
     relationship = OrganizationsUser.new(
-      organization_id: invite.item_id, 
+      organization_id: @invite.item_id, 
       user_id:         current_user.id,
       role:            'member'
     )
+
     relationship.save
-    invite.destroy
-    redirect_to root_path, notice: "歡迎加入 #{@name} "
+    @invite.destroy
+    redirect_to root_path, notice: "歡迎加入"
   end
 
   private
@@ -71,6 +82,7 @@ class InvitesController < ApplicationController
     @organization_id = params[:organization_id].to_i
     @email           = params[:email]
     @invite_token    = params[:invite_token]
+    @invite = Invite.find_by(token: @invite_token) if @invite_token
   end
 
 end
