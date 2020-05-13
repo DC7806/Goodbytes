@@ -1,6 +1,8 @@
 class InvitesController < ApplicationController
 
   before_action :params_injection
+  skip_before_action :authenticate_user!, only: [:sign_up_and_join]
+  
   def create
     # 必要參數: name organization_id email 
     user            = User.find_by(email: @email)

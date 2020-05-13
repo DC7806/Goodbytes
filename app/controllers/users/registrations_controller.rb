@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user = resource
     token = params[:invite_token]
     if token.present?
-      invite = Invites.find_by(token: token)
+      invite = Invite.find_by(token: token)
       if invite
         @org = Organization.find(invite.item_id) 
         invite.destroy
