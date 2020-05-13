@@ -1,22 +1,30 @@
 class ChannelsController < ApplicationController
   before_action :find_channel, except: [:create]
+  after_action :back_to_root, except: [:find_channel, :channel_params]
+
   def show
   end
 
   def create
     if Channel.create(channel_params)
-      redirect_to root_path, notice: "channel新增成功"
+      @notice = "channel新增成功"
     else
-      redirect_to root_path, notice: "channel新增失敗"
+      @notice = "channel新增失敗"
     end
   end
   def update
-    @channel.update(channel_params)
-    redirect_to root_path, notice: "channel更新成功"
+    if @channel.update(channel_params)
+      @notice = "channel更新成功"
+    else
+      @notice = "channel更新失敗"
+    end
   end
   def destroy
-    @channel.destroy
-    redirect_to root_path, notice: "channel刪除成功"
+    if @channel.destroy
+      @notice = "channel刪除成功"
+    else
+      @notice = "channel刪除失敗"
+    end
   end
 
   private
@@ -28,6 +36,9 @@ class ChannelsController < ApplicationController
       :name,
       :description
     )
+  end
+  def back_to_root
+    redirect_to root_path, notice: @notice
   end
   
 end
