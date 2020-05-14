@@ -9,23 +9,19 @@ Rails.application.routes.draw do
   post    "/invite/send",            to: "invites#create"
   delete  "/invite/cancel",          to: "invites#destroy"
 
-  get     "/organization/join",      to: "invites#join_to_organization"
-  get     "/organization/invited",   to: "invites#sign_up_and_join"
-  post    "/organization/promotion", to: "organization_roles#update"
-  delete  "/organization/fire",      to: "organization_roles#destroy"
-
   # get     "/channel/:channel_id",    to: "channels#show",               as: "channel"
   # post    "/channel",                to: "channels#create",             as: "channel_create"
   # post    "/channel/update",         to: "channels#update",             as: "channel_update"
   # delete  "/channel",                to: "channels#destroy",            as: "channel_destroy"
 
-  resources :channels, path: "/channel", 
-                       only: [
-                         :show, 
-                         :create, 
-                         :update, 
-                         :destroy
-                        ]
+  resources     :organizations,      as: 'org', path: "/",       only: [:create, :update, :destroy] do
+
+    resources   :organization_roles, as: 'role',path: "/role",   only: [:update, :destroy]
+    resources   :channels,           as: 'ch',  path: '/',     except: [:index, :new, :edit] do
+
+      resources :channel_roles,      as: 'role',path: '/role', except: [:index, :edit]
+    end
+  end
   
   # devise_scope :users do
   #   post "/users/sign_up" => "users/registrations#invited"
