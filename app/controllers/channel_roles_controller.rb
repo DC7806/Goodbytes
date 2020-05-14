@@ -29,16 +29,7 @@ class ChannelRolesController < ApplicationController
   end
 
   def create
-    org_role = OrganizationsUser.find_by(
-      user_id: current_user.id,
-      organization_id: @channel.organization_id
-    )
-    if org_role
-      ChannelsOrgUser.create(
-        organizations_user_id: org_role.id,
-        channel_id: @channel.id,
-        role: 'member'
-      )
+    if @channel.update_role(params[:user_id], 'member')
       redirect_to root_path, notice: "歡迎加入 channel #{@channel.name}"
       return
     end

@@ -6,6 +6,8 @@ class Channel < ApplicationRecord
   has_many :users, through: :organizations_users
 
   belongs_to :organization
+  
+  validates :name, presence: true
 
   def role(user_id)
     result = relationship(user_id)
@@ -26,6 +28,9 @@ class Channel < ApplicationRecord
           role: role
         )
       end
+      return true
+    else
+      return false
     end
   end
 

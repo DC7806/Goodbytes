@@ -32,9 +32,21 @@ class Organization < ApplicationRecord
     return result && result.role || "None"
   end
 
+  def update_role(user_id, role)
+    org_role = relationship(user_id)
+    if org_role
+      org_role = role
+      org_role.save
+    else
+      organizations_users.create(
+        user_id: user_id,
+        role: role
+      )
+    end
+  end
+
   def relationship(user_id)
-    OrganizationsUser.find_by(
-      organization_id: id, 
+    organizations_users.find_by(
       user_id: user_id
     )
   end

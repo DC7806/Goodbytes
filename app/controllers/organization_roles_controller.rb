@@ -1,11 +1,7 @@
 class OrganizationRolesController < ApplicationController
 
   before_action :org_admin?
-  before_action :get_organization_role,except: [:create]
-
-  def create
-
-  end
+  before_action :get_organization_role
 
   def update
     # 必要參數: organization_id, user_id, role

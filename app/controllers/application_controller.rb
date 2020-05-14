@@ -15,18 +15,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: '沒有權限進行此操作！'
     end
   end
-
-  def create_organization(name)
-    Organization.create(
-      name: name
-    )
-  end
-
-  def create_org_user_link(user_id, org_id, role)
-    OrganizationsUser.create(
-      user_id: user_id,
-      organization_id: org_id,
-      role: role
-    )
-  end
 end
