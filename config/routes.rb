@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'channels/update'
   get 'channels/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  
+
   root   "dashboard#index"
   get    "/feature1",               to: "test#feature1"
   post   "/invite/send",            to: "invites#create"
@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   # devise_scope :users do
   #   post "/users/sign_up" => "users/registrations#invited"
   # end
-  
+
+  resources :articles
+
 end
