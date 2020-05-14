@@ -7,9 +7,13 @@ class User < ApplicationRecord
   #associations
   has_many :organizations_users, dependent: :destroy
   has_many :organizations, through: :organizations_users
+  # has_many :channels, through: :organizations
 
-  has_many :channels_org_users, through: :organizations_users
-  has_many :channels, through: :channels_org_users
+  def channels
+    Channel.joins(organization: :users).where("users.id = ?", id)
+  end
+
+  has_many :channels_org_users, foreign_key: :organizations_user_id
   
   has_many :send_invites, class_name: "Invite", foreign_key: "sender_id"
   
@@ -34,8 +38,8 @@ class User < ApplicationRecord
       end
       return result
   end
-  def recieve_invites
-    recieve_records = Invite.find_by_sql("
+  def receive_invites
+    receive_records = Invite.find_by_sql("
         select users.email email, org.name org_name,org.id org_id, invs.token, invs.id
         from invites invs
         inner join organizations org

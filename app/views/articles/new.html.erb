@@ -1,15 +1,10 @@
-<button>
-  <%= link_to "Back to Email list", articles_path %>
-</button>
-<header>
-  I'm Header.
-</header>
-
-<%= form_for @mail do |f| %>
+<div class="card border-info mb-3" >
+  <%= form_for  do |f| %>
+  <div class="card-header">
   <%= f.label :subject, "Subject" %>
-<% end %>
+  <%= f.text_field :subject %></div>
+  <div class="card-body text-info"><%= f.submit "Create Email" %></div>
+  <% end %>
+</div>
 
-<footer>
-  Footer.
-</footer>
-
+<%= link_to "Back to Email list", articles_path, class:"button" %>

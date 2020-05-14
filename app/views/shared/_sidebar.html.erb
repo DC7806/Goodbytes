@@ -2,16 +2,17 @@
   <h3 >
   <%= link_to "Goodbytes", root_path, class: "sidebar__logo" %>
   </h3>
+  <% if @channel %>
     <nav class="sidebar__menu">
-      <%= link_to "Emails", articles_path %>
-      <%#= link_to "Emails", channel_articles_path %>
+      <%= link_to "Emails", channel_articles_path(@channel) %>
       <a>Saved Links</a>
       <a>Sources</a>
       <a>Settings</a>
     </nav>
+  <% end %>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
-      <%= link_to "New Newsletter", channels_create_path %>
+      <%= link_to "New Newsletter" %>
       <a>Billing</a>
       <%= link_to "Account Settings", edit_user_registration_path %>
       <%= link_to "Sign Out", destroy_user_session_path %>
