@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # devise_scope :users do
   #   post "/users/sign_up" => "users/registrations#invited"
   # end
+  # resources :channels, only: [:show] do
+  #   resources :articles
+  # end
 
   resources :articles
 
