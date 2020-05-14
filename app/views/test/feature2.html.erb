@@ -1,0 +1,38 @@
+
+<table class="table">
+  <% @channels.each do |ch| %>
+    <tr>
+      <td>
+        <p><%= ch.name %></p>
+      </td>
+      <td>
+        <%= form_tag(channel_update_path, method: 'post') do %>
+          <input type="hidden" name="channel_id" value="<%= ch.id %>">
+          <input type="text" name="channel[name]">
+          <input type="submit" value="改名">
+        <% end %>
+      </td>
+      <td>
+        <%= form_tag(channel_destroy_path, method: 'delete') do %>
+          <input type="hidden" name="channel_id" value="<%= ch.id %>">
+          <input type="submit" value="刪除">
+        <% end %>
+      </td>
+    </tr>
+
+  <% end %>
+</table>
+
+<%= form_tag(channel_create_path, method: 'post') do %>
+  <div>
+    <input type="text" name="channel[name]">
+  </div>
+  <div>
+    <select name="channel[organization_id]">
+      <% current_user.organizations.each do |org| %>
+        <option value="<%= org.id %>"> <%= org.name %> </option>
+      <% end %>
+    </select>
+  </div>
+  <input type="submit" value="送出">
+<% end %>
