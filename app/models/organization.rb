@@ -28,11 +28,15 @@ class Organization < ApplicationRecord
   end
 
   def role(user_id)
-    result = OrganizationsUser.find_by(
+    result = relationship(user_id)
+    return result && result.role || "None"
+  end
+
+  def relationship(user_id)
+    OrganizationsUser.find_by(
       organization_id: id, 
       user_id: user_id
     )
-    return result && result.role || "None"
   end
 
   # def relationship_with(user_obj)

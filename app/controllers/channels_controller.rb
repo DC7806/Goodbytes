@@ -6,8 +6,10 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    if Channel.create(channel_params)
+    channel = Channel.new(channel_params)
+    if channel.save
       @notice = "channel新增成功"
+      channel.update_role(current_user.id, 'admin')
     else
       @notice = "channel新增失敗"
     end

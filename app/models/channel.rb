@@ -8,7 +8,29 @@ class Channel < ApplicationRecord
   belongs_to :organization
 
   def role(user_id)
-    result = ChannelsOrgUser.find_by_sql("
+    result = relationship(user_id)
+    return result && result.role || "None"
+  end
+
+  def update_role(user_id, role)
+    org_role = Organization.find(organization_id)
+                           .relationship(user_id)
+    if org_role
+      channel_role = relationship(user_id)
+      if channel_role
+        channel_role.role = role
+        channel_role.save
+      else
+        channels_org_users.create(
+          organizations_user_id: org_role.id,
+          role: role
+        )
+      end
+    end
+  end
+
+  def relationship(user_id)
+    ChannelsOrgUser.find_by_sql("
       select * 
       from channels_org_users ch
       inner join organizations_users org
@@ -17,7 +39,7 @@ class Channel < ApplicationRecord
       on users.id = #{user_id} and users.id = org.user_id
       where ch.id = #{id}
       ").first
-    return result && result.role || "None"
   end
+
 
 end
