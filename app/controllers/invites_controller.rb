@@ -6,7 +6,6 @@ class InvitesController < ApplicationController
   def create
     # 必要參數: name organization_id email 
     
-
     invite_token  = generate_token(10)
     user          = User.find_by(email: @email)
     organization  = Organization.find(@organization_id)
@@ -60,18 +59,18 @@ class InvitesController < ApplicationController
   end
 
   def join_to_organization # 已註冊受邀者點邀請到這邊
+
     unless @invite
       redirect_to root_path, notice: "無效的操作"
       return
     end
 
-    relationship = OrganizationsUser.new(
-      organization_id: @invite.item_id, 
-      user_id:         current_user.id,
-      role:            'member'
+    create_org_user_link(
+      current_user.id, 
+      @invite.item_id, 
+      'member'
     )
 
-    relationship.save
     @invite.destroy
     redirect_to root_path, notice: "歡迎加入"
   end

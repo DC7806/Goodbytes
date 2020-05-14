@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
   before_action :find_channel, except: [:create]
+  before_action :org_admin?
 
   def show
   end
@@ -12,6 +13,7 @@ class ChannelsController < ApplicationController
     end
     redirect_to(root_path, notice: @notice) and return
   end
+
   def update
     if @channel.update(channel_params)
       @notice = "channel更新成功"
@@ -20,6 +22,7 @@ class ChannelsController < ApplicationController
     end
     redirect_to(root_path, notice: @notice) and return
   end
+
   def destroy
     if @channel.destroy
       @notice = "channel刪除成功"
@@ -31,8 +34,9 @@ class ChannelsController < ApplicationController
 
   private
   def find_channel
-    @channel = Channel.find(params[:channel_id])
+    @channel = Channel.find(params[:id])
   end
+
   def channel_params
     params.require(:channel).permit(
       :name,
@@ -40,5 +44,7 @@ class ChannelsController < ApplicationController
       :organization_id
     )
   end
+
+  
   
 end

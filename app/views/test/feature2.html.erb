@@ -6,15 +6,15 @@
         <p><%= ch.name %></p>
       </td>
       <td>
-        <%= form_tag(channel_update_path, method: 'post') do %>
-          <input type="hidden" name="channel_id" value="<%= ch.id %>">
+        <%= form_tag(channel_path(id: ch.id), method: 'patch') do %>
+          <input type="hidden" name="channel[organization_id]" value="<%= ch.organization_id %>">
           <input type="text" name="channel[name]">
           <input type="submit" value="改名">
         <% end %>
       </td>
       <td>
-        <%= form_tag(channel_destroy_path, method: 'delete') do %>
-          <input type="hidden" name="channel_id" value="<%= ch.id %>">
+        <%= form_tag(channel_path(id: ch.id), method: 'delete') do %>
+          <input type="hidden" name="channel[organization_id]" value="<%= ch.organization_id %>">
           <input type="submit" value="刪除">
         <% end %>
       </td>
@@ -23,7 +23,7 @@
   <% end %>
 </table>
 
-<%= form_tag(channel_create_path, method: 'post') do %>
+<%= form_tag(channels_path, method: 'post') do %>
   <div>
     <input type="text" name="channel[name]">
   </div>

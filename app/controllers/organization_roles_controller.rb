@@ -1,7 +1,12 @@
 class OrganizationRolesController < ApplicationController
 
-  before_action :admin?, except: [:get_organization_role]
-  before_action :get_organization_role, except: [:admin?]
+  before_action :org_admin?
+  before_action :get_organization_role,except: [:create]
+
+  def create
+
+  end
+
   def update
     # 必要參數: organization_id, user_id, role
     @relationship.role = params[:role]
@@ -20,13 +25,12 @@ class OrganizationRolesController < ApplicationController
     redirect_to root_path, notice: notice
   end
 
+  private
   def get_organization_role
     @relationship = OrganizationsUser.find_by(
       organization_id: params[:organization_id],
       user_id:         params[:user_id]
     )
   end
-
-  
 
 end

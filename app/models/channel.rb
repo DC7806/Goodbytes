@@ -1,7 +1,7 @@
 class Channel < ApplicationRecord
-  has_many :invites, as: :item
+  has_many :invites, as: :item, dependent: :destroy
 
-  has_many :channels_org_users
+  has_many :channels_org_users, dependent: :destroy
   has_many :organizations_users, through: :channels_org_users
   has_many :users, through: :organizations_users
 

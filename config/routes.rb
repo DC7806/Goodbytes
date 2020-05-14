@@ -14,12 +14,18 @@ Rails.application.routes.draw do
   post    "/organization/promotion", to: "organization_roles#update"
   delete  "/organization/fire",      to: "organization_roles#destroy"
 
-  get     "/channel/:channel_id",    to: "channels#show",               as: "channel"
-  post    "/channel",                to: "channels#create",             as: "channel_create"
-  post    "/channel/update",         to: "channels#update",             as: "channel_update"
-  delete  "/channel",                to: "channels#destroy",            as: "channel_destroy"
+  # get     "/channel/:channel_id",    to: "channels#show",               as: "channel"
+  # post    "/channel",                to: "channels#create",             as: "channel_create"
+  # post    "/channel/update",         to: "channels#update",             as: "channel_update"
+  # delete  "/channel",                to: "channels#destroy",            as: "channel_destroy"
 
-  # resources :channels, path: "/channel", only: [:show, :create, :update, :destroy]
+  resources :channels, path: "/channel", 
+                       only: [
+                         :show, 
+                         :create, 
+                         :update, 
+                         :destroy
+                        ]
   
   # devise_scope :users do
   #   post "/users/sign_up" => "users/registrations#invited"
