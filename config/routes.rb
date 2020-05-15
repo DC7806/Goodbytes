@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   
   root   "dashboard#index"
-  post   "/switch_channel",         to: "dashboard#update"
+  resources :dashboard, only: [:index, :update]
   post   "/invite/send",            to: "invites#create"
 
   get     "/feature1",               to: "test#feature1"
