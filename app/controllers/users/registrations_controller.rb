@@ -13,11 +13,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
 
     super
-
+    params_require(:invite_token,)
     user = resource
-    token = params[:invite_token]
     if token.present?
-      invite = Invite.find_by(token: token)
+      invite = Invite.find_by(token: @invite_token)
       if invite
         @org = Organization.find(invite.item_id) 
         invite.destroy

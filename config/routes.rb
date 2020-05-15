@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   get    "/organization/join",      to: "invites#join_to_organization"
   get    "/organization/invited",   to: "invites#sign_up_and_join"
 
-  resources     :organizations,      as: 'org', path: "/",       only: [:create, :update, :destroy] do
+  resources     :organizations,      as: 'organization', path: "/",       only: [:create, :update, :destroy] do
 
     resources   :organization_roles, as: 'role',path: "/role",   only: [:update, :destroy]
-    resources   :channels,           as: 'ch',  path: '/',     except: [:index, :new, :edit] do
+    resources   :channels,           as: 'channel',  path: '/',     except: [:index, :new, :edit] do
 
       resources :channel_roles,      as: 'role',path: '/role', except: [:index, :edit]
     end

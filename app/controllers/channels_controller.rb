@@ -1,11 +1,13 @@
 class ChannelsController < ApplicationController
   before_action :find_channel, except: [:create]
-  before_action :org_admin?
+  before_action :org_admin?, except: [:show]
 
   def show
+    params_require(:id)
   end
 
   def create
+    params_require(:name, :organization_id)
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
@@ -17,6 +19,7 @@ class ChannelsController < ApplicationController
   end
 
   def update
+    params_require(:id,:name, :organization_id)
     if @channel.update(channel_params)
       @notice = "channel更新成功"
     else
@@ -26,6 +29,7 @@ class ChannelsController < ApplicationController
   end
 
   def destroy
+    params_require(:id, :organization_id)
     if @channel.destroy
       @notice = "channel刪除成功"
     else
@@ -36,7 +40,8 @@ class ChannelsController < ApplicationController
 
   private
   def find_channel
-    @channel = Channel.find(params[:id])
+    params_require(:id)
+    @channel = Channel.find(@id)
   end
 
   def channel_params
