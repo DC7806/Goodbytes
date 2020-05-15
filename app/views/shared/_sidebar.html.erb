@@ -2,14 +2,12 @@
   <h3 >
   <%= link_to "Goodbytes", root_path, class: "sidebar__logo" %>
   </h3>
-  <% if @channel %>
     <nav class="sidebar__menu">
-      <%= link_to "Emails", root_path %>
+      <%= link_to "Articles", root_path %>
       <a>Saved Links</a>
       <a>Sources</a>
       <a>Settings</a>
     </nav>
-  <% end %>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
       <%= link_to "New Newsletter" %>
