@@ -3,7 +3,9 @@
     Goodbytes
   </h3>
   <% end %>
+
     <nav class="sidebar__menu">
+    <% if current_user %>
       <%= form_tag(switch_channel_path, method: 'post') do %>
         <select name="org_ch"  onchange="this.form.submit();">
           <% current_user.channels.each do |ch| %>
@@ -16,6 +18,7 @@
           <% end %>
         </select>
       <% end %>
+    <% end %>
 
       <a>Emails</a>
       <a>Saved Links</a>

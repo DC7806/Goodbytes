@@ -3,14 +3,15 @@ class DashboardController < ApplicationController
     unless session["goodbytes7788"]
       session["goodbytes7788"] = {}
     end
-    unless session[:goodbytes7788]["organization_id"] && session[:goodbytes7788]["channel_id"]
+    site = session[:goodbytes7788]
+    unless site["organization_id"] && site["channel_id"]
       channel = current_user.channels.first
-      session[:goodbytes7788]["organization_id"] = channel.organization_id
-      session[:goodbytes7788]["channel_id"] = channel.id
+      site["organization_id"] = channel.organization_id
+      site["channel_id"] = channel.id
     end
     redirect_to organization_channel_path(
-      organization_id: session[:goodbytes7788]["organization_id"], 
-      id: session[:goodbytes7788]["channel_id"]
+      organization_id: site["organization_id"], 
+      id: site["channel_id"]
     )
   end
 
@@ -22,4 +23,5 @@ class DashboardController < ApplicationController
     redirect_to organization_channel_path(organization_id: org_id, id: ch_id)
 
   end
+
 end
