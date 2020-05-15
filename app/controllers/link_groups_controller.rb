@@ -1,6 +1,6 @@
 class LinkGroupsController < ApplicationController
   def show
-    
+
   end
 
   def index

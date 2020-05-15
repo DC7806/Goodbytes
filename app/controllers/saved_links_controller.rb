@@ -1,0 +1,2 @@
+class SavedLinksController < ApplicationController
+end
