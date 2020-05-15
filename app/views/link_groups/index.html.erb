@@ -1,0 +1,24 @@
+<h1>link group</h1>
+
+<div>
+  <%= link_to "新增群組", new_channel_link_group_path %>
+</div>
+
+<div class="d-flex flex-wrap">
+  <% @link_groups.each do |link_group| %>
+    <div class="border m-2 p-2" style="width:200px">
+      <div class="p-2">
+          <%= link_group.name %>
+      </div>
+
+      <div>
+        <div>
+          <%= link_to "修改群組", edit_channel_link_group_path(id: link_group.id) %>
+        </div>
+        <div>
+          <%= link_to "刪除群組", channel_link_group_path(id: link_group.id), method: 'delete', data: {confirm: "確認刪除？" } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

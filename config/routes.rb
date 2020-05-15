@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'channels/create'
-  get 'channels/update'
-  get 'channels/destroy'
+  get 'channel/create'
+  get 'channel/update'
+  get 'channel/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   
   root   "dashboard#index"
@@ -12,7 +12,14 @@ Rails.application.routes.draw do
   get    "/organization/invited",   to: "invites#sign_up_and_join"
   post   "/organization/promotion", to: "organization_roles#update"
   delete "/organization/fire",      to: "organization_roles#destroy"
-  get    "/channel/:channel_id",    to: "channels#show"
+  # get    "/channel/:channel_id",    to: "channels#show"
+
+  resources :channels, only: [:show, :create, :update, :destroy] do
+    resources :link_groups
+  end 
+
+
+
   # devise_scope :users do
   #   post "/users/sign_up" => "users/registrations#invited"
   # end

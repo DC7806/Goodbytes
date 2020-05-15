@@ -1,6 +1,6 @@
-<h1>新增群組</h1>
+<h1>編輯群組</h1>
 
-<%= form_for(@link_group, url: channel_link_groups_path, method: "POST") do |f| %>
+<%= form_for(@link_group, url: channel_link_group_path, method: "PATCH") do |f| %>
   <%= f.text_field :name %>
   <%= f.submit %>
 <% end %>
