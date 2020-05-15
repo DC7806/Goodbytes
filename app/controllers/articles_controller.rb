@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
-  before_action :find_mail, only: [:edit, :show]
+  before_action :find_channel, only: [:index, :new, :edit, :show]
+  before_action :find_article, only: [:create]
 
   def index
-    @channel = Channel.find(params[:channel_id])
-    @articles = @channel.articles.order_by(created_at: :desc)
+    @articles = @channel.articles.order(created_at: :desc)
   end
 
   def new
@@ -11,11 +11,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(mail_params)
-    @mail.channel_id = params[:channel_id]
+    @article = Article.new(article_params)
 
     if @article.save
-      redirect_to @article, notice: "The mail has been created."
+      redirect_to channel_articles_path(params[:channel_id]), notice: "The mail has been created."
     else
       render :new
     end
@@ -25,11 +24,16 @@ class ArticlesController < ApplicationController
   end
 
   private
-  def mail_params
-    params.require(:mail).permit(:subject)
+  def article_params
+    params.require(:article).permit(:subject)
   end
 
-  def find_mail
+  def find_channel
+    @channel = Channel.find(params[:channel_id])
+  end
+
+  def find_article
+    @article.channel_id = params[:channel_id]
   rescue
     redirect_to article_path, notice: "Sorry we cannot find this email."
   end

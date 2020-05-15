@@ -2,13 +2,14 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
     <%= link_to "Home", root_path %>
-    <li class="breadcrumb-item active" aria-current="page"><%= @channel.name %> email list</li>
+    <li class="breadcrumb-item active" aria-current="page">Article list</li>
   </ol>
 </nav>
 <section>
   <div class="card">
-   <div class="card-header">
  <%= link_to "Create Email", new_channel_article_path(@channel), class:"btn btn-primary"%>
+   <div class="card-header">
+   <h3><%= @channel.name %> Emails</h3>
    </div>
    <div class="card-body">
       <% @articles.each do |article| %>
