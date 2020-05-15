@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :find_channel, only: [:index, :create, :new, :edit, :show]
-  before_action :find_article, only: [:show, :edit]
+  before_action :find_channel, only: [:index, :create, :new, :edit, :show, :update]
+  before_action :find_article, only: [:show, :edit, :update]
 
   def index
     @articles = @channel.articles.order(created_at: :desc)
