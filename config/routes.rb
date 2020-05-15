@@ -1,18 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   
-  root    "dashboard#index"
+  root   "dashboard#index"
+  post   "/invite/send",            to: "invites#create"
 
   get     "/feature1",               to: "test#feature1"
   get     "/feature2",               to: "test#feature2"
+  delete "/invite/cancel",          to: "invites#destroy"
 
-  post    "/invite/send",            to: "invites#create"
-  delete  "/invite/cancel",          to: "invites#destroy"
-
-  # get     "/channel/:channel_id",    to: "channels#show",               as: "channel"
-  # post    "/channel",                to: "channels#create",             as: "channel_create"
-  # post    "/channel/update",         to: "channels#update",             as: "channel_update"
-  # delete  "/channel",                to: "channels#destroy",            as: "channel_destroy"
+  get    "/organization/join",      to: "invites#join_to_organization"
+  get    "/organization/invited",   to: "invites#sign_up_and_join"
 
   resources     :organizations,      as: 'org', path: "/",       only: [:create, :update, :destroy] do
 
@@ -22,9 +19,5 @@ Rails.application.routes.draw do
       resources :channel_roles,      as: 'role',path: '/role', except: [:index, :edit]
     end
   end
-  
-  # devise_scope :users do
-  #   post "/users/sign_up" => "users/registrations#invited"
-  # end
   
 end
