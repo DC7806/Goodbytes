@@ -11,7 +11,15 @@ class InvitesController < ApplicationController
   end
 
   def accept
-    redirect_to 
+    org_id = params[:organization_id]
+    redirect_post(organization_role_index_path(organization_id: org_id),
+      params: {organization_id: org_id, invite_token: params[:invite_token]},   
+      options: {
+        method: :post,                  
+        authenticity_token: 'auto',                  
+        autosubmit: true
+      }
+    )
   end
 
   def destroy # 刪除邀請

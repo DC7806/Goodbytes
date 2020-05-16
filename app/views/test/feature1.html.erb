@@ -36,7 +36,7 @@
       <tr>
         <td><%= invite.email %></td>
         <td><%= invite.org_name %></td>
-        <td><%= link_to "同意", organization_role_index_path(organization_id: invite.org_id,invite_token: invite.token) %></td>
+        <td><%= link_to "同意", invite_accept_path(organization_id: invite.org_id,invite_token: invite.token) %></td>
         <td><%= link_to "不同意", invite_cancel_path(invite_token: invite.token), method: 'delete' %></td>
       </tr>
     <% end %>

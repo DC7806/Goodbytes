@@ -1,6 +1,6 @@
 class OrganizationRolesController < ApplicationController
 
-  before_action :org_admin?
+  before_action :org_admin?, only: [:update, :destroy]
   before_action :get_organization_role, only: [:update, :destroy]
 
   def new
@@ -25,7 +25,7 @@ class OrganizationRolesController < ApplicationController
       return
     end
 
-    Organizaiton.find(organization_id).update_role(
+    Organization.find(organization_id).update_role(
       current_user.id,
       'member'
     )

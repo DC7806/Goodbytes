@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'foreman', '~> 0.87.1'
 
 gem 'devise', '~> 4.2'
+gem 'repost'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
