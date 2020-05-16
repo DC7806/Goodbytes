@@ -6,15 +6,15 @@
 
     <nav class="sidebar__menu">
     <% if current_user %>
-      <%= form_tag(dashboard_path, method: 'patch') do %>
+      <%= form_tag(dashboard_path(id: 1), method: 'patch') do %>
         <select name="org_ch"  onchange="this.form.submit();">
           <% current_user.channels.each do |ch| %>
             <option value="<%= ch.organization_id %>|<%= ch.id %>"
-              <% if ch.id == params[:id].to_i %>
+              <% if ch.id == session[:goodbytes7788]["channel_id"].to_i %>
                 selected
               <% end %>
               ><%= ch.name %>
-            </option>
+            </option> 
           <% end %>
         </select>
       <% end %>

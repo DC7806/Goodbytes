@@ -33,10 +33,10 @@ class Organization < ApplicationRecord
   end
 
   def update_role(user_id, role)
-    org_role = relationship(user_id)
-    if org_role
-      org_role = role
-      org_role.save
+    org_rel = relationship(user_id)
+    if org_rel
+      org_rel.role = role
+      org_rel.save
     else
       organizations_users.create(
         user_id: user_id,

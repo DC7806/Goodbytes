@@ -1,6 +1,6 @@
 
 <p>邀請信內容測試</p>
-<%= link_to "請按我註冊加入", organization_invited_url(
+<%= link_to "請按我註冊加入", new_user_registration_path(
       email: "hellotest@hotmail.com",
       invite_token: "94539487"
       ) %>
@@ -9,7 +9,7 @@
 <% if myself %>
   <% organizations_collection = myself.organizations.includes(:organizations_users).includes(:users) %>
   <p>寄送邀請信</p>
-  <%= form_tag(invite_send_path, method: "post") do %>
+  <%= form_tag(invite_path, method: "post") do %>
     <div>
       <%= email_field_tag :email %>
     </div>
@@ -36,7 +36,7 @@
       <tr>
         <td><%= invite.email %></td>
         <td><%= invite.org_name %></td>
-        <td><%= link_to "同意", organization_join_path(invite_token: invite.token) %></td>
+        <td><%= link_to "同意", organization_role_index_path(organization_id: invite.org_id,invite_token: invite.token) %></td>
         <td><%= link_to "不同意", invite_cancel_path(invite_token: invite.token), method: 'delete' %></td>
       </tr>
     <% end %>
@@ -48,7 +48,7 @@
       <tr>
         <td><%= invite.reciever %></td>
         <td>
-          <%= form_tag(invite_send_path, method: "post") do %>
+          <%= form_tag(invite_path, method: "post") do %>
             <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
             <input type="hidden" name="email" value="<%= invite.reciever %>">
             <input class="btn btn-primary" type="submit" value="再次邀請">

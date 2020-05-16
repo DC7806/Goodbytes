@@ -7,7 +7,7 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    params_require(:name, :organization_id)
+    params_require(:name, :organization_id, target: params[:channel])
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
@@ -19,7 +19,7 @@ class ChannelsController < ApplicationController
   end
 
   def update
-    params_require(:id,:name, :organization_id)
+    params_require(:name, :organization_id, target: params[:channel])
     if @channel.update(channel_params)
       @notice = "channel更新成功"
     else

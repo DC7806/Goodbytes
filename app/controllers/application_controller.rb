@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   helper_method :current_channel, :current_organization
-  
-  def generate_token(len)
-    len.times.map{rand(0..35).to_s(36)}.join
-  end
 
   def params_require(*args, target: nil)
     unless target

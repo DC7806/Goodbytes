@@ -13,7 +13,7 @@
   <% if @user_exist %>
     <%= link_to "請按我去接受邀請", root_url %>
   <% else %>
-    <%= link_to "請按我註冊加入", organization_invited_url(
+    <%= link_to "請按我註冊加入", new_user_registration_path(
       email: @email,
       invite_token: @invite_token
       ) %>

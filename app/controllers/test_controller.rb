@@ -9,6 +9,6 @@ class TestController < ApplicationController
   end
   
   def feature2
-    @channels = Channel.all
+    @channels = current_user.channels
   end
 end

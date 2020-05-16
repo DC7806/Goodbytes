@@ -58,4 +58,10 @@ class User < ApplicationRecord
       ")
       recieve_records.map{|x|Result.new(x.attributes)}
   end
+
+  def send_invitation
+    return SendBranching.new(id)
+
+  end
+
 end
