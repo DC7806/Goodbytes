@@ -3,29 +3,15 @@ class ChannelRolesController < ApplicationController
   before_action :channel_admin?, except: [:create]
 
   def new
-    params_require(:email, :id)
-    invite_token  = generate_token(10)
-    invites       = @channel.invites
-
-    unless @channel.users.find_by(email: @email)
-      last_invite = invites.find_by(reciever: @email)
-
-      if last_invite
-        invite_token = last_invite.token
-      else
-        invites.create(
-          token: invite_token,
-          sender_id: current_user.id,
-          reciever: @email
-        )
-      end
-
-      message = "channel邀請已送出"
+    params_require(:email, :channel_id)
+    if current_user.send_invitation
+                   .by_channel(@channel_id)
+                   .to(@email)
+      message = "邀請信件已寄出"
     else
       message = "此成員已加入！"
     end
     redirect_to root_path, notice: message
-
   end
 
   def create

@@ -5,11 +5,17 @@ class SendBranching
   end
 
   def by_org(org_id)
-    return Sender.new(Organization.find(org_id), @curr_user_id)
+    return Sender.new(
+      Organization.find(org_id), 
+      @curr_user_id
+    )
   end
 
   def by_channel(ch_id)
-    return Sender.new(Channel.find(ch_id), @curr_user_id)
+    return Sender.new(
+      Channel.find(ch_id), 
+      @curr_user_id
+    )
   end
 
   class Sender
@@ -28,7 +34,8 @@ class SendBranching
                                .find_by(email: target)
 
       unless relationship 
-        last_invitation = @acceptor.invites.find_by(reciever: target)
+        last_invitation = @acceptor.invites
+                                   .find_by(reciever: target)
 
         if last_invitation
           invitation_token = last_invitation.token

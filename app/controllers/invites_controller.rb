@@ -4,16 +4,19 @@ class InvitesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:sign_up_and_join]
 
   def new
-    org_id = params[:organization_id]
-    if org_id
-      redirect_to new_organization_role_path(organization_id: org_id, email: params[:email])
+    params_require(:organization_id, :email)
+    if @organization_id
+      redirect_to new_organization_role_path(
+        organization_id: @organization_id, 
+        email: @email
+      )
     end
   end
 
   def accept
-    org_id = params[:organization_id]
-    redirect_post(organization_role_index_path(organization_id: org_id),
-      params: {organization_id: org_id, invite_token: params[:invite_token]},   
+    params_require(:organization_id, :invite_token)
+    redirect_post(organization_role_index_path(organization_id: @organization_id),
+      params: {organization_id: @organization_id, invite_token: @invite_token},   
       options: {
         method: :post,                  
         authenticity_token: 'auto',                  
@@ -23,14 +26,14 @@ class InvitesController < ApplicationController
   end
 
   def destroy # 刪除邀請
-
-    if @invite
-      @invite.destroy
+    params_require(:invite_token)
+    invite = Invite.find_by(token: @invite_token)
+    if invite
+      invite.destroy
       message = "刪除成功！"
     else
       message = "操作失敗！"
     end
-
     redirect_to root_path, notice: message
   end
 

@@ -3,9 +3,17 @@ class ApplicationController < ActionController::Base
   helper_method :current_channel, :current_organization
 
   def params_require(*args, target: nil)
-    unless target
+    
+    target_classes = [ActionController::Parameters, Hash]
+
+    if target
+      unless target_classes.include?(target.class)
+        raise TypeError, "Params_require: Your target must be 'params' or hash."
+      end
+    else
       target = params
     end
+
     args.each do |key|
       unless [String, Symbol].include? key.class
         raise TypeError, "Params_require: Your input '#{key}' must be Symbol or String."
@@ -14,6 +22,7 @@ class ApplicationController < ActionController::Base
         raise NameError, "Undefined variable '#{key}' in target. "
       end
     end
+
     args.each do |key|
       if key.class == Symbol
         key = key.to_s
@@ -21,6 +30,7 @@ class ApplicationController < ActionController::Base
       value = target[key]
       instance_variable_set('@' + key, target[key])
     end
+
   end
 
   def org_admin?

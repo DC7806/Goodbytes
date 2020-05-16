@@ -5,17 +5,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if params[:invite_token]
+      params_require(:email, :invite_token)
+    end
+    super
+  end
 
   # POST /resource
   def create
-
+    if params[:invite_token]
+      params_require(:invite_token)
+    end
     super
-    params_require(:invite_token,)
     user = resource
-    if token.present?
+    if @invite_token.present?
       invite = Invite.find_by(token: @invite_token)
       if invite
         @org = Organization.find(invite.item_id) 
@@ -31,12 +35,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     orgs << [    @org, "member"] if @org
 
     orgs.each do |org, role|
-      relationship = OrganizationsUser.new(
-        organization_id: org.id,
-        user_id:         user.id, 
-        role:            role
-      )
-      relationship.save
+      org.update_role(user.id, role)
     end
     
   end

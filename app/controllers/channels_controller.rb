@@ -1,7 +1,11 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel, except: [:create]
+  before_action :find_channel, except: [:new, :create]
   before_action :org_admin?, except: [:show]
 
+  def new
+    @channel = Channel.new
+  end
+  
   def show
     params_require(:id)
   end

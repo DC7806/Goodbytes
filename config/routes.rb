@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources     :organizations,      as: 'organization', path: "/org", only: [:create, :update, :destroy] do
     
     resources   :organization_roles, as: 'role',path: "/role",      except: [:index, :edit]
-    resources   :channels,           as: 'channel',  path: '/c',     except: [:index, :new, :edit] do
+    resources   :channels,           as: 'channel',  path: '/c',     except: [:index, :edit] do
 
       resources :channel_roles,      as: 'role',path: '/role',      except: [:index, :edit]
     end
