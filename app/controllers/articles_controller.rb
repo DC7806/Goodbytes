@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :find_channel, only: [:index, :create, :new, :edit, :show, :update]
-  before_action :find_article, only: [:show, :edit, :update]
+  before_action :find_channel
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
 
   def index
     @articles = @channel.articles.order(created_at: :desc)
@@ -27,13 +27,17 @@ class ArticlesController < ApplicationController
   end
 
   def update
-
     if @article.update(article_params)
       redirect_to channel_article_path(channel_id: @article.channel_id, id: @article.id), notice: "This article has been update."
 
     else
       render :edit
     end
+  end
+
+  def destroy
+    @article.destroy  
+    redirect_to @channel, notice: "This article has been deleted."
   end
 
   private
@@ -47,7 +51,5 @@ class ArticlesController < ApplicationController
 
   def find_article
     @article = @channel.articles.find(params[:id])
-  rescue
-    # redirect_to article_path, notice: "Sorry we cannot find this email."
   end
 end
