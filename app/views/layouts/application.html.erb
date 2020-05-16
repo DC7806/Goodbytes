@@ -15,17 +15,28 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+
     <div class="layout">
+
       <%= render "shared/sidebar" %>
+
+      <div class="sidebar-blank">
+      </div>
+
       <main>
         <%# <%= content_for :top %> 
-        <div class="container">
-            <%= render "shared/user_section" %>
+        <div class="container-fluid">
+          <div class="wrap">
+            <div class="header_navbar">
+              <%= render "shared/user_section" %>
+            </div>
             <div class="notice"><%= notice %></div>
             <div class="alert"><%= alert %></div>
             <%= yield %>
+          </div>
         </div>
       </main>
+
     </div>
   </body>
 </html>

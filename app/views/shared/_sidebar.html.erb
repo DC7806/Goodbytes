@@ -1,19 +1,39 @@
-<aside id="sidebar"><%= link_to root_path, class: "sidebar__logo" do %>
-  <h3>
-    Goodbytes
-  </h3>
-  <% end %>
-    <nav class="sidebar__menu">
-      <a>Emails</a>
-      <%= link_to "Link", channel_link_groups_path(channel_id: 1) %>
-      <a>Sources</a>
-      <a>Settings</a>
-    </nav>
+      <aside id="sidebar">
+        <%= link_to root_path, class: "sidebar__logo" do %>
+          <h3>
+            Goodbytes
+          </h3>
+        <% end %>
 
-    <nav class="sidebar__menu sidebar__menu--push-down">
-      <a>New Newsletter</a>
-      <a>Billing</a>
-      <a>Account Settings</a>
-      <a>Sign Out</a>
-    </nav>
-</aside>
+          <% if user_signed_in? %>
+          <nav class="sidebar__menu sidebar__menu--push-up">
+            <div>
+              <a>Emails</a>
+            </div>
+            <div>
+              <%= link_to "Link", channel_link_groups_path(channel_id: 1) %>
+            </div>
+            <div>
+              <a>Sources</a>
+            </div>
+            <div>
+              <a>Settings</a>
+            </div>
+          </nav>
+
+          <nav class="sidebar__menu sidebar__menu--push-down">
+            <div>
+              <a>New Newsletter</a>
+            </div>
+            <div>
+              <a>Billing</a>
+            </div>
+            <div>
+              <a>Account Settings</a>
+            </div>
+            <div>
+              <a>Sign Out</a>
+            </div>
+          </nav>
+              <% end %>
+      </aside>

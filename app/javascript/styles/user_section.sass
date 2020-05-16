@@ -1,2 +1,22 @@
-.user_section
-  text-align: right
+body
+  .layout
+    main
+      position: relative
+
+      .container-fluid
+        margin: 0
+        padding: 0
+
+        .header_navbar  //浮動定位頂bar
+          position: fixed
+          z-index: 4
+          top: 0
+          right: 0
+          width: calc(100% - #{$sidebar-width})
+          height: 50px
+          background-color: #33333333
+          display: inline-block
+
+          .user_section
+            padding: 5px 10px
+            text-align: right

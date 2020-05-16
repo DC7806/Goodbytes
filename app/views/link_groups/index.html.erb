@@ -1,5 +1,4 @@
-<div style="background:#33acb7;">
-<h1>link group</h1>
+<div style="background:#33acb7;" class="p-2">
 
 <div class="border">
   <%= link_to "新增群組", new_channel_link_group_path %>
@@ -7,8 +6,8 @@
 
 <div class="d-flex flex-wrap">
   <% @link_groups.each do |link_group| %>
-    <div class="border m-2 p-2" style="width:200px">
-      <div class="p-2">
+    <div class="border m-2" style="width:200px">
+      <div class="bg-info">
           <%= link_group.name %>
       </div>
 
