@@ -1,6 +1,7 @@
+<div style="background:#33acb7;">
 <h1>link group</h1>
 
-<div>
+<div class="border">
   <%= link_to "新增群組", new_channel_link_group_path %>
 </div>
 
@@ -18,7 +19,24 @@
         <div>
           <%= link_to "刪除群組", channel_link_group_path(id: link_group.id), method: 'delete', data: {confirm: "確認刪除？" } %>
         </div>
+
+        <div>
+          <%= link_to "新增Link", new_channel_link_group_saved_link_path(link_group_id: link_group.id) %>
+        </div>
+        <div>
+          <% link_group.saved_links.each do |saved_link| %>
+            <%= saved_link.subject %>
+          <div>
+          <div>
+            <%= link_to "修改Link", edit_channel_link_group_saved_link_path(link_group_id: link_group.id, id: saved_link.id) %>
+          </div>
+            <%= link_to "刪除Link", channel_link_group_saved_link_path(channel_id: 1, link_group_id: link_group.id, id: saved_link.id),  method: 'delete', data: {confirm: "確定要刪除連結？" } %>
+          </div>
+          <% end %>
+        </div>
+
       </div>
     </div>
   <% end %>
+</div>
 </div>

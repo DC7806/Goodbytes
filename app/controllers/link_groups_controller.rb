@@ -1,10 +1,6 @@
 class LinkGroupsController < ApplicationController
-  def show
-
-  end
-
   def index
-    @link_groups = LinkGroup.order(created_at: :asc)
+    @link_groups = LinkGroup.order(created_at: :asc).includes(:saved_links)
   end
 
   def new

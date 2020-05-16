@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_093103) do
     t.integer "link_group_id"
     t.string "url"
     t.string "subject"
+    t.text "summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

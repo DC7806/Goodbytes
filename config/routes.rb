@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # get    "/channel/:channel_id",    to: "channels#show"
 
   resources :channels, only: [:show, :create, :update, :destroy] do
-    resources :link_groups
+    resources :link_groups do
+      resources :saved_links
+    end
   end 
 
 

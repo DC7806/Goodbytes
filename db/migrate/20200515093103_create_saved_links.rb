@@ -4,6 +4,7 @@ class CreateSavedLinks < ActiveRecord::Migration[6.0]
       t.integer :link_group_id
       t.string :url
       t.string :subject
+      t.text :summary
 
       t.timestamps
     end
