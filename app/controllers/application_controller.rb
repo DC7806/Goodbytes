@@ -19,28 +19,35 @@ class ApplicationController < ActionController::Base
         raise TypeError, "Params_require: Your input '#{key}' must be Symbol or String."
       end
       unless target.include? key
-        raise NameError, "Undefined variable '#{key}' in target. "
+        raise NameError, "Params_require: Undefined variable '#{key}' in target. "
       end
     end
 
+    dic = {}
+    
     args.each do |key|
+      value = target[key]
+      dic[key] = value
       if key.class == Symbol
         key = key.to_s
       end
-      value = target[key]
       instance_variable_set('@' + key, target[key])
     end
 
+    return dic
+
   end
 
-  def org_admin?
+  def org_admin?(org_id = nil)
     relationship = OrganizationsUser.find_by(
-      organization_id: params[:organization_id],
+      organization_id: (org_id || params[:organization_id]),
       user_id:         current_user.id
     )
     unless relationship && relationship.role=='admin'
       redirect_to root_path, notice: '沒有權限進行此操作！'
+      return false
     end
+    return true
   end
 
   private

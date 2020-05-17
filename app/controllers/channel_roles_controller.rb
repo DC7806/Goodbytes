@@ -16,7 +16,7 @@ class ChannelRolesController < ApplicationController
 
   def create
     params_require(:user_id, :id)
-    if @channel.update_role(params[:user_id], 'member')
+    if @channel.update_role(@user_id, 'member')
       redirect_to root_path, notice: "歡迎加入 channel #{@channel.name}"
       return
     end
@@ -25,16 +25,19 @@ class ChannelRolesController < ApplicationController
 
   def update
     params_require(:user_id, :role, :id)
-    @channel.update_role(
-      params[:user_id],
-      params[:role]
-    )
-
+    @channel.update_role(@user_id, @role)
   end
 
   def destroy
-    params_require(:user_id, :id)
-    @channel.relationship(@user_id).destroy
+    params_require(:user_id)
+    relationship = @channel.relationship(@user_id)
+    if relationship.role == 'admin'
+      notice = "不能開除admin"
+    else
+      relationship.destroy
+      notice = "成功刪除！"
+    end
+    redirect_to root_path, notice: notice
   end
 
   def find_channel

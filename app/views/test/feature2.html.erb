@@ -22,7 +22,7 @@
   <% end %>
 </table>
 
-<%= form_tag(organization_channel_index_path(organization_id: params[:organization_id] || current_user.organizations.first.id), method: 'post') do %>
+<%= form_tag(organization_channel_index_path(organization_id: current_user.organizations.first.id), method: 'post') do %>
   <div>
     <input type="text" name="channel[name]">
   </div>

@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
     unless site["organization_id"] && site["channel_id"]
       channel = current_user.channels.first
       unless channel
-        org_id = current_user.organizations.first.id
+        org_id = current_user.organizations.find_by(name: current_user.email).id
         redirect_to new_organization_channel_path(organization_id: org_id), notice: "新增你的第一個頻道～"
         return
       end

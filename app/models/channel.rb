@@ -15,8 +15,7 @@ class Channel < ApplicationRecord
   end
 
   def update_role(user_id, role)
-    org_role = Organization.find(organization_id)
-                           .relationship(user_id)
+    org_role = organization.relationship(user_id)
     if org_role
       channel_role = relationship(user_id)
       if channel_role

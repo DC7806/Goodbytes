@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many    :organizations_users, dependent: :destroy
   has_many          :organizations, through: :organizations_users
 
-  has_many     :channels_org_users, through: :organizations_users
+  has_many     :channels_org_users, through: :organizations_users, dependent: :destroy
   has_many               :channels, through: :channels_org_users
   
   has_many           :send_invites, class_name: "Invite", 
@@ -60,8 +60,7 @@ class User < ApplicationRecord
   end
 
   def send_invitation
-    return SendBranching.new(id)
-
+    return SendInvitation.new(id)
   end
 
 end

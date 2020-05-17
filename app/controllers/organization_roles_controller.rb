@@ -1,13 +1,13 @@
 class OrganizationRolesController < ApplicationController
 
   before_action :org_admin?, only: [:update, :destroy]
-  before_action :get_organization_role, only: [:update, :destroy]
+  before_action :find_organization, except: [:new]
 
   def new
-
+    params_require(:organization_id, :email)
     if current_user.send_invitation
-                   .by_org(params[:organization_id])
-                   .to(params[:email])
+                   .by_org(@organization_id)
+                   .to(@email)
       message = "邀請信件已寄出"
     else
       message = "此成員已加入！"
@@ -16,16 +16,15 @@ class OrganizationRolesController < ApplicationController
   end
 
   def create
-    organization_id = params[:organization_id]
-    invite_token    = params[:invite_token]
-    invite = Invite.find_by(token: invite_token) if invite_token
+    params_require(:invite_token)
+    invite = Invite.find_by(token: @invite_token)
     
     unless invite
       redirect_to root_path, notice: "無效的操作"
       return
     end
 
-    Organization.find(organization_id).update_role(
+    @organization.update_role(
       current_user.id,
       'member'
     )
@@ -35,17 +34,17 @@ class OrganizationRolesController < ApplicationController
   end
 
   def update
-    # 必要參數: organization_id, user_id, role
-    @relationship.role = params[:role]
-    @relationship.save
+    params_require(:user_id, :role)
+    @organization.update_role(@user_id, @role)
   end
 
   def destroy
-    # 必要參數: organization_id, user_id
-    if @relationship.role == 'admin'
+    params_require(:user_id)
+    rel = @organization.relationship(@user_id)
+    if rel.role == 'admin'
       notice = "不能開除admin！"
     else
-      @relationship.destroy # 開除員工
+      rel.destroy # 開除員工
       notice = "成功刪除！"
     end
     
@@ -53,11 +52,8 @@ class OrganizationRolesController < ApplicationController
   end
 
   private
-  def get_organization_role
-    @relationship = OrganizationsUser.find_by(
-      organization_id: params[:organization_id],
-      user_id:         params[:user_id]
-    )
+  def find_organization
+    @organization = Organization.find(params[:organization_id])
   end
 
 end
