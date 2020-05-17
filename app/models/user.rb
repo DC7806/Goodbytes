@@ -7,13 +7,9 @@ class User < ApplicationRecord
   #associations
   has_many :organizations_users, dependent: :destroy
   has_many :organizations, through: :organizations_users
-  # has_many :channels, through: :organizations
 
-  def channels
-    Channel.joins(organization: :users).where("users.id = ?", id)
-  end
-
-  has_many :channels_org_users, foreign_key: :organizations_user_id
+  has_many :channels_org_users, through: :organizations_users
+  has_many :channels, through: :channels_org_users
   
   has_many :send_invites, class_name: "Invite", foreign_key: "sender_id"
   
