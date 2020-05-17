@@ -1,16 +1,101 @@
 
-##########channel列表
+<p>CHANNEL改名</p>
+<%= form_tag(organization_channel_path(@channel, **@organization_id_hash), method: 'patch') do %>
+  <input type="text" name="channel[name]">
+  <input type="submit" value="改名">
+<% end %>
 
-        <%= form_tag(organization_channel_path(organization_id: @channel.organization_id, id: @channel.id), method: 'patch') do %>
-          <input type="hidden" name="channel[organization_id]" value="<%= @channel.organization_id %>">
-          <input type="text" name="channel[name]">
-          <input type="submit" value="改名">
+<p>######################</p>
+<p>寄送邀請信</p>
+<%= form_tag(send_invites_path, method: "post") do %>
+  <div>
+    <%= email_field_tag :email %>
+    <input type="hidden" name="organization_id" value="<%= @organization_id %>">
+    <input type="hidden" name="channel_id" value="<%= @channel.id %>">
+    <input class="btn btn-primary" type="submit" value="寄信啊">
+  </div>
+<% end %>
+
+<p>######################</p>
+<p>邀請名單</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>收件者</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <% @channel.invites.each do |invite| %>
+    <tr>
+      <td><%= invite.reciever %></td>
+      <td class="row">
+        <%= form_tag(send_invites_path, method: "post") do %>
+          <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
+          <input type="hidden" name="email" value="<%= invite.reciever %>">
+          <input class="btn btn-primary" type="submit" value="再次邀請">
         <% end %>
+        <%= 
+          link_to "取消邀請", cancel_invites_path(invite_token: invite.token), 
+                            data: {confirm: "確定？"}, 
+                            method: 'delete' ,
+                            class: "btn btn-danger"
+        %>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
+<p>######################</p>
+<p>組織與成員名單</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>成員EMAIL</th>
+      <th>成員名稱</th>
+      <th>權限</th>
+      <th>動作</th>
+    </tr>
+  </thead>
 
-        <%= form_tag(organization_channel_path(organization_id: @channel.organization_id, id: @channel.id), method: 'delete') do %>
-          <input type="submit" value="刪除">
-        <% end %>
-############邀入channel
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td>
+          <%= form_tag(organization_channel_role_path(**@org_channel_id_hash, id: 'aha'), method: 'patch') do %>
+            <%= hidden_field_tag :user_id, user.id %>
+            <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
+              <% [member, admin].each do |role| %>
+                <option value="<%= role %>"
+                  <% if role == user.role %>
+                    selected
+                  <% end %>
+                  ><%= role %>
+                </option> 
+              <% end %>
+            </select>
+          <% end %>
+        </td>
+        <td>
+          <%= 
+            link_to "刪除", organization_channel_role_path(
+                              **@org_channel_id_hash, 
+                              user_id: user.id,
+                              id: 'd'
+                            ), 
+                            data: {confirm: "確定？"}, 
+                            method: "delete" 
+          %>
+        </td>
 
-############channel成員列表
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>######################</p>
+<p>頻道刪除</p>
+<%= form_tag(organization_channel_path(@channel, **@organization_id_hash), method: 'delete') do %>
+  <input type="submit" value="刪除">
+<% end %>

@@ -10,6 +10,10 @@ class ChannelsController < ApplicationController
   end
 
   def edit
+    @organization_id = @channel.organization_id
+    @organization_id_hash = {organization_id: @organization_id}
+    @org_channel_id_hash = {**@organization_id_hash, channel_id: @channel.id}
+    @users = @channel.users_with_role
     
   end
   
@@ -31,7 +35,7 @@ class ChannelsController < ApplicationController
   end
 
   def update
-    params_require(:name, :organization_id, target: params[:channel])
+    params_require(:name, target: params[:channel])
     if @channel.update(channel_params)
       @notice = "channel更新成功"
     else

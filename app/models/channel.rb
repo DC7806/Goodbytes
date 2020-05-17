@@ -16,6 +16,7 @@ class Channel < ApplicationRecord
 
   def update_role(user_id, role)
     org_role = organization.relationship(user_id)
+    
     if org_role
       channel_role = relationship(user_id)
       if channel_role
@@ -35,14 +36,28 @@ class Channel < ApplicationRecord
 
   def relationship(user_id)
     ChannelsOrgUser.find_by_sql("
-      select * 
+      select ch.* 
       from channels_org_users ch
       inner join organizations_users org
-      on ch.organizations_user_id = org.id
-      inner join users
-      on users.id = #{user_id} and users.id = org.user_id
+      on ch.organizations_user_id = org.id and org.user_id=#{user_id}
       where ch.channel_id = #{id}
       ").first
+  end
+
+  def users_with_role
+    result = User.find_by_sql("
+        select users.*,ch_rel.role
+        from users
+        inner join organizations_users org_rel
+        on users.id=org_rel.user_id 
+        inner join channels_org_users ch_rel
+        on org_rel.id=ch_rel.organizations_user_id 
+        where ch_rel.channel_id=#{id}
+      ")
+    result.each do |user|
+      user.role = user.attributes["role"]
+    end
+    return result
   end
 
 

@@ -16,10 +16,8 @@ class Organization < ApplicationRecord
         select users.*,rel.role
         from users
         inner join organizations_users rel
-        on users.id=rel.user_id 
-        inner join organizations org
-        on org.id=rel.organization_id 
-        where org.id=#{id}
+        on users.id=rel.user_id
+        where rel.organization_id=#{id}
       ")
     result.each do |user|
       user.role = user.attributes["role"]

@@ -24,8 +24,8 @@ class InvitesController < ApplicationController
     path_params = params_require(:organization_id)
     accept_params = params_require(:organization_id, :invite_token)
     if params[:channel_id]
-      accept_params[:channel_id] = params[:channel_id]
-      path = organization_channel_role_index_path(**path_params, channel_id: @channel_id)
+      accept_params[:channel_id]  = path_params[:channel_id] = params[:channel_id]
+      path = organization_channel_role_index_path(**path_params)
     else
       path = organization_role_index_path(**path_params)
     end
