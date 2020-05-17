@@ -1,10 +1,16 @@
 class ChannelsController < ApplicationController
+  before_action :find_organization
   before_action :find_channel, except: [:new, :create]
-  before_action :org_admin?, except: [:show, :create]
+  before_action :org_admin?, only: [:new, :create, :destroy]
+  before_action :channel_admin?, only: [:edit, :update]
 
   def new
     new_params = params_require(:organization_id)
     @channel = Channel.new(**new_params)
+  end
+
+  def edit
+    
   end
   
   def show
@@ -13,7 +19,6 @@ class ChannelsController < ApplicationController
 
   def create
     params_require(:name, :organization_id, target: params[:channel])
-    return unless org_admin? @organization_id
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
@@ -46,11 +51,6 @@ class ChannelsController < ApplicationController
   end
 
   private
-  def find_channel
-    params_require(:id)
-    @channel = Channel.find(@id)
-  end
-
   def channel_params
     params.require(:channel).permit(
       :name,

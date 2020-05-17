@@ -5,7 +5,7 @@
 <p>組織改名</p>
 <%= form_tag(organization_path(@organization), method: 'patch') do %>
   <input type="text" name="organization[name]">
-  <input type="submit" value="改名">
+  <input type="submit" value="改名" class="btn btn-success">
 <% end %>
 
 
@@ -16,6 +16,16 @@
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization.id %>">
     <input class="btn btn-primary" type="submit" value="寄信啊">
+  </div>
+<% end %>
+
+<p>###########</p>
+<p>創channel</p>
+<%= form_tag(organization_channel_index_path(organization_id: @organization.id), method: 'post') do %>
+  <div>
+    <input type="text" name="channel[name]">
+    <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
+    <input type="submit" class="btn btn-success" value="新增頻道">
   </div>
 <% end %>
 
@@ -68,7 +78,7 @@
         <td>
           <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
             <%= hidden_field_tag :user_id, user.id %>
-            <select name="role"  onchange="this.form.submit();">
+            <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
               <% ['member', 'admin'].each do |role| %>
                 <option value="<%= role %>"
                   <% if role == user.role %>

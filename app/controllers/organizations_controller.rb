@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :org_admin?, except: [:create]
   before_action :find_organization, except: [:create]
+  before_action :org_admin?, except: [:create]
 
   def create
     organization = Organization.new(organization_params)
@@ -25,10 +25,6 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     redirect_to root_path, notice: "刪除成功"
-  end
-
-  def find_organization
-    @organization = Organization.find(params[:id])
   end
 
   def organization_params

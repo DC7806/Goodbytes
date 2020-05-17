@@ -41,18 +41,33 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def org_admin?(org_id = nil)
-    relationship = OrganizationsUser.find_by(
-      organization_id: (org_id || params[:organization_id] || params[:id]),
-      user_id:         current_user.id
-    )
-    unless relationship && relationship.role=='admin'
+  def find_organization
+    org_id = (params[:organization_id] || params[:id])
+    @organization = Organization.find(org_id)
+  end
+
+  def find_channel
+    ch_id = (params[:channel_id] || params[:id])
+    @channel = Channel.find(ch_id)
+  end
+
+  def org_admin?
+    admin? @organization
+  end
+
+  def channel_admin?
+    admin? @channel
+  end
+
+  def admin?(acceptor)
+    user_id = current_user.id
+    unless acceptor && acceptor.role(user_id) == 'admin'
       redirect_to root_path, notice: '沒有權限進行此操作！'
       return false
     end
     return true
   end
-
+  
   def current_channel
     res = session[:goodbytes7788]["channel_id"]
     return res.to_i if res.present?

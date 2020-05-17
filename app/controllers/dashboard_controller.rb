@@ -24,7 +24,6 @@ class DashboardController < ApplicationController
     org_id, ch_id = params[:org_ch].split("|")
     session[:goodbytes7788]["organization_id"] = org_id
     session[:goodbytes7788]["channel_id"] = ch_id
-    # debugger
     redirect_to organization_channel_path(organization_id: org_id, id: ch_id)
 
   end

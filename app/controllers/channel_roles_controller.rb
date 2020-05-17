@@ -1,6 +1,6 @@
 class ChannelRolesController < ApplicationController
   before_action :find_channel
-  before_action :channel_admin?, except: [:create]
+  before_action :channel_admin?, only: [:update, :destroy]
 
   def new
     params_require(:email, :channel_id)
@@ -28,8 +28,13 @@ class ChannelRolesController < ApplicationController
   end
 
   def update
-    params_require(:user_id, :role, :id)
-    @channel.update_role(@user_id, @role)
+    params_require(:user_id, :role)
+    if @channel.update_role(@user_id, @role)
+      notice = "權限更新成功"
+    else
+      notice = "權限更新失敗"
+    end
+    redirect_to root_path, notice: notice
   end
 
   def destroy
@@ -42,17 +47,6 @@ class ChannelRolesController < ApplicationController
       notice = "成功刪除！"
     end
     redirect_to root_path, notice: notice
-  end
-
-  def find_channel
-    params_require(:channel_id)
-    @channel = Channel.find(@id)
-  end
-
-  def channel_admin?
-    unless @channel.role(current_user.id)=='admin'
-      redirect_to root_path, notice: '沒有權限的操作'
-    end
   end
 
 end

@@ -1,7 +1,6 @@
 class OrganizationRolesController < ApplicationController
-
+  before_action :find_organization
   before_action :org_admin?, only: [:update, :destroy]
-  before_action :find_organization, except: [:new]
 
   def new
     params_require(:organization_id, :email)
@@ -47,13 +46,7 @@ class OrganizationRolesController < ApplicationController
       rel.destroy # 開除員工
       notice = "成功刪除！"
     end
-    
     redirect_to root_path, notice: notice
-  end
-
-  private
-  def find_organization
-    @organization = Organization.find(params[:organization_id])
   end
 
 end

@@ -1,0 +1,16 @@
+
+##########channel列表
+
+        <%= form_tag(organization_channel_path(organization_id: @channel.organization_id, id: @channel.id), method: 'patch') do %>
+          <input type="hidden" name="channel[organization_id]" value="<%= @channel.organization_id %>">
+          <input type="text" name="channel[name]">
+          <input type="submit" value="改名">
+        <% end %>
+
+
+        <%= form_tag(organization_channel_path(organization_id: @channel.organization_id, id: @channel.id), method: 'delete') do %>
+          <input type="submit" value="刪除">
+        <% end %>
+############邀入channel
+
+############channel成員列表

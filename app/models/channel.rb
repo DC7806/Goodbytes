@@ -41,7 +41,7 @@ class Channel < ApplicationRecord
       on ch.organizations_user_id = org.id
       inner join users
       on users.id = #{user_id} and users.id = org.user_id
-      where ch.id = #{id}
+      where ch.channel_id = #{id}
       ").first
   end
 
