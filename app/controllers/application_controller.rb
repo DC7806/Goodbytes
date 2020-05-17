@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   helper_method :current_channel, :current_organization
 
+  private
   def params_require(*args, target: nil)
     
     target_classes = [ActionController::Parameters, Hash]
@@ -14,8 +15,10 @@ class ApplicationController < ActionController::Base
       target = params
     end
 
+    key_types = [String, Symbol]
+
     args.each do |key|
-      unless [String, Symbol].include? key.class
+      unless key_types.include? key.class
         raise TypeError, "Params_require: Your input '#{key}' must be Symbol or String."
       end
       unless target.include? key
@@ -40,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def org_admin?(org_id = nil)
     relationship = OrganizationsUser.find_by(
-      organization_id: (org_id || params[:organization_id]),
+      organization_id: (org_id || params[:organization_id] || params[:id]),
       user_id:         current_user.id
     )
     unless relationship && relationship.role=='admin'
@@ -50,12 +53,9 @@ class ApplicationController < ActionController::Base
     return true
   end
 
-  private
-
   def current_channel
     res = session[:goodbytes7788]["channel_id"]
     return res.to_i if res.present?
-
   end
 
   def current_organization

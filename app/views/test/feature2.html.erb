@@ -1,4 +1,5 @@
 
+##########channel列表
 <table class="table">
   <% @channels.each do |ch| %>
     <tr>
@@ -21,7 +22,7 @@
 
   <% end %>
 </table>
-
+###########創channel
 <%= form_tag(organization_channel_index_path(organization_id: current_user.organizations.first.id), method: 'post') do %>
   <div>
     <input type="text" name="channel[name]">
@@ -35,3 +36,6 @@
   </div>
   <input type="submit" value="送出">
 <% end %>
+############邀入channel
+
+############channel成員列表

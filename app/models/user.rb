@@ -63,4 +63,26 @@ class User < ApplicationRecord
     return SendInvitation.new(id)
   end
 
+  def organizations_table
+    organizations_collection = organizations.includes(:organizations_users).includes(:users)
+    result = organizations_collection.map do |org|
+      Result.new(
+        id:    org.id,
+        name:  org.name,
+        users: org.users.map{|user|
+          Result.new(
+            id:    user.id,
+            email: user.email,
+            name:  user.name,
+            role:   org.organizations_users
+                       .find{|rel| rel.user_id == user.id}
+                       .role
+          )
+        }
+      )
+    end
+
+    return result
+  end
+
 end

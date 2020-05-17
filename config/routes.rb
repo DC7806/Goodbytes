@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   post    "/invite/send",            to: "invites#new",        as: 'invite'
   get     "/invite/accept",          to: "invites#accept",     as: 'invite_accept'
 
-  resources     :organizations,      as: 'organization', path: "/org", only: [:create, :update, :destroy] do
+  resources     :organizations,      as: 'organization', path: "/org", except: [:index] do
     
     resources   :organization_roles, as: 'role',path: "/role",      except: [:index, :edit]
-    resources   :channels,           as: 'channel',  path: '/c',     except: [:index, :edit] do
+    resources   :channels,           as: 'channel',  path: '/c',     except: [:index] do
 
       resources :channel_roles,      as: 'role',path: '/role',      except: [:index, :edit]
     end

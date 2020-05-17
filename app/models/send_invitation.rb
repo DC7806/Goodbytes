@@ -6,11 +6,11 @@ class SendInvitation
   end
 
   def by_org(org_id)
-    acceptor_defined_by(Organization.find(org_id))
+    acceptor_defined_by Organization.find(org_id)
   end
 
   def by_channel(ch_id)
-    acceptor_defined_by(Channel.find(ch_id))
+    acceptor_defined_by Channel.find(ch_id)
   end  
 
   def to(target)

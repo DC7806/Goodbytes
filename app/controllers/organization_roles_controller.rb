@@ -18,24 +18,24 @@ class OrganizationRolesController < ApplicationController
   def create
     params_require(:invite_token)
     invite = Invite.find_by(token: @invite_token)
-    
-    unless invite
-      redirect_to root_path, notice: "無效的操作"
-      return
+
+    if invite && @organization.update_role(current_user.id, 'member')
+      invite.destroy
+      notice = "歡迎加入"
+    else
+      notice = "無效的操作"
     end
-
-    @organization.update_role(
-      current_user.id,
-      'member'
-    )
-
-    invite.destroy
-    redirect_to root_path, notice: "歡迎加入"
+    redirect_to root_path, notice: notice
   end
 
   def update
     params_require(:user_id, :role)
-    @organization.update_role(@user_id, @role)
+    if @organization.update_role(@user_id, @role)
+      notice = "權限更新成功"
+    else
+      notice = "權限更新失敗"
+    end
+    redirect_to root_path, notice: notice
   end
 
   def destroy

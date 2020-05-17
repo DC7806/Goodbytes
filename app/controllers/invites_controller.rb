@@ -16,13 +16,11 @@ class InvitesController < ApplicationController
   end
 
   def accept
-    repost_params = {
-      options: {
+    repost_options = {
         method: :post,                  
         authenticity_token: 'auto',                  
         autosubmit: true
       }
-    }
     path_params = params_require(:organization_id)
     accept_params = params_require(:organization_id, :invite_token)
     if params[:channel_id]
@@ -34,7 +32,7 @@ class InvitesController < ApplicationController
     redirect_post(
       path,
       params: accept_params,
-      **repost_params
+      options: repost_options
     )
   end
 

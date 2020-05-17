@@ -12,6 +12,10 @@ class OrganizationsController < ApplicationController
     end
     redirect_to root_path, notice: notice
   end
+  def edit
+    # organization後台頁面
+    @users = @organization.users_with_role
+  end
 
   def update
     @organization.update(organization_params)
@@ -24,7 +28,7 @@ class OrganizationsController < ApplicationController
   end
 
   def find_organization
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find(params[:id])
   end
 
   def organization_params

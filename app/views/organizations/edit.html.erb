@@ -1,0 +1,89 @@
+
+
+
+  <p>寄送邀請信</p>
+  <%= form_tag(invite_path, method: "post") do %>
+    <div>
+      <%= email_field_tag :email %>
+      <input type="hidden" name="organization_id" value="<%= @organization.id %>">
+      <input class="btn btn-primary" type="submit" value="寄信啊">
+    </div>
+  <% end %>
+
+  <p>######################</p>
+  <p>邀請名單</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>收件者</th>
+        <th>動作</th>
+      </tr>
+    </thead>
+    <% @organization.invites.each do |invite| %>
+      <tr>
+        <td><%= invite.reciever %></td>
+        <td class="row">
+          <%= form_tag(invite_path, method: "post") do %>
+            <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
+            <input type="hidden" name="email" value="<%= invite.reciever %>">
+            <input class="btn btn-primary" type="submit" value="再次邀請">
+          <% end %>
+          <%= 
+            link_to "取消邀請", invite_cancel_path(invite_token: invite.token), 
+                              data: {confirm: "確定？"}, 
+                              method: 'delete' ,
+                              class: "btn btn-danger"
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <p>######################</p>
+  <p>組織與成員名單</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>成員EMAIL</th>
+        <th>成員名稱</th>
+        <th>權限</th>
+        <th>動作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.name %></td>
+          <td>
+            <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
+              <%= hidden_field_tag :user_id, user.id %>
+              <select name="role"  onchange="this.form.submit();">
+                <% ['member', 'admin'].each do |role| %>
+                  <option value="<%= role %>"
+                    <% if role == user.role %>
+                      selected
+                    <% end %>
+                    ><%= role %>
+                  </option> 
+                <% end %>
+              </select>
+            <% end %>
+          </td>
+          <td>
+            <%= 
+              link_to "刪除", organization_role_path(
+                                organization_id: @organization.id, 
+                                user_id: user.id,
+                                id: ''
+                              ), 
+                              data: {confirm: "確定？"}, 
+                              method: "delete" 
+            %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

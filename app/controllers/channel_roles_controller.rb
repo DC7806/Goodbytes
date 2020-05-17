@@ -15,12 +15,16 @@ class ChannelRolesController < ApplicationController
   end
 
   def create
-    params_require(:user_id, :id)
-    if @channel.update_role(@user_id, 'member')
-      redirect_to root_path, notice: "歡迎加入 channel #{@channel.name}"
-      return
+    params_require(:invite_token)
+    invite = Invite.find_by(token: @invite_token)
+
+    if invite && @channel.update_role(current_user.id, 'member')
+      invite.destroy
+      notice = "歡迎加入"
+    else
+      notice = "無效的操作"
     end
-    redirect_to root_path, notice: "無效的操作"
+    redirect_to root_path, notice: notice
   end
 
   def update
@@ -41,7 +45,7 @@ class ChannelRolesController < ApplicationController
   end
 
   def find_channel
-    params_require(:id)
+    params_require(:channel_id)
     @channel = Channel.find(@id)
   end
 
