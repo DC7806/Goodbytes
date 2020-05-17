@@ -31,8 +31,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self_org.save
 
     orgs  = []
-    orgs << [self_org, "admin" ]
-    orgs << [    @org, "member"] if @org
+    orgs << [self_org, admin ]
+    orgs << [    @org, member] if @org
 
     orgs.each do |org, role|
       org.update_role(user.id, role)

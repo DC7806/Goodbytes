@@ -16,7 +16,7 @@ org = Organization.create(
 )
 org_role = org.organizations_users.create(
   user_id: u.id,
-  role: 'admin'
+  role: admin
 )
 channel_list = [
   "lalalaChannel",
@@ -29,6 +29,6 @@ channel_list.each do |name|
   )
   channel.channels_org_users.create(
     organizations_user_id: org_role.id,
-    role: 'admin'
+    role: admin
   )
 end

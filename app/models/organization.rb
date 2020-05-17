@@ -57,7 +57,7 @@ class Organization < ApplicationRecord
   # end
 
   # def can_change_role_by(user_obj)
-  #   relationship_with(user_obj).role == "admin"
+  #   relationship_with(user_obj).role == admin
   # end
   
 end

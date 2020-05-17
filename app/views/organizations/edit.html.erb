@@ -79,7 +79,7 @@
           <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
             <%= hidden_field_tag :user_id, user.id %>
             <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
-              <% ['member', 'admin'].each do |role| %>
+              <% [member, admin].each do |role| %>
                 <option value="<%= role %>"
                   <% if role == user.role %>
                     selected

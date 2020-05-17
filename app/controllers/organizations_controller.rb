@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
   def create
     organization = Organization.new(organization_params)
     if organization.save
-      organization.update_role(current_user.id, 'admin')
+      organization.update_role(current_user.id, admin)
       notice = '新增成功～'
     else
       notice = "新增失敗"

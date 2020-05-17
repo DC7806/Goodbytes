@@ -18,7 +18,7 @@ class ChannelRolesController < ApplicationController
     params_require(:invite_token)
     invite = Invite.find_by(token: @invite_token)
 
-    if invite && @channel.update_role(current_user.id, 'member')
+    if invite && @channel.update_role(current_user.id, member)
       invite.destroy
       notice = "歡迎加入"
     else
@@ -40,7 +40,7 @@ class ChannelRolesController < ApplicationController
   def destroy
     params_require(:user_id)
     relationship = @channel.relationship(@user_id)
-    if relationship.role == 'admin'
+    if relationship.role == admin
       notice = "不能開除admin"
     else
       relationship.destroy

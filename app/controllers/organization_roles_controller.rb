@@ -18,7 +18,7 @@ class OrganizationRolesController < ApplicationController
     params_require(:invite_token)
     invite = Invite.find_by(token: @invite_token)
 
-    if invite && @organization.update_role(current_user.id, 'member')
+    if invite && @organization.update_role(current_user.id, member)
       invite.destroy
       notice = "歡迎加入"
     else
@@ -40,7 +40,7 @@ class OrganizationRolesController < ApplicationController
   def destroy
     params_require(:user_id)
     rel = @organization.relationship(@user_id)
-    if rel.role == 'admin'
+    if rel.role == admin
       notice = "不能開除admin！"
     else
       rel.destroy # 開除員工

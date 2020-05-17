@@ -22,7 +22,7 @@ class ChannelsController < ApplicationController
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
-      channel.update_role(current_user.id, 'admin')
+      channel.update_role(current_user.id, admin)
       # TODO: 創channel送group
     else
       @notice = "channel新增失敗"
