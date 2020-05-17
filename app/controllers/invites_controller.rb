@@ -36,7 +36,7 @@ class InvitesController < ApplicationController
     )
   end
 
-  def destroy # 刪除邀請
+  def cancel # 刪除邀請
     params_require(:invite_token)
     invite = Invite.find_by(token: @invite_token)
     if invite

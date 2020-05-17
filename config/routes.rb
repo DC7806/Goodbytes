@@ -6,9 +6,17 @@ Rails.application.routes.draw do
 
   get     "/feature1",               to: "test#feature1"
   get     "/feature2",               to: "test#feature2"
-  delete  "/invite/cancel",          to: "invites#destroy",    as: 'invite_cancel'
-  post    "/invite/send",            to: "invites#new",        as: 'invite'
-  get     "/invite/accept",          to: "invites#accept",     as: 'invite_accept'
+
+  resources     :invites, only: [] do
+    collection do
+      delete :cancel
+      post :new, as: "send"
+      get :accept
+    end
+  end
+  # delete  "/invite/cancel",          to: "invites#destroy",    as: 'invite_cancel'
+  # post    "/invite/send",            to: "invites#new",        as: 'invite'
+  # get     "/invite/accept",          to: "invites#accept",     as: 'invite_accept'
 
   resources     :organizations,      as: 'organization', path: "/org", except: [:index] do
     

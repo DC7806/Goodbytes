@@ -11,7 +11,7 @@
 
 <p>######################</p>
 <p>寄送邀請信</p>
-<%= form_tag(invite_path, method: "post") do %>
+<%= form_tag(send_invites_path, method: "post") do %>
   <div>
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization.id %>">
@@ -42,13 +42,13 @@
     <tr>
       <td><%= invite.reciever %></td>
       <td class="row">
-        <%= form_tag(invite_path, method: "post") do %>
+        <%= form_tag(send_invites_path, method: "post") do %>
           <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
           <input type="hidden" name="email" value="<%= invite.reciever %>">
           <input class="btn btn-primary" type="submit" value="再次邀請">
         <% end %>
         <%= 
-          link_to "取消邀請", invite_cancel_path(invite_token: invite.token), 
+          link_to "取消邀請", cancel_invites_path(invite_token: invite.token), 
                             data: {confirm: "確定？"}, 
                             method: 'delete' ,
                             class: "btn btn-danger"
