@@ -93,9 +93,9 @@
         <td>
           <%= 
             link_to "刪除", organization_role_path(
-                              organization_id: @organization.id, 
+                              @organization, 
                               user_id: user.id,
-                              id: ''
+                              id: 'd'
                             ), 
                             data: {confirm: "確定？"}, 
                             method: "delete" 

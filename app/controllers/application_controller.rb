@@ -43,12 +43,27 @@ class ApplicationController < ActionController::Base
 
   def find_organization
     org_id = (params[:organization_id] || params[:id])
-    @organization = Organization.find(org_id)
+    begin
+      @organization = Organization.find(org_id)
+    rescue
+      redirect_if_not_found
+    end
   end
 
   def find_channel
     ch_id = (params[:channel_id] || params[:id])
-    @channel = Channel.find(ch_id)
+    begin
+      @channel = Channel.find(ch_id)
+    rescue
+      redirect_if_not_found
+    end
+  end
+
+  def redirect_if_not_found
+    session[:goodbytes7788]["organization_id"] = nil
+    session[:goodbytes7788]["channel_id"] = nil
+    redirect_to root_path
+    return false
   end
 
   def org_admin?

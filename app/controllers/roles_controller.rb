@@ -1,8 +1,8 @@
 class RolesController < ApplicationController
-
+  
   def new
     params_require(:email)
-    params_check(@command, @acceptor_id, @email)
+    params_check(:command, :acceptor_id)
     if current_user.send_invitation
                    .send(@command, @acceptor_id)
                    .to(@email)
@@ -15,7 +15,7 @@ class RolesController < ApplicationController
 
   def create
     params_require(:invite_token)
-    params_check(@acceptor, @invite_token)
+    params_check(:acceptor)
     invite = Invite.find_by(token: @invite_token)
 
     if invite && @acceptor.update_role(current_user.id, member)
@@ -29,7 +29,7 @@ class RolesController < ApplicationController
 
   def update
     params_require(:user_id, :role)
-    params_check(@acceptor, @user_id, @role)
+    params_check(:acceptor)
     if @acceptor.update_role(@user_id, @role)
       notice = "權限更新成功"
     else
@@ -40,7 +40,7 @@ class RolesController < ApplicationController
 
   def destroy
     params_require(:user_id)
-    params_check(@acceptor, @user_id)
+    params_check(:acceptor)
     relationship = @acceptor.relationship(@user_id)
     if relationship.role == admin
       notice = "不能開除admin"
@@ -53,7 +53,7 @@ class RolesController < ApplicationController
 
   private
   def params_check(*needed_params)
-    unless needed_params.all?
+    unless needed_params.map{ |sym| instance_variable_get('@' + sym.to_s ) }.all?
       raise NameError, "Parameter needed: #{needed_params.join(",")}"
     end
   end
