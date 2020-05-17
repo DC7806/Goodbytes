@@ -7,6 +7,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 
+import "bootstrap"
+
 import 'jquery'
 import $ from 'jquery'
 window.$ = $
