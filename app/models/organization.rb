@@ -34,15 +34,9 @@ class Organization < ApplicationRecord
 
   def update_role(user_id, role)
     org_rel = relationship(user_id)
-    p "#"*30
-    p org_rel
-    p "#"*30
     if org_rel
       org_rel.role = role
       org_rel.save
-      p "#"*30
-      pp org_rel.errors
-      p "#"*30
     else
       organizations_users.create(
         user_id: user_id,

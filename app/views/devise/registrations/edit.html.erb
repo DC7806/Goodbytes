@@ -1,3 +1,24 @@
+
+<h3>等待審核的邀請</h3>
+  <table class="table">
+    <tr>
+      <th>寄件者</th>
+      <th>組織</th>
+      <th>動作</th>
+    </tr>
+    <% @messages.each do |invite| %>
+      <tr>
+        <td><%= invite.email %></td>
+        <td><%= invite.org_name %></td>
+        <td><%= link_to "同意", invite_accept_path(organization_id: invite.org_id,invite_token: invite.token) %></td>
+        <td><%= link_to "不同意", invite_cancel_path(invite_token: invite.token), method: 'delete' %></td>
+      </tr>
+    <% end %>
+  </table>
+
+
+
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -39,5 +60,3 @@
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

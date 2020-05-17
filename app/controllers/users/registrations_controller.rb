@@ -40,9 +40,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     
   end
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @messages = current_user.recieve_invites
+    super
+  end
 
   # PUT /resource
   # def update
