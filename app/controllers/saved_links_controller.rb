@@ -32,7 +32,7 @@ class SavedLinksController < ApplicationController
   def destroy
     @saved_link = SavedLink.find(params[:id])
     if @saved_link.destroy 
-      redirect_to organization_channel_link_groups_path
+      redirect_to organization_channel_link_groups_path(**path_params)
     end
   end
 
