@@ -106,3 +106,8 @@
     <% end %>
   </tbody>
 </table>
+<p>#####################</p>
+<p>刪除組織</p>
+<%= form_tag(organization_path(@organization), data: {confirm: "確定刪除？"} , method: 'delete') do %>
+  <%= submit_tag :submit, value: "刪除" %>
+<% end %>

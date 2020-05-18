@@ -41,6 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
   # GET /resource/edit
   def edit
+    @organization = Organization.new
     @messages = current_user.recieve_invites
     super
   end

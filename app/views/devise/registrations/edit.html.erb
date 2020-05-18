@@ -16,6 +16,12 @@
     <% end %>
   </table>
 
+  <h3>創建組織</h3>
+  <%= form_for(@organization, url: organization_index_path, method: 'post') do |f| %>
+    <%= f.label :name, "名稱"%>
+    <%= f.text_field :name%>
+    <%= f.submit "建立組織", data: {disable_with: "請稍等.."} %>
+  <% end %>
 
 
 
