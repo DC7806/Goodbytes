@@ -10,11 +10,12 @@ class User < ApplicationRecord
   has_many    :organizations_users, dependent: :destroy
   has_many          :organizations, through: :organizations_users
 
-  has_many     :channels_org_users, through: :organizations_users, dependent: :destroy
+  has_many     :channels_org_users, through: :organizations_users
   has_many               :channels, through: :channels_org_users
   
   has_many           :send_invites, class_name: "Invite", 
-                                    foreign_key: "sender_id"
+                                    foreign_key: "sender_id",
+                                    dependent: :destroy
   
   #validations
   validates                 :email, presence: true, 
