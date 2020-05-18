@@ -46,7 +46,4 @@ class DashboardController < ApplicationController
     session[:goodbytes7788]["organization_id"] = @channel.organization_id
     session[:goodbytes7788]["channel_id"] = @channel.id
   end
-
-
-
 end

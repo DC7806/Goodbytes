@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_094541) do
+ActiveRecord::Schema.define(version: 2020_05_18_083701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.string "subject", null: false
+    t.datetime "deliver_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_articles_on_channel_id"
+  end
 
   create_table "channels", force: :cascade do |t|
     t.bigint "organization_id", null: false
@@ -39,11 +48,18 @@ ActiveRecord::Schema.define(version: 2020_05_12_094541) do
     t.bigint "item_id", null: false
     t.string "token"
     t.bigint "sender_id", null: false
-    t.string "reciever", null: false
+    t.string "receiver", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_type", "item_id"], name: "index_invites_on_item_type_and_item_id"
     t.index ["sender_id"], name: "index_invites_on_sender_id"
+  end
+
+  create_table "link_groups", force: :cascade do |t|
+    t.integer "channel_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -60,6 +76,15 @@ ActiveRecord::Schema.define(version: 2020_05_12_094541) do
     t.string "role"
     t.index ["organization_id"], name: "index_organizations_users_on_organization_id"
     t.index ["user_id"], name: "index_organizations_users_on_user_id"
+  end
+
+  create_table "saved_links", force: :cascade do |t|
+    t.integer "link_group_id"
+    t.string "url"
+    t.string "subject"
+    t.text "summary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_094541) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "channels"
   add_foreign_key "channels", "organizations"
   add_foreign_key "channels_org_users", "channels"
   add_foreign_key "channels_org_users", "organizations_users"

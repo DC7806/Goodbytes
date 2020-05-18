@@ -41,11 +41,11 @@ class InvitesController < ApplicationController
     invite = Invite.find_by(token: @invite_token)
     if invite
       invite.destroy
-      message = "刪除成功！"
+      @notice = "刪除成功！"
     else
-      message = "操作失敗！"
+      @notice = "操作失敗！"
     end
-    redirect_to root_path, notice: message
+    redirect_to root_path, notice: @notice
   end
 
 end

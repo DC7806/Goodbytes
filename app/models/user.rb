@@ -46,7 +46,7 @@ class User < ApplicationRecord
       end
       return result
   end
-  def recieve_invites
+  def receive_invites
     Invite.find_by_sql("
         select users.email, org.name, org.id, invs.token
         from invites invs
@@ -54,7 +54,7 @@ class User < ApplicationRecord
         on org.id=invs.item_id and invs.item_type='Organization'
         inner join users
         on users.id=invs.sender_id
-        where invs.reciever='#{email}'
+        where invs.receiver='#{email}'
       ").map{|x|
       dic = x.attributes
       Result.new(
@@ -71,7 +71,7 @@ class User < ApplicationRecord
       on ch.id=invs.item_id and invs.item_type='Channel'
       inner join users
       on users.id=invs.sender_id
-      where invs.reciever='#{email}'
+      where invs.receiver='#{email}'
     ").map{|x|
     dic = x.attributes
     Result.new(

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  
+
   root   "dashboard#index"
   resources :dashboard, only: [:index, :update]
 
@@ -14,17 +14,18 @@ Rails.application.routes.draw do
       get :accept
     end
   end
-  # delete  "/invite/cancel",          to: "invites#destroy",    as: 'invite_cancel'
-  # post    "/invite/send",            to: "invites#new",        as: 'invite'
-  # get     "/invite/accept",          to: "invites#accept",     as: 'invite_accept'
 
   resources     :organizations,      as: 'organization', path: "/org", except: [:index] do
-    
     resources   :organization_roles, as: 'role',path: "/role",      except: [:index, :edit]
-    resources   :channels,           as: 'channel',  path: '/c',     except: [:index] do
 
+    resources   :channels,           as: 'channel',  path: '/c',     except: [:index] do
       resources :channel_roles,      as: 'role',path: '/role',      except: [:index, :edit]
-    end
-  end
-  
-end
+
+      resources :link_groups do
+        resources :saved_links
+      end
+
+      resources :articles
+    end # channel
+  end # organization
+end  # Rails draw do

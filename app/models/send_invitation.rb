@@ -23,7 +23,7 @@ class SendInvitation
 
     unless relationship 
       last_invitation = @acceptor.invites
-                                 .find_by(reciever: target)
+                                 .find_by(receiver: target)
 
       if last_invitation
         invitation_token = last_invitation.token
@@ -31,7 +31,7 @@ class SendInvitation
         @acceptor.invites.create(
           token: invitation_token,
           sender_id: @user_id,
-          reciever: target
+          receiver: target
         )
       end
 

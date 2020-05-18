@@ -59,10 +59,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def path_params
+    ch_id = params[:channel_id] || params[:id] || session["goodbytes7788"]["channel_id"]
+    org_id = params[:organization_id] || params[:id] || session["goodbytes7788"]["organization_id"]
+    return {channel_id: ch_id, organization_id: org_id}
+  end
+
+
   def redirect_if_not_found
     session[:goodbytes7788]["organization_id"] = nil
     session[:goodbytes7788]["channel_id"] = nil
-    redirect_to root_path
+    @notice = "Sorry we cannot find this Newsletter." if !@notice
+    redirect_to root_path, notice: @notice
     return false
   end
 
@@ -83,7 +91,7 @@ class ApplicationController < ActionController::Base
     return true
   end
 
-  # 以下是用了無效的helper method，疑問待釐清
+  # 以下是用了無效的helper method，已經跟KT研究過，說是因為版本問題，疑問待釐清
   def current_channel
     res = session[:goodbytes7788]["channel_id"]
     return res.to_i if res.present?

@@ -1,11 +1,12 @@
-<aside id="sidebar"><%= link_to root_path, class: "sidebar__logo" do %>
-  <h3>
-    Goodbytes
-  </h3>
+<aside id="sidebar">
+  <%= link_to root_path, class: "sidebar__logo" do %>
+    <h3>
+      Goodbytes
+    </h3>
   <% end %>
 
-    <nav class="sidebar__menu">
-    <% if current_user %>
+  <% if user_signed_in? %>
+    <nav class="sidebar__menu sidebar__menu--push-up">
       <%= form_tag(dashboard_path(id: 1), method: 'patch') do %>
         <select name="org_ch"  onchange="this.form.submit();">
           <% current_user.channels.each do |ch| %>
@@ -18,18 +19,34 @@
           <% end %>
         </select>
       <% end %>
-    <% end %>
-
-      <a>Emails</a>
-      <a>Saved Links</a>
-      <a>Sources</a>
-      <a>Settings</a>
+      <div>
+        <%= link_to "Articles", root_path %>
+      </div>
+      <div>
+        <%= link_to "Link", organization_channel_link_groups_path(**path_params) %>
+      </div>
+      <div>
+        <a>Sources</a>
+      </div>
+      <div>
+        <a>Settings</a>
+      </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
-      <a>New Newsletter</a>
-      <a>Billing</a>
-      <a>Account Settings</a>
-      <a>Sign Out</a>
+      <div>
+        <%= link_to "New Newsletter" %>
+      </div>
+      <div>
+        <a>Billing</a>
+      </div>
+      <div>
+        <%= link_to "Account Settings", edit_user_registration_path %>
+      </div>
+      <div>
+        <%= link_to "Sign Out", destroy_user_session_path %>
+      </div>
     </nav>
+  <% end %>
 </aside>
+

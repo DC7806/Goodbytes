@@ -1,0 +1,8 @@
+<h1>新增群組</h1>
+
+<%= form_for(@link_group, url: organization_channel_link_groups_path, method: "POST") do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'X (返回)', organization_channel_link_groups_path %>

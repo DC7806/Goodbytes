@@ -6,11 +6,11 @@ class RolesController < ApplicationController
     if current_user.send_invitation
                    .send(@command, @acceptor_id)
                    .to(@email)
-      message = "邀請信件已寄出"
+      @notice = "邀請信件已寄出"
     else
-      message = "此成員已加入！"
+      @notice = "此成員已加入！"
     end
-    redirect_to root_path, notice: message
+    redirect_to root_path, notice: @notice
   end
 
   def create
@@ -20,22 +20,22 @@ class RolesController < ApplicationController
 
     if invite && @acceptor.update_role(current_user.id, member)
       invite.destroy
-      notice = "歡迎加入"
+      @notice = "歡迎加入"
     else
-      notice = "無效的操作"
+      @notice = "無效的操作"
     end
-    redirect_to root_path, notice: notice
+    redirect_to root_path, notice: @notice
   end
 
   def update
     params_require(:user_id, :role)
     params_check(:acceptor)
     if @acceptor.update_role(@user_id, @role)
-      notice = "權限更新成功"
+      @notice = "權限更新成功"
     else
-      notice = "權限更新失敗"
+      @notice = "權限更新失敗"
     end
-    redirect_to root_path, notice: notice
+    redirect_to root_path, notice: @notice
   end
 
   def destroy
@@ -43,12 +43,12 @@ class RolesController < ApplicationController
     params_check(:acceptor)
     relationship = @acceptor.relationship(@user_id)
     if relationship.role == admin
-      notice = "不能開除admin"
+      @notice = "不能開除admin"
     else
       relationship.destroy
-      notice = "成功刪除！"
+      @notice = "成功刪除！"
     end
-    redirect_to root_path, notice: notice
+    redirect_to root_path, notice: @notice
   end
 
   private

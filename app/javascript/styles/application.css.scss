@@ -15,54 +15,92 @@ h6 {
 a {
   text-decoration: none;
   color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
+$sidebar-width: 250px;
+$top-bar-height: 50px;
+
 #sidebar {
-  width: 250px;
+  width: $sidebar-width;
+  height: 100vh;
   background: #f5f7f9;
-  border-right: 1px solid #d6dce0;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 1px .1rem .05rem #d6dce0;
+  padding: 2rem;
+  text-align: center;
+  position: fixed;
+  z-index: 3;
+
 
   .sidebar__logo {
-    display: flex;
-    position: relative;
-    padding: 1.5em 3em;
-    justify-content: end;
-    color: inherit;
+    color: #212529;
+    display: inline-block;
+    margin-bottom: 1.5rem;
   }
 
   a {
-    color: #9eafba;
+    color: #8ba8ba;
     text-decoration: none;
-    transition: all .4s ease;
+    transition: .4s ease;
 
     &:hover {
       color: #33acb7;
+      cursor: pointer;
+    }
+
+    &:active {
+      color: #33acb7;
     }
   }
-}
 
-.active {
-  a {
-    color: #33acb7;
+  .sidebar__menu {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      text-align: right;
+      line-height: 2rem;
+    }
+
+    //side bar hover border line
+    a {
+      position: relative;
+    }
+
+    a::after {
+      content: "";
+      width: 0;
+      height: 1.5px;
+      position: absolute;
+      margin-bottom: 1px;
+      transition: .3s ease-out;
+      background: #33acb7;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+
+    a::after {
+      right: 0;
+      bottom: 0;
+      transition-duration: .3s;
+    }
   }
-}
 
-.sidebar__menu {
-  margin-bottom: 3rem;
-
-  a {
-    display: block;
-    text-align: right;
-    height: 2rem;
-    line-height: 2rem;
-    padding: 0 3em 0 3em;
+  .sidebar__menu--push-up {
+    margin: 0 1.5rem;
   }
-}
 
-.sidebar__menu--push-down {
-  margin-top: auto;
+  .sidebar__menu--push-down {
+    position: absolute;
+    bottom: 2rem;
+    right: 3.5rem;
+  }
+
 }
 
 .sign_in {
@@ -70,7 +108,7 @@ a {
   right: 3em;
   top: 80%;
   font-size: .8em;
-  color: #9eafba;
+  color: #8ba8ba;
 }
 
 
@@ -106,14 +144,14 @@ a {
     padding: 1em 3em;
     border-bottom: 1px solid #d6dce0;
     background: #f5f7f9;
-    color: #9eafba;
+    color: #8ba8ba;
 
     p {
       display: inline;
     }
 
     a {
-      color: #9eafba;
+      color: #8ba8ba;
       text-decoration: none;
     }
 
@@ -148,7 +186,7 @@ a {
     }
 
     .date_and_author {
-      color: #9eafba;
+      color: #8ba8ba;
       margin: .5em 0 0 0;
     }
   }
@@ -170,7 +208,7 @@ a {
     }
 
     .date_and_author {
-      color: #9eafba;
+      color: #8ba8ba;
       margin: .5em 0 2em 0;
     }
 

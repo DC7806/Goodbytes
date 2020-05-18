@@ -40,11 +40,11 @@
   </thead>
   <% @organization.invites.each do |invite| %>
     <tr>
-      <td><%= invite.reciever %></td>
+      <td><%= invite.receiver %></td>
       <td class="row">
         <%= form_tag(send_invites_path, method: "post") do %>
           <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
-          <input type="hidden" name="email" value="<%= invite.reciever %>">
+          <input type="hidden" name="email" value="<%= invite.receiver %>">
           <input class="btn btn-primary" type="submit" value="再次邀請">
         <% end %>
         <%= 

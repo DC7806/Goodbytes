@@ -1,1 +1,22 @@
-<%= @channel.name %>
+<nav aria-label="breadcrumb">
+  <% path_params = {channel_id: @channel.id, organization_id: @channel.organization_id} %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home", root_path %>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @channel.name, organization_channel_path(**path_params) %></li>
+  </ol>
+</nav>
+<section>
+  <div class="card">
+   <div class="card-header">
+ <%= link_to "Create Article", new_organization_channel_article_path(@channel, organization_id: @channel.organization_id), class:"btn btn-primary"%>
+   </div>
+   <div class="card-body">
+      <% @articles.each do |article| %>
+      <h5 class="card-title"><%= link_to article.subject, organization_channel_article_path(article, **path_params) %></h5>
+      <%= link_to "Edit", edit_organization_channel_article_path(article, **path_params), class:"btn btn-primary btn-sm" %>
+      <%= link_to "Delete", organization_channel_article_path(article, **path_params), method: :delete, data: { confirm: "Are you sure you want to delete this aritcle?", class:"button"} %>
+      <div><%= link_to article.created_at.strftime("%A, %B %d %Y"), organization_channel_article_path(article, **path_params) %></div>
+      <% end %>
+   </div>
+  </div>
+</section>

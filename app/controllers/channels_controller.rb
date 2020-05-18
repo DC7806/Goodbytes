@@ -19,39 +19,40 @@ class ChannelsController < ApplicationController
   
   def show
     params_require(:organization_id, :id)
+    @articles = @channel.articles
   end
 
   def create
     params_require(:name, :organization_id, target: params[:channel])
     channel = Channel.new(channel_params)
     if channel.save
-      notice = "channel新增成功"
+      @notice = "channel新增成功"
       channel.update_role(current_user.id, admin)
       # TODO: 創channel送group
     else
-      notice = "channel新增失敗"
+      @notice = "channel新增失敗"
     end
-    redirect_to(root_path, notice: notice) and return
+    redirect_to(root_path, notice: @notice) and return
   end
 
   def update
     params_require(:name, target: params[:channel])
     if @channel.update(channel_params)
-      notice = "channel更新成功"
+      @notice = "channel更新成功"
     else
-      notice = "channel更新失敗"
+      @notice = "channel更新失敗"
     end
-    redirect_to(root_path, notice: notice) and return
+    redirect_to(root_path, notice: @notice) and return
   end
 
   def destroy
     params_require(:id, :organization_id, target: params[:channel])
     if @channel.destroy
-      notice = "channel刪除成功"
+      @notice = "channel刪除成功"
     else
-      notice = "channel刪除失敗"
+      @notice = "channel刪除失敗"
     end
-    redirect_to(root_path, notice: notice) and return
+    redirect_to(root_path, notice: @notice) and return
   end
 
   private
@@ -62,7 +63,4 @@ class ChannelsController < ApplicationController
       :organization_id
     )
   end
-
-  
-  
 end
