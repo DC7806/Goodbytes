@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :find_channel
+  before_action :channel_member?
   before_action :find_article, only: [:show, :edit, :update, :destroy]
 
   def index

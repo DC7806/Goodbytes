@@ -1,5 +1,6 @@
 class LinkGroupsController < ApplicationController
   before_action :find_channel
+  before_action :channel_member?
   before_action :find_link_group, only: [:edit, :update, :destroy]
   
   def index

@@ -75,16 +75,25 @@ class ApplicationController < ActionController::Base
   end
 
   def org_admin?
-    admin? @organization
+    purview_check @organization, admin
   end
 
   def channel_admin?
-    admin? @channel
+    purview_check @channel, admin
   end
 
-  def admin?(acceptor)
+  def org_member?
+    purview_check @organization, admin, member
+  end
+
+  def channel_member?
+    purview_check @channel, admin, member
+  end
+
+
+  def purview_check(acceptor, *purview)
     user_id = current_user.id
-    unless acceptor && acceptor.role(user_id) == admin
+    unless purview.include? (acceptor && acceptor.role(user_id))
       redirect_to root_path, notice: '沒有權限進行此操作！'
       return false
     end

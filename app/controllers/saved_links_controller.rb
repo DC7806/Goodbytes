@@ -1,5 +1,6 @@
 class SavedLinksController < ApplicationController
   before_action :find_channel
+  before_action :channel_member?
   def new
     @saved_link = SavedLink.new
   end
