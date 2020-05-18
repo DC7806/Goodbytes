@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_140251) do
+ActiveRecord::Schema.define(version: 2020_05_15_093103) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +56,13 @@ ActiveRecord::Schema.define(version: 2020_05_13_140251) do
     t.index ["sender_id"], name: "index_invites_on_sender_id"
   end
 
+  create_table "link_groups", force: :cascade do |t|
+    t.integer "channel_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -69,6 +77,15 @@ ActiveRecord::Schema.define(version: 2020_05_13_140251) do
     t.string "role"
     t.index ["organization_id"], name: "index_organizations_users_on_organization_id"
     t.index ["user_id"], name: "index_organizations_users_on_user_id"
+  end
+
+  create_table "saved_links", force: :cascade do |t|
+    t.integer "link_group_id"
+    t.string "url"
+    t.string "subject"
+    t.text "summary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

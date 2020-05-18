@@ -1,0 +1,2 @@
+module SavedLinksHelper
+end
