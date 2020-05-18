@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+    <%= link_to "Home", root_path %>
+    <li class="breadcrumb-item active" aria-current="page"><%= @channel.name %> email list</li>
+  </ol>
+</nav>
+<div class="card border-info mb-3" >
+  <%= form_for @article, url: channel_articles_path(@channel) do |f| %>
+  <div class="card-header">
+  <%= f.label :subject, "Subject" %>
+  <%= f.text_field :subject %></div>
+  <div class="card-body text-info"><%= f.submit "Create Article" %></div>
+  <% end %>
+</div>
+
+<%= link_to "Back to Email list", @channel, class:"button" %>

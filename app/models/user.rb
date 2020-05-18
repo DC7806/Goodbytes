@@ -34,8 +34,8 @@ class User < ApplicationRecord
       end
       return result
   end
-  def recieve_invites
-    recieve_records = Invite.find_by_sql("
+  def receive_invites
+    receive_records = Invite.find_by_sql("
         select users.email email, org.name org_name,org.id org_id, invs.token, invs.id
         from invites invs
         inner join organizations org

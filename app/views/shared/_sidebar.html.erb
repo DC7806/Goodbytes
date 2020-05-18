@@ -1,19 +1,18 @@
-<aside id="sidebar"><%= link_to root_path, class: "sidebar__logo" do %>
-  <h3>
-    Goodbytes
+<aside id="sidebar">
+  <h3 >
+  <%= link_to "Goodbytes", root_path, class: "sidebar__logo" %>
   </h3>
-  <% end %>
     <nav class="sidebar__menu">
-      <a>Emails</a>
+      <%= link_to "Articles", root_path %>
       <a>Saved Links</a>
       <a>Sources</a>
       <a>Settings</a>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
-      <a>New Newsletter</a>
+      <%= link_to "New Newsletter" %>
       <a>Billing</a>
-      <a>Account Settings</a>
-      <a>Sign Out</a>
+      <%= link_to "Account Settings", edit_user_registration_path %>
+      <%= link_to "Sign Out", destroy_user_session_path %>
     </nav>
 </aside>

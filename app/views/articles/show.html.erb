@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to @channel.name, @channel %> </li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @article.subject %></li> 
+  </ol>
+</nav>
+
+  <div class="card-header">
+    <%= @article.subject %>
+  </div>
+  <div class="card-body">
+    <%= link_to "Edit Article", edit_channel_article_path, class:"button" %>
+    <%= link_to "Delete Article", channel_article_path, class:"button", method: :delete, data: { confirm: "Are you sure you want to delete this aritcle?" } %>
+    <%= link_to "Back to Aritcle list", @channel, class:"button" %>
+  </div>
