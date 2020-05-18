@@ -1,62 +1,76 @@
-<div style="background:#33acb7;" class="p-2">
+<div class="link p-2">
 
   <div class="border">
     <%= link_to "新增群組", new_channel_link_group_path %>
   </div>
 
-  <div class="d-flex flex-wrap">
+  <div class="link_group d-flex flex-wrap">
     <% @link_groups.each do |link_group| %>
       <div class="border m-2" style="width:234px">
-        <div class="subject_bar bg-info p-2 d-flex justify-content-between">
-            <div>
+        <div class="subject_bar p-2 d-flex justify-content-between">
+
+          <div class="link_group_name">
+            <div class="name">
               <%= link_group.name %>
             </div>
+          </div>
 
-            <div class="link_group_icon">
+          <div class="dropdown p-0 m-0" id="dropdownMenu">
+            <div class="link_group_icon btn" data-toggle="dropdown">
               <svg class="bi bi-three-dots-vertical" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
               <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clip-rule="evenodd"/>
               </svg>
             </div>
 
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button">Action</button>
-              <button class="dropdown-item" type="button">Another action</button>
-              <button class="dropdown-item" type="button">Something else here</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <div class="dropdown-item btn">
+                <%= link_to "修改群組", edit_channel_link_group_path(id: link_group.id) %>
+              </div>
+              <div class="dropdown-item btn">
+                <%= link_to "刪除群組", channel_link_group_path(id: link_group.id), method: 'delete', data: {confirm: "確認刪除？" } %>
+              </div>
+              <div class="dropdown-item btn newlink">
+                <%= link_to "新增Link", new_channel_link_group_saved_link_path(link_group_id: link_group.id) %>
+              </div>
+              <%# 新增Link跳出視窗，嘗試打Ajax不過未成功 %>
+                <div class="dropdown-item btn" data-toggle="modal" data-target="#add-link" data-whatever="modal">
+                  新增Link
+                </div>
+              <%#  %>
             </div>
-          </div>
 
+          </div>
         </div>
 
         <div>
-          <div>
-            <%= link_to "修改群組", edit_channel_link_group_path(id: link_group.id) %>
-          </div>
-          <div>
-            <%= link_to "刪除群組", channel_link_group_path(id: link_group.id), method: 'delete', data: {confirm: "確認刪除？" } %>
-          </div>
+          <div class="saved_links">
 
-          <div>
-            <%= link_to "新增Link", new_channel_link_group_saved_link_path(link_group_id: link_group.id) %>
-          </div>
-          <div>
             <% link_group.saved_links.each do |saved_link| %>
-              <%= saved_link.subject %>
-            <div>
-            <div>
-              <%= link_to "修改Link", edit_channel_link_group_saved_link_path(link_group_id: link_group.id, id: saved_link.id) %>
-            </div>
-              <%= link_to "刪除Link", channel_link_group_saved_link_path(channel_id: 1, link_group_id: link_group.id, id: saved_link.id),  method: 'delete', data: {confirm: "確定要刪除連結？" } %>
-            </div>
-            <% end %>
-          </div>
+              <div class="saved_link" id="sortable">
+                <div class="link ui-state-default">
+                  <%= saved_link.subject %>
+                </div>
+                <div class="set_link">
+                <div>
+                  <%= link_to "修改Link", edit_channel_link_group_saved_link_path(link_group_id: link_group.id, id: saved_link.id) %>
+                </div>
+              
+                <div>
+                  <%= link_to "刪除Link", channel_link_group_saved_link_path(channel_id: 1, link_group_id: link_group.id, id: saved_link.id),  method: 'delete', data: {confirm: "確定要刪除連結？" } %>
+                </div>
+              </div>
+              </div>
 
+
+            <% end %>
+
+          </div>
         </div>
       </div>
     <% end %>
+    <%# 嘗試打Ajax不過未成功 %>
+    <%= render "saved_links/add", link_groups: @link_groups %>
+    <%#  %>
   </div>
 
 </div>

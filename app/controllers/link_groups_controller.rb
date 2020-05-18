@@ -1,6 +1,7 @@
 class LinkGroupsController < ApplicationController
   def index
     @link_groups = LinkGroup.order(created_at: :asc).includes(:saved_links)
+    @saved_link = SavedLink.new
   end
 
   def new
