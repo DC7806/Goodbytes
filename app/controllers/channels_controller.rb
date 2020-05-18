@@ -1,6 +1,8 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel, except: [:create]
+  before_action :find_channel, except: [:create, :index]
+
   def show
+    @articles = @channel.articles
   end
 
   def create
@@ -21,13 +23,14 @@ class ChannelsController < ApplicationController
 
   private
   def find_channel
-    @channel = Channel.find(params[:id])
+    @channel ||= Channel.find_by(id: params[:id])
+    redirect_to channels_path, notice: "Sorry we cannot find this Newsletter." if @channel.nil?
   end
+
   def channel_params
     params.require(:channel).permit(
       :name,
       :description
     )
   end
-  
 end

@@ -12,8 +12,18 @@
 
 ActiveRecord::Schema.define(version: 2020_05_15_093103) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.string "subject", null: false
+    t.datetime "deliver_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_articles_on_channel_id"
+  end
 
   create_table "channels", force: :cascade do |t|
     t.bigint "organization_id", null: false
@@ -96,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_093103) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "channels"
   add_foreign_key "channels", "organizations"
   add_foreign_key "channels_org_users", "channels"
   add_foreign_key "channels_org_users", "organizations_users"

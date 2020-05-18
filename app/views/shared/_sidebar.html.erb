@@ -1,3 +1,4 @@
+
       <aside id="sidebar">
         <%= link_to root_path, class: "sidebar__logo" do %>
           <h3>
@@ -8,7 +9,7 @@
           <% if user_signed_in? %>
           <nav class="sidebar__menu sidebar__menu--push-up">
             <div>
-              <a>Emails</a>
+              <%= link_to "Articles", root_path %>
             </div>
             <div>
               <%= link_to "Link", channel_link_groups_path(channel_id: 1) %>
@@ -23,17 +24,18 @@
 
           <nav class="sidebar__menu sidebar__menu--push-down">
             <div>
-              <a>New Newsletter</a>
+              <%= link_to "New Newsletter" %>
             </div>
             <div>
               <a>Billing</a>
             </div>
             <div>
-              <a>Account Settings</a>
+              <%= link_to "Account Settings", edit_user_registration_path %>
             </div>
             <div>
-              <a>Sign Out</a>
+              <%= link_to "Sign Out", destroy_user_session_path %>
             </div>
           </nav>
               <% end %>
       </aside>
+
