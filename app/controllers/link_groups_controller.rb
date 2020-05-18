@@ -5,7 +5,7 @@ class LinkGroupsController < ApplicationController
   
   def index
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
-    @saved_link = SavedLink.new
+    @saved_link  = SavedLink.new
   end
 
   def new
@@ -13,7 +13,7 @@ class LinkGroupsController < ApplicationController
   end
 
   def create
-    @link_group = LinkGroup.new(link_group_params)
+    @link_group            = LinkGroup.new(link_group_params)
     @link_group.channel_id = params[:channel_id]
 
     if @link_group.save

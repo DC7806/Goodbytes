@@ -1,7 +1,5 @@
 class InvitesController < ApplicationController
 
-  skip_before_action :authenticate_user!, only: [:sign_up_and_join]
-
   def new
     invite_params = params_require(:organization_id, :email)
     if params[:channel_id]
@@ -21,7 +19,7 @@ class InvitesController < ApplicationController
         authenticity_token: 'auto',                  
         autosubmit: true
       }
-    path_params = params_require(:organization_id)
+    path_params   = params_require(:organization_id)
     accept_params = params_require(:organization_id, :invite_token)
     if params[:channel_id]
       accept_params[:channel_id]  = path_params[:channel_id] = params[:channel_id]

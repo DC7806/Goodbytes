@@ -10,13 +10,13 @@ class DashboardController < ApplicationController
     else
       redirect_to organization_channel_path(
         organization_id: session[:goodbytes7788]["organization_id"], 
-                    id: session[:goodbytes7788]["channel_id"]
+                     id: session[:goodbytes7788]["channel_id"]
       )
     end
   end
 
   def update # switch current channel
-    org_id, ch_id = params[:org_ch].split("|")
+                                 org_id, ch_id = params[:org_ch].split("|")
     session[:goodbytes7788]["organization_id"] = org_id
     session[:goodbytes7788]["channel_id"]      = ch_id
     redirect_to organization_channel_path(organization_id: org_id, id: ch_id)
@@ -29,7 +29,10 @@ class DashboardController < ApplicationController
     end
   end
   def have_no_current_channel
-    return !(session[:goodbytes7788]["organization_id"] && session[:goodbytes7788]["channel_id"])
+    return !(
+      session[:goodbytes7788]["organization_id"] && 
+      session[:goodbytes7788]["channel_id"]
+    )
   end
 
   def new_regist_user
@@ -44,6 +47,6 @@ class DashboardController < ApplicationController
 
   def set_current_channel_and_org
     session[:goodbytes7788]["organization_id"] = @channel.organization_id
-    session[:goodbytes7788]["channel_id"] = @channel.id
+    session[:goodbytes7788]["channel_id"]      = @channel.id
   end
 end

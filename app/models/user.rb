@@ -33,37 +33,37 @@ class User < ApplicationRecord
   
   def organizations_with_purview
     result = Organization.find_by_sql("
-        select org.*, rel.role purview
-        from organizations org
-        inner join organizations_users rel
-        on org.id=rel.organization_id 
-        inner join users
-        on users.id=rel.user_id 
-        where users.id=#{id}
-      ")
-      result.each do |organization|
-        organization.purview = organization.attributes["purview"]
-      end
-      return result
+      select org.*, rel.role purview
+      from organizations org
+      inner join organizations_users rel
+      on org.id=rel.organization_id 
+      inner join users
+      on users.id=rel.user_id 
+      where users.id=#{id}
+    ")
+    result.each do |organization|
+      organization.purview = organization.attributes["purview"]
+    end
+    return result
   end
   def receive_invites
     Invite.find_by_sql("
-        select users.email, org.name, org.id, invs.token
-        from invites invs
-        inner join organizations org
-        on org.id=invs.item_id and invs.item_type='Organization'
-        inner join users
-        on users.id=invs.sender_id
-        where invs.receiver='#{email}'
-      ").map{|x|
-      dic = x.attributes
-      Result.new(
-        email: dic["email"],
-        name: dic["name"],
-        accept_attr: {organization_id: dic["id"],invite_token: dic["token"]},
-        deny_attr: {invite_token: dic["token"]}
-        )
-      } +
+      select users.email, org.name, org.id, invs.token
+      from invites invs
+      inner join organizations org
+      on org.id=invs.item_id and invs.item_type='Organization'
+      inner join users
+      on users.id=invs.sender_id
+      where invs.receiver='#{email}'
+    ").map{|x|
+    dic = x.attributes
+    Result.new(
+      email: dic["email"],
+      name: dic["name"],
+      accept_attr: {organization_id: dic["id"],invite_token: dic["token"]},
+      deny_attr: {invite_token: dic["token"]}
+      )
+    } +
     Invite.find_by_sql("
       select users.email, ch.name, ch.id, ch.organization_id, invs.token
       from invites invs

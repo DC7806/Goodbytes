@@ -29,8 +29,7 @@ class ApplicationController < ActionController::Base
     dic = {}
     
     args.each do |key|
-      value = target[key]
-      dic[key] = value
+      dic[key] = target[key]
       if key.class == Symbol
         key = key.to_s
       end
@@ -60,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def path_params
-    ch_id = params[:channel_id] || params[:id] || session["goodbytes7788"]["channel_id"]
+    ch_id = params[:channel_id]       || params[:id] || session["goodbytes7788"]["channel_id"]
     org_id = params[:organization_id] || params[:id] || session["goodbytes7788"]["organization_id"]
     return {channel_id: ch_id, organization_id: org_id}
   end
@@ -68,7 +67,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_not_found
     session[:goodbytes7788]["organization_id"] = nil
-    session[:goodbytes7788]["channel_id"] = nil
+    session[:goodbytes7788]["channel_id"]      = nil
     @notice = "Sorry we cannot find this Newsletter." if !@notice
     redirect_to root_path, notice: @notice
     return false

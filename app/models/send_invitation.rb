@@ -18,8 +18,8 @@ class SendInvitation
       raise NameError, 'SendInvitation: Acceptor undefine yet.'
     end
     invitation_token  = generate_token(20)
-    relationship  = @acceptor.users
-                             .find_by(email: target)
+    relationship      = @acceptor.users
+                                 .find_by(email: target)
 
     unless relationship 
       last_invitation = @acceptor.invites

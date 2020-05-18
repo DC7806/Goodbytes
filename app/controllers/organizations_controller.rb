@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :find_organization, except: [:create]
-  before_action :org_admin?, except: [:create]
+  before_action :org_admin?,        except: [:create]
 
   def create
     organization = Organization.new(organization_params)

@@ -1,20 +1,20 @@
 class ChannelsController < ApplicationController
   before_action :find_organization
-  before_action :find_channel, except: [:new, :create]
-  before_action :org_admin?, only: [:new, :create, :destroy]
-  before_action :channel_admin?, only: [:edit, :update]
+  before_action :find_channel,  except: [:new, :create]
+  before_action :org_admin?,      only: [:new, :create, :destroy]
+  before_action :channel_admin?,  only: [:edit, :update]
   before_action :channel_member?, only: [:show]
 
   def new
     new_params = params_require(:organization_id)
-    @channel = Channel.new(**new_params)
+    @channel   = Channel.new(**new_params)
   end
 
   def edit
-    @organization_id = @channel.organization_id
-    @organization_id_hash = {organization_id: @organization_id}
-    @org_channel_id_hash = {**@organization_id_hash, channel_id: @channel.id}
-    @users = @channel.users_with_role
+    @organization_id      = @channel.organization_id
+    @organization_id_hash = { organization_id: @organization_id }
+    @org_channel_id_hash  = { **@organization_id_hash, channel_id: @channel.id }
+    @users                = @channel.users_with_role
     
   end
   
@@ -33,7 +33,7 @@ class ChannelsController < ApplicationController
     else
       @notice = "channel新增失敗"
     end
-    redirect_to(root_path, notice: @notice) and return
+    redirect_to(organization_channel_path(channel, organization_id: @organization_id), notice: @notice) and return
   end
 
   def update

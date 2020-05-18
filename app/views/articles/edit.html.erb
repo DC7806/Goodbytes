@@ -1,15 +1,22 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to @channel.name, organization_channel_path(@channel, **path_params) %> </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @article.subject %></li>
+    <li class="breadcrumb-item">
+      <%= link_to @channel.name, organization_channel_path(@channel, **path_params) %> 
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= @article.subject %>
+    </li>
   </ol>
 </nav>
 <div class="card border-info mb-3" >
-  <%= form_for @article, url: organization_channel_article_path(channel_id: @article.channel_id, id: @article.id) do |f| %>
-  <div class="card-header">
-  <%= f.label :subject, "Subject" %>
-  <%= f.text_field :subject %></div>
-  <div class="card-body text-info"><%= f.submit "Edit Article" %></div>
+  <%= form_for @article, url: organization_channel_article_path(@article, **path_params) do |f| %>
+    <div class="card-header">
+      <%= f.label :subject, "Subject" %>
+      <%= f.text_field :subject %>
+    </div>
+    <div class="card-body text-info">
+      <%= f.submit "Edit Article" %>
+    </div>
   <% end %>
 </div>
 

@@ -12,7 +12,7 @@
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization_id %>">
     <input type="hidden" name="channel_id" value="<%= @channel.id %>">
-    <input class="btn btn-primary" type="submit" value="寄信啊">
+    <input type="submit" value="寄信啊" class="btn btn-primary">
   </div>
 <% end %>
 
@@ -63,7 +63,7 @@
         <td><%= user.email %></td>
         <td><%= user.name %></td>
         <td>
-          <%= form_tag(organization_channel_role_path(**@org_channel_id_hash, id: 'aha'), method: 'patch') do %>
+          <%= form_tag(organization_channel_role_path(**path_params, id: 'aha'), method: 'patch') do %>
             <%= hidden_field_tag :user_id, user.id %>
             <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
               <% [member, admin].each do |role| %>
@@ -80,7 +80,7 @@
         <td>
           <%= 
             link_to "刪除", organization_channel_role_path(
-                              **@org_channel_id_hash, 
+                              **path_params, 
                               user_id: user.id,
                               id: 'd'
                             ), 
@@ -96,6 +96,6 @@
 
 <p>######################</p>
 <p>頻道刪除</p>
-<%= form_tag(organization_channel_path(@channel, **@organization_id_hash), method: 'delete') do %>
+<%= form_tag(organization_channel_path(@channel, **path_params), method: 'delete') do %>
   <input type="submit" value="刪除">
 <% end %>

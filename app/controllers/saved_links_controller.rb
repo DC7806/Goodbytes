@@ -6,7 +6,7 @@ class SavedLinksController < ApplicationController
   end
 
   def create
-    @saved_link = SavedLink.new(saved_link_params)
+    @saved_link               = SavedLink.new(saved_link_params)
     @saved_link.link_group_id = params[:link_group_id]
 
     if @saved_link.save
