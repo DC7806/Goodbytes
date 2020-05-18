@@ -18,13 +18,21 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    @organization.update(organization_params)
-    redirect_to root_path, notice: "更新成功"
+    if @organization.update(organization_params)
+      notice = "更新成功"
+    else
+      notice = "更新失敗"
+    end
+    redirect_to root_path, notice: notice
   end
 
   def destroy
-    @organization.destroy
-    redirect_to root_path, notice: "刪除成功"
+    if @organization.destroy
+      notice = "刪除成功"
+    else
+      notice = "刪除失敗"
+    end
+    redirect_to root_path, notice: notice 
   end
 
   def organization_params
