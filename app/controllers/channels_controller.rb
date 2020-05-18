@@ -29,7 +29,7 @@ class ChannelsController < ApplicationController
     if channel.save
       @notice = "channel新增成功"
       channel.update_role(current_user.id, admin)
-      # TODO: 創channel送group
+      channel.link_groups.create(name: "INBOX")
     else
       @notice = "channel新增失敗"
     end
