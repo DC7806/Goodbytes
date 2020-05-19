@@ -19,13 +19,13 @@ class InvitesController < ApplicationController
         authenticity_token: 'auto',                  
         autosubmit: true
       }
-    path_params   = params_require(:organization_id)
+    invite_path_params   = params_require(:organization_id)
     accept_params = params_require(:organization_id, :invite_token)
     if params[:channel_id]
-      accept_params[:channel_id]  = path_params[:channel_id] = params[:channel_id]
-      path = organization_channel_role_index_path(**path_params)
+      accept_params[:channel_id]  = invite_path_params[:channel_id] = params[:channel_id]
+      path = organization_channel_role_index_path(**invite_path_params)
     else
-      path = organization_role_index_path(**path_params)
+      path = organization_role_index_path(**invite_path_params)
     end
     redirect_post(
       path,

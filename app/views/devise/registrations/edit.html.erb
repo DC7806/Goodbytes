@@ -3,13 +3,15 @@
 <table class="table">
   <tr>
     <th>寄件者</th>
-    <th>組織</th>
+    <th>組織類別</th>
+    <th>組織名稱</th>
     <th>動作</th>
   </tr>
   <% @messages.each do |invite| %>
     <tr>
-      <td><%= invite.email %></td>
-      <td><%= invite.name %></td>
+      <td><%= invite.sender.email %></td>
+      <td><%= invite.type_in_chinese %></td>
+      <td><%= invite.item.name %></td>
       <td><%= link_to "同意", accept_invites_path(**invite.accept_attr) %></td>
       <td><%= link_to "不同意", cancel_invites_path(**invite.deny_attr), method: 'delete' %></td>
     </tr>

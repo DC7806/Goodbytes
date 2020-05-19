@@ -42,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     @organization = Organization.new
-    @messages = current_user.receive_invites
+    @messages = current_user.receive_invites.includes(:item).includes(:sender)
     super
   end
 

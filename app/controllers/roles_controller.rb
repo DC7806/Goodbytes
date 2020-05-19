@@ -1,10 +1,9 @@
 class RolesController < ApplicationController
   
   def new
-    params_require(:email)
-    params_check(:command, :acceptor_id)
+    params_require(:email, :model_object)
     if current_user.send_invitation
-                   .send(@command, @acceptor_id)
+                   .from(@model_object)
                    .to(@email)
       @notice = "邀請信件已寄出"
     else
@@ -14,11 +13,10 @@ class RolesController < ApplicationController
   end
 
   def create
-    params_require(:invite_token)
-    params_check(:acceptor)
+    params_require(:invite_token, :model_object)
     invite = Invite.find_by(token: @invite_token)
 
-    if invite && @acceptor.update_role(current_user.id, member)
+    if invite && @model_object.update_role(current_user.id, member)
       invite.destroy
       @notice = "歡迎加入"
     else
@@ -28,9 +26,8 @@ class RolesController < ApplicationController
   end
 
   def update
-    params_require(:user_id, :role)
-    params_check(:acceptor)
-    if @acceptor.update_role(@user_id, @role)
+    params_require(:user_id, :role, :model_object)
+    if @model_object.update_role(@user_id, @role)
       @notice = "權限更新成功"
     else
       @notice = "權限更新失敗"
@@ -39,9 +36,8 @@ class RolesController < ApplicationController
   end
 
   def destroy
-    params_require(:user_id)
-    params_check(:acceptor)
-    relationship = @acceptor.relationship(@user_id)
+    params_require(:user_id, :model_object)
+    relationship = @model_object.relationship(@user_id)
     if relationship.role == admin
       @notice = "不能開除admin"
     else
@@ -49,13 +45,6 @@ class RolesController < ApplicationController
       @notice = "成功刪除！"
     end
     redirect_to root_path, notice: @notice
-  end
-
-  private
-  def params_check(*needed_params)
-    unless needed_params.map{ |sym| instance_variable_get('@' + sym.to_s ) }.all?
-      raise NameError, "Parameter needed: #{needed_params.join(",")}"
-    end
   end
 
 end
