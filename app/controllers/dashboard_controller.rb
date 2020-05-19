@@ -7,12 +7,8 @@ class DashboardController < ApplicationController
       else
         set_current_channel_and_org
       end
-    else
-      redirect_to organization_channel_path(
-        organization_id: session[:goodbytes7788]["organization_id"], 
-                     id: session[:goodbytes7788]["channel_id"]
-      )
     end
+    redirect_to_your_channel
   end
 
   def update # switch current channel
@@ -48,5 +44,12 @@ class DashboardController < ApplicationController
   def set_current_channel_and_org
     session[:goodbytes7788]["organization_id"] = @channel.organization_id
     session[:goodbytes7788]["channel_id"]      = @channel.id
+  end
+
+  def redirect_to_your_channel
+    redirect_to organization_channel_path(
+        organization_id: session[:goodbytes7788]["organization_id"], 
+                     id: session[:goodbytes7788]["channel_id"]
+      )
   end
 end

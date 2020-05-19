@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  get '/user', to: "dashboard#index", as: :user_root
 
   root   "dashboard#index"
   resources :dashboard, only: [:index, :update]
