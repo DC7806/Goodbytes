@@ -1,6 +1,6 @@
 
 <p>CHANNEL改名</p>
-<%= form_tag(organization_channel_path(@channel, **@organization_id_hash), method: 'patch') do %>
+<%= form_tag(organization_channel_path(@channel, **path_params), method: 'patch') do %>
   <input type="text" name="channel[name]">
   <input type="submit" value="改名">
 <% end %>

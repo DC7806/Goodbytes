@@ -12,10 +12,7 @@ class ChannelsController < ApplicationController
 
   def edit
     @organization_id      = @channel.organization_id
-    @organization_id_hash = { organization_id: @organization_id }
-    @org_channel_id_hash  = { **@organization_id_hash, channel_id: @channel.id }
     @users                = @channel.users_with_role
-    
   end
   
   def show
@@ -33,7 +30,7 @@ class ChannelsController < ApplicationController
     else
       @notice = "channel新增失敗"
     end
-    redirect_to(organization_channel_path(channel, organization_id: @organization_id), notice: @notice) and return
+    redirect_to(organization_channel_path(**path_params), notice: @notice) and return
   end
 
   def update

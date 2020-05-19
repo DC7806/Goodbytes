@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  helper_method :current_channel, :current_organization
+  helper_method :path_params
 
   private
   def params_require(*args, target: nil)
@@ -151,6 +151,16 @@ class ApplicationController < ActionController::Base
   def channel_member?
     purview_check @channel, admin, member
   end
+
+  # 待釋疑：
+  # unless !nil
+  #   p 'one'
+  # elsif !nil
+  #   p 'two'
+  # else
+  #   p 'three'
+  # end
+  # 預期應該是"two"，但是卻出錯，why？
 
   # 以下是用了無效的helper method，已經跟KT研究過，說是因為版本問題，疑問待釐清
   def current_channel
