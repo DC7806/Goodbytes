@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   helper_method :path_params
+  rescue_from ActiveRecord::RecordNotFound, 
+              with: :redirect_if_not_found
 
   private
   def params_require(*args, target: nil)
@@ -81,19 +83,13 @@ class ApplicationController < ActionController::Base
   end
 
   def find_organization
-    begin
-      @organization = Organization.find(get_organization_id)
-    rescue
-      redirect_if_not_found
-    end
+    @model_name = "organization"
+    @organization = Organization.find(get_organization_id)
   end
 
   def find_channel
-    begin
-      @channel = Channel.find(get_channel_id)
-    rescue
-      redirect_if_not_found
-    end
+    @model_name = "channel"
+    @channel = Channel.find(get_channel_id)
   end
 
   # 這邊是為了填path helper的參數方便特地做的helper method
@@ -112,7 +108,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_not_found
     session[:goodbytes7788]["organization_id"] = nil
     session[:goodbytes7788]["channel_id"]      = nil
-    @notice = "Sorry we cannot find this Newsletter." if !@notice
+    @notice = "Sorry we cannot find this #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
     return false
   end
@@ -150,6 +146,12 @@ class ApplicationController < ActionController::Base
 
   def channel_member?
     purview_check @channel, admin, member
+  end
+
+  def record_not_found
+    render file: 'public/404.html', 
+           status: 404, 
+           layout: false
   end
 
   # 待釋疑：

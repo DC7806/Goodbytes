@@ -14,8 +14,8 @@ class DashboardController < ApplicationController
     # 因為側邊欄的channel選單只能回傳一個值，不得已只好在前端設計好變數的樣子
     # 把organization_id跟channel_id塞在一個字串裡，用｜分開
                                  org_id, ch_id = params[:org_ch].split("|")
-    session[:goodbytes7788]["organization_id"] = org_id
-    session[:goodbytes7788]["channel_id"]      = ch_id
+    session["goodbytes7788"]["organization_id"] = org_id
+    session["goodbytes7788"]["channel_id"]      = ch_id
     redirect_to organization_channel_path(organization_id: org_id, id: ch_id)
   end
 
@@ -28,8 +28,8 @@ class DashboardController < ApplicationController
   end
   def session_has_no_current_channel
     return !(
-      session[:goodbytes7788]["organization_id"] && 
-      session[:goodbytes7788]["channel_id"]
+      session["goodbytes7788"]["organization_id"] && 
+      session["goodbytes7788"]["channel_id"]
     )
   end
 
@@ -45,14 +45,14 @@ class DashboardController < ApplicationController
   end
 
   def set_current_channel_and_org
-    session[:goodbytes7788]["organization_id"] = @channel.organization_id
-    session[:goodbytes7788]["channel_id"]      = @channel.id
+    session["goodbytes7788"]["organization_id"] = @channel.organization_id
+    session["goodbytes7788"]["channel_id"]      = @channel.id
   end
 
   def redirect_to_your_channel
     redirect_to organization_channel_path(
-        organization_id: session[:goodbytes7788]["organization_id"], 
-                     id: session[:goodbytes7788]["channel_id"]
+        organization_id: session["goodbytes7788"]["organization_id"], 
+                     id: session["goodbytes7788"]["channel_id"]
       )
   end
 end
