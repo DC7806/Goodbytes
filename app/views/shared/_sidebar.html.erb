@@ -11,7 +11,7 @@
         <select name="org_ch"  onchange="this.form.submit();">
           <% current_user.channels.each do |ch| %>
             <option value="<%= ch.organization_id %>|<%= ch.id %>"
-              <% if ch.id == session[:goodbytes7788]["channel_id"].to_i %>
+              <% if ch.id == session["goodbytes7788"]["channel_id"].to_i %>
                 selected
               <% end %>
             >

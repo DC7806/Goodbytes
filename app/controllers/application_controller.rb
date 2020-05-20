@@ -106,8 +106,8 @@ class ApplicationController < ActionController::Base
   # 如果找不到channel或organization，就把session裡的兩個current id 設為nil
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
   def redirect_if_not_found
-    session[:goodbytes7788]["organization_id"] = nil
-    session[:goodbytes7788]["channel_id"]      = nil
+    session["goodbytes7788"]["organization_id"] = nil
+    session["goodbytes7788"]["channel_id"]      = nil
     @notice = "Sorry we cannot find this #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
     return false
@@ -166,21 +166,21 @@ class ApplicationController < ActionController::Base
 
   # 以下是用了無效的helper method，已經跟KT研究過，說是因為版本問題，疑問待釐清
   def current_channel
-    res = session[:goodbytes7788]["channel_id"]
+    res = session["goodbytes7788"]["channel_id"]
     return res.to_i if res.present?
   end
 
   def current_organization
-    res = session[:goodbytes7788]["organization_id"]
+    res = session["goodbytes7788"]["organization_id"]
     return res.to_i if res.present?
   end
 
   def current_channel=(x)
-    session[:goodbytes7788]["channel_id"] = x.to_i
+    session["goodbytes7788"]["channel_id"] = x.to_i
   end
 
   def current_organization=(x)
-    session[:goodbytes7788]["organization_id"] = x.to_i
+    session["goodbytes7788"]["organization_id"] = x.to_i
   end
 
 end
