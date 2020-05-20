@@ -8,9 +8,9 @@ class SavedLinksController < ApplicationController
     @saved_link.link_group_id = params[:link_group_id]
 
     if @saved_link.save
-      redirect_to channel_link_groups_path
+      @ajax_create_link = { ok: true }
     else
-      render :new
+      @ajax_create_link = { ok: false, message: 'Create Error!' }
     end
   end
 
@@ -22,9 +22,9 @@ class SavedLinksController < ApplicationController
     @saved_link = SavedLink.find(params[:id])
 
     if @saved_link.update(saved_link_params)
-      redirect_to channel_link_groups_path
+      @ajax_update_link = { ok: true }
     else
-      render :edit
+      @ajax_update_link = { ok: false, message: 'Update Error!' }
     end
   end
 

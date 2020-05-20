@@ -1,5 +1,15 @@
-# 嘗試打Ajax不過未成功
-$("input").val("");
-$("textarea").val("");
-$('#add-link').modal('hide')
-$('.saved_links').html("<%= escape_javascript(render 'saved_links' saved_links: @saved_links) %>")
+(function () {
+  let ok = '<%= @ajax_create_link[:ok] %>' === 'true'
+
+  if (ok) {
+    let group_id = '<%= @saved_link.link_group_id %>'
+    $(`#create-link-${group_id}`).modal('hide')
+    $(`#create-link-${group_id} .link_url`).val('');
+    $(`#create-link-${group_id} .link_subject`).val('');
+    $(`#create-link-${group_id} .link_summary`).val('');
+
+    $(`#link_group-${group_id}`).replaceWith("<%= j render('shared/partials/create_saved_link', link_group: @saved_link.link_group) %>")
+  } else {
+    alert('<%= @ajax_create_link[:message] %>')
+  }
+})()
