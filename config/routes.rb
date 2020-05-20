@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   get '/user', to: "dashboard#index", as: :user_root
 
   root   "dashboard#index"
-  resources :dashboard, only: [:index, :update]
+  resource :dashboard, only: [:index, :update]
 
   get     "/feature1",               to: "test#feature1"
   get     "/feature2",               to: "test#feature2"
 
-  resources     :invites, only: [] do
+  resource :invites, as: 'invite', path: 'invitation', only: [] do
     collection do
       delete :cancel
       post :new, as: "send"
@@ -16,17 +16,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources     :organizations,      as: 'organization', path: "/org", except: [:index] do
-    resources   :organization_roles, as: 'role',path: "/role",      except: [:index, :edit]
+  resource    :organizations,      as: 'organization', path: "/organization", except: [:index, :show] do
+    resource  :organization_roles, as: 'role',         path: "/role",         except: [:index, :edit, :show]
+  end
 
-    resources   :channels,           as: 'channel',  path: '/c',     except: [:index] do
-      resources :channel_roles,      as: 'role',path: '/role',      except: [:index, :edit]
+  resource    :channels,           as: 'channel',      path: '/channel',      except: [:index] do
+    resource  :channel_roles,      as: 'role',         path: '/role',         except: [:index, :edit]
+  end
 
-      resources :link_groups do
-        resources :saved_links
-      end
+  resources   :link_groups,        as: 'link_group',   path: 'link_group'
+  resources   :saved_links,        as: 'saved_link',   path: 'saved_link'
 
-      resources :articles
-    end # channel
-  end # organization
+  resources   :articles,           as: 'article',      path: 'article'
+
 end  # Rails draw do
