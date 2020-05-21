@@ -26,7 +26,9 @@ Rails.application.routes.draw do
         resources :saved_links
       end
 
-      resources :articles
+      resources :articles do
+        resources :contents
+      end
     end # channel
   end # organization
 end  # Rails draw do

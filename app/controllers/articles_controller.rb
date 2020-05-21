@@ -25,11 +25,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    render layout: "content"
   end
 
   def update
     if @article.update(article_params)
-      redirect_to organization_channel_article_path(@article, **path_params), notice: "This article has been update."
+      redirect_to organization_channel_article_path(@article, **path_params), notice: "This article has been updated."
 
     else
       render :edit

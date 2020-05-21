@@ -1,0 +1,9 @@
+<%# <%= link_to "< Go back article", organization_channel_article_path %> %>
+<h1>Drag components to your email newsletter</h1>
+
+
+<%= form_for(@artilce, url: organization_channel_article_path, method: "POST") do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+
