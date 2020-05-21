@@ -1,6 +1,6 @@
 
 <%= form_for @channel, url: channel_path do |f| %>
-  <%= f.hidden_field :organization_id, value: params[:organization_id] %>
+  <%= f.hidden_field :organization_id, value: current_organization_id %>
   <%= f.label :name, "頻道名稱" %>
   <%= f.text_field :name %>
   <%= f.submit "送出", disable_with: '送出ing...' %>

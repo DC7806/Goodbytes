@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get '/user', to: "dashboard#index", as: :user_root
 
-  root   "dashboard#index"
-  patch  "dashboard",                to: "dashboard#update"
+  root    "dashboard#index"
+  patch   "switch_org",              to: "dashboard#switch_org"
+  patch   "switch_ch",               to: "dashboard#switch_ch"
 
   get     "/feature1",               to: "test#feature1"
   get     "/feature2",               to: "test#feature2"

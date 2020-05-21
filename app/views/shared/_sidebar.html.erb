@@ -4,14 +4,29 @@
       Goodbytes
     </h3>
   <% end %>
-
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up">
-      <%= form_tag(dashboard_path, method: 'patch') do %>
-        <select name="org_ch"  onchange="this.form.submit();">
-          <% current_user.channels.each do |ch| %>
-            <option value="<%= ch.organization_id %>|<%= ch.id %>"
-              <% if ch.id == session["goodbytes7788"]["channel_id"].to_i %>
+
+      <%= form_tag(switch_org_path, method: 'patch') do %>
+        <select name="id"  onchange="this.form.submit();">
+          <% current_user.organizations.each do |org| %>
+            <option value="<%= org.id %>"
+              <% if org.id == current_organization_id %>
+                selected
+              <% end %>
+            >
+              <%= org.name %>
+            </option> 
+          <% end %>
+        </select>
+      <% end %>
+      
+      <%= form_tag(switch_ch_path, method: 'patch') do %>
+        <select name="id"  onchange="this.form.submit();">
+          <% current_channels.each do |ch| %>
+            <option value="<%= ch.id %>"
+              
+              <% if ch.id == current_channel_id %>
                 selected
               <% end %>
             >
@@ -20,6 +35,7 @@
           <% end %>
         </select>
       <% end %>
+
       <div>
         <%= link_to "Articles", root_path %>
       </div>

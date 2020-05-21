@@ -2,9 +2,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, 
               with: :redirect_if_not_found
-  helper_method :get_organization_id, :get_channel_id, 
-                                      :current_organization, 
-                                      :current_channel
+  helper_method :current_organization_id, :current_channel_id, 
+                                          :current_organization, 
+                                          :current_channel,
+                                          :current_channels
 
   private
   def params_checker(*args, target: nil)
@@ -60,15 +61,28 @@ class ApplicationController < ActionController::Base
   end
 
   def current_channel
-    Channel.find(current_channel_id)
+    if current_channel_id
+      Channel.find(current_channel_id)
+    end
+  end
+
+  def current_channels
+    current_organization.channels & current_user.channels
   end
 
   def find_channel
     @model_name = "channel"
     if @subobject
       @channel = @subobject.channel
-    else
+    elsif current_channel_id
       @channel = current_channel
+    elsif purview_check current_organization, admin
+      @channel = current_organization.channels.build
+      render "channels/new", notice: "創個新頻道吧！"
+    elsif purview_check current_organization, member
+      render html: "此組織目前沒有可供編輯的頻道～", layout: true
+    else
+      redirect_to root_path, notice: '沒有權限進行此操作！'
     end
   end
 
@@ -91,9 +105,14 @@ class ApplicationController < ActionController::Base
 
   # 如果找不到channel或organization，就把session裡的兩個current id 設為nil
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
-  def redirect_if_not_found
+
+  def clean_session
     session["goodbytes7788"]["organization_id"] = nil
     session["goodbytes7788"]["channel_id"]      = nil
+  end
+
+  def redirect_if_not_found
+    clean_session
     @notice = "Sorry we cannot find this #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
     return false
@@ -105,7 +124,12 @@ class ApplicationController < ActionController::Base
   # 泰安老師有教吼！！！！！賣擱問啊！！！！
   def purview_check(model_object, *purview)
     user_id = current_user.id
-    unless purview.include? (model_object && model_object.role(user_id))
+    purview.include? (model_object && model_object.role(user_id))
+  end
+
+  def redirect_if_not_allow(model_object, *purview)
+    unless purview_check(model_object, *purview)
+      clean_session
       redirect_to root_path, notice: '沒有權限進行此操作！'
       return false
     end
@@ -118,20 +142,20 @@ class ApplicationController < ActionController::Base
   # 以後有對名稱不滿意的只要改那邊，全站就會跟著改
   # 當然已經寫進資料庫的不會跟著改，那就要手動改了，或者寫腳本
   def org_admin?
-    purview_check @organization, admin
+    redirect_if_not_allow @organization, admin
   end
 
   def channel_admin?
-    purview_check @channel, admin
+    redirect_if_not_allow @channel, admin
   end
 
   # admin也算member中的一員
   def org_member?
-    purview_check @organization, admin, member
+    redirect_if_not_allow @organization, admin, member
   end
 
   def channel_member?
-    purview_check @channel, admin, member
+    redirect_if_not_allow @channel, admin, member
   end
 
   # 待釋疑：
