@@ -7,7 +7,7 @@
 
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up">
-      <%= form_tag(dashboard_path(id: 1), method: 'patch') do %>
+      <%= form_tag(dashboard_path, method: 'patch') do %>
         <select name="org_ch"  onchange="this.form.submit();">
           <% current_user.channels.each do |ch| %>
             <option value="<%= ch.organization_id %>|<%= ch.id %>"
@@ -24,7 +24,7 @@
         <%= link_to "Articles", root_path %>
       </div>
       <div>
-        <%= link_to "Link", organization_channel_link_groups_path(**path_params) %>
+        <%= link_to "Link", link_group_index_path %>
       </div>
       <div>
         <a>Sources</a>

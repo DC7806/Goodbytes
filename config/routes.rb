@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/user', to: "dashboard#index", as: :user_root
 
   root   "dashboard#index"
-  resource :dashboard, only: [:index, :update]
+  patch  "dashboard",                to: "dashboard#update"
 
   get     "/feature1",               to: "test#feature1"
   get     "/feature2",               to: "test#feature2"

@@ -1,7 +1,7 @@
 class LinkGroupsController < ApplicationController
+  before_action :find_link_group, only: [:edit, :update, :destroy]
   before_action :find_channel
   before_action :channel_member?
-  before_action :find_link_group, only: [:edit, :update, :destroy]
   
   def index
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
@@ -17,7 +17,7 @@ class LinkGroupsController < ApplicationController
     @link_group.channel_id = params[:channel_id]
 
     if @link_group.save
-      redirect_to organization_channel_link_groups_path
+      redirect_to link_group_index_path(@link_group)
     else
       render :new
     end
@@ -29,7 +29,7 @@ class LinkGroupsController < ApplicationController
   def update
 
     if @link_group.update(link_group_params)
-      redirect_to organization_channel_link_groups_path
+      redirect_to link_group_index_path(@link_group)
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class LinkGroupsController < ApplicationController
 
   def destroy
     if @link_group.destroy 
-      redirect_to organization_channel_link_groups_path
+      redirect_to link_group_index_path(@link_group)
     end
   end
 
@@ -48,5 +48,6 @@ class LinkGroupsController < ApplicationController
 
   def find_link_group
     @link_group = LinkGroup.find(params[:id])
+    @subobject = @link_group
   end
 end

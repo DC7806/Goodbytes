@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
       return if go_to_create_first_channel_if_new_regist_user
       set_current_channel_and_org
     end
-    redirect_to_your_channel
+    redirect_to channel_path
   end
 
   def update # switch current channel
@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
                                  org_id, ch_id = params[:org_ch].split("|")
     session["goodbytes7788"]["organization_id"] = org_id
     session["goodbytes7788"]["channel_id"]      = ch_id
-    redirect_to organization_channel_path(organization_id: org_id, id: ch_id)
+    redirect_to channel_path
   end
 
   # 方法名稱都寫的粉清楚了，應該....不用再多說明了吧？qq
@@ -37,7 +37,7 @@ class DashboardController < ApplicationController
     @channel = current_user.channels.first
     unless @channel
       org_id = current_user.organizations.find_by(name: current_user.email).id
-      redirect_to new_organization_channel_path(organization_id: org_id), notice: "新增你的第一個頻道～"
+      redirect_to new_channel_path, notice: "新增你的第一個頻道～"
       # 這邊要回傳true or false以供上方的存取介面做判斷
       return true
     end
@@ -48,11 +48,5 @@ class DashboardController < ApplicationController
     session["goodbytes7788"]["organization_id"] = @channel.organization_id
     session["goodbytes7788"]["channel_id"]      = @channel.id
   end
-
-  def redirect_to_your_channel
-    redirect_to organization_channel_path(
-        organization_id: session["goodbytes7788"]["organization_id"], 
-                     id: session["goodbytes7788"]["channel_id"]
-      )
-  end
+  
 end

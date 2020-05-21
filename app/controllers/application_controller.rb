@@ -1,11 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  helper_method :path_params
   rescue_from ActiveRecord::RecordNotFound, 
               with: :redirect_if_not_found
+  helper_method :get_organization_id, :get_channel_id, 
+                                      :current_organization, 
+                                      :current_channel
 
   private
-  def params_require(*args, target: nil)
+  def params_checker(*args, target: nil)
     
     # 檢查傳進來的target物件種類是否為以下: 1.我們常在用的那個params 2.就hash
     # 如果不是，就噴錯誤
@@ -13,7 +15,7 @@ class ApplicationController < ActionController::Base
 
     if target
       unless target_classes.include?(target.class)
-        raise TypeError, "Params_require: Your target must be 'params' or hash."
+        raise TypeError, "params_checker: Your target must be 'params' or hash."
       end
     else
       # 如果使用此方法時沒有傳target物件進來則預設會去抓params
@@ -28,7 +30,7 @@ class ApplicationController < ActionController::Base
     args.each do |key|
       # key種類檢查，用上面的array
       unless key_types.include? key.class
-        raise TypeError, "Params_require: Your input '#{key}' must be Symbol or String."
+        raise TypeError, "params_checker: Your input '#{key}' must be Symbol or String."
       end
 
       # 如果目標target內有包含傳入的key則建立同名實體變數
@@ -46,61 +48,45 @@ class ApplicationController < ActionController::Base
       elsif instance_variable_get('@' + key.to_s )
         next
       else
-        raise NameError, "Params_require: Undefined variable '#{key}'."
+        raise NameError, "params_checker: Undefined variable '#{key}'."
       end
     end
 
     return dict
   end
 
-  # 我們的網址有以下幾種形式：
-  # /org                               organization #create
-  # /org/new                           organization #new
-  # /org/:id                           organization #R,U,D
-  # /org/:id/edit                      organization #edit
-  # /org/:organization_id/c            channel #create
-  # /org/:organization_id/c/new        channel #new
-  # /org/:organization_id/c/:id        channel #R,U,D
-  # /org/:organization_id/c/:id/edit   channel #edit
-  # /org/:organization_id/c/:channel_id/articles(or link_groups)      article or linkgroup #index or create
-  # /org/:organization_id/c/:channel_id/articles(or link_groups)/:id  article or linkgroup #R,U,D
-  # .... etc
-  # 以上我們可以看出規律，當我需要find_organization時，通常在網址都讀得到:organization_id
-  # 讀不到organization_id的情況只有最上面四種，此時:organization_id 叫做:id
-  # 所以此時改找:id來find_organization也是可以正常運作的
-  # 連id都讀不到的情況只有new跟create，這兩種情況是不需要find_organization的
-  # find_channel同理，不需要find_channel的情況只有在organization層級做操作時，或是channel new跟create時
-  # 其餘以下情形都能夠順利找到 :organization_id、 :channel_id or :id 
-  # 不需要擔心當你在article層級或是link_group層級做操作時找不到organization_id及channel_id
-  # 因為當你在子層級做操作時，他們的id一定會在你的網址內被找到
-
-  def get_channel_id
-    params[:channel_id] || params[:id]
+  def current_channel_id
+    session["goodbytes7788"]["channel_id"]
   end
 
-  def get_organization_id
-    params[:organization_id] || params[:id]
-  end
-
-  def find_organization
-    @model_name = "organization"
-    @organization = Organization.find(get_organization_id)
+  def current_channel
+    Channel.find(current_channel_id)
   end
 
   def find_channel
     @model_name = "channel"
-    @channel = Channel.find(get_channel_id)
+    if @subobject
+      @channel = @subobject.channel
+    else
+      @channel = current_channel
+    end
   end
 
-  # 這邊是為了填path helper的參數方便特地做的helper method
-  # 用法上會是 path_method(**path_params)
-  # 加兩個星號的差別在於，不加星號會變成:
-  #     path_method( { channel_id: 123, organization_id: 456 } )
-  # 等於是傳一個hash物件進去，跟method的需求不合
-  # 加兩個星號會把hash打散，使其變成平成傳入參數的模式:
-  #     path_method( channel_id: 123, organization_id: 456 )
-  def path_params
-    {channel_id: get_channel_id, organization_id: get_organization_id}
+  def current_organization_id
+    session["goodbytes7788"]["organization_id"]
+  end
+
+  def current_organization
+    Organization.find(current_organization_id)
+  end
+
+  def find_organization
+    @model_name = "organization"
+    if @subobject
+      @organization = @subobject.organization
+    else
+      @organization = current_organization
+    end
   end
 
   # 如果找不到channel或organization，就把session裡的兩個current id 設為nil
@@ -148,12 +134,6 @@ class ApplicationController < ActionController::Base
     purview_check @channel, admin, member
   end
 
-  def record_not_found
-    render file: 'public/404.html', 
-           status: 404, 
-           layout: false
-  end
-
   # 待釋疑：
   # unless !nil
   #   p 'one'
@@ -165,15 +145,6 @@ class ApplicationController < ActionController::Base
   # 預期應該是"two"，但是卻出錯，why？
 
   # 以下是用了無效的helper method，已經跟KT研究過，說是因為版本問題，疑問待釐清
-  def current_channel
-    res = session["goodbytes7788"]["channel_id"]
-    return res.to_i if res.present?
-  end
-
-  def current_organization
-    res = session["goodbytes7788"]["organization_id"]
-    return res.to_i if res.present?
-  end
 
   def current_channel=(x)
     session["goodbytes7788"]["channel_id"] = x.to_i

@@ -1,9 +1,9 @@
 class InvitesController < ApplicationController
 
   def new
-    invite_params = params_require(:organization_id, :email)
+    invite_params = params_checker(:organization_id, :email)
     if params[:channel_id]
-      path = new_organization_channel_role_path(
+      path = new_channel_role_path(
         **invite_params,
         channel_id: params[:channel_id]
       )
@@ -19,13 +19,12 @@ class InvitesController < ApplicationController
         authenticity_token: 'auto',                  
         autosubmit: true
       }
-    invite_path_params   = params_require(:organization_id)
-    accept_params = params_require(:organization_id, :invite_token)
+    accept_params = params_checker(:organization_id, :invite_token)
     if params[:channel_id]
-      accept_params[:channel_id]  = invite_path_params[:channel_id] = params[:channel_id]
-      path = organization_channel_role_index_path(**invite_path_params)
+      accept_params[:channel_id] = params[:channel_id]
+      path = channel_role_path
     else
-      path = organization_role_index_path(**invite_path_params)
+      path = organization_role_path
     end
     redirect_post(
       path,
@@ -35,7 +34,7 @@ class InvitesController < ApplicationController
   end
 
   def cancel # 刪除邀請
-    params_require(:invite_token)
+    params_checker(:invite_token)
     invite = Invite.find_by(token: @invite_token)
     if invite
       invite.destroy

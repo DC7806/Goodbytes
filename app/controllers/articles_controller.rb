@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
   before_action :find_channel
   before_action :channel_member?
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
 
   def index
     @articles = @channel.articles.order(created_at: :desc)
@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     @article = @channel.articles.new(article_params)
     
     if @article.save
-      redirect_to organization_channel_article_path(@article, **path_params), notice: "The article has been created."
+      redirect_to article_path(@article), notice: "The article has been created."
     else
       render :new
     end
@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to organization_channel_article_path(@article, **path_params), notice: "This article has been update."
+      redirect_to article_path(@article), notice: "This article has been update."
 
     else
       render :edit
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy  
-    redirect_to organization_channel_path(@channel, **path_params), notice: "This article has been deleted."
+    redirect_to channel_path, notice: "This article has been deleted."
   end
 
   private
@@ -47,6 +47,7 @@ class ArticlesController < ApplicationController
   end
 
   def find_article
-    @article = @channel.articles.find(params[:id])
+    @article = Article.find(params[:id])
+    @subobject = @article
   end
 end

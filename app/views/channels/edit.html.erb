@@ -1,13 +1,13 @@
 
 <p>CHANNEL改名</p>
-<%= form_tag(organization_channel_path(@channel, **path_params), method: 'patch') do %>
+<%= form_tag(channel_path, method: 'patch') do %>
   <input type="text" name="channel[name]">
   <input type="submit" value="改名">
 <% end %>
 
 <p>######################</p>
 <p>寄送邀請信</p>
-<%= form_tag(send_invites_path, method: "post") do %>
+<%= form_tag(send_invite_path, method: "post") do %>
   <div>
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization_id %>">
@@ -29,13 +29,13 @@
     <tr>
       <td><%= invite.receiver %></td>
       <td class="row">
-        <%= form_tag(send_invites_path, method: "post") do %>
+        <%= form_tag(send_invite_path, method: "post") do %>
           <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
           <input type="hidden" name="email" value="<%= invite.receiver %>">
           <input class="btn btn-primary" type="submit" value="再次邀請">
         <% end %>
         <%= 
-          link_to "取消邀請", cancel_invites_path(invite_token: invite.token), 
+          link_to "取消邀請", cancel_invite_path(invite_token: invite.token), 
                             data: {confirm: "確定？"}, 
                             method: 'delete' ,
                             class: "btn btn-danger"
@@ -63,7 +63,7 @@
         <td><%= user.email %></td>
         <td><%= user.name %></td>
         <td>
-          <%= form_tag(organization_channel_role_path(**path_params, id: 'aha'), method: 'patch') do %>
+          <%= form_tag(channel_role_path, method: 'patch') do %>
             <%= hidden_field_tag :user_id, user.id %>
             <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
               <% [member, admin].each do |role| %>
@@ -79,10 +79,8 @@
         </td>
         <td>
           <%= 
-            link_to "刪除", organization_channel_role_path(
-                              **path_params, 
-                              user_id: user.id,
-                              id: 'd'
+            link_to "刪除", channel_role_path(
+                              user_id: user.id
                             ), 
                             data: {confirm: "確定？"}, 
                             method: "delete" 
@@ -96,6 +94,6 @@
 
 <p>######################</p>
 <p>頻道刪除</p>
-<%= form_tag(organization_channel_path(@channel, **path_params), method: 'delete') do %>
+<%= form_tag(channel_path, method: 'delete') do %>
   <input type="submit" value="刪除">
 <% end %>

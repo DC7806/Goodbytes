@@ -1,5 +1,5 @@
 
-<%= form_for @channel, url: organization_channel_index_path do |f| %>
+<%= form_for @channel, url: channel_path do |f| %>
   <%= f.hidden_field :organization_id, value: params[:organization_id] %>
   <%= f.label :name, "頻道名稱" %>
   <%= f.text_field :name %>

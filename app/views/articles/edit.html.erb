@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to @channel.name, organization_channel_path(@channel, **path_params) %> 
+      <%= link_to @channel.name, channel_path %> 
     </li>
     <li class="breadcrumb-item active" aria-current="page">
       <%= @article.subject %>
@@ -9,7 +9,7 @@
   </ol>
 </nav>
 <div class="card border-info mb-3" >
-  <%= form_for @article, url: organization_channel_article_path(@article, **path_params) do |f| %>
+  <%= form_for @article, url: article_path(@article) do |f| %>
     <div class="card-header">
       <%= f.label :subject, "Subject" %>
       <%= f.text_field :subject %>
@@ -21,4 +21,4 @@
 </div>
 
 
-<%= link_to "Back to article list", organization_channel_path(@channel, **path_params), class:"button" %>
+<%= link_to "Back to article list", channel_path, class:"button" %>

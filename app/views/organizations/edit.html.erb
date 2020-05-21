@@ -3,7 +3,7 @@
 
 
 <p>組織改名</p>
-<%= form_tag(organization_path(@organization), method: 'patch') do %>
+<%= form_tag(organization_path, method: 'patch') do %>
   <input type="text" name="organization[name]">
   <input type="submit" value="改名" class="btn btn-success">
 <% end %>
@@ -11,7 +11,7 @@
 
 <p>######################</p>
 <p>寄送邀請信</p>
-<%= form_tag(send_invites_path, method: "post") do %>
+<%= form_tag(send_invite_path, method: "post") do %>
   <div>
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization.id %>">
@@ -21,7 +21,7 @@
 
 <p>###########</p>
 <p>創channel</p>
-<%= form_tag(organization_channel_index_path(organization_id: @organization.id), method: 'post') do %>
+<%= form_tag(channel_path, method: 'post') do %>
   <div>
     <input type="text" name="channel[name]">
     <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
@@ -42,13 +42,13 @@
     <tr>
       <td><%= invite.receiver %></td>
       <td class="row">
-        <%= form_tag(send_invites_path, method: "post") do %>
+        <%= form_tag(send_invite_path, method: "post") do %>
           <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
           <input type="hidden" name="email" value="<%= invite.receiver %>">
           <input class="btn btn-primary" type="submit" value="再次邀請">
         <% end %>
         <%= 
-          link_to "取消邀請", cancel_invites_path(invite_token: invite.token), 
+          link_to "取消邀請", cancel_invite_path(invite_token: invite.token), 
                             data: {confirm: "確定？"}, 
                             method: 'delete' ,
                             class: "btn btn-danger"
