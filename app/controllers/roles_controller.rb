@@ -1,10 +1,9 @@
 class RolesController < ApplicationController
   
   def new
-    params_checker(:email, :model_object)
     if current_user.send_invitation
                    .from(@model_object)
-                   .to(@email)
+                   .to(params[:email])
       @notice = "邀請信件已寄出"
     else
       @notice = "此成員已加入！"
@@ -13,10 +12,8 @@ class RolesController < ApplicationController
   end
 
   def create
-    params_checker(:invite_token, :model_object)
-    invite = Invite.find_by(token: @invite_token)
-
-    if invite && @model_object.update_role(current_user.id, member)
+    invite = Invite.find_by(token: params[:invite_token])
+    if invite && invite.item.update_role(current_user.id, member)
       invite.destroy
       @notice = "歡迎加入"
     else
@@ -26,8 +23,7 @@ class RolesController < ApplicationController
   end
 
   def update
-    params_checker(:user_id, :role, :model_object)
-    if @model_object.update_role(@user_id, @role)
+    if @model_object.update_role(params[:user_id], params[:role])
       @notice = "權限更新成功"
     else
       @notice = "權限更新失敗"
@@ -36,8 +32,7 @@ class RolesController < ApplicationController
   end
 
   def destroy
-    params_checker(:user_id, :model_object)
-    relationship = @model_object.relationship(@user_id)
+    relationship = @model_object.relationship(params[:user_id])
     if relationship.role == admin
       @notice = "不能開除admin"
     else

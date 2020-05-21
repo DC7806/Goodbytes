@@ -3,25 +3,30 @@ class DashboardController < ApplicationController
     give_a_session_when_first_time_come
     if session_has_no_current_channel
       # 符合條件要加個return不然redirect之後這個function會繼續執行下去
-      # 造成重複redirec錯誤
+      # 造成重複redirect錯誤
       return if new_user_go_create_channel
       set_current_channel_and_org
     end
     redirect_to channel_path
   end
 
-  def switch_org # switch current channel
-    # 因為側邊欄的channel選單只能回傳一個值，不得已只好在前端設計好變數的樣子
-    # 把organization_id跟channel_id塞在一個字串裡，用｜分開
+  def switch_org # switch current organization
+    # 設置session內的organization_id，因為從html form傳來的值是字串所以to_i
     session["goodbytes7788"]["organization_id"] = params[:id].to_i
+    # current_channelsssssssssss 請參考application controller
     channel = current_channels.first
-    session["goodbytes7788"]["channel_id"] = channel && channel.id || nil
+    if channel
+      # 如果channel有找到就設置current channel id
+      session["goodbytes7788"]["channel_id"] = channel.id
+    else
+      # 否則設為nil，後續讓find channel去處理
+      session["goodbytes7788"]["channel_id"] = nil
+    end
     redirect_to channel_path
   end
 
   def switch_ch # switch current channel
-    # 因為側邊欄的channel選單只能回傳一個值，不得已只好在前端設計好變數的樣子
-    # 把organization_id跟channel_id塞在一個字串裡，用｜分開
+    # 設置session內的organization_id，因為從html form傳來的值是字串所以to_i
     session["goodbytes7788"]["channel_id"] = params[:id].to_i
     redirect_to channel_path
   end

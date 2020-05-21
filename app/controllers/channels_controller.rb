@@ -21,7 +21,6 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    params_checker(:name, :organization_id, target: params[:channel])
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
@@ -34,7 +33,6 @@ class ChannelsController < ApplicationController
   end
 
   def update
-    params_checker(:name, target: params[:channel])
     if @channel.update(channel_params)
       @notice = "channel更新成功"
     else
@@ -44,7 +42,6 @@ class ChannelsController < ApplicationController
   end
 
   def destroy
-    params_checker(:id, :organization_id, target: params[:channel])
     if @channel.destroy
       @notice = "channel刪除成功"
     else

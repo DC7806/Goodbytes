@@ -8,78 +8,41 @@ class ApplicationController < ActionController::Base
                                           :current_channels
 
   private
-  def params_checker(*args, target: nil)
-    
-    # 檢查傳進來的target物件種類是否為以下: 1.我們常在用的那個params 2.就hash
-    # 如果不是，就噴錯誤
-    target_classes = [ActionController::Parameters, Hash]
-
-    if target
-      unless target_classes.include?(target.class)
-        raise TypeError, "params_checker: Your target must be 'params' or hash."
-      end
-    else
-      # 如果使用此方法時沒有傳target物件進來則預設會去抓params
-      target = params
-    end
-
-    # 限定使用的key種類只能是symbol或是string
-    key_types = [String, Symbol]
-    # 給一個空的hash收集結果最後回傳
-    dict = {}
-
-    args.each do |key|
-      # key種類檢查，用上面的array
-      unless key_types.include? key.class
-        raise TypeError, "params_checker: Your input '#{key}' must be Symbol or String."
-      end
-
-      # 如果目標target內有包含傳入的key則建立同名實體變數
-      # 若無則進一步檢查是否已現有同名實體變數
-      # 都沒有就噴錯
-      if target.include?(key)
-        dict[key] = target[key]
-        # instance_variable_set 是Ruby內建語法
-        # 用法是傳入兩個值，第一個是實體變數名，必須是"@"開頭的字串
-        # 第二個值是此變數要給予的值，可以是任意種類
-        # 比如當我下指令： instance_variable_set( "@hello", "world" )
-        # 此時我再找 @hello 這個變數，就會得到 "world"
-        instance_variable_set('@' + key.to_s, target[key])
-        # instance_variable_get也是差不多道理，傳入實體變數名稱的字串，得到該值
-      elsif instance_variable_get('@' + key.to_s )
-        next
-      else
-        raise NameError, "params_checker: Undefined variable '#{key}'."
-      end
-    end
-
-    return dict
-  end
-
   def current_channel_id
     session["goodbytes7788"]["channel_id"]
   end
 
   def current_channel
+    # 從session內抓出當前channel
     if current_channel_id
       Channel.find(current_channel_id)
     end
   end
 
   def current_channels
+    # 從當前organization的channels跟user有權限的channels做交集比對
+    # 回傳的是當前organization內user有權限的channels
     current_organization.channels & current_user.channels
   end
 
   def find_channel
+    # 這一行是要留給錯誤訊息印出來的
     @model_name = "channel"
     if @subobject
+      # 子物件，如果這個find_channel方法是在子物件層級被呼叫
+      # 則子層此時會帶有一個@subobject，channel此時變成從子物件身上找
       @channel = @subobject.channel
     elsif current_channel_id
+      # 如果session內有當前channel id的話則用該id來找channel
       @channel = current_channel
-    elsif purview_check current_organization, admin
+    elsif purview_check(current_organization, admin)
+      # current_channel_id不存在的情況請參考上面的current_channels與dashboard#switch_org
+      # 簡單說就是組織內沒有頻道，或者沒有可以讓你編輯的頻道
+      # 此時進一步做組織權限判斷，如果是admin就叫你創頻道
       @channel = current_organization.channels.build
       render "channels/new", notice: "創個新頻道吧！"
-    elsif purview_check current_organization, member
+    elsif purview_check(current_organization, member)
+      # 而如果是organization member代表此組織沒有可以給你編輯的channel
       render html: "此組織目前沒有可供編輯的頻道～", layout: true
     else
       redirect_to root_path, notice: '沒有權限進行此操作！'
@@ -95,6 +58,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_organization
+    # 這一行是要留給錯誤訊息印出來的
     @model_name = "organization"
     if @subobject
       @organization = @subobject.organization
@@ -105,17 +69,15 @@ class ApplicationController < ActionController::Base
 
   # 如果找不到channel或organization，就把session裡的兩個current id 設為nil
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
-
-  def clean_session
-    session["goodbytes7788"]["organization_id"] = nil
-    session["goodbytes7788"]["channel_id"]      = nil
-  end
-
   def redirect_if_not_found
     clean_session
     @notice = "Sorry we cannot find this #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
-    return false
+  end
+
+  def clean_session
+    session["goodbytes7788"]["organization_id"] = nil
+    session["goodbytes7788"]["channel_id"]      = nil
   end
 
   # 權限檢查，傳入的第一個物件是channel物件或是organization物件

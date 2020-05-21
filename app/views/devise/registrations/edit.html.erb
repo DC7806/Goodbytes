@@ -23,8 +23,8 @@
       <td><%= invite.sender.email %></td>
       <td><%= invite.type_in_chinese %></td>
       <td><%= invite.item.name %></td>
-      <td><%= link_to "同意", accept_invite_path(**invite.accept_attr) %></td>
-      <td><%= link_to "不同意", cancel_invite_path(**invite.deny_attr), method: 'delete' %></td>
+      <td><%= link_to "同意", accept_invite_path(invite_token: invite.token) %></td>
+      <td><%= link_to "不同意", cancel_invite_path(invite_token: invite.token), method: 'delete' %></td>
     </tr>
   <% end %>
 </table>

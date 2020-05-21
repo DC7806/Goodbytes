@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     collection do
       delete :cancel
       post :new, as: "send"
-      get :accept
+      get :accept, to: "roles#create"
     end
   end
 
