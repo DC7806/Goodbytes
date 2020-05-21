@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  # around_action :redirect_back_to_edit_page, except: [:create]
   
   def new
     if current_user.send_invitation
@@ -8,18 +9,27 @@ class RolesController < ApplicationController
     else
       @notice = "此成員已加入！"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
   end
 
   def create
-    invite = Invite.find_by(token: params[:invite_token])
+    invite = Invite.find_by(token: params[:token])
     if invite && invite.item.update_role(current_user.id, member)
+      path = "/switch_#{invite.item_type.downcase}"
+      options = {	
+        method: :post,                  	
+        authenticity_token: 'auto',                  	
+        autosubmit: true	
+      }
+      redirect_post(	
+        path,	
+        params: {id: invite.item_id},	
+        options: options
+      )
       invite.destroy
-      @notice = "歡迎加入"
     else
-      @notice = "無效的操作"
+      redirect_to channel_path, notice: "無效的操作"
     end
-    redirect_to root_path, notice: @notice
   end
 
   def update
@@ -28,7 +38,7 @@ class RolesController < ApplicationController
     else
       @notice = "權限更新失敗"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
   end
 
   def destroy
@@ -39,7 +49,13 @@ class RolesController < ApplicationController
       relationship.destroy
       @notice = "成功刪除！"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
+  end
+
+  private
+  def redirect_back_to_edit_page
+    class_name = @model_object.class.to_s.downcase
+    redirect_to "/#{class_name}/edit", notice: @notice
   end
 
 end

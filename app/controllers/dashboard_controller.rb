@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
     redirect_to channel_path
   end
 
-  def switch_org # switch current organization
+  def switch_organization # switch current organization
     # 設置session內的organization_id，因為從html form傳來的值是字串所以to_i
     session["goodbytes7788"]["organization_id"] = params[:id].to_i
     # current_channelsssssssssss 請參考application controller
@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
     redirect_to channel_path
   end
 
-  def switch_ch # switch current channel
+  def switch_channel # switch current channel
     # 設置session內的organization_id，因為從html form傳來的值是字串所以to_i
     session["goodbytes7788"]["channel_id"] = params[:id].to_i
     redirect_to channel_path
