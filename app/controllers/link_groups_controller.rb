@@ -4,6 +4,7 @@ class LinkGroupsController < ApplicationController
   
   def index
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
+    @link_group = LinkGroup.new
     @saved_link = SavedLink.new
   end
 
@@ -15,10 +16,14 @@ class LinkGroupsController < ApplicationController
     @link_group = LinkGroup.new(link_group_params)
     @link_group.channel_id = params[:channel_id]
 
+    # for AJAX render
+    @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
+    @saved_link = SavedLink.new
+
     if @link_group.save
-      redirect_to channel_link_groups_path
+      @ajax_create_group = { ok: true }
     else
-      render :new
+      @ajax_create_group = { ok: false, message: 'Create Error!' }
     end
   end
 
@@ -26,11 +31,14 @@ class LinkGroupsController < ApplicationController
   end
 
   def update
+    # for AJAX render
+    @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
+    @saved_link = SavedLink.new
 
     if @link_group.update(link_group_params)
-      redirect_to channel_link_groups_path
+      @ajax_update_group = { ok: true }
     else
-      render :edit
+      @ajax_update_group = { ok: false, message: 'Update Error!' }
     end
   end
 

@@ -32,7 +32,7 @@ class SavedLinksController < ApplicationController
     @saved_link = SavedLink.find(params[:id])
 
     if @saved_link.destroy 
-      redirect_to channel_link_groups_path
+      @ajax_destroy_link = { ok: true }
     end
   end
 

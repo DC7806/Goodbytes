@@ -1,0 +1,15 @@
+(function () {
+  let ok = '<%= @ajax_update_group[:ok] %>' === 'true'
+
+  if (ok) {
+    let group_id = '<%= @link_group.id %>'
+    $(`#update-group-${group_id}`).modal('hide')
+    $('.modal-backdrop').hide()
+
+    $(`#update-group .group_name`).val('<%= @link_group.name %>');
+
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, saved_link: @saved_link) %>")
+  } else {
+    alert('<%= @ajax_update_group[:message] %>')
+  }
+})()
