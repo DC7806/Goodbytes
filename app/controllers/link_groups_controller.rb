@@ -21,6 +21,9 @@ class LinkGroupsController < ApplicationController
     @saved_link = SavedLink.new
 
     if @link_group.save
+      @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
+      @link_group = LinkGroup.new
+
       @ajax_create_group = { ok: true }
     else
       @ajax_create_group = { ok: false, message: 'Create Error!' }
@@ -36,6 +39,7 @@ class LinkGroupsController < ApplicationController
     @saved_link = SavedLink.new
 
     if @link_group.update(link_group_params)
+      @link_group = LinkGroup.new
       @ajax_update_group = { ok: true }
     else
       @ajax_update_group = { ok: false, message: 'Update Error!' }
@@ -43,8 +47,12 @@ class LinkGroupsController < ApplicationController
   end
 
   def destroy
+    # for AJAX render
+    @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
+    @saved_link = SavedLink.new
+
     if @link_group.destroy 
-      redirect_to channel_link_groups_path
+      @ajax_destroy_group = { ok: true }
     end
   end
 

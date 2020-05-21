@@ -1,0 +1,16 @@
+(function () {
+  let ok = '<%= @ajax_destroy_group[:ok] %>' === 'true'
+  let group_id = '<%= @link_group.id %>'
+
+  if (ok) {
+    $(`#destroy-link-${group_id}`).modal('hide')
+    $('.modal-backdrop').hide()
+
+    $(`#destroy-link-${group_id}`).remove();
+    $('#create-group .group_name').val('');
+
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, saved_link: @saved_link) %>")
+  } else {
+    alert("can't destroy")
+  }
+})()

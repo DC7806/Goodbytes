@@ -1,14 +1,11 @@
-(function () {
-  let ok = '<%= @ajax_create_group[:ok] %>' === 'true'
+<% if @ajax_create_group[:ok] %>
 
-  if (ok) {
-    $(`#create-group`).modal('hide')
-    $('.modal-backdrop').hide()
+  $(`#create-group`).modal('hide')
+  $('.modal-backdrop').hide()
+  $('#create-group .group_name').val('');
 
-    $(`#create-group .group_name`).val('');
+  $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, saved_link: @saved_link) %>")
 
-    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, saved_link: @saved_link) %>")
-  } else {
-    alert('<%= @ajax_create_group[:message] %>')
-  }
-})()
+  <% else %>
+    <%= @ajax_create_group[:message] %>
+  <% end %>

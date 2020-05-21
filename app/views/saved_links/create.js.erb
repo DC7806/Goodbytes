@@ -3,12 +3,15 @@
 
   if (ok) {
     let group_id = '<%= @saved_link.link_group_id %>'
+
     $(`#create-link-${group_id}`).modal('hide')
+    $('.modal-backdrop').hide()
+
     $(`#create-link-${group_id} .link_url`).val('');
     $(`#create-link-${group_id} .link_subject`).val('');
     $(`#create-link-${group_id} .link_summary`).val('');
 
-    $(`#link_group-${group_id}`).replaceWith("<%= j render('shared/partials/create_saved_link', link_group: @saved_link.link_group) %>")
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, link_group: @saved_link.link_group, saved_link: @saved_link) %>")
   } else {
     alert('<%= @ajax_create_link[:message] %>')
   }
