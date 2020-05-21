@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, 
               with: :redirect_if_not_found
   helper_method :current_organization_id, :current_channel_id, 
-                                          :current_organization, 
-                                          :current_channel,
+                :current_organization,    :current_channel,
                                           :current_channels
 
   private
@@ -43,6 +42,7 @@ class ApplicationController < ActionController::Base
       render "channels/new", notice: "創個新頻道吧！"
     elsif purview_check(current_organization, member)
       # 而如果是organization member代表此組織沒有可以給你編輯的channel
+      # TODO: 這邊的render應該之後要有個模版可以給他render，暫時先這樣
       render html: "此組織目前沒有可供編輯的頻道～", layout: true
     else
       redirect_to root_path, notice: '沒有權限進行此操作！'

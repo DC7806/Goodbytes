@@ -7,7 +7,7 @@ class Invite < ApplicationRecord
     when "Organization"
       "組織"
     when "Channel"
-      "頻靓"
+      "頻道"
     end
   end
   
