@@ -41,5 +41,5 @@ Rails.application.routes.draw do
         resources :contents
       end
     end # channel
-  end # organization
-end  # Rails draw do
+  # end # organization
+# end  # Rails draw do
