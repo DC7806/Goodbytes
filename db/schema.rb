@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2020_05_20_101214) do
 
   create_table "contents", force: :cascade do |t|
     t.integer "article_id"
-    t.text "content", null: false
-    t.integer "position", default: 0, null: false
+    t.text "content"
+    t.integer "position"
     t.text "title"
     t.text "desc"
     t.text "url"

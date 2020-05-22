@@ -11,15 +11,15 @@ class ContentsController < ArticlesController
     @content = Content.new
   end 
 
-  # def create
-  #   @content = @article.contents.new(:content)
+  def create
+    @content = @article.contents.new
     
-  #   if @content.save
-  #     redirect_to organization_channel_article_content_path
-  #   else
-  #     render :new
-  #   end
-  # end
+    if @content.save
+      redirect_to organization_channel_article_contents_path
+    else
+      render :new
+    end
+  end
 
   # def edit
   #   @contents = @article.contents.order(create_at: :asc).includes(:contents)

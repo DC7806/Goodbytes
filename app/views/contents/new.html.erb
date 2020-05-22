@@ -1,14 +1,12 @@
 <%= link_to "< Go back article", organization_channel_article_contents_path %>
 
-<%= form_for(@content, url: new_organization_channel_article_content_path, method: "POST") do |f| %>
+<%= form_for(@content, url: organization_channel_article_contents_path, method: "POST") do |f| %>
   <div class="form-group">
   <h6 style="color:salmon;">Drag components to your email newsletter</h6>
-    <label for="exampleFormControlInput1">Title</label>
-    <input type="text" class="form-control" placeholder="Input title here">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Input your text here"></textarea>
+  <%= f.label :title , "Title"%>
+  <%= f.text_field :title, class:"form-control", placeholder:"Input title here" %>
+  <%= f.label :desc , "Text"%>
+  <%= f.text_area :desc, class:"form-control", placeholder:"Input text here" %>
   </div>
   <%= f.submit %>
 <% end %>
