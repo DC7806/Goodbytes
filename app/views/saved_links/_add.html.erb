@@ -2,7 +2,7 @@
 <% link_groups.each do |link_group| %>
   <div class="modal fade" id="add-link" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <%= form_for(@saved_link, url: organization_channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST") do |f| %>
+      <%= form_for(@saved_link, url: saved_link_index_path(link_group_id: link_group.id), method: "POST") do |f| %>
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">新增Link</h5>

@@ -1,6 +1,8 @@
 <h1>新增Link</h1>
 
-<%= form_for(@saved_link, url: organization_channel_link_group_saved_links_path, method: "POST") do |f| %>
+<%= form_for(@saved_link, url: saved_link_index_path, method: "POST") do |f| %>
+
+  <%= f.hidden_field :link_group_id %>
   
   <div>
     <%= f.label :url %>
@@ -21,4 +23,4 @@
   <%= f.submit %>
 <% end %>
 
-<%= link_to 'X (返回)', organization_channel_link_groups_path %>
+<%= link_to 'X (返回)',link_group_index_path %>

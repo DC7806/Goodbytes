@@ -4,27 +4,44 @@
       Goodbytes
     </h3>
   <% end %>
-
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up">
-      <%= form_tag(dashboard_path(id: 1), method: 'patch') do %>
-        <select name="org_ch"  onchange="this.form.submit();">
-          <% current_user.channels.each do |ch| %>
-            <option value="<%= ch.organization_id %>|<%= ch.id %>"
-              <% if ch.id == session[:goodbytes7788]["channel_id"].to_i %>
-                selected
-              <% end %>
-            >
-              <%= ch.name %>
-            </option> 
-          <% end %>
-        </select>
-      <% end %>
+      <div>
+        <%= form_tag(switch_organization_path, method: 'post') do %>
+          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
+            <% current_user.organizations.each do |org| %>
+              <option value="<%= org.id %>" 
+                <% if org.id == current_organization_id %>
+                  selected
+                <% end %>
+              >
+                <%= org.name %>
+              </option> 
+            <% end %>
+          </select>
+        <% end %>
+      </div>
+      <div>
+        <%= form_tag(switch_channel_path, method: 'post') do %>
+          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
+            <% current_channels.each do |ch| %>
+              <option value="<%= ch.id %>"
+                
+                <% if ch.id == current_channel_id %>
+                  selected
+                <% end %>
+              >
+                <%= ch.name %>
+              </option> 
+            <% end %>
+          </select>
+        <% end %>
+      </div>
       <div>
         <%= link_to "Articles", root_path %>
       </div>
       <div>
-        <%= link_to "Link", organization_channel_link_groups_path(**path_params) %>
+        <%= link_to "Link", link_group_index_path %>
       </div>
       <div>
         <a>Sources</a>

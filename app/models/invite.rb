@@ -11,24 +11,4 @@ class Invite < ApplicationRecord
     end
   end
   
-  def accept_attr
-    case item_type
-    when "Organization"
-      { 
-        organization_id: item_id, 
-        invite_token: token
-      }
-    when "Channel"
-      { 
-        organization_id: item.organization_id, 
-        channel_id: item_id, 
-        invite_token: token
-      }
-    end
-  end
-
-  def deny_attr
-    { invite_token: token }
-  end
-  
 end

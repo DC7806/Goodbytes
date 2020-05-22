@@ -6,22 +6,21 @@ class ChannelsController < ApplicationController
   before_action :channel_member?, only: [:show]
 
   def new
-    new_params = params_require(:organization_id)
-    @channel   = Channel.new(**new_params)
+    @channel   = Channel.new(
+      organization_id: get_organization_id
+    )
   end
 
   def edit
-    @organization_id      = @channel.organization_id
-    @users                = @channel.users_with_role
+    @organization_id = @channel.organization_id
+    @users           = @channel.users_with_role
   end
   
   def show
-    params_require(:organization_id, :id)
     @articles = @channel.articles
   end
 
   def create
-    params_require(:name, :organization_id, target: params[:channel])
     channel = Channel.new(channel_params)
     if channel.save
       @notice = "channel新增成功"
@@ -30,11 +29,10 @@ class ChannelsController < ApplicationController
     else
       @notice = "channel新增失敗"
     end
-    redirect_to(organization_channel_path(**path_params), notice: @notice) and return
+    redirect_to(channel_path, notice: @notice) and return
   end
 
   def update
-    params_require(:name, target: params[:channel])
     if @channel.update(channel_params)
       @notice = "channel更新成功"
     else
@@ -44,7 +42,6 @@ class ChannelsController < ApplicationController
   end
 
   def destroy
-    params_require(:id, :organization_id, target: params[:channel])
     if @channel.destroy
       @notice = "channel刪除成功"
     else

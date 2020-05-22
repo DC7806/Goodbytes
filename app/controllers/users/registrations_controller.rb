@@ -6,17 +6,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    if params[:invite_token]
-      params_require(:email, :invite_token)
-    end
+    @email = params[:email]
+    @invite_token = params[:invite_token]
     super
   end
 
   # POST /resource
   def create
-    if params[:invite_token]
-      params_require(:invite_token)
-    end
+    @invite_token = params[:invite_token]
     super
     user = resource
     if @invite_token.present?

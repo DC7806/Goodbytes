@@ -1,50 +1,61 @@
 class RolesController < ApplicationController
+  # around_action :redirect_back_to_edit_page, except: [:create]
   
   def new
-    params_require(:email, :model_object)
     if current_user.send_invitation
                    .from(@model_object)
-                   .to(@email)
+                   .to(params[:email])
       @notice = "邀請信件已寄出"
     else
       @notice = "此成員已加入！"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
   end
 
   def create
-    params_require(:invite_token, :model_object)
-    invite = Invite.find_by(token: @invite_token)
-
-    if invite && @model_object.update_role(current_user.id, member)
+    invite = Invite.find_by(token: params[:token])
+    if invite && invite.item.update_role(current_user.id, member)
+      path = "/switch_#{invite.item_type.downcase}"
+      options = {	
+        method: :post,                  	
+        authenticity_token: 'auto',                  	
+        autosubmit: true	
+      }
+      redirect_post(	
+        path,	
+        params: {id: invite.item_id},	
+        options: options
+      )
       invite.destroy
-      @notice = "歡迎加入"
     else
-      @notice = "無效的操作"
+      redirect_to channel_path, notice: "無效的操作"
     end
-    redirect_to root_path, notice: @notice
   end
 
   def update
-    params_require(:user_id, :role, :model_object)
-    if @model_object.update_role(@user_id, @role)
+    if @model_object.update_role(params[:user_id], params[:role])
       @notice = "權限更新成功"
     else
       @notice = "權限更新失敗"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
   end
 
   def destroy
-    params_require(:user_id, :model_object)
-    relationship = @model_object.relationship(@user_id)
+    relationship = @model_object.relationship(params[:user_id])
     if relationship.role == admin
       @notice = "不能開除admin"
     else
       relationship.destroy
       @notice = "成功刪除！"
     end
-    redirect_to root_path, notice: @notice
+    redirect_back_to_edit_page
+  end
+
+  private
+  def redirect_back_to_edit_page
+    class_name = @model_object.class.to_s.downcase
+    redirect_to "/#{class_name}/edit", notice: @notice
   end
 
 end

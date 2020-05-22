@@ -10,7 +10,7 @@
   </ol>
 </nav>
 <div class="card border-info mb-3" >
-  <%= form_for @article, url: organization_channel_articles_path do |f| %>
+  <%= form_for @article, url: article_index_path	 do |f| %>
     <div class="card-header">
       <%= f.label :subject, "Subject" %>
       <%= f.text_field :subject %>
@@ -22,6 +22,6 @@
 </div>
 
 <%= 
-  link_to "Back to Email list", organization_channel_path(@channel, **path_params), 
+  link_to "Back to Email list", channel_path, 
                                 class:"button" 
 %>
