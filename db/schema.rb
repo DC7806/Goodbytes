@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_101214) do
+ActiveRecord::Schema.define(version: 2020_05_22_085639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2020_05_20_101214) do
     t.datetime "deliver_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["channel_id"], name: "index_articles_on_channel_id"
+    t.index ["deleted_at"], name: "index_articles_on_deleted_at"
   end
 
   create_table "channels", force: :cascade do |t|
@@ -52,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_05_20_101214) do
     t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_contents_on_deleted_at"
   end
 
   create_table "invites", force: :cascade do |t|
