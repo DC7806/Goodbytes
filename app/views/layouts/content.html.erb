@@ -17,14 +17,27 @@
   <body>
 
     <div class="layout">
-
-      <%= render "shared/content_sidebar" %>
-
-      <div class="sidebar-blank">
+      <aside id="sidebar_content">
+  <% if user_signed_in? %>
+    <nav class="sidebar__menu">
+      <div class="card" style="width: 15rem;">
+        <div class="card-header">
+          <%= link_to "Back to Articles list", root_path %>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <%= link_to "+ Add Content", new_organization_channel_article_content_path(article_id: @article), method: "GET" %></li>
+          <li class="list-group-item">Header</li>
+          <li class="list-group-item">
+          <%= yield %>
+          </li>
+          <li class="list-group-item">Footer</li>
+        </ul>
       </div>
-
+    </nav>
+  <% end %>
+</aside>
       <main>
-
         <div class="container-fluid">
           <div class="wrap">
             <div class="header_navbar">
@@ -33,7 +46,7 @@
             <div class="noticed"><%= notice %></div>
             <div class="alerted"><%= alert %></div>
             <div class="content">
-              <%= yield %>
+              
             </div>
           </div>
 
