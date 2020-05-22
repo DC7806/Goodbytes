@@ -8,7 +8,7 @@
 
     $(`#update-group .group_name`).val('<%= @link_group.name %>');
 
-    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, saved_link: @saved_link) %>")
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, new_link_group: @channel.link_groups.new, saved_link: @saved_link, new_saved_link: @link_group.saved_links.new) %>")
   } else {
     alert('<%= @ajax_update_group[:message] %>')
   }

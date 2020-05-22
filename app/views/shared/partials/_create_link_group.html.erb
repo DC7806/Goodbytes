@@ -66,7 +66,7 @@
               <%# AJAX create link modal %>
           <div class="modal fade" id="create-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <%= form_for(@saved_link, url: channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST", remote: true ) do |f| %>
+              <%= form_for(new_saved_link, url: channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST", remote: true ) do |f| %>
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="create_link">新增Link</h5>
@@ -172,7 +172,7 @@
 
 
       <%# AJAX create group modal %>
-        <%= form_for(@link_group, url: channel_link_groups_path, method: "POST", remote: true) do |f| %>
+        <%= form_for(new_link_group, url: channel_link_groups_path, method: "POST", remote: true) do |f| %>
           <div class="modal fade" id="create-group" tabindex="-1" role="dialog" aria-labelledby="create-group" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

@@ -6,7 +6,7 @@
         <%= link_to "新增群組", new_channel_link_group_path, remote: true, class:"btn btn-primary" %>
       </div>
   </div>
-  <%# AJAX rerender all group %>
+  <%# AJAX render all group, only create modal not the same %>
   <div class="link_group d-flex flex-wrap">
     <% @link_groups.each do |link_group| %>
       <div class="border m-2" style="width:234px">
@@ -71,12 +71,12 @@
                 </div>
                 
               <% end %>
+
             </div>
           <%#  %>
         </div>
 
       </div>
-
 
       <%# AJAX create group modal %>
         <%= form_for(@link_group, url: channel_link_groups_path, method: "POST", remote: true) do |f| %>
@@ -159,11 +159,12 @@
           </div>
         <% end %>
       <%#  %>
-      
+
       <%# AJAX create link modal %>
+        <%= form_for(@saved_link, url: channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST", remote: true ) do |f| %>
           <div class="modal fade" id="create-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <%= form_for(@saved_link, url: channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST", remote: true ) do |f| %>
+
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="create_link">新增Link</h5>
@@ -191,9 +192,10 @@
                     <%= f.submit class:"btn btn-primary" %>
                   </div>
                 </div>
-              <% end %>
+
             </div>
           </div>
+        <% end %>
       <%#  %>
 
       <%# AJAX update link modal %>
@@ -261,6 +263,8 @@
           </div>
         <% end %>
       <%#  %>
+
+      
 
     <% end %>
   </div>

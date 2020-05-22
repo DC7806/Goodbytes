@@ -10,8 +10,8 @@
     $(`#create-link-${group_id} .link_url`).val('');
     $(`#create-link-${group_id} .link_subject`).val('');
     $(`#create-link-${group_id} .link_summary`).val('');
-
-    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, link_group: @saved_link.link_group, saved_link: @saved_link) %>")
+    console.log("<%= @saved_link.id %>")
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, link_group: @saved_link.link_group, new_link_group: @channel.link_groups.new, new_saved_link: @link_group.saved_links.new) %>")
   } else {
     alert('<%= @ajax_create_link[:message] %>')
   }
