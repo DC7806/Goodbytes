@@ -1,3 +1,43 @@
+<button class="btn btn-primary" disabled>
+  會員資料
+</button>
+<button class="btn btn-primary">
+  <%= link_to "組織資料", edit_organization_path %>
+</button>
+<button class="btn btn-primary">
+  <%= link_to "頻道資料", edit_channel_path %>
+</button>
+
+
+
+<h3>等待審核的邀請</h3>
+<table class="table">
+  <tr>
+    <th>寄件者</th>
+    <th>組織類別</th>
+    <th>組織名稱</th>
+    <th>動作</th>
+  </tr>
+  <% @messages.each do |invite| %>
+    <tr>
+      <td><%= invite.sender.email %></td>
+      <td><%= invite.type_in_chinese %></td>
+      <td><%= invite.item.name %></td>
+      <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}" %></td>
+      <td><%= link_to "不同意", cancel_invite_path(token: invite.token), method: 'delete' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>創建組織</h3>
+<%= form_for(@organization, url: organization_path, method: 'post') do |f| %>
+  <%= f.label :name, "名稱"%>
+  <%= f.text_field :name%>
+  <%= f.submit "建立組織", data: {disable_with: "請稍等.."} %>
+<% end %>
+
+
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -39,5 +79,3 @@
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

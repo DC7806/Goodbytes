@@ -5,19 +5,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @email = params[:email]
+    @invite_token = params[:invite_token]
+    super
+  end
 
   # POST /resource
   def create
-
+    @invite_token = params[:invite_token]
     super
-
     user = resource
-    token = params[:invite_token]
-    if token.present?
-      invite = Invite.find_by(token: token)
+    if @invite_token.present?
+      invite = Invite.find_by(token: @invite_token)
       if invite
         @org = Organization.find(invite.item_id) 
         invite.destroy
@@ -28,23 +28,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self_org.save
 
     orgs  = []
-    orgs << [self_org, "admin" ]
-    orgs << [    @org, "member"] if @org
+    orgs << [self_org, admin ]
+    orgs << [    @org, member] if @org
 
     orgs.each do |org, role|
-      relationship = OrganizationsUser.new(
-        organization_id: org.id,
-        user_id:         user.id, 
-        role:            role
-      )
-      relationship.save
+      org.update_role(user.id, role)
     end
     
   end
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @organization = Organization.new
+    @messages = current_user.receive_invites.includes(:item).includes(:sender)
+    super
+  end
 
   # PUT /resource
   # def update
