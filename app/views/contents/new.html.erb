@@ -1,8 +1,7 @@
-<%= link_to "< Go back article", organization_channel_article_contents_path %>
-
-<%= form_for(@content, url: organization_channel_article_contents_path, method: "POST") do |f| %>
+<%= form_for(@content, url: contents_path, method: "POST") do |f| %>
   <div class="form-group">
   <h6 style="color:salmon;">Drag components to your article newsletter</h6>
+  <input name="article_id" type="hidden" value="<%= params[:article_id] %>">
   <%= f.label :title , "Title"%>
   <%= f.text_field :title, class:"form-control", placeholder:"Input title here" %>
   <%= f.label :desc , "Text"%>

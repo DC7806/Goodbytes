@@ -25,9 +25,9 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                <%= link_to "+ Add Content", contents_path %></li>
+                <%= link_to "+ Add Content", new_article_contents_path(article_id: @article), method: "GET" %></li>
                 <li class="list-group-item">Header</li>
-                <li class="list-group-item"></li>
+                <li class="list-group-item"><%= yield %></li>
                 <li class="list-group-item">Footer</li>
               </ul>
             </div>
@@ -39,9 +39,9 @@
           <div class="wrap">
             <div class="header_navbar">
               <%= render "shared/article_user_section" %>
-              <%= render "shared/flash" %><%= yield %>
+              <%= render "shared/flash" %>
             </div>
-            <%# <div class="content"></div> %>
+            <div class="content">
           </div>
         </div>
       </main>
