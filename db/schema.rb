@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_063419) do
+ActiveRecord::Schema.define(version: 2020_05_23_110042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_063419) do
 
   create_table "contents", force: :cascade do |t|
     t.integer "article_id"
-    t.text "layout"
     t.integer "position"
     t.text "title"
     t.text "desc"
@@ -58,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_063419) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
+    t.integer "layout"
     t.index ["deleted_at"], name: "index_contents_on_deleted_at"
   end
 
