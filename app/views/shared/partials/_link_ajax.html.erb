@@ -59,7 +59,7 @@
           <%# AJAX create link modal %>
             <div class="modal fade" id="create-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
               <div class="modal-dialog" role="document">
-                <%= form_for(new_saved_link, url: channel_link_group_saved_links_path(link_group_id: link_group.id), method: "POST", remote: true ) do |f| %>
+                <%= form_for(SavedLink.new, url: saved_link_index_path, method: "POST", remote: true ) do |f| %>
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="create-link-title">新增Link</h5>
@@ -68,6 +68,8 @@
                       </button>
                     </div>
                     <div class="modal-body">
+
+                          <%= f.hidden_field :link_group_id, value: link_group.id %>
                         <div class="form-group">
                           <%= f.label :url %>
                           <%= f.text_field :url, class: "link_url link_url-#{link_group.id} " %>
@@ -94,7 +96,8 @@
 
           <%# AJAX update link modal %>
             <% link_group.saved_links.each do |saved_link| %>
-              <%= form_for(saved_link, url: channel_link_group_saved_link_path(channel_id: 1, link_group_id: link_group.id, id: saved_link.id), method: "PATCH", remote: true ) do |f| %>
+              <%= form_for(saved_link, url: saved_link_path(id: saved_link.id), method: "PATCH", remote: true ) do |f| %>
+                
                 <div class="modal fade" id="update-link-<%= saved_link.id %>">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -146,7 +149,7 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       <div type="button" class="btn btn-primary">
-                        <%= link_to "Delete Saved link" , channel_link_group_saved_link_path(channel_id: 1, link_group_id: link_group.id, id: saved_link.id),  method: 'delete', remote: true %>
+                        <%= link_to "Delete Saved link" , saved_link_path(saved_link),  method: 'delete', remote: true %>
                       </div>
                     </div>
                   </div>
@@ -160,7 +163,7 @@
     </div>
 
     <%# AJAX create group modal %>
-      <%= form_for(new_link_group, url: channel_link_groups_path, method: "POST", remote: true) do |f| %>
+      <%= form_for(LinkGroup.new(channel_id: @channel.id), url: link_group_index_path, method: "POST", remote: true) do |f| %>
         <div class="modal fade" id="create-group" tabindex="-1" role="dialog" aria-labelledby="create-group" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -188,7 +191,7 @@
     <%#  %>
 
     <%# AJAX update group modal %>
-      <%= form_for(link_group, url: channel_link_group_path(id: link_group.id), method: "PATCH", remote: true) do |f| %>
+      <%= form_for(link_group, url: link_group_path(id: link_group.id), method: "PATCH", remote: true) do |f| %>
         <div class="modal fade" id="update-group-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="update-group-<%= link_group.id %>" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -232,7 +235,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <div type="button" class="btn btn-primary">
-                  <%= link_to "刪除群組", channel_link_group_path(id: link_group.id), method: 'delete', remote: true %>
+                  <%= link_to "刪除群組", link_group_path(id: link_group.id), method: 'delete', remote: true %>
                 </div>
               </div>
             </div>

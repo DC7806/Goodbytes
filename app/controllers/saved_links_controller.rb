@@ -13,7 +13,7 @@ class SavedLinksController < ApplicationController
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
 
     if @saved_link.save
-      @link_group = LinkGroup.new
+      # @link_group = LinkGroup.new
       @ajax_create_link = { ok: true }
     else
       @ajax_create_link = { ok: false, message: 'Create Error!' }
@@ -24,8 +24,6 @@ class SavedLinksController < ApplicationController
   end
 
   def update
-    @saved_link = SavedLink.find(params[:id])
-
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
 
     if @saved_link.update(saved_link_params)
@@ -37,10 +35,8 @@ class SavedLinksController < ApplicationController
   end
 
   def destroy
-    @saved_link = SavedLink.find(params[:id])
-
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
-    @link_group = LinkGroup.new
+    # @link_group = LinkGroup.new
 
     if @saved_link.destroy 
       @ajax_destroy_link = { ok: true }
@@ -48,9 +44,6 @@ class SavedLinksController < ApplicationController
   end
 
   private
-  def find_channel
-    @channel = Channel.find(params[:channel_id])
-  end
   def saved_link_params
     params.require(:saved_link).permit( :url, 
                                         :subject, 
