@@ -1,6 +1,7 @@
 class LinkGroupsController < ApplicationController
-  before_action :find_channel
   before_action :find_link_group, only: [:edit, :update, :destroy]
+  before_action :find_channel
+  before_action :channel_member?
   
   def index
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
@@ -13,7 +14,7 @@ class LinkGroupsController < ApplicationController
   end
 
   def create
-    @link_group = LinkGroup.new(link_group_params)
+    @link_group            = LinkGroup.new(link_group_params)
     @link_group.channel_id = params[:channel_id]
 
     # for AJAX render
@@ -21,7 +22,6 @@ class LinkGroupsController < ApplicationController
     @saved_link = SavedLink.new
 
     if @link_group.save
-
       @ajax_create_group = { ok: true }
     else
       @ajax_create_group = { ok: false, message: 'Create Error!' }
@@ -59,11 +59,8 @@ class LinkGroupsController < ApplicationController
     params.require(:link_group).permit(:name)
   end
 
-  def find_channel
-    @channel = Channel.find(params[:channel_id])
-  end
-
   def find_link_group
     @link_group = LinkGroup.find(params[:id])
+    @subobject = @link_group
   end
 end

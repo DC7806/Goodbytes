@@ -1,13 +1,14 @@
 class SavedLinksController < ApplicationController
+  before_action :find_saved_link, except: [:new, :create]
   before_action :find_channel
-
+  before_action :channel_member?
+  
   def new
-    @saved_link = SavedLink.new
+    @saved_link = SavedLink.new(link_group_id: params[:link_group_id])
   end
 
   def create
     @saved_link = SavedLink.new(saved_link_params)
-    @saved_link.link_group_id = params[:link_group_id]
 
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
 
@@ -20,7 +21,6 @@ class SavedLinksController < ApplicationController
   end
 
   def edit
-    @saved_link = SavedLink.find(params[:id])
   end
 
   def update
@@ -52,6 +52,14 @@ class SavedLinksController < ApplicationController
     @channel = Channel.find(params[:channel_id])
   end
   def saved_link_params
-    params.require(:saved_link).permit(:url, :subject, :summary)
+    params.require(:saved_link).permit( :url, 
+                                        :subject, 
+                                        :summary,
+                                        :link_group_id )
+  end
+
+  def find_saved_link
+    @saved_link = SavedLink.find(params[:id])
+    @subobject = @saved_link
   end
 end

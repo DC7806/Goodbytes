@@ -13,10 +13,12 @@
   <% if @user_exist %>
     <%= link_to "請按我去接受邀請", root_url %>
   <% else %>
-    <%= link_to "請按我註冊加入", organization_invited_url(
-      email: @email,
-      invite_token: @invite_token
-      ) %>
+    <%= 
+      link_to "請按我註冊加入", new_user_registration_url(
+        email: @email,
+        invite_token: @invite_token
+      )
+    %>
   <% end %>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
