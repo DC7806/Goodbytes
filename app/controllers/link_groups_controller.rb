@@ -21,8 +21,6 @@ class LinkGroupsController < ApplicationController
     @saved_link = SavedLink.new
 
     if @link_group.save
-      @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
-      @link_group = LinkGroup.new
 
       @ajax_create_group = { ok: true }
     else

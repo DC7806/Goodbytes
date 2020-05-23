@@ -1,10 +1,13 @@
+<%# 如果有宣告變數，用匿名函式寫才不會重複宣告，這樣因為沒有宣告變數所以沒有出錯 %>
+
 <% if @ajax_create_group[:ok] %>
 
-$(`#create-group`).modal('hide')
-$('.modal-backdrop').hide()
-$('#create-group .group_name').val('');
+  $(`#create-group`).modal('hide')
+  $('.modal-backdrop').hide()
 
-$(`.link_group`).replaceWith("<%= j render('shared/partials/create_link_group', link_groups: @link_groups, new_link_group: @channel.link_groups.new, saved_link: @saved_link, new_saved_link: @link_group.saved_links.new) %>")
+  $('#create-group .group_name').val('');
+
+  $(`.link_group`).replaceWith("<%= j render('shared/partials/link_ajax', link_groups: @link_groups, new_link_group: @channel.link_groups.new, saved_link: @saved_link, new_saved_link: @link_group.saved_links.new) %>")
 
 <% else %>
   <%= @ajax_create_group[:message] %>
