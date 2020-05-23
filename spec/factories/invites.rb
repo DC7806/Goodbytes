@@ -3,6 +3,6 @@ FactoryBot.define do
     item { nil }
     token { "MyString" }
     sender_id { nil }
-    reciever_id { nil }
+    receiver_id { nil }
   end
 end

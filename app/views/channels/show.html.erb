@@ -1,21 +1,36 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "Home", root_path %>
-    <li class="breadcrumb-item active" aria-current="page"><%= link_to @channel.name, @channel %></li>
+    <li class="breadcrumb-item">
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= link_to @channel.name, channel_path %>
+    </li>
   </ol>
 </nav>
 <section>
   <div class="card">
-   <div class="card-header">
- <%= link_to "Create Article", new_channel_article_path(@channel), class:"btn btn-primary"%>
-   </div>
-   <div class="card-body">
+    <div class="card-header">
+      <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
+    </div>
+    <div class="card-body">
       <% @articles.each do |article| %>
-      <h5 class="card-title"><%= link_to article.subject, channel_article_path(channel_id: @channel.id, id: article.id) %></h5>
-      <%= link_to "Edit", edit_channel_article_path(channel_id: @channel.id, id: article.id), class:"btn btn-primary btn-sm" %>
-      <%= link_to "Delete", channel_article_path(channel_id: @channel.id, id: article.id), method: :delete, data: { confirm: "Are you sure you want to delete this aritcle?", class:"button"} %>
-      <div><%= link_to article.created_at.strftime("%A, %B %d %Y"), channel_article_path(channel_id: @channel.id, id: article.id) %></div>
+        <h5 class="card-title">
+          <%= link_to article.subject, article_path(article) %>
+        </h5>
+        <%= link_to "Edit", edit_article_path(article), class:"btn btn-primary btn-sm" %>
+        <%= 
+          link_to "Delete", article_path(article), 
+                            method: :delete, 
+                            data: { 
+                              confirm: "Are you sure you want to delete this aritcle?", 
+                              class:"button"
+                            } 
+        %>
+        <div>
+          <%= link_to article.created_at.strftime("%A, %B %d %Y"), article_path(article) %>
+        </div>
       <% end %>
-   </div>
+    </div>
   </div>
 </section>

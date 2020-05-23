@@ -3,4 +3,5 @@ class LinkGroup < ApplicationRecord
   has_many :saved_links, dependent: :destroy
   
   validates :name, presence: true
+
 end

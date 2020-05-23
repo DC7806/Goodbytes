@@ -1,0 +1,123 @@
+<button class="btn btn-primary">
+  <%= link_to "會員資料", edit_user_registration_path %>
+</button>
+<button class="btn btn-primary" disabled>
+  組織資料
+</button>
+<button class="btn btn-primary">
+  <%= link_to "頻道資料", edit_channel_path %>
+</button>
+
+<h3><%= @organization.name %></h3>
+<p>organization</p>
+
+
+<p>組織改名</p>
+<%= form_tag(organization_path, method: 'patch') do %>
+  <input type="text" name="organization[name]">
+  <input type="submit" value="改名" class="btn btn-success">
+<% end %>
+
+
+<p>######################</p>
+<p>寄送邀請信</p>
+<%= form_tag(new_organization_role_path, method: "post") do %>
+  <div>
+    <%= email_field_tag :email %>
+    <input type="hidden" name="organization_id" value="<%= @organization.id %>">
+    <input class="btn btn-primary" type="submit" value="寄信啊">
+  </div>
+<% end %>
+
+<p>###########</p>
+<p>創channel</p>
+<%= form_tag(channel_path, method: 'post') do %>
+  <div>
+    <input type="text" name="channel[name]">
+    <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
+    <input type="submit" class="btn btn-success" value="新增頻道">
+  </div>
+<% end %>
+
+<p>######################</p>
+<p>邀請名單</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>收件者</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <% @organization.invites.each do |invite| %>
+    <tr>
+      <td><%= invite.receiver %></td>
+      <td class="row">
+        <%= form_tag(new_organization_role_path, method: "post") do %>
+          <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
+          <input type="hidden" name="email" value="<%= invite.receiver %>">
+          <input class="btn btn-primary" type="submit" value="再次邀請">
+        <% end %>
+        <%= 
+          link_to "取消邀請", cancel_invite_path(invite_token: invite.token), 
+                            data: {confirm: "確定？"}, 
+                            method: 'delete' ,
+                            class: "btn btn-danger"
+        %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<p>######################</p>
+<p>組織與成員名單</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>成員EMAIL</th>
+      <th>成員名稱</th>
+      <th>權限</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td>
+          <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
+            <%= hidden_field_tag :user_id, user.id %>
+            <select class="btn btn-primary" name="role"  onchange="this.form.submit();">
+              <% [member, admin].each do |role| %>
+                <option value="<%= role %>"
+                  <% if role == user.role %>
+                    selected
+                  <% end %>
+                  ><%= role %>
+                </option> 
+              <% end %>
+            </select>
+          <% end %>
+        </td>
+        <td>
+          <%= 
+            link_to "刪除", organization_role_path(
+                              @organization, 
+                              user_id: user.id,
+                              id: 'd'
+                            ), 
+                            data: {confirm: "確定？"}, 
+                            method: "delete" 
+          %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>#####################</p>
+<p>刪除組織</p>
+<%= form_tag(organization_path(@organization), data: {confirm: "確定刪除？"} , method: 'delete') do %>
+  <%= submit_tag :submit, value: "刪除" %>
+<% end %>

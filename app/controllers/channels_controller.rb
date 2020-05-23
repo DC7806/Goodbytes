@@ -1,36 +1,61 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel, except: [:create, :index]
+  before_action :find_organization
+  before_action :find_channel,  except: [:new, :create]
+  before_action :org_admin?,      only: [:new, :create, :destroy]
+  before_action :channel_admin?,  only: [:edit, :update]
+  before_action :channel_member?, only: [:show]
 
+  def new
+    @channel   = Channel.new(
+      organization_id: get_organization_id
+    )
+  end
+
+  def edit
+    @organization_id = @channel.organization_id
+    @users           = @channel.users_with_role
+  end
+  
   def show
     @articles = @channel.articles
   end
 
   def create
-    if Channel.create(channel_params)
-      redirect_to root_path, notice: "channel新增成功"
+    channel = Channel.new(channel_params)
+    if channel.save
+      @notice = "channel新增成功"
+      channel.update_role(current_user.id, admin)
+      channel.link_groups.create(name: "INBOX")
     else
-      redirect_to root_path, notice: "channel新增失敗"
+      @notice = "channel新增失敗"
     end
+    redirect_to(channel_path, notice: @notice) and return
   end
+
   def update
-    @channel.update(channel_params)
-    redirect_to root_path, notice: "channel更新成功"
+    if @channel.update(channel_params)
+      @notice = "channel更新成功"
+    else
+      @notice = "channel更新失敗"
+    end
+    redirect_to(root_path, notice: @notice) and return
   end
+
   def destroy
-    @channel.destroy
-    redirect_to root_path, notice: "channel刪除成功"
+    if @channel.destroy
+      @notice = "channel刪除成功"
+    else
+      @notice = "channel刪除失敗"
+    end
+    redirect_to(root_path, notice: @notice) and return
   end
 
   private
-  def find_channel
-    @channel ||= Channel.find_by(id: params[:id])
-    redirect_to channels_path, notice: "Sorry we cannot find this Newsletter." if @channel.nil?
-  end
-
   def channel_params
     params.require(:channel).permit(
       :name,
-      :description
+      :description,
+      :organization_id
     )
   end
 end
