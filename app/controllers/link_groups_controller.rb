@@ -15,8 +15,7 @@ class LinkGroupsController < ApplicationController
   end
 
   def create
-    @link_group            = LinkGroup.new(link_group_params)
-    @link_group.channel_id = params[:channel_id]
+    @link_group          = @channel.link_groups.build(link_group_params)
 
     if @link_group.save
       @ajax_create_group = { ok: true }
