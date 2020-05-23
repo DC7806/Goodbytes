@@ -1,4 +1,7 @@
-<%= "I'm contents index."  %>
+<div><%= "Contents list."  %></div>
 <% @contents.each do |content| %>
-  <%= text_field(:title, :desc) %>
+  <div> Title: <%= content.title %> </div>
+  <%= text_field(:title, :desc) %> 
+  <div> Description: <%= content.desc %> </div>
+  <%= text_field(:title, :desc) %> 
 <% end %>

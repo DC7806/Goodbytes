@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/bgh3rys.css">
+    <title>Goodbytes</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('mail_1.png') %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="layout">
+      <aside id="sidebar_content">
+        <% if user_signed_in? %>
+          <nav class="sidebar__menu">
+            <div class="card" style="width: 15rem;">
+              <div class="card-header">
+                <%= link_to "Back to Articles list", root_path %>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                <%= link_to "+ Add Content", new_article_contents_path(article_id: @article), method: "GET" %></li>
+                <li class="list-group-item">Header</li>
+                <li class="list-group-item"></li>
+                <li class="list-group-item">Footer</li>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
+      </aside>
+      <main>
+        <div class="container-fluid">
+          <div class="wrap">
+            <div class="header_navbar">
+              <%= render "shared/article_user_section" %>
+              <%= render "shared/flash" %>
+            </div>
+            <div class="content">
+              <%= yield %>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

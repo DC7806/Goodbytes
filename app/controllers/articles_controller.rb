@@ -22,7 +22,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    render layout: "content"
+    @contents = @article.contents.order(created_at: :asc)
+    render layout: "article"
   end
 
   def edit

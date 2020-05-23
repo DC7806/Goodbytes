@@ -6,7 +6,7 @@ class ContentsController < ApplicationController
   before_action :find_content, only: [:edit, :update, :destroy]
 
   def index
-    @contents = @article.contents.order(create_at: :asc).includes(:contents)
+    @contents = @article.contents.order(created_at: :asc)
   end
 
   def new
