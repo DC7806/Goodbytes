@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   end
 
-  resource    :channels,      as: 'channel',    path: '/channel', except: [:index] do
+  resource    :channels,      as: 'channel',    path: '/channel', except: :index do
     resource  :channel_roles, as: 'role',       path: '/role',    only:   [:update, :destroy]   do
       collection do
         post :new,            as: 'new',        path: '/new'
@@ -35,11 +35,8 @@ Rails.application.routes.draw do
 
   resources   :link_groups,   as: 'link_group', path: 'link_group'
   resources   :saved_links,   as: 'saved_link', path: 'saved_link'
-  resources   :articles,      as: 'article',    path: 'article',  except: [:index] do
-    member do
-      resource :contents,     only: [:new]
-    end
+  resources   :articles,      as: 'article',    path: 'article',  except: :index do
+    resource :contents,     only: :new
   end
   resources   :contents,      except: [:index, :new]
-  # end # organization
-end  # Rails draw do
+end  
