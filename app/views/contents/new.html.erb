@@ -2,7 +2,7 @@
 
 <%= form_for(@content, url: organization_channel_article_contents_path, method: "POST") do |f| %>
   <div class="form-group">
-  <h6 style="color:salmon;">Drag components to your email newsletter</h6>
+  <h6 style="color:salmon;">Drag components to your article newsletter</h6>
   <%= f.label :title , "Title"%>
   <%= f.text_field :title, class:"form-control", placeholder:"Input title here" %>
   <%= f.label :desc , "Text"%>

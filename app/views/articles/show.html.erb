@@ -13,13 +13,4 @@
     <%= @article.subject %>
   </div>
   <div class="card-body">
-    <%= link_to "Edit Article", edit_article_path, class:"button" %>
-    <%= link_to "Delete Article", article_path, 
-                                  class:"button", 
-                                  method: :delete, 
-                                  data: { 
-                                    confirm: "Are you sure you want to delete this aritcle?" 
-                                  } 
-    %>
-    <%= link_to "Back to Aritcle list",channel_path, class:"button"  %>
   </div>

@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    render layout: "content"
   end
 
   def edit
