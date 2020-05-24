@@ -18,7 +18,7 @@
         <h5 class="card-title">
           <%= link_to article.subject, article_path(article) %>
         </h5>
-        <%= link_to "Edit", article_path(article), method: :GET, class:"btn btn-primary btn-sm" %>
+        <%= link_to "Edit", edit_article_path(article), method: :GET, class:"btn btn-primary btn-sm" %>
         <%= 
           link_to "Delete", article_path(article), 
                             method: :delete, 

@@ -19,6 +19,12 @@
 <% end %>
 
 <div class="card-header">
+  <div class="row justify-content-between w-75 ml-3">
+    <h3><%= @article.subject %></h3>
+    <div>
+      <%= link_to "Edit subject", edit_article_path(@article), method: :GET, class:"btn btn-primary btn-sm" %>
+    </div>
+  </div>
   <p>I'm article show.</p>
 </div>
 <div class="card-body">

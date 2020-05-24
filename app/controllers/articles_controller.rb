@@ -23,11 +23,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    render layout: "content"
   end
 
   def update
-    render layout: "content"
     if @article.update(article_params)
       redirect_to article_path(@article), notice: "This article has been update."
 
