@@ -14,7 +14,7 @@ class LinkGroupsController < ApplicationController
 
   def create
     @link_group            = LinkGroup.new(link_group_params)
-    @link_group.channel_id = params[:channel_id]
+    @link_group.channel_id = current_channel_id
 
     if @link_group.save
       redirect_to link_group_index_path(@link_group)

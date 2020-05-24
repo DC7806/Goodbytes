@@ -33,7 +33,7 @@ class ContentsController < ApplicationController
 
     if @content.delete
       @article = Article.find(params[:id])
-      redirect_to article_path(article_id: @article.id), notice: "成功刪除此樣版"
+      redirect_to article_path(@article), notice: "成功刪除此樣版"
     else
       render "articles/show"
     end 
