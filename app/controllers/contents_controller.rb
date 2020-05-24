@@ -1,7 +1,7 @@
 class ContentsController < ApplicationController
   layout "content"
-  before_action :find_article, except: :destroy
-  before_action :find_content, only: [:edit, :update]
+  before_action :find_content, except: [:new, :create]
+  before_action :find_article
   before_action :find_channel
   before_action :channel_member?
 
@@ -29,10 +29,8 @@ class ContentsController < ApplicationController
   end
 
   def destroy
-    @content = Content.find(params[:id])
 
     if @content.delete
-      @article = Article.find(params[:id])
       redirect_to article_path(@article), notice: "成功刪除此樣版"
     else
       render "articles/show"
@@ -40,13 +38,17 @@ class ContentsController < ApplicationController
   end
 
   private
-  def find_article
-    @article = Article.find(params[:article_id])
-    @subobject = @article
+  def find_content
+    @content = Content.find(params[:id])
+    @subobject = @content
   end
 
-  def find_content
-    @content = @article.contents.find(params[:id])
+  def find_article
+    if @content
+      @article = @content.article
+    elsif params[:article_id].present?
+      @article = Article.find(params[:article_id])
+    end
   end
 
   def content_params

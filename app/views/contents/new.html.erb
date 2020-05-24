@@ -1,4 +1,4 @@
-<%= form_for(@content, url: contents_path, method: "POST") do |f| %>
+<%= form_for(@content, url: article_contents_path(article_id: @article.id), method: "POST") do |f| %>
   <div class="form-group">
   <h6 style="color:salmon;">Drag components to your article newsletter</h6>
   <input name="article_id" type="hidden" value="<%= params[:article_id] %>">
