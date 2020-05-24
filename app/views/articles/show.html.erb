@@ -30,8 +30,8 @@
 <div class="card-body">
   <% @contents.each do |content| %>
     <h5 class="card-title">
-      <%= link_to content.title %>
-      <%= link_to content.desc %>
+      <h5><%= content.title %></h5>
+      <p><%= content.desc %></p>
     </h5>
   <% end %>
 </div>
