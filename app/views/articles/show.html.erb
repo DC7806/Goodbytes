@@ -1,10 +1,25 @@
-  <div class="card-header"><p>I'm article show.</p>
-  </div>
-  <div class="card-body">
-    <% @contents.each do |content| %>
-      <h5 class="card-title">
-        <%= link_to content.title %>
-        <%= link_to content.desc %>
-      </h5>
+<%= content_for :side_bar do %>
+  <div>Contents list.</div>
+  <% @contents.each do |content| %>
+    <%= form_for content, url: content_path(content), method: "patch" do |f| %>
+      <input type="hidden" name="article_id" value="<%= @article.id %>">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <%= f.label :desc %>
+      <%= f.text_field :desc %>
+      <%= f.submit %>
     <% end %>
-  </div>
+  <% end %>
+<% end %>
+
+<div class="card-header">
+  <p>I'm article show.</p>
+</div>
+<div class="card-body">
+  <% @contents.each do |content| %>
+    <h5 class="card-title">
+      <%= link_to content.title %>
+      <%= link_to content.desc %>
+    </h5>
+  <% end %>
+</div>

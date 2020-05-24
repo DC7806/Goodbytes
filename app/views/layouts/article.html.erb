@@ -27,7 +27,7 @@
                 <li class="list-group-item">
                 <%= link_to "+ Add Content", new_article_contents_path(article_id: @article), method: "GET" %></li>
                 <li class="list-group-item">Header</li>
-                <li class="list-group-item"></li>
+                <li class="list-group-item"><%= yield :side_bar %></li>
                 <li class="list-group-item">Footer</li>
               </ul>
             </div>

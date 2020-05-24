@@ -1,13 +1,9 @@
 class ContentsController < ApplicationController
   layout "content"
+  before_action :find_article
+  before_action :find_content, only: [:edit, :update, :destroy]
   before_action :find_channel
   before_action :channel_member?
-  before_action :find_article, only: [:index, :new, :create]
-  before_action :find_content, only: [:edit, :update, :destroy]
-
-  def index
-    @contents = @article.contents.order(created_at: :asc)
-  end
 
   def new
     @content = @article.contents.new
@@ -19,7 +15,7 @@ class ContentsController < ApplicationController
     # @content = @article.contents.new(content_params)
     
     if @content.save
-      redirect_to article_article_contents_index_path(article_id: @article.id)
+      redirect_to article_path(@article)
     else
       render :new
     end
@@ -30,18 +26,24 @@ class ContentsController < ApplicationController
   #   render layout: "content"
   # end
 
-  # def update
-  #   render layout: "content"
-  # end
+  def update
+    if @content.update(content_params)
+      redirect_to article_path(@article), notice: "更新成功"
+    else
+      render "articles/show"
+    end
+  end
 
   private
   def find_article
-    @article = @channel.articles.find(params[:article_id])
+    @article = Article.find(params[:article_id])
     @subobject = @article
   end
+
   def find_content
-    @content = Content.find(params[:id])
+    @content = @article.contents.find(params[:id])
   end
+
   def content_params
     params.require(:content).permit(:title, :desc)
   end
