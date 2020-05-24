@@ -1,0 +1,20 @@
+(function () {
+  let ok = '<%= @ajax_update_link[:ok] %>' === 'true'
+
+  if (ok) {
+    let group_id = '<%= @saved_link.link_group_id %>'
+    let link_id = '<%= @saved_link.id %>'
+
+    $(`#update-link-${link_id}`).modal('hide')
+    $('.modal-backdrop').hide()
+
+
+    $(`#update-link-${link_id} .link_url`).val('');
+    $(`#update-link-${link_id} .link_subject`).val('');
+    $(`#update-link-${link_id} .link_summary`).val('');
+
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/link_ajax', link_groups: @link_groups, link_group: @saved_link.link_group, new_link_group: @channel.link_groups.new, saved_link: @saved_link, new_saved_link: @link_group.saved_links.new) %>")
+  } else {
+    alert('<%= @ajax_update_link[:message] %>')
+  }
+})()
