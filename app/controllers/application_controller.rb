@@ -13,9 +13,7 @@ class ApplicationController < ActionController::Base
 
   def current_channel
     # 從session內抓出當前channel
-    if current_channel_id
-      Channel.find(current_channel_id)
-    end
+    Channel.find(current_channel_id)
   end
 
   def current_channels
@@ -60,8 +58,8 @@ class ApplicationController < ActionController::Base
   def find_organization
     # 這一行是要留給錯誤訊息印出來的
     @model_name = "organization"
-    if @subobject
-      @organization = @subobject.organization
+    if @channel
+      @organization = @channel.organization
     else
       @organization = current_organization
     end
