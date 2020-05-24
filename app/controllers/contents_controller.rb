@@ -12,7 +12,6 @@ class ContentsController < ApplicationController
   def create
     @content = Content.new(content_params)
     @content.article_id = @article.id
-    # @content = @article.contents.new(content_params)
     
     if @content.save
       redirect_to article_path(@article)
@@ -20,11 +19,6 @@ class ContentsController < ApplicationController
       render :new
     end
   end
-
-  # def edit
-  #   @contents = @article.contents.order(create_at: :asc).includes(:contents)
-  #   render layout: "content"
-  # end
 
   def update
     if @content.update(content_params)
