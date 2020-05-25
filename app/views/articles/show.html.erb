@@ -16,6 +16,12 @@
       <% end %>
     <% end %>
   <% end %>
+  <div id="editor" data-controller="content" data-target="editor">
+    <% @contents.each do |content| %>
+      <div><%= content.title %></div>
+    <% end %>
+  </div>
+  
 <% end %>
 
 <div class="card-header">
