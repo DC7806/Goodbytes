@@ -17,15 +17,9 @@
   <body>
 
     <div class="layout">
-
       <%= render "shared/sidebar" %>
-
-      <div class="sidebar-blank">
-      </div>
-
+      <div class="sidebar-blank"></div>
       <main>
-
-        <%# <%= content_for :top %> 
         <div class="container-fluid">
           <div class="wrap">
             <div class="header_navbar">
@@ -37,10 +31,8 @@
               <%= yield %>
             </div>
           </div>
-
         </div>
       </main>
-
     </div>
   </body>
 </html>
