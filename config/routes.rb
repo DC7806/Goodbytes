@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources   :saved_links,   as: 'saved_link', path: 'saved_link'
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
     resource :contents,     only: [:new, :create]
+    resources :contents,  only: :index
   end
-  resources   :contents,      except: [:new, :create]
+  resources   :contents,      except: [:new, :create, :index]
 end  

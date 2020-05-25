@@ -1,10 +1,14 @@
 class ContentsController < ApplicationController
   layout "content"
-  before_action :find_content, except: [:new, :create]
+  before_action :find_content, except: [:index, :new, :create]
   before_action :find_article
   before_action :find_channel
   before_action :channel_member?
 
+  def index
+    @contents = @article.contents.order(:position)
+    render partial: "shared/contents"
+  end
   def new
     @content = @article.contents.new
   end 
@@ -22,9 +26,9 @@ class ContentsController < ApplicationController
 
   def update
     if @content.update(content_params)
-      redirect_to article_path(@article), notice: "更新成功"
+      render json: {status: "success."}
     else
-      render "articles/show"
+      render json: {status: "fail."}
     end
   end
 
@@ -40,6 +44,7 @@ class ContentsController < ApplicationController
   private
   def find_content
     @content = Content.find(params[:id])
+    puts @content
     @subobject = @content
   end
 
@@ -52,6 +57,6 @@ class ContentsController < ApplicationController
   end
 
   def content_params
-    params.require(:content).permit(:title, :desc)
+    params.require(:content).permit(:title, :desc, :position)
   end
 end

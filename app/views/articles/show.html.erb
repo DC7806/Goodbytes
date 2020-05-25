@@ -1,5 +1,14 @@
 <%= content_for :side_bar do %>
   <div>Contents list.</div>
+
+  <div id="editor" data-controller="drag" data-target="editor">
+    <% @contents.each do |content| %>
+      <div class="list-group-item" data-id="<%= content.id %>">
+        <%= content.title %>
+      </div>
+    <% end %>
+  </div>
+
   <% @contents.each do |content| %>
     <%= form_for content, url: content_path(content), method: "patch" do |f| %>
       <input type="hidden" name="article_id" value="<%= @article.id %>">
@@ -16,12 +25,6 @@
       <% end %>
     <% end %>
   <% end %>
-  <div id="editor" data-controller="content" data-target="editor">
-    <% @contents.each do |content| %>
-      <div><%= content.title %></div>
-    <% end %>
-  </div>
-  
 <% end %>
 
 <div class="card-header">
@@ -33,11 +36,5 @@
   </div>
   <p>I'm article show.</p>
 </div>
-<div class="card-body">
-  <% @contents.each do |content| %>
-    <h5 class="card-title">
-      <h5><%= content.title %></h5>
-      <p><%= content.desc %></p>
-    </h5>
-  <% end %>
+<div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
 </div>
