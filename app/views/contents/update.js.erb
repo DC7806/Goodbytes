@@ -1,2 +1,2 @@
-$(`.content[data-id=<%= @content.id %>]`).replaceWith(`<%= render "shared/template/one_title_one_desc" %>`)
+$(`.content[data-id=<%= @content.id %>]`).replaceWith(`<%= render "shared/template/one_title_one_desc", content: @content %>`)
 $(`#editor div[data-id=<%= @content.id %>] div[name=title]`).text(`<%= @content.title %>`)
