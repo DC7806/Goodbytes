@@ -6,6 +6,7 @@ class Channel < ApplicationRecord
   has_many :organizations_users,  through: :channels_org_users
   has_many :users,                through: :organizations_users
   has_many :saved_links,          through: :link_groups
+  has_many :contents,             through: :articles
 
   belongs_to :organization
   

@@ -17,7 +17,7 @@ class ChannelsController < ApplicationController
   end
   
   def show
-    @articles = @channel.articles
+    @articles = @channel.articles.order(created_at: :desc)
   end
 
   def create

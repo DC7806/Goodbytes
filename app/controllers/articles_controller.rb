@@ -3,10 +3,6 @@ class ArticlesController < ApplicationController
   before_action :find_channel
   before_action :channel_member?
 
-  def index
-    @articles = @channel.articles.order(created_at: :desc)
-  end
-
   def new
     @article = @channel.articles.new
   end
@@ -22,6 +18,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @contents = @article.contents.order(created_at: :asc)
+    render layout: "article"
   end
 
   def edit

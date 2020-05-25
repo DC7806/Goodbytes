@@ -1,0 +1,18 @@
+      <aside id="sidebar_content">
+        <% if user_signed_in? %>
+          <nav class="sidebar__menu">
+            <div class="card" style="width: 15rem;">
+              <div class="card-header">
+                <%= link_to "Back to Articles list", root_path %>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                <%= link_to "+ Add Content", new_article_contents_path(article_id: @article), method: "GET" %></li>
+                <li class="list-group-item">Header</li>
+                <li class="list-group-item"></li>
+                <li class="list-group-item">Footer</li>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
+      </aside>
