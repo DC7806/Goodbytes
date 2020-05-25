@@ -1,5 +1,6 @@
 contents.innerHTML = ""
 <% @contents.each do |content| %>
+  <% @id = content.id %>
   <% @title = content.title %>
   <% @desc = content.desc %>
   contents.innerHTML += `<%= render "shared/template/one_title_one_desc" %>`
