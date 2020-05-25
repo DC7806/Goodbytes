@@ -24,17 +24,19 @@ Rails.application.routes.draw do
 
   end
 
-  resource    :channels,           as: 'channel',      path: '/channel',      except: [:index] do
-    resource  :channel_roles,      as: 'role',         path: '/role',         only:   [:update, :destroy]   do
+  resource    :channels,      as: 'channel',    path: '/channel', except: :index do
+    resource  :channel_roles, as: 'role',       path: '/role',    only:   [:update, :destroy]   do
       collection do
-        post :new,                 as: 'new',          path: '/new'
-        get :create,               as: 'accept',       path: '/:token'
+        post :new,            as: 'new',        path: '/new'
+        get :create,          as: 'accept',     path: '/:token'
       end
     end
   end
 
-  resources   :link_groups,        as: 'link_group',   path: 'link_group'
-  resources   :saved_links,        as: 'saved_link',   path: 'saved_link'
-  resources   :articles,           as: 'article',      path: 'article'
-
-end  # Rails draw do
+  resources   :link_groups,   as: 'link_group', path: 'link_group'
+  resources   :saved_links,   as: 'saved_link', path: 'saved_link'
+  resources   :articles,      as: 'article',    path: 'article',  except: :index do
+    resource :contents,     only: [:new, :create]
+  end
+  resources   :contents,      except: [:new, :create]
+end  

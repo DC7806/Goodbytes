@@ -31,6 +31,7 @@ gem 'foreman', '~> 0.87.1'
 
 gem 'devise', '~> 4.2'
 gem 'repost'
+gem "paranoia", "~> 2.2"
 gem 'figaro', '~> 1.0'
 
 group :development, :test do

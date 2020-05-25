@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_083701) do
+ActiveRecord::Schema.define(version: 2020_05_23_110042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,12 @@ ActiveRecord::Schema.define(version: 2020_05_18_083701) do
     t.datetime "deliver_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.text "header"
+    t.text "footer"
+    t.text "main_img"
     t.index ["channel_id"], name: "index_articles_on_channel_id"
+    t.index ["deleted_at"], name: "index_articles_on_deleted_at"
   end
 
   create_table "channels", force: :cascade do |t|
@@ -41,6 +46,19 @@ ActiveRecord::Schema.define(version: 2020_05_18_083701) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["channel_id"], name: "index_channels_org_users_on_channel_id"
     t.index ["organizations_user_id"], name: "index_channels_org_users_on_organizations_user_id"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "position"
+    t.text "title"
+    t.text "desc"
+    t.text "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.integer "layout"
+    t.index ["deleted_at"], name: "index_contents_on_deleted_at"
   end
 
   create_table "invites", force: :cascade do |t|

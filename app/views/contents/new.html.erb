@@ -1,0 +1,12 @@
+<%= form_for(@content, url: article_contents_path(article_id: @article.id), method: "POST") do |f| %>
+  <div class="form-group">
+  <h6 style="color:salmon;">Drag components to your article newsletter</h6>
+  <input name="article_id" type="hidden" value="<%= params[:article_id] %>">
+  <%= f.label :title , "Title"%>
+  <%= f.text_field :title, class:"form-control", placeholder:"Input title here" %>
+  <%= f.label :desc , "Text"%>
+  <%= f.text_area :desc, class:"form-control", placeholder:"Input text here" %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
