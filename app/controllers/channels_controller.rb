@@ -1,6 +1,6 @@
 class ChannelsController < ApplicationController
-  before_action :find_organization
   before_action :find_channel,  except: [:new, :create]
+  before_action :find_organization
   before_action :org_admin?,      only: [:new, :create, :destroy]
   before_action :channel_admin?,  only: [:edit, :update]
   before_action :channel_member?, only: [:show]
