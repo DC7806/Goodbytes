@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   resources   :link_groups,   as: 'link_group', path: 'link_group'
   resources   :saved_links,   as: 'saved_link', path: 'saved_link'
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
+    member do
+      post :sort
+    end
     resource :contents,     only: [:new, :create]
     resources :contents,  only: :index
   end

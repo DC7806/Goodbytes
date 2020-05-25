@@ -1,5 +1,4 @@
 class ContentsController < ApplicationController
-  layout "content"
   before_action :find_content, except: [:index, :new, :create]
   before_action :find_article
   before_action :find_channel
@@ -9,36 +8,29 @@ class ContentsController < ApplicationController
     @contents = @article.contents.order(:position)
     render partial: "shared/contents"
   end
-  def new
-    @content = @article.contents.new
-  end 
 
   def create
-    @content = Content.new(content_params)
+    @content = Content.new(
+      title: "title",
+      desc: "description",
+      layout: (params[:layout] || 0),
+      position: @article.contents.length
+    )
     @content.article_id = @article.id
     
-    if @content.save
-      redirect_to article_path(@article)
-    else
-      render :new
+    unless @content.save
+      head :no_ok
     end
+
   end
 
   def update
-    if @content.update(content_params)
-      render json: {status: "success."}
-    else
-      render json: {status: "fail."}
-    end
+    @content.update(content_params)
   end
 
   def destroy
-
-    if @content.delete
-      redirect_to article_path(@article), notice: "成功刪除此樣版"
-    else
-      render "articles/show"
-    end 
+    @content_id = @content.id
+    @content.delete
   end
 
   private
