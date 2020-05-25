@@ -7,24 +7,22 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 
-import "bootstrap"
+import "bootstrap";
 
-import 'jquery'
-import $ from 'jquery'
-window.$ = $
+import "jquery";
+import $ from "jquery";
+window.$ = $;
 
-import 'jquery-ui'
-import "controllers"
-
-
+import "jquery-ui";
+import "controllers";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 require("@rails/ujs").start();
 // require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 require("scripts");
-require("popper.js")
-
+require("popper.js");
 
 // webpack testing all complete!! { Koten }
 // console.log(`jQuery testing.. ${$}`)
