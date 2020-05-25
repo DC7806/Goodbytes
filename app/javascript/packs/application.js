@@ -14,6 +14,8 @@ import $ from 'jquery'
 window.$ = $
 
 import 'jquery-ui'
+import "controllers"
+
 
 
 require("@rails/ujs").start();
