@@ -13,7 +13,7 @@ class ContentsController < ApplicationController
     @content = Content.new(
       title: "title",
       desc: "description",
-      layout: (params[:layout] || 0),
+      layout: (params[:layout].to_s || 0),
       position: @article.contents.length
     )
     @content.article_id = @article.id

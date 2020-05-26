@@ -2,16 +2,14 @@
 <%= content_for :side_bar do %>
 
   <div id="drag-area">
-    <li class="list-group-item">
-    <%= link_to "+ Add Content", article_contents_path(article_id: @article.id), method: "POST", remote: true %></li>
+    <a href="#" class="list-group-item" data-controller="switch" data-action="click->switch#toAddContent">+ Add Content</a>
     <li class="list-group-item">Header</li>
-    <li class="list-group-item">
-      <div id="editor" data-controller="drag" data-target="editor">
-        <% @contents.each do |content| %>
-          <%= render "/shared/content_drag_bar", content: content %>
-        <% end %>
-      </div>
-    </li>
+    <div class="card" id="editor" data-controller="drag" data-target="editor">
+      <% @contents.each do |content| %>
+        <%= render "/shared/content_drag_bar", content: content %>
+      <% end %>
+    </div>
+
     <li class="list-group-item">Footer</li>
   </div>
   <a href="#" data-controller="switch" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>

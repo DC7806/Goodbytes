@@ -12,7 +12,6 @@ export default class extends Controller {
   }
 
   toDrag(evt){
-    console.log(evt.target.tagName)
     if(evt.target.tagName === "A"){
       evt.preventDefault()
     }
@@ -22,11 +21,17 @@ export default class extends Controller {
   }
 
   toAddContent(evt){
-
+    if(evt.target.tagName === "A"){
+      evt.preventDefault()
+    }
+    console.log(evt.target)
   }
   
   toContentList(evt){
-    
+    if(evt.target.tagName === "A"){
+      evt.preventDefault()
+    }
+    console.log(evt.target)
   }
 
 

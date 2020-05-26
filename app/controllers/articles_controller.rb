@@ -35,7 +35,9 @@ class ArticlesController < ApplicationController
   end
 
   def sort
-    @contents = params[:contents_ids].map{ |obj_id| Content.find(obj_id) }
+    ids = params[:contents_ids].map{ |x| x.to_i }
+    # 原本是一個一個查，那樣順序也不會有錯，但就是 N+1 query
+    @contents = Content.where(id: ids).sort_by{ |obj| ids.index(obj.id) }
     @contents.each.with_index do |content, index|
       content.update(position: index)
     end
