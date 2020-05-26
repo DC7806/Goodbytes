@@ -31,6 +31,9 @@ class ContentsController < ApplicationController
   def destroy
     @content_id = @content.id
     @content.delete
+    @article.contents.order(:position).each.with_index do |content, index|
+      content.update(position: index)
+    end
   end
 
   private
