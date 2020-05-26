@@ -19,27 +19,31 @@ class ContentsController < ApplicationController
     @content.article_id = @article.id
     
     unless @content.save
-      head :no_ok
+      head :bad_request
     end
 
   end
 
   def update
-    @content.update(content_params)
+    unless @content.update(content_params)
+      head :bad_request
+    end
   end
 
   def destroy
     @content_id = @content.id
-    @content.delete
-    @article.contents.order(:position).each.with_index do |content, index|
-      content.update(position: index)
+    if @content.delete
+      @article.contents.order(:position).each.with_index do |content, index|
+        content.update(position: index)
+      end
+    else
+      head :bad_request
     end
   end
 
   private
   def find_content
     @content = Content.find(params[:id])
-    puts @content
     @subobject = @content
   end
 
