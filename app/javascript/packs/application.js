@@ -5,9 +5,8 @@
 
 // import "jquery-ui";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/index.sass";
-
 import "bootstrap";
+import "../styles/index.js";
 
 import "jquery";
 import $ from "jquery";
