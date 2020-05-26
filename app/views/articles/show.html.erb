@@ -14,10 +14,10 @@
     </li>
     <li class="list-group-item">Footer</li>
   </div>
-  <a href="#" data-controller="switch" data-action="click->switch#drag" id="back" style="display: none;">Go back</a>
+  <a href="#" data-controller="switch" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
   <div id="form-area">
     <% @contents.each do |content| %>
-      <%= render "shared/edit_form/one_title_one_desc", content: content %>
+      <%= render "shared/edit_form/#{content.layout}", content: content %>
     <% end %>
   </div>
 
@@ -34,6 +34,6 @@
 </div>
 <div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
   <% @contents.each do |content| %>
-    <%= render "shared/template/one_title_one_desc", content: content %>
+    <%= render "shared/template/#{content.layout}", content: content %>
   <% end %>
 </div>

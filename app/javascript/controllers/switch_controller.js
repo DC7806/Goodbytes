@@ -4,14 +4,14 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = ["form"] 
   
-  edit(evt){
+  toEdit(evt){
     evt.preventDefault()
     $("#drag-area").hide()
     $("#"+this.formTarget.value).show()
     $("#back").show()
   }
 
-  drag(evt){
+  toDrag(evt){
     console.log(evt.target.tagName)
     if(evt.target.tagName === "A"){
       evt.preventDefault()
@@ -19,6 +19,14 @@ export default class extends Controller {
     $("#back").hide()
     $(".edit_content").hide()
     $("#drag-area").show()
+  }
+
+  toAddContent(evt){
+
+  }
+  
+  toContentList(evt){
+    
   }
 
 
