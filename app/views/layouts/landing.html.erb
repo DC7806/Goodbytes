@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      content="width=device-width, initial-scale=1"
     />
     <link rel="stylesheet" href="https://use.typekit.net/bgh3rys.css">
     <title>Goodbytes</title>
@@ -15,24 +15,19 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-
     <div class="layout">
-      <%= render "shared/sidebar" %>
-      <div class="sidebar-blank"></div>
       <main>
         <div class="container-fluid">
           <div class="wrap">
-            <div class="header_navbar">
-              <%= render "shared/user_section" %>
-            </div>
             <div class="noticed"><%= notice %></div>
             <div class="alerted"><%= alert %></div>
-            <div class="channel-body">
               <%= yield %>
             </div>
           </div>
+
         </div>
       </main>
+
     </div>
   </body>
 </html>
