@@ -8,7 +8,7 @@
     <li class="list-group-item">
       <div id="editor" data-controller="drag" data-target="editor">
         <% @contents.each do |content| %>
-          <%= render "/shared/drag_bar", content: content %>
+          <%= render "/shared/content_drag_bar", content: content %>
         <% end %>
       </div>
     </li>

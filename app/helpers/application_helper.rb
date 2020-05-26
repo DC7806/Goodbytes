@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def render_form(path, *keys, content: nil)
+  def render_edit_form(content, *keys)
     form_pattern = {
       content: content,
       title: false,
@@ -9,6 +9,6 @@ module ApplicationHelper
       form_pattern[key] = true
     end
 
-    render path, **form_pattern
+    render "shared/edit_form/edit_form", **form_pattern
   end
 end

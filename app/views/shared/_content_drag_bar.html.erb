@@ -1,10 +1,10 @@
-<div data-controller="switch" class="list-group-item row justify-@content-between" data-id="<%= content.id %>">
+<div data-controller="content_switch" class="list-group-item row justify-content-between" data-id="<%= content.id %>">
   <div name="title">
     <%= content.title %>
   </div>
-  <%= hidden_field_tag :edit_form, "edit_content_"+content.id.to_s, data: {target: "switch.form"} %>
+  <%= hidden_field_tag :edit_form, "edit_content_"+content.id.to_s, data: {target: "content_switch.form"} %>
   <div>
-    <%= link_to "#", data: {action: "click->switch#edit"} do %>
+    <%= link_to "#", data: {action: "click->content_switch#edit"} do %>
       <i class="far fa-edit"></i>
     <% end %>
     <%= link_to content_path(content), method: 'delete', data: {confirm: "確定刪除此內容？" }, remote: true do %>

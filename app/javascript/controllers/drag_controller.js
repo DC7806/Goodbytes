@@ -10,7 +10,7 @@ export default class extends Controller {
       animation: 250,
       ghostClass: "blue-background-class",
       onUpdate: function (e) {
-        let ids =  Array.prototype.slice.call(e.target.children).map(obj => obj.dataset.id)
+        let ids =  $(editor).children().toArray().map(obj => obj.dataset.id)
         let data = JSON.stringify({contents_ids: ids})
         let articleId = contents.dataset.articleid
         Rails.ajax({
