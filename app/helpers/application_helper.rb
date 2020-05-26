@@ -1,17 +1,14 @@
 module ApplicationHelper
-  def filted_attributes(model_object)
-    result = {}
-    no_need_params = [
-      "created_at",
-      "updated_at",
-      "deleted_at"
-    ]
-    model_object.attributes.each do |key, value|
-      if !no_need_params.include?(key) && value
-        result[key] = value
-      end
+  def render_form(path, *keys, content: nil)
+    form_pattern = {
+      content: content,
+      title: false,
+      desc: false
+    }
+    keys.each do |key|
+      form_pattern[key] = true
     end
 
-    return result
+    render path, **form_pattern
   end
 end
