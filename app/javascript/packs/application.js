@@ -9,13 +9,8 @@ import "../styles/index.sass";
 
 import "bootstrap"
 
-import 'jquery'
-import $ from 'jquery'
-window.$ = $
-
-import 'jquery-ui'
 import "controllers"
-
+import "sortablejs"
 
 
 require("@rails/ujs").start();

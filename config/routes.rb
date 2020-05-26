@@ -34,7 +34,11 @@ Rails.application.routes.draw do
   end
 
   resources   :link_groups,   as: 'link_group', path: 'link_group'
-  resources   :saved_links,   as: 'saved_link', path: 'saved_link'
+  resources   :saved_links,   as: 'saved_link', path: 'saved_link' do
+    collection do
+      post :move
+    end
+  end
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
     resource :contents,     only: [:new, :create]
   end

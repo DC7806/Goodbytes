@@ -31,9 +31,9 @@
         </div>
       </div>
       <div>
-        <div class="saved_links" id="link_group-<%= link_group.id %>">
-          <% link_group.saved_links.sort{ |obj1,obj2| obj1.created_at <=> obj2.created_at }.each do |saved_link| %>
-            <div class="saved_link" id="saved_link-<%= saved_link.id %>">
+        <div class="saved_links" id="link_group-<%= link_group.id %>" data-controller="draglist">
+          <% link_group.saved_links.sort{ |obj1,obj2| obj1.position <=> obj2.position }.each do |saved_link| %>
+            <div class="saved_link" id="saved_link-<%= saved_link.id %>" data-id="<%= saved_link.id %>" data-url="link_group/move">
               <div class="link">
                 <%= saved_link.subject %>
               </div>
