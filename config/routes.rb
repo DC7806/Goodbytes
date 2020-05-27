@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources   :saved_links,   as: 'saved_link', path: 'saved_link' do
     collection do
       post :move
+      post :move_group
     end
   end
   resources   :articles,      as: 'article',    path: 'article',  except: :index do

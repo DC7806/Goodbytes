@@ -1,5 +1,5 @@
 class SavedLinksController < ApplicationController
-  before_action :find_saved_link, except: [:new, :create, :move]
+  before_action :find_saved_link, except: [:new, :create, :move, :move_group]
   before_action :find_channel
   before_action :channel_member?
   
@@ -8,6 +8,18 @@ class SavedLinksController < ApplicationController
     @saved_links.each.with_index do |saved_link, index|
       saved_link.update(position: index)
     end
+    head :ok
+  end
+
+  def move_group
+    @from_saved_links = params[:from_link_ids].map { |obj_id| SavedLink.find(obj_id) }
+    @from_saved_links.each.with_index { |saved_link, index| saved_link.update(position: index) }
+
+    @to_group_id = params[:to_group_id].first
+    @to_saved_links = params[:to_link_ids].map { |obj_id| SavedLink.find(obj_id) }
+    @to_saved_links.each.with_index { |saved_link, index| saved_link.update(link_group_id: @to_group_id, position: index) }
+    
+    head :ok
   end
 
   def new

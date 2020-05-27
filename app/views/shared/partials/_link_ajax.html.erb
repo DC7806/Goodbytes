@@ -1,7 +1,7 @@
 <%# for link render %>
 <div class="link_group d-flex flex-wrap">
   <% @link_groups.each do |link_group| %>
-    <div class="border m-2" style="width:234px">
+    <div class="m-2" style="width:234px">
       <div class="subject_bar p-2 d-flex justify-content-between">
         <div class="link_group_name">
           <div class="name">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div>
-        <div class="saved_links" id="link_group-<%= link_group.id %>" data-controller="draglist">
+        <div class="saved_links" id="link_group-<%= link_group.id %>" data-controller="draglist"  data-group="<%= link_group.id %>" data-url="link_group/move_group">
           <% link_group.saved_links.sort{ |obj1,obj2| obj1.position <=> obj2.position }.each do |saved_link| %>
             <div class="saved_link" id="saved_link-<%= saved_link.id %>" data-id="<%= saved_link.id %>" data-url="link_group/move">
               <div class="link">
