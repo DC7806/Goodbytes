@@ -1,15 +1,10 @@
 $primary-color: #66cccc
+$secondary-color: #8ba8ba 
 $button-color: #ffcc33
 $button-text-color: #ffffff
 $text-color: #333333
 $font-size: 16px
 $font-weight: 300
-.font-large
-  font-size: $font-size * 1.2
-.font-middle
-  font-size: $font-size - 3px
-.font-small
-  font-size: $font-size / 2
 
 html,
 body
@@ -28,79 +23,90 @@ h4
 
 ion-icon
   font-size: 4rem
-  color: var($button-color)
+  color: $button-color - 15%
   height: 4rem
   display: block
   margin: 0 auto
   line-height: 0
 
-.landing__hero
-  height: 100vh
-  display: flex
-  background-image: url("../../assets/images/landing_full.png")
-  background-size: cover
-  background-repeat: no-repeat
-  background-position: center
-
-  &__text
-    color: $text-color
-    font-size: 3rem
-
-  &__cta
-    display: inline-block
-    font-size: 1.2em
-    height: 2.5em
-    line-height: 2.5em
-    padding: 0 1em
-    border: 2px solid var($button-color)
-    border-radius: 1.25em
-    margin-right: 1em
-    color: var($button-color)
-    text-decoration: none
-    font-weight: 300
-    transition: 200ms ease-in-out
-
-  &__cta:hover,
-
-  &__cta--opaque
-    background-color: var($button-color)
-    color: white
-
-  &__cta--opaque:hover
-    filter: brightness(90%)
-
-.container
-  margin: auto 2rem
-  width: 600px
-
-.navbar
+.landing_navbar
   height: 5rem
   position: fixed
-  // background-color: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
-  width: 100vw
+  background-color: rgba(255, 255, 255, 0.2)
+  width: 100%
   display: flex
   justify-content: space-between
 
   &__logo
     height: 100%
     margin-left: 2rem
+    img
+      width: 10%
 
   &__menu
     margin-right: 2rem
     display: flex
 
   &__menu__item
-    height: 5rem
-    line-height: 5rem
-    padding: 0 1rem
-    color: #fff
+    height: 3rem
+    line-height: 3rem
+    padding: 0 2.7rem
+    margin-left: 1.2em
+    margin-top: 0.7em
+    border: 0 1em
+    border: 2px solid $secondary-color
+    background-color: white
+    border-radius: .25em
+    color: $text-color
+    font-weight: bolder
     text-decoration: none
-    font-size: 1.2em
-    text-transform: uppercase
-    transition: 0.2s ease-in-out
+    font-size: 1.1em
 
-  &__menu__item:hover
-    background-color: rgba(255, 255, 255, 0.3)
+  &__menu__item:hover,
+  &__menu__item--opaque
+    background-color: $button-color
+    text-decoration: none
+    color: $text-color
+    border-color: $button-color
+
+  &__menu__item--opaque:hover
+    filter: brightness(95%)
+    color: $button-text-color
+
+.landing__hero
+  height: 100vh
+  display: flex
+  background-image: url("../../assets/images/landing-bg.svg")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+
+  &__text
+    color: $text-color
+    font-size: 2.2rem
+    font-weight: bolder
+    padding: .8em 0
+
+  &__cta
+    background-color: $button-color
+    color: $text-color
+    display: inline-block
+    font-size: 1.5em
+    font-weight: bolder
+    height: 2.5em
+    line-height: 2.5em
+    padding: 0 2.7rem
+    border: 2px solid $button-color
+    border-radius: .25em
+    margin-top: 2.5em
+
+  &__cta:hover
+    text-decoration: none
+    color: $button-text-color
+
+.container
+  margin: auto 2rem
+  width: 600px
 
 .landing__section
   height: 100vh

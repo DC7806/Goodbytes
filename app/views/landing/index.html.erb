@@ -1,65 +1,63 @@
-    <nav class="navbar">
-      <a href=""></a
-      ><img src="../../assets/images/mail_1.png" alt="branding logo" class="navbar__logo" />
-      <div class="navbar__menu">
-        <a href="#" class="navbar__menu__item">註冊</a>
-        <a href="#" class="navbar__menu__item">登入</a>
-      </div>
-    </nav>
-    <div class="landing__hero">
-      <div class="container">
-        <h3 class="landing__hero__text">
-          還在尋覓好上手的電子報編輯器嗎？ 
-        </h3>
-        <h3 class="landing__hero__text">
-          快來Goodbytes一起聰明寄信吧！  
-        </h3>
-        <div>
-          <a href="#" class="landing__hero__cta landing__hero__cta--opaque"
-            >開始編輯電子報</a
-          >
-        </div>
-      </div>
+<nav class="landing_navbar">
+  <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"landing_navbar__logo") %>
+  <div class="landing_navbar__menu">
+    <%= link_to "註冊", new_user_registration_path, class:"landing_navbar__menu__item landing_navbar__menu__item--opaque" %>
+    <%= link_to "登入", new_user_session_path, class:"landing_navbar__menu__item" %>
+  </div>
+</nav>
+<div class="landing__hero">
+  <div class="container">
+    <h3 class="landing__hero__text">
+      還在尋覓好上手的電子報編輯器嗎？ 
+    </h3>
+    <h3 class="landing__hero__text">
+      快來Goodbytes一起聰明寄信吧！  
+    </h3>
+    <div class="row justify-content-center">
+      <%= link_to "開始編輯電子報", new_user_registration_path, class:"landing__hero__cta"
+       %>
     </div>
+  </div>
+</div>
 
-    <section class="landing__section" id="livero-de-manĝaĵoj">
-      <div class="container">
-        <h1 class="landing__section__header">
-          Goodbyes
-        </h1>
-        <hr />
-        <p class="landing__section__description">
-          能帶給您什麼樣的Email行銷體驗？
+<section class="landing__section" id="livero-de-manĝaĵoj">
+  <div class="container">
+    <h1 class="landing__section__header">
+      Goodbytes
+    </h1>
+    <hr />
+    <p class="landing__section__description">
+      能帶給您什麼樣的Email行銷體驗？
+    </p>
+
+    <section class="four-columns">
+      <div class="column">
+        <ion-icon name="create-outline" size="big"></ion-icon>
+        <h3 class="column__title">拖放式編輯</h3>
+        <p>整合用戶儲存連結，讓您設計Email事半功倍
         </p>
-
-        <section class="four-columns">
-          <div class="column">
-            <ion-icon name="create-outline" size="big"></ion-icon>
-            <h3 class="column__title">拖放式編輯</h3>
-            <p>整合用戶儲存連結，讓您設計Email事半功倍
-            </p>
-          </div>
-          <div class="column">
-            <ion-icon name="link-outline" size="big"></ion-icon>
-            <h3 class="column__title">儲存網站連結</h3>
-            <p>遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!
-            </p>
-          </div>
-          <div class="column">
-            <ion-icon name="paper-plane-outline" size="big"></ion-icon>
-            <h3 class="column__title">串接Mailgun</h3>
-            <p>省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋
-            </p>
-          </div>
-          <div class="column">
-            <ion-icon name="ios-cart" size="big"></ion-icon>
-            <h3 class="column__title">一站式服務</h3>
-            <p>
-            聽說您需要的服務，Goodbytes都有了 
-            </p>
-          </div>
-        </section>
+      </div>
+      <div class="column">
+        <ion-icon name="link-outline" size="big"></ion-icon>
+        <h3 class="column__title">儲存網站連結</h3>
+        <p>遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!
+        </p>
+      </div>
+      <div class="column">
+        <ion-icon name="paper-plane-outline" size="big"></ion-icon>
+        <h3 class="column__title">串接Mailgun</h3>
+        <p>省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋
+        </p>
+      </div>
+      <div class="column">
+        <ion-icon name="ios-cart" size="big"></ion-icon>
+        <h3 class="column__title">一站式服務</h3>
+        <p>
+        聽說您需要的服務，Goodbytes都有了 
+        </p>
       </div>
     </section>
+  </div>
+</section>
 
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
