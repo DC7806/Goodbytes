@@ -31,8 +31,10 @@ class SavedLinksController < ApplicationController
 
     @link_groups = @channel.link_groups.order(created_at: :asc).includes(:saved_links)
 
+    @saved_link.position = SavedLink.all.length * -1
+    # 讓新增的@saved_link永遠排在最上面第一個
+
     if @saved_link.save
-      # @link_group = LinkGroup.new
       @ajax_create_link = { ok: true }
     else
       @ajax_create_link = { ok: false, message: 'Create Error!' }
