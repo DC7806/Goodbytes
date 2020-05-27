@@ -7,5 +7,9 @@
     <%= f.label :desc %>
     <%= f.text_field :desc %>
   <% end %>
+  <% if url %>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  <% end %>
   <%= f.submit "OK", data: {controller: "switch", action: "click->switch#toDrag"} %>
 <% end %>

@@ -30,8 +30,14 @@
   </div>
   <p>I'm article show.</p>
 </div>
-<div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
-  <% @contents.each do |content| %>
-    <%= render "shared/template/#{content.layout}",type: :show, content: content %>
-  <% end %>
+<div class="card-body container w-75">
+  <%= @article.header.html_safe %>
+  <div id="contents" data-articleId="<%= @article.id %>" >
+    <% @contents.each do |content| %>
+      <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+    <% end %>
+  </div>
+  <%= @article.footer.html_safe %>
 </div>
+
+

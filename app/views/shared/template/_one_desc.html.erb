@@ -1,8 +1,8 @@
 
 <% case type %>
 <% when :show %>
-  <div class="content container w-75" data-id="<%= content.id %>">
-    <div class="row">
+  <div class="content w-100" data-id="<%= content.id %>">
+    <div>
       <p class="content-desc"><%= content.display_desc %></p>
     </div>
   </div>
@@ -14,7 +14,6 @@
 
 <% when :drag %>
   <%= render_drag_bar content, 
-                      content.display_desc.limit(10),
-                      :desc
+                      content.display_desc.limit(10)
   %>
 <% end %>

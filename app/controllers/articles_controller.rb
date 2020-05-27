@@ -9,6 +9,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = @channel.articles.new(article_params)
+    @article.header = render_to_string "shared/template/header", layout: false
+    @article.footer = render_to_string "shared/template/footer", layout: false
     
     if @article.save
       redirect_to article_path(@article), notice: "The article has been created."

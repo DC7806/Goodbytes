@@ -1,6 +1,6 @@
 module ApplicationHelper
-  
-  def form_pattern(content,keys)
+
+  def render_edit_form(content, *keys)
     form_pattern = {
       content: content,
       title: false,
@@ -10,18 +10,11 @@ module ApplicationHelper
     keys.each do |key|
       form_pattern[key] = true
     end
-    form_pattern
+    render "shared/template/edit_form", **form_pattern
   end
 
-  def render_edit_form(content, *keys)
-    pattern = form_pattern(content, keys)
-    render "shared/template/edit_form", **pattern
-  end
-
-  def render_drag_bar(content, display, *keys)
-    pattern = form_pattern(content, keys)
-    pattern[:display] = display
-    render "shared/template/drag_bar", **pattern
+  def render_drag_bar(content, display)
+    render "shared/template/drag_bar",content: content, display: display
   end
   
 end
