@@ -55,112 +55,111 @@
               </div>
             </div>
           <% end %>
-
-          <%# AJAX create link modal %>
-            <div class="modal fade" id="create-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <%= form_for(SavedLink.new, url: saved_link_index_path, method: "POST", remote: true ) do |f| %>
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="create-link-title">新增連結</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-
-                          <%= f.hidden_field :link_group_id, value: link_group.id %>
-                        <div class="form-group">
-                          <%= f.label :url %>
-                          <%= f.text_field :url, class: "link_url link_url-#{link_group.id} " %>
-                        </div>
-                        <div class="form-group">
-                          <%= f.label :subject %>
-                          <%= f.text_field :subject, class: "link_subject link_subject-#{link_group.id}" %>
-                        </div>
-                        <div class="form-group">
-                          <%= f.label :summary %>
-                          <%= f.text_area :summary, class: "link_summary link_summary-#{link_group.id}", rows:"12" %>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <%= f.submit class:"btn btn-primary" %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <%#  %>
-
-          <%# AJAX update link modal %>
-            <% link_group.saved_links.each do |saved_link| %>
-              <%= form_for(saved_link, url: saved_link_path(id: saved_link.id), method: "PATCH", remote: true ) do |f| %>
-                
-                <div class="modal fade" id="update-link-<%= saved_link.id %>">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="update-link-title">編輯連結</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          <div class="form-group">
-                            <%= f.label :url %>
-                            <%= f.text_field :url, class: "link_url link_url-#{saved_link.id} " %>
-                          </div>
-                          <div class="form-group">
-                            <%= f.label :subject %>
-                            <%= f.text_field :subject, class: "link_subject link_subject-#{saved_link.id}" %>
-                          </div>
-                          <div class="form-group">
-                            <%= f.label :summary %>
-                            <%= f.text_area :summary, class: "link_summary link_summary-#{saved_link.id}", rows:"12" %>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <%= f.submit class:"btn btn-primary" %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          <%#  %>
-
-          <%# AJAX destroy link modal %>
-            <% link_group.saved_links.each do |saved_link| %>
-              <div class="modal fade" id="destroy-link-<%= saved_link.id %>" tabindex="-1" role="dialog" aria-labelledby="destroy-link" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="destroy-link-title">刪除連結</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      確定要刪除？
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <div type="button" class="btn btn-primary">
-                        <%= link_to "Delete Saved link" , saved_link_path(saved_link),  method: 'delete', remote: true %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          <%#  %>
-
         </div>
       </div>
     </div>
+    
+    <%# AJAX create link modal %>
+      <div class="modal fade" id="create-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <%= form_for(SavedLink.new, url: saved_link_index_path, method: "POST", remote: true ) do |f| %>
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="create-link-title">新增連結</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                    <%= f.hidden_field :link_group_id, value: link_group.id %>
+                  <div class="form-group">
+                    <%= f.label :url %>
+                    <%= f.text_field :url, class: "link_url link_url-#{link_group.id} " %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :subject %>
+                    <%= f.text_field :subject, class: "link_subject link_subject-#{link_group.id}" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :summary %>
+                    <%= f.text_area :summary, class: "link_summary link_summary-#{link_group.id}", rows:"12" %>
+                  </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.submit class:"btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <%#  %>
+
+    <%# AJAX update link modal %>
+      <% link_group.saved_links.each do |saved_link| %>
+        <%= form_for(saved_link, url: saved_link_path(id: saved_link.id), method: "PATCH", remote: true ) do |f| %>
+          
+          <div class="modal fade" id="update-link-<%= saved_link.id %>">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="update-link-title">編輯連結</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <%= f.label :url %>
+                      <%= f.text_field :url, class: "link_url link_url-#{saved_link.id} " %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label :subject %>
+                      <%= f.text_field :subject, class: "link_subject link_subject-#{saved_link.id}" %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label :summary %>
+                      <%= f.text_area :summary, class: "link_summary link_summary-#{saved_link.id}", rows:"12" %>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <%= f.submit class:"btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <%#  %>
+
+    <%# AJAX destroy link modal %>
+      <% link_group.saved_links.each do |saved_link| %>
+        <div class="modal fade" id="destroy-link-<%= saved_link.id %>" tabindex="-1" role="dialog" aria-labelledby="destroy-link" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="destroy-link-title">刪除連結</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                確定要刪除？
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div type="button" class="btn btn-primary">
+                  <%= link_to "Delete Saved link" , saved_link_path(saved_link),  method: 'delete', remote: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <%#  %>
 
     <%# AJAX update group modal %>
       <%= form_for(link_group, url: link_group_path(id: link_group.id), method: "PATCH", remote: true) do |f| %>
