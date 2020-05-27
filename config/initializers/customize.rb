@@ -2,6 +2,10 @@ class String
   def limit(max_length)
     length > max_length ? self[0..max_length - 1] + '...' : self
   end
+
+  def line_break(line_width)
+    scan(/.{1,#{line_width}}/).join("\n")
+  end
 end
 
 # 給定model名string，可找到model class本體

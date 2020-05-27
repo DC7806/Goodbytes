@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def form_pattern(content,keys)
     form_pattern = {
       content: content,

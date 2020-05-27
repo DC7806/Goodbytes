@@ -9,16 +9,19 @@ class Content < ApplicationRecord
     saved_link: 3
   }
 
+  LINE_LIMIT = 30
+  DRAG_LIMIT = 10
+
   def display_on_page(origin_text, show_if_no_text)
     origin_text.present? ? origin_text : show_if_no_text
   end
 
   def display_title
-    display_on_page(title, "Title")
+    display_on_page(title, "Title").line_break(LINE_LIMIT)
   end
 
   def display_desc
-    display_on_page(desc, "Text")
+    display_on_page(desc, "Text").line_break(LINE_LIMIT)
   end
 
 end
