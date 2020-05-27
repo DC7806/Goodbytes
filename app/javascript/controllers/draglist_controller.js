@@ -7,14 +7,14 @@ export default class extends Controller {
 
   connect() {
     this.sortable = Sortable.create(this.element, {
-      onUpdate: this.moveList.bind(this),
+      onUpdate: this.moveLink.bind(this),
       group: 'shared',
       animation: 150,
-      onRemove: this.addList.bind(this)
+      onRemove: this.removeLink.bind(this)
     })
   }
 
-  moveList(e) {
+  moveLink(e) {
     let ids = ($(e.target).children('.saved_link').toArray().map(obj => obj.dataset.id)) //取得group下的id更新位置，target是sortable的方法
     let data = JSON.stringify({ saved_link_ids: ids }) //轉換為JSON形式
     Rails.ajax({
@@ -30,15 +30,13 @@ export default class extends Controller {
     })
   }
 
-  addList(e) {
+  removeLink(e) {
     let fromLinkIds = $(e.target).children('.saved_link').toArray().map(obj => obj.dataset.id)
     let toLinkIds = $(e.to).children('.saved_link').toArray().map(obj => obj.dataset.id)
-    let fromGroupId = $(e.target).toArray().map(obj => obj.dataset.group)
     let toGroupId = $(e.to).toArray().map(obj => obj.dataset.group)
     let data = JSON.stringify({
       from_link_ids: fromLinkIds,
       to_link_ids: toLinkIds,
-      from_group_id: fromGroupId,
       to_group_id: toGroupId,
     })
     Rails.ajax({
@@ -53,5 +51,3 @@ export default class extends Controller {
     })
   }
 }
-// let fromGroupId = ($(e.target).toArray().map(obj => obj.dataset.group))
-// let toGroupId = ($(e.to).toArray().map(obj => obj.dataset.group))
