@@ -1,0 +1,71 @@
+<nav class="landing_navbar">
+  <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"landing_navbar__logo") %>
+  <div class="landing_navbar__menu">
+    <%= link_to "註冊", new_user_registration_path, class:"landing_navbar__menu__item landing_navbar__menu__item--opaque" %>
+    <%= link_to "登入", new_user_session_path, class:"landing_navbar__menu__item" %>
+  </div>
+</nav>
+<div class="landing__hero">
+  <div class="wrapper">
+    <h3 class="landing__hero__text">
+      還在尋覓好上手的電子報編輯器嗎？ 
+    </h3>
+    <h3 class="landing__hero__text">
+      快來Goodbytes一起聰明寄信吧！  
+    </h3>
+      <%= link_to "開始編輯電子報", new_user_registration_path, class:"landing__hero__cta"
+       %>
+  </div>
+</div>
+
+<section class="landing__section">
+  <div class="landing__section__wrapper">
+    <h1 class="landing__section__header">
+      Goodbytes</h1>
+    <hr />
+    <p class="landing__section__description">
+      能帶給您什麼樣Email行銷體驗？
+    </p>
+
+    <section class="four-columns">
+      <div class="card">
+        <div class="round"><i class="far fa-edit"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">拖放式編輯</h5>
+          <p class="card-text">不需要學HTML、CSS，讓您設計Email得心應手</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="round"><i class="fas fa-link"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">儲存網站連結</h5>
+          <p class="card-text">遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="round"><i class="far fa-paper-plane"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">串接Mailgun</h5>
+          <p class="card-text">省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="round"><i class="fas fa-shopping-basket"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">一站式服務</h5>
+          <p class="card-text">聽說您需要的服務，Goodbytes都有了</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<footer class="landing__footer">
+  <nav class="landing__footer__nav">
+    <%= link_to "聯絡我們" %>
+    <%= link_to "隱私權政策" %>
+    <%= link_to "使用條款" %>
+    <div class="landing__footer__nav__copyright">
+  Goodbytes © 2020版權所有</div>
+  </nav>
+</footer>
