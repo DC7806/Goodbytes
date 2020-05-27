@@ -6,58 +6,56 @@
   </div>
 </nav>
 <div class="landing__hero">
-  <div class="container">
+  <div class="wrapper">
     <h3 class="landing__hero__text">
       還在尋覓好上手的電子報編輯器嗎？ 
     </h3>
     <h3 class="landing__hero__text">
       快來Goodbytes一起聰明寄信吧！  
     </h3>
-    <div class="row justify-content-center">
       <%= link_to "開始編輯電子報", new_user_registration_path, class:"landing__hero__cta"
        %>
-    </div>
   </div>
 </div>
 
-<section class="landing__section" id="livero-de-manĝaĵoj">
-  <div class="container">
+<section class="landing__section">
+  <div class="landing__section__wrapper">
     <h1 class="landing__section__header">
-      Goodbytes
-    </h1>
+      Goodbytes</h1>
     <hr />
     <p class="landing__section__description">
-      能帶給您什麼樣的Email行銷體驗？
+      能帶給您什麼樣Email行銷體驗？
     </p>
 
     <section class="four-columns">
-      <div class="column">
-        <ion-icon name="create-outline" size="big"></ion-icon>
-        <h3 class="column__title">拖放式編輯</h3>
-        <p>整合用戶儲存連結，讓您設計Email事半功倍
-        </p>
+      <div class="card">
+        <div class="round"><i class="far fa-edit"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">拖放式編輯</h5>
+          <p class="card-text">不需要學HTML、CSS，讓您設計Email得心應手</p>
+        </div>
       </div>
-      <div class="column">
-        <ion-icon name="link-outline" size="big"></ion-icon>
-        <h3 class="column__title">儲存網站連結</h3>
-        <p>遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!
-        </p>
+      <div class="card">
+        <div class="round"><i class="fas fa-link"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">儲存網站連結</h5>
+          <p class="card-text">遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!</p>
+        </div>
       </div>
-      <div class="column">
-        <ion-icon name="paper-plane-outline" size="big"></ion-icon>
-        <h3 class="column__title">串接Mailgun</h3>
-        <p>省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋
-        </p>
+      <div class="card">
+        <div class="round"><i class="far fa-paper-plane"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">串接Mailgun</h5>
+          <p class="card-text">省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋</p>
+        </div>
       </div>
-      <div class="column">
-        <ion-icon name="ios-cart" size="big"></ion-icon>
-        <h3 class="column__title">一站式服務</h3>
-        <p>
-        聽說您需要的服務，Goodbytes都有了 
-        </p>
+      <div class="card">
+        <div class="round"><i class="fas fa-shopping-basket"></i></div>
+        <div class="card-body">
+          <h5 class="card-title">一站式服務</h5>
+          <p class="card-text">聽說您需要的服務，Goodbytes都有了</p>
+        </div>
       </div>
     </section>
   </div>
 </section>
-
-<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>

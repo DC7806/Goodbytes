@@ -4,44 +4,37 @@ $button-color: #ffcc33
 $button-text-color: #ffffff
 $text-color: #333333
 $font-size: 16px
-$font-weight: 300
+$chinese-font: Noto Sans CJK TC, Source Han Sans TW, Source Han Sans SC, Hiragino Sans GB W3, Droid Sans Fallback, Microsoft Yahei, Microsoft JhengHei, \5FAE软雅黑, PingFang TC, Noto Sans TC, STXihei, \534E文细黑
 
 html,
 body
-  font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', $chinese-font, sans-serif
   font-size: $font-size
   line-height: 3
-  font-weight: 300
+  font-weight: 100
 
 h1,
 h2,
 h3,
 h4
-  font-weight: 300
+  font-weight: 100
   line-height: 1.2
   color: $primary-color
-
-ion-icon
-  font-size: 4rem
-  color: $button-color - 15%
-  height: 4rem
-  display: block
-  margin: 0 auto
-  line-height: 0
 
 .landing_navbar
   height: 5rem
   position: fixed
-  background-color: rgba(255, 255, 255, 0.2)
   width: 100%
   display: flex
   justify-content: space-between
+  align-items: center
+  transition: .2s ease-in-out
+  z-index: 10
 
   &__logo
-    height: 100%
+    height: 75%
+    width: auto
     margin-left: 2rem
-    img
-      width: 10%
 
   &__menu
     margin-right: 2rem
@@ -52,7 +45,6 @@ ion-icon
     line-height: 3rem
     padding: 0 2.7rem
     margin-left: 1.2em
-    margin-top: 0.7em
     border: 0 1em
     border: 2px solid $secondary-color
     background-color: white
@@ -73,6 +65,10 @@ ion-icon
     filter: brightness(95%)
     color: $button-text-color
 
+.landing_navbar--opaque
+  background-color: #fff
+  box-shadow: 0 0 10px rgba(0,0,0,.1)
+
 .landing__hero
   height: 100vh
   display: flex
@@ -84,7 +80,6 @@ ion-icon
   &__text
     color: $text-color
     font-size: 2.2rem
-    font-weight: bolder
     padding: .8em 0
 
   &__cta
@@ -98,43 +93,68 @@ ion-icon
     padding: 0 2.7rem
     border: 2px solid $button-color
     border-radius: .25em
-    margin-top: 2.5em
+    margin-top: 1.5em
 
   &__cta:hover
     text-decoration: none
     color: $button-text-color
 
-.container
-  margin: auto 2rem
+.wrapper
+  margin: auto 3rem
   width: 600px
 
 .landing__section
   height: 100vh
+  margin-top: 3rem
   display: flex
   font-size: 1.15rem
+  &__wrapper
+    width: 100%
+    margin: auto
 
   &__header
-    text-transform: uppercase
-    font-size: 2.6rem
+    color: $text-color
+    font-size: 3rem
     font-weight: 300
     text-align: center
     margin: 0
 
   &__description
-    max-width: 800px
+    text-align: center
     margin: 0 auto
+    font-size: 1.8rem
 
 hr
   width: 10rem
   margin: 1.5rem auto
-  color: var($button-color)
-  border: 1px solid var($button-color)
+  color: $primary-color
+  border: 1px solid $primary-color
 
 .four-columns
-  margin-top: 2rem
+  margin: 2rem auto
   display: grid
   grid-template-columns: repeat(4, 1fr)
   grid-gap: 2rem
+  max-width: 1080px
 
-.column__title
+.round
+  margin: 1em auto .2em
+  background-color: $primary-color
+  width: 100px
+  height: 100px
+  position: relative
+  border-radius: 50%
+
+  .far,
+  .fas,
+    font-size: 2.5rem
+    color: $text-color
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+.card-title,
+.card-text,
   text-align: center
