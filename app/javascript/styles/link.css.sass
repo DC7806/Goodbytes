@@ -1,51 +1,67 @@
-.link
-  .link_group
-    .subject_bar
-      background-color: #eee
-      .link_group_name
-        display: flex
-        align-items: center
+$create-bar-height: 40px
 
-        .name
+.all-link
+  width: calc(100vw - #{$sidebar-width} )
+  height: calc(100vh - #{$top-bar-height} )
 
-      .dropdown
+  .create-bar
+    height: $create-bar-height //暫放此bar
 
-        .btn
-          padding: 0 0.2rem
-          &:hover
-            background-color: #33333333
+  .link
+    width: calc(100vw - #{$sidebar-width} )
+    height: calc(100vh - #{$top-bar-height} - #{$create-bar-height} )
+    overflow-x: scroll
+    display: flex
 
-        .dropdown-menu
-          min-width: 1rem
-          padding: .2rem 0
+    .link_group
 
-          .dropdown-item
-            display: block
+      .subject_bar
+        background-color: #eee
+
+        .link_group_name
+          display: flex
+          align-items: center
+
+          .name
+
+        .dropdown
 
           .btn
-            padding: 0.25rem 2rem
+            padding: 0 0.2rem
             &:hover
-              color: #33acb7
-              background-color: #F5F7F9
+              background-color: #33333333
 
-          .newlink
-            border-top: .5px solid #ccc
+          .dropdown-menu
+            min-width: 1rem
+            padding: .2rem 0
 
-    .saved_links
-      min-height: 74px
-      border: 1.5px solid #eee
+            .dropdown-item
+              display: block
 
-      .saved_link
-        position: relative
-        background-color: #eee
-        margin: .5rem
-        padding: 1rem
-        &:hover .set_link
-          display: block
-        .link
+            .btn
+              padding: 0.25rem 2rem
+              &:hover
+                color: #33acb7
+                background-color: #F5F7F9
 
-        .set_link
-          display: none
-          position: absolute
-          top: 0
-          right: 0
+            .newlink
+              border-top: .5px solid #ccc
+
+      .saved_links
+        min-height: 74px
+        border: 1.5px solid #eee
+
+        .saved_link
+          position: relative
+          background-color: #eee
+          margin: .5rem
+          padding: 1rem
+          &:hover .set_link
+            display: block
+          .subject
+
+          .set_link
+            display: none
+            position: absolute
+            top: 0
+            right: 0

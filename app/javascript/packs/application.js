@@ -9,6 +9,8 @@ import "../styles/index.sass";
 
 import "bootstrap"
 
+window.$ = $
+
 import "controllers"
 import "sortablejs"
 
