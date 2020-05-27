@@ -74,6 +74,7 @@ h4
   display: flex
   background-image: url("../../assets/images/landing-bg.svg")
   background-size: cover
+  overflow: hidden
   background-repeat: no-repeat
   background-position: center
 
@@ -107,6 +108,7 @@ h4
   height: 100vh
   margin-top: 3rem
   display: flex
+  background-color: #fafafa
   font-size: 1.15rem
   &__wrapper
     width: 100%
@@ -137,6 +139,10 @@ hr
   grid-gap: 2rem
   max-width: 1080px
 
+.card
+  box-shadow: 0 0 5px rgba(0,0,0,.08)
+  border-color: transparentize(black, .9)
+
 .round
   margin: 1em auto .2em
   background-color: $primary-color
@@ -158,3 +164,24 @@ hr
 .card-title,
 .card-text,
   text-align: center
+
+.landing__footer
+  background-color: $primary-color
+  width: 100%
+  height: 7rem
+
+  &__nav
+    text-align: center
+    font-weight: bolder
+
+    a
+      text-decoration: none
+      color: $text-color
+      display: inline-block
+      margin: 1em 1em 0
+    a:hover
+      color: #fbfbfb
+
+    &__copyright
+      // background-color: pink
+      line-height: .9rem
