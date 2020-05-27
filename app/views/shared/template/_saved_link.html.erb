@@ -1,0 +1,22 @@
+
+<% case type %>
+<% when :show %>
+<div class="content" data-id="<%= content.id %>">
+  <div>
+    <a href="<%= content.url %>"><h3 class="content-title">Link: <%= content.display_title %></h3></a>
+  </div>
+  <div class="border w-25"></div>
+  <div>
+    <p class="content-desc"><%= content.display_desc %></p>
+  </div>
+</div>
+
+<% when :form %>
+<%= render_edit_form content,
+                     :title, :desc, :url
+%>
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      content.display_title.limit(10)
+  %>
+<% end %>

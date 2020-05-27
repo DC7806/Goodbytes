@@ -10,10 +10,7 @@ class ContentsController < ApplicationController
   end
 
   def create
-    @content = Content.new(
-      layout: (params[:layout] || 0),
-      position: @article.contents.length
-    )
+    @content = Content.new(content_params)
     @content.article_id = @article.id
     
     unless @content.save
@@ -54,6 +51,8 @@ class ContentsController < ApplicationController
   end
 
   def content_params
-    params.require(:content).permit(:title, :desc, :position)
+    result = params.require(:content).permit(:title, :desc, :url, :position, :layout)
+    result[:layout] = result[:layout] ? result[:layout].to_i : 0
+    result
   end
 end

@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 import "controllers"
 
+import "bootstrap"
 window.$ = $
 
 require("@rails/ujs").start();

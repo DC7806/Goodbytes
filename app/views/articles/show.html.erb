@@ -1,9 +1,16 @@
 
 <%= content_for :side_bar do %>
 
+  <div class="list-group-item" data-controller="switch" id="switch-area">
+    <!-- 新增鈕 -->
+    <a href="#" data-action="click->switch#toAddContent" id="add">+ Add Content</a>
+    <!-- 返回鈕 -->
+    <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
+  </div>
+  
   <div id="drag-area">
-    <a href="#" class="list-group-item" data-controller="switch" data-action="click->switch#toAddContent">+ Add Content</a>
     <li class="list-group-item">Header</li>
+    <!-- 拖拉區域 -->
     <div class="card" id="editor" data-controller="drag" data-target="editor">
       <% @contents.each do |content| %>
         <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
@@ -12,11 +19,23 @@
 
     <li class="list-group-item">Footer</li>
   </div>
-  <a href="#" data-controller="switch" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
+  
+  
+  <!-- 隱藏表單 -->
   <div id="form-area">
     <% @contents.each do |content| %>
       <%= render "shared/template/#{content.layout}",type: :form, content: content %>
     <% end %>
+  </div>
+
+  <!-- template選單 -->
+  <div id="menu-area" style="display: none;">
+    <div class="d-flex" data-controller="switch">
+      <div class="card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >Template</a></div>
+      <div class="card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >Saved_link</a></div>
+    </div>  
+    <%= render "shared/template/index" %>
+    <%= render "shared/partials/index" %>
   </div>
 
 <% end %>

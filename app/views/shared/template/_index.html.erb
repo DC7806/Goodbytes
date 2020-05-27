@@ -1,8 +1,18 @@
-<ul>
-  <li class="list-group-item">
-  <%= link_to "one title one desc", article_contents_path(article_id: @article.id, layout: 0), method: "POST", remote: true %></li>
-  <li class="list-group-item">
-  <%= link_to "one title", article_contents_path(article_id: @article.id, layout: 1), method: "POST", remote: true %></li>
-  <li class="list-group-item">
-  <%= link_to "one desc", article_contents_path(article_id: @article.id, layout: 2), method: "POST", remote: true %></li>
+<ul id="templates" style="padding-inline-start: 0px;">
+  <% [
+    ["one title one desc", 0],
+    ["one title", 1],
+    ["one desc", 2]
+  ].each do |name, layout| %>
+  
+    <li class="list-group-item" data-controller="content">
+      <%= hidden_field_tag "content[layout]", layout , data: {target: "content.layout" }%>
+      <%= hidden_field_tag "content[title]", "" , data: {target: "content.title" }%>
+      <%= hidden_field_tag "content[desc]", "" , data: {target: "content.desc" }%>
+      <%= hidden_field_tag "content[url]", "" , data: {target: "content.url" }%>
+      <a href="#" data-action="click->content#create"><%= name %></a>
+    </li>
+
+  <% end %>
+
 </ul>
