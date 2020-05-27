@@ -1,7 +1,7 @@
 <div class="all-link">
     <div class="create-bar w-100">
       <%# AJAX create group %>
-        <div data-toggle="modal" data-target="#create-group">
+        <div data-toggle="modal" data-target="#create-group" class="d-inline-block">
           <%= link_to "新增群組", new_link_group_path, remote: true, class:"btn btn-primary" %>
         </div>
     </div>
@@ -19,6 +19,7 @@
             </div>
             <div class="modal-body">
               <div>
+                <%= f.label :name %>
                 <%= f.text_field :name, class: "group_name" %>
               </div>
             </div>
@@ -32,9 +33,9 @@
         </div>
       </div>
     <% end %>
-    <%# AJAX render all group, not the same %>
 
+    <%# AJAX render all group %>
     <%= render('shared/partials/link_ajax') %>
-  </div>
 
+  </div>
 </div>

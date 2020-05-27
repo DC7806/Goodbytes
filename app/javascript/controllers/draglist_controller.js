@@ -9,7 +9,7 @@ export default class extends Controller {
     this.sortable = Sortable.create(this.element, {
       onUpdate: this.moveLink.bind(this),
       group: 'shared',
-      animation: 150,
+      animation: 250,
       onRemove: this.removeLink.bind(this)
     })
   }
@@ -21,7 +21,7 @@ export default class extends Controller {
       url: 'saved_link/move',
       type: 'POST',
       dataType: 'json',
-      //打AJAX的方法
+      //送出
       beforeSend: (xhr, options) => {
         options.data = data
         xhr.setRequestHeader('Content-Type', 'application/json')
@@ -40,7 +40,7 @@ export default class extends Controller {
       to_group_id: toGroupId,
     })
     Rails.ajax({
-      url: 'saved_link/move_group',
+      url: 'saved_link/change_group',
       type: 'POST',
       dataType: 'json',
       beforeSend: (xhr, options) => {
