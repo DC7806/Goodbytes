@@ -1,3 +1,8 @@
+class String
+  def limit(max_length)
+    length > max_length ? self[0..max_length - 1] + '...' : self
+  end
+end
 
 # 給定model名string，可找到model class本體
 def get_model(model_name)
@@ -22,3 +27,4 @@ end
 def member
   'member'
 end
+

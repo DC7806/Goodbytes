@@ -11,8 +11,6 @@ class ContentsController < ApplicationController
 
   def create
     @content = Content.new(
-      title: "title",
-      desc: "description",
       layout: (params[:layout].to_s || 0),
       position: @article.contents.length
     )

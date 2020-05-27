@@ -5,6 +5,20 @@ class Content < ApplicationRecord
   enum layout: {
     one_title_one_desc: 0,
     one_title: 1,
-    one_desc: 2
+    one_desc: 2,
+    saved_link: 3
   }
+
+  def display_on_page(origin_text, show_if_no_text)
+    origin_text.present? ? origin_text : show_if_no_text
+  end
+
+  def display_title
+    display_on_page(title, "Title")
+  end
+
+  def display_desc
+    display_on_page(desc, "Text")
+  end
+
 end

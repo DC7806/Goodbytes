@@ -1,4 +1,4 @@
 
-$("#contents").append(`<%= render "/shared/template/#{@content.layout}", content: @content %>`)
-$("#form-area").append(`<%= render "/shared/edit_form/#{@content.layout}", content: @content %>`)
-$("#editor").append(`<%= render "/shared/content_drag_bar", content: @content %>`)
+$("#contents").append(`<%= render "/shared/template/#{@content.layout}",type: :show, content: @content %>`)
+$("#form-area").append(`<%= render "/shared/template/#{@content.layout}",type: :form, content: @content %>`)
+$("#editor").append(`<%= render "/shared/template/#{@content.layout}",type: :drag, content: @content %>`)

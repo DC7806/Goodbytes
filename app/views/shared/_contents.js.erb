@@ -1,4 +1,4 @@
 contents.innerHTML = ""
 <% @contents.each do |content| %>
-  contents.innerHTML += `<%= render "shared/template/#{content.layout}", content: content %>`
+  contents.innerHTML += `<%= render "shared/template/#{content.layout}",type: :show, content: content %>`
 <% end %>

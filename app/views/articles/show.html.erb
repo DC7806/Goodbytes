@@ -6,7 +6,7 @@
     <li class="list-group-item">Header</li>
     <div class="card" id="editor" data-controller="drag" data-target="editor">
       <% @contents.each do |content| %>
-        <%= render "/shared/content_drag_bar", content: content %>
+        <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
       <% end %>
     </div>
 
@@ -15,7 +15,7 @@
   <a href="#" data-controller="switch" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
   <div id="form-area">
     <% @contents.each do |content| %>
-      <%= render "shared/edit_form/#{content.layout}", content: content %>
+      <%= render "shared/template/#{content.layout}",type: :form, content: content %>
     <% end %>
   </div>
 
@@ -32,6 +32,6 @@
 </div>
 <div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
   <% @contents.each do |content| %>
-    <%= render "shared/template/#{content.layout}", content: content %>
+    <%= render "shared/template/#{content.layout}",type: :show, content: content %>
   <% end %>
 </div>

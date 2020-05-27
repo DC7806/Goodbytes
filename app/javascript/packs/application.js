@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 import "controllers"
 
+window.$ = $
+
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
