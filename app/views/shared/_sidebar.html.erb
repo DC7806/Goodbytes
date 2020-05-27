@@ -43,12 +43,6 @@
       <div>
         <%= link_to "Link", link_group_index_path %>
       </div>
-      <div>
-        <a>Sources</a>
-      </div>
-      <div>
-        <a>Settings</a>
-      </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
@@ -62,7 +56,7 @@
         <%= link_to "Account Settings", edit_user_registration_path %>
       </div>
       <div>
-        <%= link_to "Sign Out", destroy_user_session_path %>
+        <%= link_to "Log Out", destroy_user_session_path,method: :delete %>
       </div>
     </nav>
   <% end %>
