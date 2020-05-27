@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get '/user', to: "dashboard#index", as: :user_root
 
-  root    "dashboard#index"
+  root "landing#index"
+  # root    "dashboard#index"
+  get "/dashboard", to: "dashboard#index"
   post   "/switch_organization",  to: "dashboard#switch_organization"
   post   "/switch_channel",       to: "dashboard#switch_channel"
   get     "/feature1",            to: "test#feature1"
@@ -45,7 +47,11 @@ Rails.application.routes.draw do
     end
   end
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
+    member do
+      post :sort
+    end
     resource :contents,     only: [:new, :create]
+    resources :contents,  only: :index
   end
-  resources   :contents,      except: [:new, :create]
+  resources   :contents,      except: [:new, :create, :index]
 end  

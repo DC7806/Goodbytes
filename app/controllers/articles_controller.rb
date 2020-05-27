@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :find_article, except: [:new, :create]
   before_action :find_channel
   before_action :channel_member?
 
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @contents = @article.contents.order(created_at: :asc)
+    @contents = @article.contents.order(:position)
     render layout: "article"
   end
 
@@ -32,6 +32,14 @@ class ArticlesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def sort
+    @contents = params[:contents_ids].map{ |obj_id| Content.find(obj_id) }
+    @contents.each.with_index do |content, index|
+      content.update(position: index)
+    end
+    render partial: "shared/contents"
   end
 
   def destroy
