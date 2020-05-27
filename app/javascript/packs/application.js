@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 // import "jquery-ui";
+import '@fortawesome/fontawesome-free/css/all.css';
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.sass";
 
@@ -18,7 +19,7 @@ import "controllers";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 require("@rails/ujs").start();
-// require("turbolinks").start();
+require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 require("scripts");
