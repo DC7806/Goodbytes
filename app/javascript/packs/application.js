@@ -6,13 +6,10 @@
 // import "jquery-ui";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap";
-import "../styles/index.js";
+import "../styles/index.sass";
 
-import "jquery";
-import $ from "jquery";
 window.$ = $;
 
-import "jquery-ui";
 import "controllers";
 import "@fortawesome/fontawesome-free/css/all.css";
 
