@@ -7,7 +7,7 @@ class ChannelsController < ApplicationController
 
   def new
     @channel   = Channel.new(
-      organization_id: get_organization_id
+      organization_id: current_organization_id
     )
   end
 
@@ -29,7 +29,7 @@ class ChannelsController < ApplicationController
     else
       @notice = "channel新增失敗"
     end
-    redirect_to(channel_path, notice: @notice) and return
+    redirect_to(root_path, notice: @notice) and return
   end
 
   def update
