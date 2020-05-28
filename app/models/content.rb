@@ -1,5 +1,6 @@
 class Content < ApplicationRecord
   acts_as_paranoid
+  mount_uploader :image, ImageUploader
   belongs_to :article
   has_one :channel, through: :article
   enum layout: {
