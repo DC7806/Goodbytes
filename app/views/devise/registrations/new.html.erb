@@ -1,46 +1,47 @@
-<%= link_to root_path do %>
-<%# <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"landing_navbar__logo") %> %>
-<% end %>
-
-<div class="container">
-  <div class="row justify-content-center">
-    <form>
-      <div class="form-group">
+<div class="login_wrapper">
+  <div class="logo">
+    <%= link_to root_path do %>
+    <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"img") %>
+    <% end %>
+  </div>
+  <div class="card">
+    <div class="card-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
-
         <% if @email %>
           <%= f.hidden_field :email, value: @email %>
         <% else %>
           <div class="field">
             <%= f.label :email, "電子信箱", class: "" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請設定您的電子信箱" %>
-          </div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請設定您的電子信箱", class:"form-control" %>
         <% end %>
         <% if @invite_token %>
           <input type="hidden" name="invite_token" value="<%= @invite_token %>">
         <% end %>
-
+        </div>
         <div class="field">
           <%= f.label :password, "設定密碼" %>
           <% if @minimum_password_length %>
-          <em>(長度至少<%= @minimum_password_length %>位)</em>
+          (長度至少<%= @minimum_password_length %>位)
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: "請在此輸入密碼" %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "請在此輸入密碼", class:"form-control"  %>
         </div>
-
         <div class="field">
           <%= f.label :password_confirmation, "確認密碼" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "請再次輸入密碼" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "請再次輸入密碼", class:"form-control" %>
         </div>
-        
         <div class="actions">
-          <%= f.submit "註冊Goodbytes", class:"btn" %>
+          <%= f.submit "註冊Goodbytes", class:"w-100 btn btn-primary" %>
         </div>
         <% end %>
-
-        <%= link_to "點我登入", new_session_path(resource_name) %><br />
-      </div>  
-    </form>
+      </div>
+    </div>
+    <div class="bottom-card">
+      <div class="card">
+        <div class="card-body"><span>已經有帳號了？</span>
+        <%= link_to "點我登入", new_session_path(resource_name) %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
