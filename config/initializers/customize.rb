@@ -1,11 +1,16 @@
 class String
+  # 字串秀在頁面上要做的處理
   def limit(max_length)
+    # 如果超過指定長度則縮減至指定長度並加上"..."，會用在drag bar
     length > max_length ? self[0..max_length - 1] + '...' : self
   end
 
   def line_break(line_width)
-    scan(/.{1,#{line_width}}/).join("\n")
+    split(" ").map do |section| # 先依空白分割，再逐一檢查各單字
+      section.scan(/.{1,#{line_width}}/).join("\n") # 如果有某個單字超過指定長度則強制換行
+    end.join(" ") # 最後再把空白加回去
   end
+  
 end
 
 # 給定model名string，可找到model class本體

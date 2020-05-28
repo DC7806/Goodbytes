@@ -10,8 +10,7 @@ class Content < ApplicationRecord
     one_title_one_image: 4
   }
   
-
-  LINE_LIMIT = 30
+  LINE_LIMIT = 90
 
   def display_on_page(origin_text, show_if_no_text)
     origin_text.present? ? origin_text : show_if_no_text
@@ -25,5 +24,6 @@ class Content < ApplicationRecord
     display_on_page(desc, "Text").line_break(LINE_LIMIT)
   end
 
+  # 擺上面會出錯，擺下面就正常，不懂為什麼
   mount_uploader :image, ImageUploader
 end
