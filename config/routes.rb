@@ -35,8 +35,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources   :link_groups,   as: 'link_group', path: 'link_group'
-  resources   :saved_links,   as: 'saved_link', path: 'saved_link'
+  resources   :link_groups,   as: 'link_group', path: 'link_group' do
+    collection do
+      post :update_group_position
+    end
+  end
+  resources   :saved_links,   as: 'saved_link', path: 'saved_link' do
+    collection do
+      post :link_move_in_group
+      post :link_change_group
+    end
+  end
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
     member do
       post :sort
