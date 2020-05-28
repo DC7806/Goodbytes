@@ -21,7 +21,11 @@
   <% if image %>
     <div class="form-group">
       <%= f.label :image %>
-      <%= image_tag content.image.url, class: "w-100" if content.image.present? %>
+      <div class="d-flex justify-content-center">
+        <div>
+          <%= image_tag content.image.form.url if content.image.present? %>
+        </div>
+      </div>
       <%= f.file_field :image, class: "form-control" %>
     </div>
   <% end %>
