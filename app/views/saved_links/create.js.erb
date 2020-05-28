@@ -1,0 +1,18 @@
+(function () {
+  let ok = '<%= @ajax_create_link[:ok] %>' === 'true'
+
+  if (ok) {
+    let group_id = '<%= @saved_link.link_group_id %>'
+
+    $(`#create-link-${group_id}`).modal('hide')
+    $('.modal-backdrop').hide()
+
+    $(`#create-link-${group_id} .link_url`).val('');
+    $(`#create-link-${group_id} .link_subject`).val('');
+    $(`#create-link-${group_id} .link_summary`).val('');
+
+    $(`.link_group`).replaceWith("<%= j render('shared/partials/link_ajax') %>")
+  } else {
+    alert('<%= @ajax_create_link[:message] %>')
+  }
+})()

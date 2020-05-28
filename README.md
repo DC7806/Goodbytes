@@ -1,10 +1,10 @@
-# Goodbite
+# Goodbytes
 
 [Goodbits](https://goodbits.io/) is the fastest email newsletter creator.
 
-**Goodbite** is a demo application for self-learning only.
+**Goodbytes** is a demo application for self-learning only.
 
-[Goodbite demo url:](#)
+[Goodbytes demo url: https://goodbyt.es/ ](https://goodbyt.es/)
 
 ## What we use
 
@@ -57,11 +57,6 @@
   GitHub: https://github.com/Koten0224 \
   email: koten0224@gmail.com \
   blog: https://medium.com/@koten0224
-
-**許家禎**
-
-  GitHub: https://github.com/luuuuuuuna \
-  email: leyleo129@hotmail.com
 
 ---
 ## ER-Model

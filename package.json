@@ -2,6 +2,7 @@
   "name": "good",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -10,6 +11,9 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",
+    "popper.js": "^1.16.1",
+    "sortablejs": "^1.10.2",
+    "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
