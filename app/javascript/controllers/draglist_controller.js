@@ -18,7 +18,7 @@ export default class extends Controller {
     let ids = ($(e.target).children('.saved_link').toArray().map(obj => obj.dataset.id)) //取得group下的id更新位置，target是sortable的方法
     let data = JSON.stringify({ saved_link_ids: ids }) //轉換為JSON形式
     Rails.ajax({
-      url: 'saved_link/move',
+      url: 'saved_link/link_move_in_group',
       type: 'POST',
       dataType: 'json',
       //送出
@@ -40,7 +40,7 @@ export default class extends Controller {
       to_group_id: toGroupId,
     })
     Rails.ajax({
-      url: 'saved_link/change_group',
+      url: 'saved_link/link_change_group',
       type: 'POST',
       dataType: 'json',
       beforeSend: (xhr, options) => {

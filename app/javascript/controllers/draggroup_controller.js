@@ -16,7 +16,7 @@ export default class extends Controller {
     let ids = $(e.target).children('.a_group').toArray().map(obj => obj.dataset.groupid)
     let data = JSON.stringify({ group_ids: ids })
     Rails.ajax({
-      url: 'link_group/move_group',
+      url: 'link_group/update_group_position',
       type: 'POST',
       dataType: 'json',
       beforeSend: (xhr, options) => {
