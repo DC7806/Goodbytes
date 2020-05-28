@@ -51,7 +51,14 @@ class ContentsController < ApplicationController
   end
 
   def content_params
-    result = params.require(:content).permit(:title, :desc, :url, :position, :layout)
+    result = params.require(:content).permit(
+      :title, 
+      :desc, 
+      :url, 
+      :image,
+      :layout, 
+      :position 
+    )
     result[:layout] = result[:layout] ? result[:layout].to_i : 0
     result
   end

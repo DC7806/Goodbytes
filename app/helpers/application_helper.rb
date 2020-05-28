@@ -5,7 +5,8 @@ module ApplicationHelper
       content: content,
       title: false,
       desc: false,
-      url: false
+      url: false,
+      image: false
     }
     keys.each do |key|
       form_pattern[key] = true

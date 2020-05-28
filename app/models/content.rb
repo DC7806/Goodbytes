@@ -1,17 +1,17 @@
 class Content < ApplicationRecord
   acts_as_paranoid
-  mount_uploader :image, ImageUploader
   belongs_to :article
   has_one :channel, through: :article
   enum layout: {
     one_title_one_desc: 0,
     one_title: 1,
     one_desc: 2,
-    saved_link: 3
+    saved_link: 3,
+    one_title_one_image: 4
   }
+  
 
   LINE_LIMIT = 30
-  DRAG_LIMIT = 10
 
   def display_on_page(origin_text, show_if_no_text)
     origin_text.present? ? origin_text : show_if_no_text
@@ -25,4 +25,5 @@ class Content < ApplicationRecord
     display_on_page(desc, "Text").line_break(LINE_LIMIT)
   end
 
+  mount_uploader :image, ImageUploader
 end
