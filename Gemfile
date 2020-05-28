@@ -34,6 +34,7 @@ gem 'repost'
 gem "paranoia", "~> 2.2"
 gem 'figaro', '~> 1.0'
 gem 'carrierwave', '~> 2.0'
+gem "fog-aws"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
