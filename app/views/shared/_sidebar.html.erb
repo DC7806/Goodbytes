@@ -22,7 +22,7 @@
           <% current_user.organizations.each do |org| %>
             <% if org.id != current_organization_id %>
               <div class="pr-2">
-                <a href="#" data-id="<%= org.id %>" data-action="click->switch#movePlace"><%= org.name %></a>
+                <a href="#" class="text-light" data-id="<%= org.id %>" data-action="click->switch#movePlace"><%= org.name %></a>
               </div>
             <% end %>
           <% end %>
@@ -44,7 +44,7 @@
           <% current_channels.each do |channel| %>
             <% if channel.id != current_channel_id %>
               <div class="pr-2">
-                <a href="#" data-id="<%= channel.id %>" data-action="click->switch#movePlace"><%= channel.name %></a>
+                <a href="#" class="text-light" data-id="<%= channel.id %>" data-action="click->switch#movePlace"><%= channel.name %></a>
               </div>
             <% end %>
           <% end %>
