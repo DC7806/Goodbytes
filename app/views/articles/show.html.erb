@@ -43,9 +43,35 @@
   
   <!-- 隱藏表單 -->
   <div id="form-area">
+
+    <!-- contents編輯器 -->
     <% @contents.each do |content| %>
       <%= render "shared/template/#{content.layout}",type: :form, content: content %>
     <% end %>
+
+    <!-- header編輯器 -->
+    <div style="display: none;" class="edit_content" id="edit_header" data-controller="header">
+      <div class="form-group">
+        <label for="edit-preheader">preheader</label>
+        <input data-target="header.preheader" class="form-control" type="text" id="edit-preheader">
+      </div>
+      <div class="form-group">
+        <label for="edit-title">title</label>
+        <input data-target="header.title" class="form-control" type="text" id="edit-title">
+      </div>
+      <div class="form-group">
+        <label for="edit-desc">desc</label>
+        <textarea data-target="header.desc" class="form-control" id="edit-desc"></textarea>
+      </div>
+      <button class="form-control" data-action="click->header#submit">OK</button>
+    </div>
+
+    <!-- footer編輯器 -->
+    <div class="edit-content" id="edit_footer">
+
+    </div>
+
+
   </div>
 
   <!-- template選單 -->
@@ -60,6 +86,7 @@
 
 <% end %>
 
+<!-- 文章內容 -->
 <div class="card-header">
   <div class="row justify-content-between w-75 ml-3">
     <h3><%= @article.subject %></h3>
@@ -70,13 +97,20 @@
   <p>I'm article show.</p>
 </div>
 <div class="card-body container w-75">
+
+  <!-- 頁首 -->
   <%= @article.header.html_safe %>
+
+  <!-- 文章 -->
   <div id="contents" data-articleId="<%= @article.id %>" >
     <% @contents.each do |content| %>
       <%= render "shared/template/#{content.layout}",type: :show, content: content %>
     <% end %>
   </div>
+
+  <!-- 頁尾 -->
   <%= @article.footer.html_safe %>
+
 </div>
 
 

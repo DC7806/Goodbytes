@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   resources   :articles,      as: 'article',    path: 'article',  except: :index do
     member do
       post :sort
+      post :header
+      post :footer
     end
     resource :contents,     only: [:new, :create]
     resources :contents,  only: :index

@@ -29,10 +29,9 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to article_path(@article), notice: "This article has been update."
-
+      head :ok
     else
-      render :edit
+      head :bad_request
     end
   end
 
@@ -52,9 +51,17 @@ class ArticlesController < ApplicationController
     redirect_to channel_path, notice: "This article has been deleted."
   end
 
+  def header
+    
+  end
+
+  def footer
+
+  end
+
   private
   def article_params
-    params.require(:article).permit(:subject)
+    params.require(:article).permit(:subject, :header, :footer)
   end
 
   def find_article
