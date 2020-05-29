@@ -1,14 +1,23 @@
-<button class="btn btn-primary" disabled>
-  會員資料
-</button>
-<button class="btn btn-primary">
-  <%= link_to "組織資料", edit_organization_path %>
-</button>
-<button class="btn btn-primary">
-  <%= link_to "頻道資料", edit_channel_path %>
-</button>
-
-
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+      <%= link_to "個人資料", edit_user_registration_path, class:"nav-link active" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "團隊資料", edit_organization_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "頻道資料", edit_channel_path, class:"nav-link" %>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 
 <h3>等待審核的邀請</h3>
 <table class="table">
@@ -28,15 +37,6 @@
     </tr>
   <% end %>
 </table>
-
-<h3>創建組織</h3>
-<%= form_for(@organization, url: organization_path, method: 'post') do |f| %>
-  <%= f.label :name, "名稱"%>
-  <%= f.text_field :name%>
-  <%= f.submit "建立組織", data: {disable_with: "請稍等.."} %>
-<% end %>
-
-
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
