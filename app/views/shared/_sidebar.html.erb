@@ -6,21 +6,47 @@
   <% end %>
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up">
-      <div>
-        <%= form_tag(switch_organization_path, method: 'post') do %>
-          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
-            <% current_user.organizations.each do |org| %>
-              <option value="<%= org.id %>" 
-                <% if org.id == current_organization_id %>
-                  selected
-                <% end %>
-              >
-                <%= org.name %>
-              </option> 
-            <% end %>
-          </select>
-        <% end %>
+
+      <div class="border pr-2" data-controller="switch">
+        <input type="hidden" data-target="switch.objectId" value="organization_list">
+        <div>
+          <a href="#" data-action="click->switch#toggleOrgList">
+          <%= current_organization.name %>
+          </a>
+        </div>
       </div>
+      <div class="position-relative" id="organization_list" style="display: none;z-index:1">
+        <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
+          <% current_user.organizations.each do |org| %>
+            <% if org.id != current_organization_id %>
+              <div class="pr-2">
+                <a href="#" data-id="<%= org.id %>" data-action="click->switch#organization"><%= org.name %></a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="border pr-2" data-controller="switch">
+        <input type="hidden" data-target="switch.objectId" value="channel_list">
+        <div>
+          <a href="#" data-action="click->switch#toggleOrgList">
+          <%= current_organization.name %>
+          </a>
+        </div>
+      </div>
+      <div class="position-relative" id="organization_list" style="display: none;z-index:1">
+        <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
+          <% current_user.organizations.each do |org| %>
+            <% if org.id != current_organization_id %>
+              <div class="pr-2">
+                <a href="#" data-id="<%= org.id %>" data-action="click->switch#organization"><%= org.name %></a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      
       <div>
         <%= form_tag(switch_channel_path, method: 'post') do %>
           <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
@@ -37,6 +63,9 @@
           </select>
         <% end %>
       </div>
+
+      
+
       <div>
         <%= link_to "Articles", root_path %>
       </div>
