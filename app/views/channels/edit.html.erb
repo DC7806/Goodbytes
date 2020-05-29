@@ -8,6 +8,16 @@
   頻道資料
 </button>
 
+<p>###########</p>
+<p>創channel</p>
+<%= form_tag(channel_path, method: 'post') do %>
+  <div>
+    <input type="text" name="channel[name]">
+    <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
+    <input type="submit" class="btn btn-success" value="新增頻道">
+  </div>
+<% end %>
+
 <p>CHANNEL改名</p>
 <%= form_tag(channel_path, method: 'patch') do %>
   <input type="text" name="channel[name]">
@@ -21,7 +31,7 @@
     <%= email_field_tag :email %>
     <input type="hidden" name="organization_id" value="<%= @organization_id %>">
     <input type="hidden" name="channel_id" value="<%= @channel.id %>">
-    <input type="submit" value="寄信啊" class="btn btn-primary">
+    <input type="submit" value="寄送邀請" class="btn btn-primary">
   </div>
 <% end %>
 
