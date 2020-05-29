@@ -9,7 +9,17 @@
   </div>
   
   <div id="drag-area">
-    <li class="list-group-item">Header</li>
+    <div data-controller="switch" class="list-group-item d-flex justify-content-between">
+      <%= hidden_field_tag :edit_form, "edit_header", data: {target: "switch.form"} %>
+      <div>
+        Header
+      </div>
+      <div>
+        <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      </div>
+    </div>
     <!-- 拖拉區域 -->
     <div class="card" id="editor" data-controller="drag" data-target="editor">
       <% @contents.each do |content| %>
@@ -17,7 +27,17 @@
       <% end %>
     </div>
 
-    <li class="list-group-item">Footer</li>
+    <div data-controller="switch" class="list-group-item d-flex justify-content-between">
+      <%= hidden_field_tag :edit_form, "edit_footer", data: {target: "switch.form"} %>
+      <div>
+        Footer
+      </div>
+      <div>
+        <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
   
   
