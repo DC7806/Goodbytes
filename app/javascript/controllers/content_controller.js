@@ -3,6 +3,9 @@ import Rails from "@rails/ujs"
 
 export default class extends Controller {
   static targets = ["layout", "title", "desc", "url"] 
+  // 為了template與saved link兩邊可以共用此方法，所以欄位統一有這麼多
+  // 在saved link會有事先存好的資料送到這邊打post
+  // 而在template則除了layout外都是空值
   create(evt){
     evt.preventDefault()
     let data = JSON.stringify({

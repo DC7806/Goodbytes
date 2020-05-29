@@ -34,7 +34,7 @@ export default class extends Controller {
   }
 
   submit(evt){
-
+    evt.preventDefault()
     // 從表格讀值
     let preheader = $(this.preheaderTarget).val()
     let title = $(this.titleTarget).val()
@@ -83,7 +83,7 @@ export default class extends Controller {
     $("#add").show()
     $("#back").hide()
     $(".edit_content").hide()
-    $("#drag-area").show()
+    $("#edit-area").show()
 
   }
 

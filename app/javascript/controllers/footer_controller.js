@@ -22,7 +22,7 @@ export default class extends Controller {
   }
 
   submit(evt){
-
+    evt.preventDefault()
     // 從表格讀值
     let outro = $(this.outroTarget).val()
     let showOutro = this.showOutroTarget.checked
@@ -63,7 +63,7 @@ export default class extends Controller {
     $("#add").show()
     $("#back").hide()
     $(".edit_content").hide()
-    $("#drag-area").show()
+    $("#edit-area").show()
 
   }
 

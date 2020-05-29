@@ -2,6 +2,11 @@ class Content < ApplicationRecord
   acts_as_paranoid
   belongs_to :article
   has_one :channel, through: :article
+
+  # 這個enum很神奇，可以讓你明明是存的純數字的欄位變成一種類似狀態機
+  # https://blog.niclin.tw/2017/07/30/%E4%BD%BF%E7%94%A8-avtiverecordenum-%E5%BB%BA%E7%AB%8B%E6%98%93%E8%AE%80%E7%9A%84%E7%8B%80%E6%85%8B%E5%B1%AC%E6%80%A7/
+  # 我在很多地方有直接把layout填進路徑裡做render存取
+  # 這邊看不懂那些應該就都不懂
   enum layout: {
     one_title_one_desc: 0,
     one_title: 1,

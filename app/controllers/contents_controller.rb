@@ -14,6 +14,9 @@ class ContentsController < ApplicationController
     @content.article_id = @article.id
     
     unless @content.save
+      # 參考資料：
+      # https://edgeguides.rubyonrails.org/layouts_and_rendering.html#the-status-option
+      # https://edgeguides.rubyonrails.org/layouts_and_rendering.html#using-head-to-build-header-only-responses
       head :bad_request
     end
 
@@ -59,6 +62,7 @@ class ContentsController < ApplicationController
       :layout, 
       :position 
     )
+    # layout要存入一定要轉integer否則會出錯
     result[:layout] = result[:layout] ? result[:layout].to_i : 0
     result
   end

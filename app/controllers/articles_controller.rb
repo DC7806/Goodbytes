@@ -9,6 +9,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = @channel.articles.new(article_params)
+
+    # 把樣板render後的結果轉成純字串並存入article
     @article.header = render_to_string "shared/template/header", layout: false
     @article.footer = render_to_string "shared/template/footer", layout: false
     

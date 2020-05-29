@@ -8,7 +8,9 @@
     <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
   </div>
   
-  <div id="drag-area">
+  <div id="edit-area">
+
+    <!-- header bar -->
     <div data-controller="switch" class="list-group-item d-flex justify-content-between">
       <%= hidden_field_tag :edit_form, "edit_header", data: {target: "switch.form"} %>
       <div>
@@ -20,13 +22,15 @@
         <% end %>
       </div>
     </div>
+
     <!-- 拖拉區域 -->
-    <div class="card" id="editor" data-controller="drag" data-target="editor">
+    <div class="card" id="drag_area" data-controller="drag" data-target="drag_area">
       <% @contents.each do |content| %>
         <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
       <% end %>
     </div>
 
+    <!-- footer bar -->
     <div data-controller="switch" class="list-group-item d-flex justify-content-between">
       <%= hidden_field_tag :edit_form, "edit_footer", data: {target: "switch.form"} %>
       <div>
@@ -38,6 +42,7 @@
         <% end %>
       </div>
     </div>
+
   </div>
   
   
@@ -58,13 +63,17 @@
 
   </div>
 
-  <!-- template選單 -->
+  <!-- template選單（切換鈕） -->
   <div id="menu-area" style="display: none;">
     <div class="d-flex" data-controller="switch">
       <div class="card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >Template</a></div>
       <div class="card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >Saved_link</a></div>
     </div>  
+
+    <!-- 樣板選單 -->
     <%= render "shared/template/index" %>
+
+    <!-- saved link選單 -->
     <%= render "shared/partials/index" %>
   </div>
 
@@ -83,6 +92,7 @@
 <div class="card-body container w-75">
 
   <!-- 頁首 -->
+  <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
   <%= @article.header.html_safe %>
 
   <!-- 文章 -->
