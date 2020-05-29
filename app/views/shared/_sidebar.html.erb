@@ -7,6 +7,7 @@
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up">
 
+      <div>組織列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
         <div>
@@ -16,7 +17,7 @@
         </div>
       </div>
       <div class="position-relative" id="organization_list" style="display: none;z-index:1">
-        <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
+        <div class="position-absolute w-100 bg-dark" data-controller="switch">
           <input type="hidden" data-target="switch.url" value="/switch_organization">
           <% current_user.organizations.each do |org| %>
             <% if org.id != current_organization_id %>
@@ -28,6 +29,7 @@
         </div>
       </div>
 
+      <div>頻道列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="channel_list">
         <div>
@@ -37,7 +39,7 @@
         </div>
       </div>
       <div class="position-relative" id="channel_list" style="display: none;z-index:1">
-        <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
+        <div class="position-absolute w-100 bg-dark" data-controller="switch">
           <input type="hidden" data-target="switch.url" value="/switch_channel">
           <% current_channels.each do |channel| %>
             <% if channel.id != current_channel_id %>
