@@ -26,8 +26,7 @@
             <div class="header_navbar">
               <%= render "shared/user_section" %>
             </div>
-            <div class="noticed"><%= notice %></div>
-            <div class="alerted"><%= alert %></div>
+              <%= render "shared/flash" %>
             <div class="channel-body">
               <%= yield %>
             </div>

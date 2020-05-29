@@ -1,3 +1,4 @@
+// $primary-color: #39adad
 $primary-color: #66cccc
 $secondary-color: #8ba8ba 
 $button-color: #ffcc33
@@ -5,7 +6,7 @@ $button-text-color: #ffffff
 $text-color: #333333
 $bg-color: #f5f7f9
 $border-color: #d6dce0
-$font-weight: 500
+$chinese-font: Noto Sans CJK TC, Source Han Sans TW, Source Han Sans SC, Hiragino Sans GB W3, Droid Sans Fallback, Microsoft Yahei, Microsoft JhengHei, \5FAE软雅黑, PingFang TC, Noto Sans TC, STXihei, \534E文细黑
 $font-size: 16px
 .font-large
   font-size: $font-size * 1.2
@@ -15,10 +16,13 @@ $font-size: 16px
   font-size: $font-size / 2
 $sidebar-width: 250px
 $top-bar-height: 50px
+$footer-height: 11rem
 
 html,
 body
-  font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', $chinese-font, sans-serif
+  font-size: $font-size
+  font-weight: 100
 
 h1,
 h2,
@@ -26,7 +30,8 @@ h3,
 h4,
 h5,
 h6
-  font-weight: $font-weight
+  font-weight: 100
+  line-height: 1.2
 
 a
   text-decoration: none
@@ -45,12 +50,11 @@ a
   z-index: 3
 
   .sidebar__logo
-    // color: $font-color
+    color: $text-color
     display: inline-block
     margin-bottom: 1.5rem
 
   a
-    color: $secondary-color
     text-decoration: none
     transition: .4s ease
 
@@ -187,3 +191,12 @@ a
       color: $secondary-color
       margin: .5em 0 2em 0
 
+.alert
+  margin-bottom: 0
+  position: absolute
+  right: 0
+  top: $top-bar-height + 20px
+  z-index: 999
+  ul
+    margin-bottom: 0
+    list-style: none

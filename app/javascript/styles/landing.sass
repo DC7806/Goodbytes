@@ -1,26 +1,3 @@
-$primary-color: #66cccc
-$secondary-color: #8ba8ba 
-$button-color: #ffcc33
-$button-text-color: #ffffff
-$text-color: #333333
-$font-size: 16px
-$chinese-font: Noto Sans CJK TC, Source Han Sans TW, Source Han Sans SC, Hiragino Sans GB W3, Droid Sans Fallback, Microsoft Yahei, Microsoft JhengHei, \5FAE软雅黑, PingFang TC, Noto Sans TC, STXihei, \534E文细黑
-
-html,
-body
-  font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', $chinese-font, sans-serif
-  font-size: $font-size
-  line-height: 3
-  font-weight: 100
-
-h1,
-h2,
-h3,
-h4
-  font-weight: 100
-  line-height: 1.2
-  color: $primary-color
-
 .landing_navbar
   height: 5rem
   position: fixed
@@ -30,6 +7,7 @@ h4
   align-items: center
   transition: .2s ease-in-out
   z-index: 10
+  top: 0
 
   &__logo
     height: 75%
@@ -50,20 +28,22 @@ h4
     background-color: white
     border-radius: .25em
     color: $text-color
+    transition: .15s ease-in-out
     font-weight: bolder
     text-decoration: none
     font-size: 1.1em
 
-  &__menu__item:hover,
+    &:hover
+      background: darken(white, 4%)
+      color: inherit
+
   &__menu__item--opaque
-    background-color: $button-color
-    text-decoration: none
-    color: $text-color
+    background: $button-color
     border-color: $button-color
 
   &__menu__item--opaque:hover
-    filter: brightness(95%)
-    color: $button-text-color
+    background: lighten($button-color, 10%)
+    border-color: lighten($button-color, 10%)
 
 .landing_navbar--opaque
   background-color: #fff
@@ -77,6 +57,10 @@ h4
   overflow: hidden
   background-repeat: no-repeat
   background-position: center
+
+  &__wrapper
+    margin: auto 3rem
+    width: 600px
 
   &__text
     color: $text-color
@@ -97,12 +81,9 @@ h4
     margin-top: 1.5em
 
   &__cta:hover
-    text-decoration: none
-    color: $button-text-color
-
-.wrapper
-  margin: auto 3rem
-  width: 600px
+    background: lighten($button-color, 10%)
+    border-color: lighten($button-color, 10%)
+    color: $text-color
 
 .landing__section
   height: 100vh
@@ -139,49 +120,54 @@ hr
   grid-gap: 2rem
   max-width: 1080px
 
-.card
-  box-shadow: 0 0 5px rgba(0,0,0,.08)
-  border-color: transparentize(black, .9)
+  .card
+    box-shadow: 0 0 5px rgba(0,0,0,.08)
+    border-color: transparentize(black, .9)
 
-.round
-  margin: 1em auto .2em
-  background-color: $primary-color
-  width: 100px
-  height: 100px
-  position: relative
-  border-radius: 50%
+  .round
+    margin: 1em auto .2em
+    background-color: $primary-color
+    width: 100px
+    height: 100px
+    position: relative
+    border-radius: 50%
 
-  .far,
-  .fas,
-    font-size: 2.5rem
-    color: $text-color
-    display: block
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
+    .far,
+    .fas,
+      font-size: 2.5rem
+      color: $text-color
+      display: block
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
 
-.card-title,
-.card-text,
-  text-align: center
+  .card-title,
+  .card-text,
+    text-align: center
 
 .landing__footer
   background-color: $primary-color
   width: 100%
-  height: 7rem
+  height: $footer-height
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  color: $text-color
 
   &__nav
     text-align: center
     font-weight: bolder
 
     a
-      text-decoration: none
-      color: $text-color
       display: inline-block
-      margin: 1em 1em 0
+      margin-right: 1rem
+      &:last-child
+        margin-right: 0
     a:hover
-      color: #fbfbfb
+      text-decoration: underline
+      color: inherit
 
     &__copyright
-      // background-color: pink
       line-height: .9rem
