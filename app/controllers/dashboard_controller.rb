@@ -46,6 +46,7 @@ class DashboardController < ApplicationController
     @channel = current_user.channels.first
     unless @channel
       org_id = current_user.organizations.find_by(name: current_user.email).id
+      session["goodbytes7788"]["organization_id"] = org_id
       redirect_to new_channel_path, notice: "新增你的第一個頻道～"
       # 這邊要回傳true or false以供上方的存取介面做判斷
       return true
