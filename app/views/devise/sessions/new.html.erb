@@ -1,28 +1,41 @@
-<%= link_to root_path do %>
-<%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"landing_navbar__logo") %>
-<% end %>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, "電子信箱" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請輸入您的電子信箱"  %>
+<div class="login_wrapper">
+  <div class="logo">
+    <%= link_to root_path do %>
+    <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"img") %>
+    <% end %>
   </div>
+  <div class="card">
+    <div class="card-body">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email, "電子信箱" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請輸入您的電子信箱", class:"form-control"   %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password, "密碼" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "請留意英文大小寫" %>
-  </div>
+        <div class="field">
+          <%= f.label :password, "密碼" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "請留意英文大小寫", class:"form-control"  %>
+        </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, "記住我" %>
+        <% if devise_mapping.rememberable? %>
+          <div class="check_box">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "記住我" %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "登入Goodbytes", class:"w-100 btn btn-dark" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "登入Goodbytes" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <div class="bottom-card">
+    <div class="card">
+      <div class="card-body">
+        <span>還沒有帳號嗎？</span>
+        <%= link_to "點我註冊", new_session_path(resource_name) %>
+      </div>
+    </div>
+  </div>
+</div>    
