@@ -10,17 +10,18 @@
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
         <div>
-          <a href="#" data-action="click->switch#toggleOrgList">
+          <a href="#" data-action="click->switch#toggleList">
           <%= current_organization.name %>
           </a>
         </div>
       </div>
       <div class="position-relative" id="organization_list" style="display: none;z-index:1">
         <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
+          <input type="hidden" data-target="switch.url" value="/switch_organization">
           <% current_user.organizations.each do |org| %>
             <% if org.id != current_organization_id %>
               <div class="pr-2">
-                <a href="#" data-id="<%= org.id %>" data-action="click->switch#organization"><%= org.name %></a>
+                <a href="#" data-id="<%= org.id %>" data-action="click->switch#movePlace"><%= org.name %></a>
               </div>
             <% end %>
           <% end %>
@@ -30,41 +31,23 @@
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="channel_list">
         <div>
-          <a href="#" data-action="click->switch#toggleOrgList">
-          <%= current_organization.name %>
+          <a href="#" data-action="click->switch#toggleList">
+          <%= current_channel.name %>
           </a>
         </div>
       </div>
-      <div class="position-relative" id="organization_list" style="display: none;z-index:1">
+      <div class="position-relative" id="channel_list" style="display: none;z-index:1">
         <div id="test" class="position-absolute w-100 bg-dark" data-controller="switch">
-          <% current_user.organizations.each do |org| %>
-            <% if org.id != current_organization_id %>
+          <input type="hidden" data-target="switch.url" value="/switch_channel">
+          <% current_channels.each do |channel| %>
+            <% if channel.id != current_channel_id %>
               <div class="pr-2">
-                <a href="#" data-id="<%= org.id %>" data-action="click->switch#organization"><%= org.name %></a>
+                <a href="#" data-id="<%= channel.id %>" data-action="click->switch#movePlace"><%= channel.name %></a>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      
-      <div>
-        <%= form_tag(switch_channel_path, method: 'post') do %>
-          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
-            <% current_channels.each do |ch| %>
-              <option value="<%= ch.id %>"
-                
-                <% if ch.id == current_channel_id %>
-                  selected
-                <% end %>
-              >
-                <%= ch.name %>
-              </option> 
-            <% end %>
-          </select>
-        <% end %>
-      </div>
-
-      
 
       <div>
         <%= link_to "Articles", root_path %>

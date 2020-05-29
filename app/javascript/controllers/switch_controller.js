@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["form", "objectId"] 
+  static targets = ["form", "objectId", "url"] 
   
   edit(evt){
     evt.preventDefault()
@@ -21,21 +21,19 @@ export default class extends Controller {
     $("#drag-area").show()
   }
   
-  toggleOrgList(evt){
+  toggleList(evt){
     evt.preventDefault()
     $("#" + this.objectIdTarget.value).toggle()
   }
   
-  organization(evt){
+  movePlace(evt){
     evt.preventDefault()
-    let organizationId = evt.target.dataset.id
-    let data = JSON.stringify({id: organizationId})
     Rails.ajax({
-      url: `/switch_organization`,
+      url: this.urlTarget.value,
       type: 'POST', 
       dataType: 'json',
       beforeSend: (xhr, options) => {
-        options.data = data
+        options.data = JSON.stringify({id: evt.target.dataset.id})
         xhr.setRequestHeader('Content-Type', 'application/json')
         return true
       },
