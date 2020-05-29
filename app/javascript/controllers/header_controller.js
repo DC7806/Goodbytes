@@ -58,7 +58,7 @@ export default class extends Controller {
     let data = JSON.stringify({
       article: {
         // 抓出header整段html
-        header: $("#header").get(0).outerHTML
+        header: header.outerHTML
       }
     })
 
