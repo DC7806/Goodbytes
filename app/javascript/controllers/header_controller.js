@@ -2,7 +2,14 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["preheader", "title", "desc"]
+  static targets = [
+    "preheader", 
+    "title", 
+    "desc", 
+    "showPreheader", 
+    "showTitle", 
+    "showDesc"
+  ]
 
   connect(){
 
@@ -11,24 +18,40 @@ export default class extends Controller {
     let title = $("#header-title h3").text()
     let desc = $("#header-desc").text()
 
-    // 把文字塞入表格
+    // 從html讀出顯示狀態
+    let showPreheader = $("#header-preheader").is(":visible")
+    let showTitle = $("#header-title h3").is(":visible")
+    let showDesc = $("#header-desc").is(":visible")
+
+    // 把值塞入表格
     $(this.preheaderTarget).val(preheader)
     $(this.titleTarget).val(title)
     $(this.descTarget).val(desc)
+    this.showPreheaderTarget.checked = showPreheader
+    this.showTitleTarget.checked = showTitle
+    this.showDescTarget.checked = showDesc
 
   }
 
   submit(evt){
 
-    // 從表格讀出文字
+    // 從表格讀值
     let preheader = $(this.preheaderTarget).val()
     let title = $(this.titleTarget).val()
     let desc = $(this.descTarget).val()
+    let showPreheader = this.showPreheaderTarget.checked
+    let showTitle = this.showTitleTarget.checked
+    let showDesc = this.showDescTarget.checked
 
     // 把文字塞回html
     $("#header-preheader").text(preheader)
     $("#header-title h3").text(title)
     $("#header-desc").text(desc)
+
+    // 依true or false控制顯示
+    $("#header-preheader").toggle(showPreheader)
+    $("#header-title").toggle(showTitle)
+    $("#header-desc").toggle(showDesc)
 
     // 準備打post更新header
     let articleId = contents.dataset.articleid
