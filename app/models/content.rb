@@ -7,7 +7,9 @@ class Content < ApplicationRecord
     one_title: 1,
     one_desc: 2,
     saved_link: 3,
-    one_title_one_image: 4
+    one_title_one_image: 4,
+    left_image_right_text: 5,
+    left_text_right_image: 6
   }
   
   LINE_LIMIT = 90
