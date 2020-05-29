@@ -11,7 +11,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('mail_1.png') %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
@@ -24,11 +24,8 @@
                 <%= link_to "Back to Articles list", root_path %>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                <%= link_to "+ Add Content", new_article_contents_path(article_id: @article), method: "GET" %></li>
-                <li class="list-group-item">Header</li>
-                <li class="list-group-item"><%= yield :side_bar %></li>
-                <li class="list-group-item">Footer</li>
+                
+                <%= yield :side_bar %>
               </ul>
             </div>
           </nav>
@@ -41,7 +38,7 @@
               <%= render "shared/article_user_section" %>
               <%= render "shared/flash" %>
             </div>
-            <div class="content">
+            <div>
               <%= yield %>
           </div>
         </div>

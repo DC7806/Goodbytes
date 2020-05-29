@@ -1,40 +1,44 @@
 class ContentsController < ApplicationController
-  layout "content"
-  before_action :find_content, except: [:new, :create]
+  before_action :find_content, except: [:index, :new, :create]
   before_action :find_article
   before_action :find_channel
   before_action :channel_member?
 
-  def new
-    @content = @article.contents.new
-  end 
+  def index
+    @contents = @article.contents.order(:position)
+    render partial: "shared/contents"
+  end
 
   def create
-    @content = Content.new(content_params)
+    @content = Content.new(
+      title: "title",
+      desc: "description",
+      layout: (params[:layout] || 0),
+      position: @article.contents.length
+    )
     @content.article_id = @article.id
     
-    if @content.save
-      redirect_to article_path(@article)
-    else
-      render :new
+    unless @content.save
+      head :bad_request
     end
+
   end
 
   def update
-    if @content.update(content_params)
-      redirect_to article_path(@article), notice: "更新成功"
-    else
-      render "articles/show"
+    unless @content.update(content_params)
+      head :bad_request
     end
   end
 
   def destroy
-
+    @content_id = @content.id
     if @content.delete
-      redirect_to article_path(@article), notice: "成功刪除此樣版"
+      @article.contents.order(:position).each.with_index do |content, index|
+        content.update(position: index)
+      end
     else
-      render "articles/show"
-    end 
+      head :bad_request
+    end
   end
 
   private
@@ -52,6 +56,6 @@ class ContentsController < ApplicationController
   end
 
   def content_params
-    params.require(:content).permit(:title, :desc)
+    params.require(:content).permit(:title, :desc, :position)
   end
 end

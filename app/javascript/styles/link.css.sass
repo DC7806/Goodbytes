@@ -1,48 +1,109 @@
-.link
-  .link_group
-    .subject_bar
-      background-color: #eee
-      .link_group_name
-        display: flex
-        align-items: center
+$create-bar-height: 40px //TODO 之後要記得換掉
 
-        .name
+.all-link
+  width: calc(100vw - #{$sidebar-width} )
+  height: calc(100vh - #{$top-bar-height} )
 
-      .dropdown
+  .create-bar
+    height: $create-bar-height //TODO 新增按鈕暫放此bar
 
-        .btn
-          padding: 0 0.2rem
-          &:hover
-            background-color: #33333333
+  .link
+    width: calc(100vw - #{$sidebar-width} )
+    height: calc(100vh - #{$top-bar-height} - #{$create-bar-height} )
+    overflow-x: scroll
+    overflow-y: hidden
+    display: flex
 
-        .dropdown-menu
-          min-width: 1rem
-          padding: .2rem 0
+    .link_group
 
-          .dropdown-item
-            display: block
+      .a_group
+        width: 250px
 
-          .btn
-            padding: 0.25rem 2rem
-            &:hover
-              color: #33acb7
-              background-color: #F5F7F9
+        .subject_bar
+          background-color: #ccc
 
-          .newlink
-            border-top: .5px solid #ccc
+          .link_group_name
+            display: flex
+            align-items: center
 
-    .saved_links
-      .saved_link
-        position: relative
-        background-color: #eee
-        margin: .5rem
-        padding: 1rem
-        &:hover .set_link
-          display: block
-        .link
+            .name
 
-        .set_link
-          display: none
-          position: absolute
-          top: 0
-          right: 0
+          .dropdown
+
+            .btn
+              padding: 0 0.2rem
+              &:hover
+                background-color: #33333333
+
+            .dropdown-menu
+              min-width: 1rem
+              padding: .2rem 0
+
+              .dropdown-item
+                display: block
+
+              .btn
+                padding: 0.25rem 2rem
+                &:hover
+                  color: #33acb7
+                  background-color: #F5F7F9
+
+              .newlink
+                border-top: .5px solid #ccc
+
+        .saved_links
+          min-height: 74px
+          max-height: calc(100vh - #{$top-bar-height} - 150px)
+          overflow-y: auto
+          overflow-x: hidden
+          border: 1.5px solid #ddd
+          border-top: none
+          //側邊欄滾動條樣式
+          &::-webkit-scrollbar
+            width: 6px
+
+          &::-webkit-scrollbar-track
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1)
+
+          &::-webkit-scrollbar-thumb
+            background-color: #bbb
+            outline: 1px solid #ccc
+
+          .saved_link
+            position: relative
+            background-color: #eee
+            margin: .5rem
+            padding: 1rem
+            &:hover .set_link
+              display: flex
+              cursor: pointer
+            .subject
+
+            .set_link
+              display: none
+              height: 56px
+              flex-direction: column
+              justify-content: center
+              position: absolute
+              top: 0
+              right: 0
+
+              .edit-icon, .destroy-icon
+                padding: 0.05rem 0.15rem
+
+// for modal
+html
+  body
+    .all-link
+      .modal
+        input[type="text" i],textarea
+          min-width: 100%
+
+        .modal-content
+          max-height: calc(100vh - 56px)
+          textarea
+            max-height: 298px
+            resize: none
+
+        .modal-header, .modal-footer
+          border: none

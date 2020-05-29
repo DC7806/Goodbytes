@@ -30,3 +30,5 @@
 yarn-debug.log*
 .yarn-integrity
 /config/database.yml
+/config/application.yml
+/public/uploads

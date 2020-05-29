@@ -1,0 +1,4 @@
+contents.innerHTML = ""
+<% @contents.each do |content| %>
+  contents.innerHTML += `<%= render "shared/template/one_title_one_desc", content: content %>`
+<% end %>
