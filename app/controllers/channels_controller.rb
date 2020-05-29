@@ -7,7 +7,7 @@ class ChannelsController < ApplicationController
 
   def new
     @channel   = Channel.new(
-      organization_id: get_organization_id
+      organization_id: current_organization_id
     )
   end
 
@@ -26,10 +26,13 @@ class ChannelsController < ApplicationController
       @notice = "channel新增成功"
       channel.update_role(current_user.id, admin)
       channel.link_groups.create(name: "INBOX")
+      session["goodbytes7788"]["channel_id"] = channel.id
+      path = channel_path
     else
       @notice = "channel新增失敗"
+      path = root_path
     end
-    redirect_to(channel_path, notice: @notice) and return
+    redirect_to(path, notice: @notice) and return
   end
 
   def update
