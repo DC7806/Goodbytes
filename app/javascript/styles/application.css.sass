@@ -22,7 +22,6 @@ html,
 body
   font-family: proxima-nova, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', $chinese-font, sans-serif
   font-size: $font-size
-  // line-height: 3
   font-weight: 100
 
 h1,
@@ -51,12 +50,11 @@ a
   z-index: 3
 
   .sidebar__logo
-    // color: $font-color
+    color: $text-color
     display: inline-block
     margin-bottom: 1.5rem
 
   a
-    color: $secondary-color
     text-decoration: none
     transition: .4s ease
 
@@ -192,3 +190,11 @@ a
     .date_and_author
       color: $secondary-color
       margin: .5em 0 2em 0
+
+.alert
+  margin-bottom: 0
+  position: absolute
+  right: 0
+  top: $top-bar-height + 10px
+  ul
+    margin-bottom: 0
