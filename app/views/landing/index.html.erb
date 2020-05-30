@@ -1,4 +1,6 @@
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+
 
 <section class="landing-page">
     <nav class="landing_navbar navbar navbar-expand-sm px-5">
@@ -38,7 +40,7 @@
 
   <section class="landing__section">
     <div class="landing__section__wrapper">
-      <h1 class="landing__section__header">Goodbytes</h1>
+      <h1 class="landing__section__header pt-4">Goodbytes</h1>
       <hr />
       <h3 class="landing__section__description">您能獲得什麼樣的體驗？</h3>
       <div class="container">
@@ -65,8 +67,8 @@
             <div class="card h-100">
               <div class="round"><i class="far fa-paper-plane"></i></div>
               <div class="card-body px-2 py-3">
-                <h5 class="card-title">串接Mailgun</h5>
-                <p class="card-text">省去寄信的所有麻煩事<br>還能追蹤各項數據<br>及時回饋</p>
+                <h5 class="card-title">串接寄信服務</h5>
+                <p class="card-text">自動化寄信<br>免串接API<br>省去寄信的所有麻煩事</p>
               </div>
             </div>
           </div>
@@ -92,13 +94,13 @@
       <div data-depth="0.3" class="back">
         <%=image_tag("back.svg") %>
       </div>
-      <div data-depth="0.1" class="bot">
+      <div data-depth="0.2" class="bot">
         <%=image_tag("bot.svg") %>
       </div>
-      <div data-depth="0.2" class="people">
+      <div data-depth="0.3" class="people">
         <%=image_tag("people.svg") %>
       </div>
-      <div data-depth="0.8" class="fly">
+      <div data-depth="0.9" class="fly">
         <%=image_tag("fly.svg") %>
       </div>
       <div data-depth="0.4" class="msg1">
@@ -125,15 +127,18 @@
       <div data-depth="0.6" class="website1">
         <%=image_tag("website1.svg") %>
       </div>
-      <div data-depth="0.8" class="website2">
+      <div data-depth="0.7" class="website2">
         <%=image_tag("website2.svg") %>
       </div>
     </div>
   </section>
   
   <footer class="landing__footer">
-    <nav class="landing__footer__nav"><%=link_to "聯絡我們"%><%=link_to "隱私權政策"%><%=link_to "使用條款"%><div
-        class="landing__footer__nav__copyright">Goodbytes © 2020版權所有</div>
+    <nav class="landing__footer__nav">
+      <%=link_to "聯絡我們"%>
+      <%=link_to "隱私權政策"%>
+      <%=link_to "使用條款"%>
+      <div class="landing__footer__nav__copyright">Goodbytes © 2020版權所有</div>
     </nav>
   </footer>
 </section>

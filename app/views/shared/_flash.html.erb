@@ -1,2 +1,17 @@
-<div class="noticed"><%= notice %></div>
-<div class="alerted"><%= alert %></div>
+<div class="col-xs-10 col-xs-offset-1">
+  <% flash.each do |type, msg| %>
+    <% if type == "notice" %>
+      <div class="alert alert-warning">
+    <% elsif type == "alert" %>
+      <div class="alert alert-danger">
+    <% else %>
+      <div class='alert alert-<%= "#{type}" %>'>
+    <% end %>
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <ul>
+      <li>
+        <%= msg %>
+      </li>
+    </ul>
+  <% end %>
+</div>

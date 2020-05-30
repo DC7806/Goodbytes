@@ -12,6 +12,14 @@
 <p>organization</p>
 
 
+<h3>創建組織</h3>
+<%= form_for(@organization, url: organization_path, method: 'post') do |f| %>
+  <%= f.label :name, "名稱"%>
+  <%= f.text_field :name%>
+  <%= f.submit "建立組織", data: {disable_with: "請稍等.."} %>
+<% end %>
+
+
 <p>組織改名</p>
 <%= form_tag(organization_path, method: 'patch') do %>
   <input type="text" name="organization[name]">
@@ -24,18 +32,8 @@
 <%= form_tag(new_organization_role_path, method: "post") do %>
   <div>
     <%= email_field_tag :email %>
-    <input type="hidden" name="organization_id" value="<%= @organization.id %>">
-    <input class="btn btn-primary" type="submit" value="寄信啊">
-  </div>
-<% end %>
-
-<p>###########</p>
-<p>創channel</p>
-<%= form_tag(channel_path, method: 'post') do %>
-  <div>
-    <input type="text" name="channel[name]">
-    <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
-    <input type="submit" class="btn btn-success" value="新增頻道">
+    <input type="hidden" name="organization_id" value="<%= @organization.id %>" placeholder="請輸入收件者電子信箱">
+    <input class="btn btn-primary" type="submit" value="寄送邀請">
   </div>
 <% end %>
 
