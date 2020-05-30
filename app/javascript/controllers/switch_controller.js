@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["form", "objectId", "url"] 
+  static targets = ["form", "objectId", "url", "toId"] 
   
   edit(evt){
     evt.preventDefault()
@@ -35,13 +35,15 @@ export default class extends Controller {
   }
   
   movePlace(evt){
+    evt.stopPropagation()
     evt.preventDefault()
+    let data = JSON.stringify({id: this.toIdTarget.value})
     Rails.ajax({
       url: this.urlTarget.value,
       type: 'POST', 
       dataType: 'json',
       beforeSend: (xhr, options) => {
-        options.data = JSON.stringify({id: evt.target.dataset.id})
+        options.data = data
         xhr.setRequestHeader('Content-Type', 'application/json')
         return true
       },

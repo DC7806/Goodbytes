@@ -10,19 +10,20 @@
       <div>組織列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
-        <div>
-          <a href="#" data-action="click->switch#toggleList">
+        <div data-action="click->switch#toggleList">
+          <a href="#">
           <%= current_organization.name %>
           </a>
         </div>
       </div>
       <div class="position-relative" id="organization_list" style="display: none;z-index:1">
-        <div class="position-absolute w-100 bg-dark" data-controller="switch">
-          <input type="hidden" data-target="switch.url" value="/switch_organization">
+        <div class="position-absolute w-100 bg-dark">
           <% current_user.organizations.each do |org| %>
             <% if org.id != current_organization_id %>
-              <div class="pr-2">
-                <a href="#" class="text-light" data-id="<%= org.id %>" data-action="click->switch#movePlace"><%= org.name %></a>
+              <div class="pr-2" data-controller="switch" data-action="click->switch#movePlace">
+                <input type="hidden" data-target="switch.url" value="/switch_organization">
+                <input type="hidden" data-target="switch.toId" value="<%= org.id %>">
+                <a href="#" class="text-light"><%= org.name %></a>
               </div>
             <% end %>
           <% end %>
@@ -32,19 +33,21 @@
       <div>頻道列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="channel_list">
-        <div>
-          <a href="#" data-action="click->switch#toggleList">
+        <div data-action="click->switch#toggleList">
+          <a href="#">
           <%= current_channel.name %>
           </a>
         </div>
       </div>
       <div class="position-relative" id="channel_list" style="display: none;z-index:1">
-        <div class="position-absolute w-100 bg-dark" data-controller="switch">
-          <input type="hidden" data-target="switch.url" value="/switch_channel">
+        <div class="position-absolute w-100 bg-dark">
+          
           <% current_channels.each do |channel| %>
             <% if channel.id != current_channel_id %>
-              <div class="pr-2">
-                <a href="#" class="text-light" data-id="<%= channel.id %>" data-action="click->switch#movePlace"><%= channel.name %></a>
+              <div class="pr-2" data-controller="switch" data-action="click->switch#movePlace">
+                <input type="hidden" data-target="switch.url" value="/switch_channel">
+                <input type="hidden" data-target="switch.toId" value="<%= channel.id %>">
+                <a href="#" class="text-light"><%= channel.name %></a>
               </div>
             <% end %>
           <% end %>
