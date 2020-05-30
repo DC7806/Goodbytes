@@ -14,6 +14,10 @@ window.$ = $;
 import "controllers";
 import "@fortawesome/fontawesome-free/css/all.css";
 
+import "parallax-js";
+import Parallax from 'parallax-js'
+window.Parallax = Parallax;
+
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
