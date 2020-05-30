@@ -28,7 +28,7 @@ export default class extends Controller {
     $(evt.target).on("focusout", function(){
       // 為了可以點擊menu外就隱藏menu，於是加了onFocusOut
       // 同時也是為了解決同時開兩個menu的問題
-      object.fadeOut()
+      object.fadeOut("fast")
     })
   }
   
