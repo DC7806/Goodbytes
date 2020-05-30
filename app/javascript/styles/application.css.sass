@@ -191,12 +191,29 @@ a
       color: $secondary-color
       margin: .5em 0 2em 0
 
+  //警示訊息
+  
 .alert
   margin-bottom: 0
   position: absolute
-  right: 0
+  right: 20px
   top: $top-bar-height + 20px
   z-index: 999
+  width: 240px
+  height: 80px
+  padding: .5rem
+
   ul
+    padding: 0
     margin-bottom: 0
     list-style: none
+    position: absolute
+    top: 35%
+    bottom: 50%
+    left: 0
+    right: 0
+    margin: auto
+
+  
+  .close
+    cursor: pointer
