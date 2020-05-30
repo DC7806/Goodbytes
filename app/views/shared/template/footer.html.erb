@@ -8,6 +8,7 @@
 Article.all.each do |article|
   article.header = File.open("app/views/shared/template/header.html.erb").read
   article.footer = File.open("app/views/shared/template/footer.html.erb").read
+  article.save
 end
 
 
