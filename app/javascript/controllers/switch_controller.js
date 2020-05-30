@@ -24,13 +24,11 @@ export default class extends Controller {
   toggleList(evt){
     evt.preventDefault()
     let object = $("#" + this.objectIdTarget.value)
-    object.toggle()
+    object.fadeToggle("fast")
     $(evt.target).on("focusout", function(){
       // 為了可以點擊menu外就隱藏menu，於是加了onFocusOut
       // 同時也是為了解決同時開兩個menu的問題
-      // 但同時又發現會有來不及點menu內選項就被隱藏的問題
-      // 所以設了timeout，隱藏會稍微慢一點，但要很用心去體會才會發現啦
-      setTimeout( () => { object.hide() }, 200)
+      object.fadeOut()
     })
   }
   
