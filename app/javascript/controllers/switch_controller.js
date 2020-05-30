@@ -23,6 +23,7 @@ export default class extends Controller {
   
   toggleList(evt){
     evt.preventDefault()
+    evt.stopPropagation()
     let object = $("#" + this.objectIdTarget.value)
     object.fadeToggle("fast")
     $(evt.target).on("focusout", function(){

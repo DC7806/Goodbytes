@@ -10,11 +10,12 @@
       <div>組織列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
-        <div data-action="click->switch#toggleList">
-          <a class="d-block" href="#">
-          <%= current_organization.name %>
-          </a>
-        </div>
+        <a class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#toggleList">
+          <div>
+            <i class="fas fa-bars"></i>
+          </div>
+            <%= current_organization.name %>
+        </a>
       </div>
       <div class="position-relative" id="organization_list" style="display: none;z-index:1">
         <div class="position-absolute w-100 bg-light border rounded-lg">
@@ -33,11 +34,12 @@
       <div>頻道列表</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="channel_list">
-        <div data-action="click->switch#toggleList">
-          <a class="d-block" href="#">
-          <%= current_channel.name %>
-          </a>
-        </div>
+        <a class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#toggleList">
+          <div>
+            <i class="fas fa-bars"></i>
+          </div>
+            <%= current_channel.name %>
+        </a>
       </div>
       <div class="position-relative" id="channel_list" style="display: none;z-index:1">
         <div class="position-absolute w-100 bg-light border rounded-lg">
