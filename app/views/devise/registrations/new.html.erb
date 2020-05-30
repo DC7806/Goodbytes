@@ -7,6 +7,10 @@
   <div class="card">
     <div class="card-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%# 不要問為什麼這段不放controller %>
+        <%# 因為放controller沒用，不管是放在super前面還是後面都沒用 %>
+        <%# 因為render頁面這件事在super那一行就已經送出去了 %>
+        <%# 所以只能在render之後，也就是這邊再塞alert到flash %>
         <% if resource.errors.any? %>
           <% flash.alert = resource.errors.full_messages.join("\n") %>
         <% end %>
