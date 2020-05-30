@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["form", "objectId", "url", "toId"] 
+  static targets = ["form", "objectId","switcher", "url", "toId"] 
   
   edit(evt){
     evt.preventDefault()
@@ -23,13 +23,13 @@ export default class extends Controller {
   
   toggleList(evt){
     evt.preventDefault()
-    evt.stopPropagation()
-    let object = $("#" + this.objectIdTarget.value)
-    object.fadeToggle("fast")
-    $(evt.target).on("focusout", function(){
+    let targetObject = $("#" + this.objectIdTarget.value)
+    targetObject.fadeToggle("fast")
+    this.switcherTarget.focus()
+    $(this.switcherTarget).on("focusout", function(){
       // 為了可以點擊menu外就隱藏menu，於是加了onFocusOut
       // 同時也是為了解決同時開兩個menu的問題
-      object.fadeOut("fast")
+      targetObject.fadeOut("fast")
     })
   }
   
