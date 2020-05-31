@@ -1,28 +1,3 @@
-
-<%= content_for :side_bar do %>
-
-  <div id="drag-area">
-    <li class="list-group-item">
-    <%= link_to "+ Add Content", article_contents_path(article_id: @article.id), method: "POST", remote: true %></li>
-    <li class="list-group-item">Header</li>
-    <li class="list-group-item">
-      <div id="editor" data-controller="drag" data-target="editor">
-        <% @contents.each do |content| %>
-          <%= render "/shared/drag_bar", content: content %>
-        <% end %>
-      </div>
-    </li>
-    <li class="list-group-item">Footer</li>
-  </div>
-  <a href="#" data-controller="switch" data-action="click->switch#drag" id="back" style="display: none;">Go back</a>
-  <div id="form-area">
-    <% @contents.each do |content| %>
-      <%= render "shared/edit_form/one_title_one_desc", content: content %>
-    <% end %>
-  </div>
-
-<% end %>
-
 <div class="card-header">
   <div class="row justify-content-between w-75 ml-3">
     <h3><%= @article.subject %></h3>

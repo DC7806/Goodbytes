@@ -19,10 +19,12 @@ class ArticlesController < ApplicationController
 
   def show
     @contents = @article.contents.order(:position)
-    render layout: "article"
+    render layout: false
   end
 
   def edit
+    @contents = @article.contents.order(:position)
+    render layout: "article"
   end
 
   def update
