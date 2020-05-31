@@ -11,7 +11,8 @@
 <section>
   <div class="card">
     <div class="card-header">
-      <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
+      <%= link_to "Create Article", new_article_path, class:"btn btn-primary" %>
+      <%= link_to "Deliver", deliver_channel_path, class: "btn btn-primary", remote: true %>
     </div>
     <div class="card-body">
       <% @articles.each do |article| %>

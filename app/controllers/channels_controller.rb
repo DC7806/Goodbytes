@@ -55,13 +55,24 @@ class ChannelsController < ApplicationController
   end
 
   def deliver
-    
+    @channel.articles.where(deliver_time: nil).each do |article|
+      @channel.subscribers.each do |subscriber|
+        ArticleMailerJob.perform_later(
+          subscriber.email,
+          article.id
+        )
+      end
+      article.deliver_time = Time.now
+      article.save
+    end
+    render js: 'alert("信件已寄出")'
   end
 
   def landing
     @channel = Channel.find(params[:id])
     @articles = @channel.articles.limit(5).order(created_at: :desc)
     @subscriber = Subscriber.new
+    @email = "koten0224@gmail.com"
     render layout: "landing"
 
   end

@@ -44,7 +44,7 @@
         <%= link_to "Link", link_group_index_path %>
       </div>
       <div>
-        <%=  link_to "Landing Page", landing_channel_path(@channel) if @channel %>
+        <%=  link_to "Landing Page", landing_channel_path(current_channel) if current_channel_id.present? %>
       </div>
     </nav>
 

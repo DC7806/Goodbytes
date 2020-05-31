@@ -1,6 +1,5 @@
 class SubscribersController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :find_subscriber, only: [:destroy]
 
   def create
     # 傳入參數預期應該會有
@@ -18,14 +17,15 @@ class SubscribersController < ApplicationController
     # 傳入參數預期應該會有
     #   channel id: 頻道id
     #   email: 訂閱者email
+    channel = Channel.find(params[:channel_id])
+    subscriber = channel.subscribers.find_by(email: params[:email])
+    if subscriber and subscriber.destroy
+      render js: 'alert("成功取消訂閱！")'
+    end
 
   end
 
-  private    
-    def find_subscriber
-      @subscriber = @channel.subscribers.find_by(email: params[:email])
-    end
-
+  private
     def subscriber_params
       params.require(:subscriber).permit(
         :email,

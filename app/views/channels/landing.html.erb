@@ -15,11 +15,18 @@
       </p>
     <% end %>
   </div>
-  <%= form_for @subscriber, html: {class: "d-flex"}, remote: true do |f| %>
+  <%= form_for @subscriber, url: subscribe_path, method: "post", html: {class: "d-flex"}, remote: true do |f| %>
     <div class="mx-auto">
       <%= f.email_field :email , placeholder: "請輸入信箱" %>
       <%= f.hidden_field :channel_id, value: @channel.id %>
       <%= f.submit "訂閱我們！", class: "btn btn-danger" %>
     </div>
   <% end %>
+  <%# 因為寄信功能暫時不能用，退訂功能暫時在這邊測試，mailgun恢復後這邊要拿掉 %>
+  <%= form_tag unsubscribe_url, method: "post", remote: true do %>
+    <%= hidden_field_tag :email, @email %>
+    <%= hidden_field_tag :channel_id, @channel.id %>
+    <%= submit_tag "取消訂閱", class: "btn btn-secondary", data: {confirm: "確定要退訂嗎？"} %>
+  <% end %> 
+  
 </div>

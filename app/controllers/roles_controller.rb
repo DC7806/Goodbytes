@@ -42,7 +42,7 @@ class RolesController < ApplicationController
   end
 
   def destroy
-    relationship = @model_object.relationship(params[:user_id])
+    relationship = @model_object.relationship(params[:user_id].to_i)
     if relationship.role == admin
       @notice = "不能開除admin"
     else
