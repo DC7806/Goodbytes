@@ -30,9 +30,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
-      head :ok
-    else
+    unless @article.update(article_params)
       head :bad_request
     end
   end

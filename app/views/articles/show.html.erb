@@ -83,8 +83,11 @@
 <div class="card-header">
   <div class="row justify-content-between w-75 ml-3">
     <h3><%= @article.subject %></h3>
-    <div>
-      <%= link_to "Edit subject", edit_article_path(@article), method: :GET, class:"btn btn-primary btn-sm" %>
+    <%= text_field_tag :subject, @article.subject, id: "subject-editor", style: "display: none" %>
+    <div data-controller="switch" >
+      <a href="#" class="btn btn-primary btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">OK</a>
+      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">Edit subject</a>
+      <a href="#" class="btn btn-secondary btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">Cancel</a>
     </div>
   </div>
   <p>I'm article show.</p>

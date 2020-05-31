@@ -40,5 +40,13 @@ export default class extends Controller {
     $("#templates").hide()
   }
 
+  toEditSubject(evt){
+    evt.preventDefault()
+    $(".card-header h3").toggle()
+    $(".card-header a.edit").toggle()
+    $(".card-header a.submit").toggle()
+    $(".card-header a.cancel").toggle()
+    $("#subject-editor").toggle()
+  }
 
 }
