@@ -53,6 +53,10 @@ class ChannelsController < ApplicationController
     redirect_to(root_path, notice: @notice) and return
   end
 
+  def deliver
+
+  end
+
   private
   def channel_params
     params.require(:channel).permit(
