@@ -3,7 +3,7 @@
 <% when :show %>
 <div class="content" data-id="<%= content.id %>">
   <div>
-    <h3 class="content-title"><%= content.display_title %></h3>
+    <a href="<%= content.url %>"><h3 class="content-title">Link: <%= content.display_title %></h3></a>
   </div>
   <div class="border w-25"></div>
   <div>
@@ -13,7 +13,7 @@
 
 <% when :form %>
 <%= render_edit_form content,
-                     :title, :desc
+                     :title, :desc, :url
 %>
 <% when :drag %>
   <%= render_drag_bar content, 

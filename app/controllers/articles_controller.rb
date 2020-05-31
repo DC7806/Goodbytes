@@ -9,6 +9,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = @channel.articles.new(article_params)
+
+    # 把樣板render後的結果轉成純字串並存入article
+    @article.header = render_to_string "shared/template/header", layout: false
+    @article.footer = render_to_string "shared/template/footer", layout: false
     
     if @article.save
       redirect_to article_path(@article), notice: "The article has been created."
@@ -28,16 +32,16 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
-      redirect_to article_path(@article), notice: "This article has been update."
-
-    else
-      render :edit
+    unless @article.update(article_params)
+      head :bad_request
     end
   end
 
   def sort
-    @contents = params[:contents_ids].map{ |obj_id| Content.find(obj_id) }
+    ids = params[:contents_ids]
+    # 原本是一個一個查，那樣順序也不會有錯，但就是 N+1 query
+    @contents = @article.contents
+                        .sort_by{ |obj| ids.index(obj.id.to_s) }
     @contents.each.with_index do |content, index|
       content.update(position: index)
     end
@@ -49,9 +53,17 @@ class ArticlesController < ApplicationController
     redirect_to channel_path, notice: "This article has been deleted."
   end
 
+  def header
+    
+  end
+
+  def footer
+
+  end
+
   private
   def article_params
-    params.require(:article).permit(:subject)
+    params.require(:article).permit(:subject, :header, :footer)
   end
 
   def find_article

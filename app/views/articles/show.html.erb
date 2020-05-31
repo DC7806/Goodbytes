@@ -1,14 +1,113 @@
+
+<%= content_for :side_bar do %>
+
+  <div class="list-group-item" data-controller="switch" id="switch-area">
+    <!-- 新增鈕 -->
+    <a href="#" data-action="click->switch#toAddContent" id="add">+ Add Content</a>
+    <!-- 返回鈕 -->
+    <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;">Go back</a>
+  </div>
+  
+  <div id="edit-area">
+
+    <!-- header bar -->
+    <div data-controller="switch" class="list-group-item d-flex justify-content-between">
+      <%= hidden_field_tag :edit_form, "edit_header", data: {target: "switch.form"} %>
+      <div>
+        Header
+      </div>
+      <div>
+        <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 拖拉區域 -->
+    <div class="card" id="drag_area" data-controller="drag" data-target="drag_area">
+      <% @contents.each do |content| %>
+        <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
+      <% end %>
+    </div>
+
+    <!-- footer bar -->
+    <div data-controller="switch" class="list-group-item d-flex justify-content-between">
+      <%= hidden_field_tag :edit_form, "edit_footer", data: {target: "switch.form"} %>
+      <div>
+        Footer
+      </div>
+      <div>
+        <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  
+  
+  <!-- 隱藏表單 -->
+  <div id="form-area">
+
+    <!-- contents編輯器 -->
+    <% @contents.each do |content| %>
+      <%= render "shared/template/#{content.layout}",type: :form, content: content %>
+    <% end %>
+
+    <!-- header編輯器 -->
+    <%= render "shared/template/header_form" %>
+
+    <!-- footer編輯器 -->
+    <%= render "shared/template/footer_form" %>
+
+
+  </div>
+
+  <!-- template選單（切換鈕） -->
+  <div id="menu-area" style="display: none;">
+    <div class="d-flex" data-controller="switch">
+      <div class="card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >Template</a></div>
+      <div class="card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >Saved_link</a></div>
+    </div>  
+
+    <!-- 樣板選單 -->
+    <%= render "shared/template/index" %>
+
+    <!-- saved link選單 -->
+    <%= render "shared/partials/index" %>
+  </div>
+
+<% end %>
+
+<!-- 文章內容 -->
 <div class="card-header">
   <div class="row justify-content-between w-75 ml-3">
     <h3><%= @article.subject %></h3>
-    <div>
-      <%= link_to "Edit subject", edit_article_path(@article), method: :GET, class:"btn btn-primary btn-sm" %>
+    <%= text_field_tag :subject, @article.subject, id: "subject-editor", style: "display: none" %>
+    <div data-controller="switch" >
+      <a href="#" class="btn btn-primary btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">OK</a>
+      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">Edit subject</a>
+      <a href="#" class="btn btn-secondary btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">Cancel</a>
     </div>
   </div>
   <p>I'm article show.</p>
 </div>
-<div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
-  <% @contents.each do |content| %>
-    <%= render "shared/template/one_title_one_desc", content: content %>
-  <% end %>
+<div class="card-body container w-75">
+
+  <!-- 頁首 -->
+  <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
+  <%= @article.header.html_safe %>
+
+  <!-- 文章 -->
+  <div id="contents" data-articleId="<%= @article.id %>" >
+    <% @contents.each do |content| %>
+      <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+    <% end %>
+  </div>
+
+  <!-- 頁尾 -->
+  <%= @article.footer.html_safe %>
+
 </div>
+
+

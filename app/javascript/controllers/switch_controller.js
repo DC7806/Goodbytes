@@ -1,25 +1,52 @@
 import { Controller } from "stimulus"
-import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["form"] 
-  
-  edit(evt){
+  // 控制選單切換的stimulus controller
+  static targets = ["form"]
+
+  toEdit(evt){
     evt.preventDefault()
-    $("#drag-area").hide()
+    $("#edit-area").hide()
     $("#"+this.formTarget.value).show()
     $("#back").show()
+    $("#add").hide()
   }
 
-  drag(evt){
-    console.log(evt.target.tagName)
-    if(evt.target.tagName === "A"){
-      evt.preventDefault()
-    }
+  toDrag(evt){
+    $("#add").show()
     $("#back").hide()
     $(".edit_content").hide()
-    $("#drag-area").show()
+    $("#edit-area").show()
+    $("#menu-area").hide()
   }
 
+  toAddContent(evt){
+    evt.preventDefault()
+    $("#edit-area").hide()
+    $("#add").hide()
+    $("#back").show()
+    $("#menu-area").show()
+  }
+  
+  toContentList(evt){
+    evt.preventDefault()
+    $("#saved_links").hide()
+    $("#templates").show()
+  }
+
+  toSavedLinks(evt){
+    evt.preventDefault()
+    $("#saved_links").show()
+    $("#templates").hide()
+  }
+
+  toEditSubject(evt){
+    evt.preventDefault()
+    $(".card-header h3").toggle()
+    $(".card-header a.edit").toggle()
+    $(".card-header a.submit").toggle()
+    $(".card-header a.cancel").toggle()
+    $("#subject-editor").toggle()
+  }
 
 }

@@ -1,2 +1,3 @@
-$(`.content[data-id=<%= @content.id %>]`).replaceWith(`<%= render "shared/template/one_title_one_desc", content: @content %>`)
-$(`#editor div[data-id=<%= @content.id %>] div[name=title]`).text(`<%= @content.title %>`)
+$(`.content[data-id=<%= @content.id %>]`).replaceWith(`<%= render "shared/template/#{@content.layout}",type: :show, content: @content %>`)
+$(`#drag_area div[data-id=<%= @content.id %>]`).replaceWith(`<%= render "shared/template/#{@content.layout}",type: :drag, content: @content %>`)
+$(`#edit_content_<%= @content.id %>`).replaceWith(`<%= render "shared/template/#{@content.layout}",type: :form, content: @content %>`)

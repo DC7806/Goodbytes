@@ -1,0 +1,21 @@
+
+<% case type %>
+<% when :show %>
+<div class="content d-flex" data-id="<%= content.id %>">
+  <div class="col-6">
+    <p class="content-desc"><%= content.display_desc %></p>
+  </div>
+  <div class="col-6 my-auto">
+    <%= image_tag content.image.url, style: "max-width: 100%" if content.image.present? %>
+  </div>
+</div>
+
+<% when :form %>
+  <%= render_edit_form content,
+                      :desc, :image
+  %>
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      content.display_desc.limit(7)
+  %>
+<% end %>

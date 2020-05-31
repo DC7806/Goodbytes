@@ -1,0 +1,20 @@
+<%#
+<!-- 在新創article時預設要塞的內容 -->
+<!-- 如果想變更header跟footer內容會比較麻煩 -->
+<!-- 更新這邊的檔案後要在rails console run以下程式碼才能把新的header跟footer塞到article裡 -->
+<!-- （請copy到console使用） -->
+
+
+Article.all.each do |article|
+  article.header = File.open("app/views/shared/template/header.html.erb").read
+  article.footer = File.open("app/views/shared/template/footer.html.erb").read
+  article.save
+end
+
+
+<!-- （請copy到console使用） -->
+%>
+<div id="footer" class="content">
+  <div id="footer-outro">outro Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, nam!</div>  
+  <a href="#" id="footer-unsubscribe">unsubscribe</a>
+</div>

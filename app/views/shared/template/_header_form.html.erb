@@ -1,0 +1,25 @@
+<%#<!-- header跟footer比較特別，他們要各自獨立一個檔案 -->%>
+<div style="display: none;" class="edit_content" id="edit_header" data-controller="header">
+  <div class="form-group">
+    <div class="d-flex justify-content-between">
+      <div><label for="edit-preheader">preheader</label></div>
+      <div class="col-2"><input data-target="header.showPreheader" type="checkbox"></div>
+    </div>
+    <input data-target="header.preheader" class="form-control" type="text" id="edit-preheader">
+  </div>
+  <div class="form-group">
+    <div class="d-flex justify-content-between">
+      <div><label for="edit-title">title</label></div>
+      <div class="col-2"><input data-target="header.showTitle" type="checkbox"></div>
+    </div>
+    <input data-target="header.title" class="form-control" type="text" id="edit-title">
+  </div>
+  <div class="form-group">
+    <div class="d-flex justify-content-between">
+      <div><label for="edit-desc">desc</label></div>
+      <div class="col-2"><input data-target="header.showDesc" type="checkbox"></div>
+    </div>
+    <textarea data-target="header.desc" class="form-control" id="edit-desc"></textarea>
+  </div>
+  <button class="form-control" data-action="click->header#submit">OK</button>
+</div>

@@ -1,0 +1,19 @@
+
+<% case type %>
+<% when :show %>
+  <div class="content w-100" data-id="<%= content.id %>">
+    <div>
+      <p class="content-desc"><%= content.display_desc %></p>
+    </div>
+  </div>
+
+<% when :form %>
+  <%= render_edit_form content,
+                       :desc
+  %>
+
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      content.display_desc.limit(7)
+  %>
+<% end %>
