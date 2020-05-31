@@ -1,3 +1,10 @@
+<nav class="top-bar">
+  <div class="left-section">
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+  </div>
+</nav>
 
 <%= form_for @channel, url: channel_path do |f| %>
   <%= f.hidden_field :organization_id, value: current_organization_id %>

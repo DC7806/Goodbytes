@@ -7,10 +7,68 @@
     min-width: $sidebar-width
     height: 100vh
 
-  main //寬度為總寬去掉佔位
+  main
     width: 100vw
+    position: relative
 
     .container-fluid
+      margin: 0
+      padding: 0
+
       .wrap
-        .content
+        .replace
+          background-color: #f2f6f6
+          min-height: calc( 100vh - #{$top-bar-height} )
+          transition: .3s
           margin-top: $top-bar-height
+
+          // 以下在使用時請跟著css的命名
+          .top-bar  //浮動定位top-bar
+            position: fixed
+            z-index: 2
+            top: 0
+            right: 0
+            width: calc(100% - #{$sidebar-width})
+            height: $top-bar-height
+            display: flex
+            padding: 0 1rem
+            justify-content: space-between
+            align-items: center
+            background-color: $dark-color
+            color: $secondary-color
+
+            .btn
+              color: $text-color
+              background-color: $bg-color
+              border: none
+              box-sizing: border-box
+
+
+              &:hover
+                background-color: $primary-color
+
+            
+            .user-section
+              color: #ffffff
+              display: inline
+              margin: auto 2rem
+              cursor: default
+
+            .left-section
+              .breadcrumb
+                margin: 0
+                background-color: transparent
+
+                li
+
+                  a
+                    color: #fff
+
+                  a:hover
+                    color: $primary-color
+                    transition: .3s
+
+              .breadcrumb-item::before
+                color: $secondary-color
+
+            .right-section

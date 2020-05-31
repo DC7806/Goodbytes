@@ -1,13 +1,17 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to @channel.name, channel_path %> 
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <%= @article.subject %>
-    </li>
-  </ol>
+<nav class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Articales" %>
+      </li>
+    </ol>
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+    <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
+  </div>
 </nav>
+
 <div class="card border-info mb-3" >
   <%= form_for @article, url: article_path(@article) do |f| %>
     <div class="card-header">

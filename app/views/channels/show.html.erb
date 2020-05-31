@@ -1,18 +1,19 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to "Home", root_path %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <%= link_to @channel.name, channel_path %>
-    </li>
-  </ol>
+<nav class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Articales" %>
+      </li>
+    </ol>
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+    <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
+  </div>
 </nav>
+
 <section>
   <div class="card">
-    <div class="card-header">
-      <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
-    </div>
     <div class="card-body">
       <% @articles.each do |article| %>
         <h5 class="card-title">
