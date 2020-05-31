@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   end
 
   resource    :channels,      as: 'channel',    path: '/channel', except: :index do
+    collection do
+      get 'landing/:id',      as: 'landing',    to: 'channels#landing'
+    end
     resource  :channel_roles, as: 'role',       path: '/role',    only:   [:update, :destroy]   do
       collection do
         post :new,            as: 'new',        path: '/new'
@@ -37,25 +40,28 @@ Rails.application.routes.draw do
     end
   end
 
-  resources   :link_groups,   as: 'link_group', path: 'link_group' do
+  resources   :link_groups, as: 'link_group', path: 'link_group' do
     collection do
       post :update_group_position
     end
   end
-  resources   :saved_links,   as: 'saved_link', path: 'saved_link' do
+
+  resources   :saved_links, as: 'saved_link', path: 'saved_link' do
     collection do
       post :link_move_in_group
       post :link_change_group
     end
   end
-  resources   :articles,      as: 'article',    path: 'article',  except: :index do
+  
+  resources   :articles,    as: 'article',    path: 'article',  except: :index do
     member do
       post :sort
       post :header
       post :footer
     end
-    resource :contents,     only: [:new, :create]
-    resources :contents,  only: :index
+    resource   :contents, only: [:new, :create]
+    resources  :contents, only: :index
   end
-  resources   :contents,      except: [:new, :create, :index]
+  resources    :contents, except: [:new, :create, :index]
+  resources :subscribers, only: [:create, :destroy]
 end  

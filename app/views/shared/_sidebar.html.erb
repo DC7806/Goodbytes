@@ -43,6 +43,9 @@
       <div>
         <%= link_to "Link", link_group_index_path %>
       </div>
+      <div>
+        <%=  link_to "Landing Page", landing_channel_path(@channel) if @channel %>
+      </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">

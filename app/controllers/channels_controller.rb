@@ -1,8 +1,9 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel,  except: [:new, :create]
-  before_action :find_organization
+  skip_before_action :authenticate_user!, only: [:landing]
+  before_action :find_channel,  except: [:new, :create, :landing]
+  before_action :find_organization, except: [:landing]
   before_action :org_admin?,      only: [:new, :create, :destroy]
-  before_action :channel_admin?,  only: [:edit, :update]
+  before_action :channel_admin?,  only: [:edit, :update, :deliver]
   before_action :channel_member?, only: [:show]
 
   def new
@@ -54,6 +55,14 @@ class ChannelsController < ApplicationController
   end
 
   def deliver
+    
+  end
+
+  def landing
+    @channel = Channel.find(params[:id])
+    @articles = @channel.articles.limit(5).order(created_at: :desc)
+    @subscriber = Subscriber.new
+    render layout: "landing"
 
   end
 

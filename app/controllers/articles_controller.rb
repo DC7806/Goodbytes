@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
   before_action :find_article, except: [:new, :create]
-  before_action :find_channel
-  before_action :channel_member?
+  before_action :find_channel, except: [:show]
+  before_action :channel_member?, except: [:show]
 
   def new
     @article = @channel.articles.new
@@ -23,7 +24,7 @@ class ArticlesController < ApplicationController
 
   def show
     @contents = @article.contents.order(:position)
-    render layout: false
+    render layout: "landing"
   end
 
   def edit
