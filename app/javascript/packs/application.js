@@ -13,6 +13,10 @@ import "controllers";
 window.$ = $;
 
 
+import "parallax-js";
+import Parallax from 'parallax-js'
+window.Parallax = Parallax;
+
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
