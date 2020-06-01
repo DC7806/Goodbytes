@@ -5,7 +5,7 @@
     <li class="list-group-item">
     <%= link_to "+ Add Content", article_contents_path(article_id: @article.id), method: "POST", remote: true %></li>
     <li class="list-group-item">Header</li>
-    <li class="list-group-item">
+    <li class="list-group-item py-0">
       <div id="editor" data-controller="drag" data-target="editor">
         <% @contents.each do |content| %>
           <%= render "/shared/drag_bar", content: content %>
@@ -23,17 +23,27 @@
 
 <% end %>
 
-<div class="card-header">
-  <div class="row justify-content-between w-75 ml-3">
-    <h3><%= @article.subject %></h3>
-    <div>
-      <%= link_to "Edit subject", edit_article_path(@article), method: :GET, class:"btn btn-primary btn-sm" %>
-    </div>
+<nav class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Articles" %>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a href=""><%= @article.subject %></a>
+      </li>
+    </ol>
   </div>
-  <p>I'm article show.</p>
-</div>
-<div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
-  <% @contents.each do |content| %>
-    <%= render "shared/template/one_title_one_desc", content: content %>
-  <% end %>
-</div>
+  <div class="right-section">
+    <%= link_to "Sending Email", class:"btn btn-primary"%>
+  </div>
+</nav>
+
+<section class="article-content">
+  
+  <div id="contents" class="card-body" data-articleId="<%= @article.id %>" >
+    <% @contents.each do |content| %>
+      <%= render "shared/template/one_title_one_desc", content: content %>
+    <% end %>
+  </div>
+</section>

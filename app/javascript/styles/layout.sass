@@ -23,6 +23,11 @@
           margin-top: $top-bar-height
 
           // 以下在使用時請跟著css的命名
+          .top-bar-blank //if need
+            height: $top-bar-height
+            display: block
+            width: calc(100% - #{$sidebar-width})
+          
           .top-bar  //浮動定位top-bar
             position: fixed
             z-index: 2

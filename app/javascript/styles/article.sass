@@ -1,0 +1,20 @@
+.sidebar__menu
+  .card
+    height: 100vh
+
+    .list-group
+      overflow-y: scroll
+
+      &::-webkit-scrollbar
+            width: 6px
+
+      &::-webkit-scrollbar-track
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1)
+
+      &::-webkit-scrollbar-thumb
+        background-color: #bbb
+        outline: 1px solid #ccc
+
+
+.article-content
+  min-height: calc( 100vh - #{$top-bar-height} ) 

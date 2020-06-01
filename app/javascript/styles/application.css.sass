@@ -46,11 +46,10 @@ a
   background-color: $dark-primary-color
   border: none
 
-  &:hover
+  &:hover, &:focus, &:not(:disabled):not(.disabled):active,&:not(:disabled):not(.disabled):active:focus
     background-color: $primary-color
-
-  &:not(:disabled):not(.disabled):active
-  background-color: $dark-primary-color
+    border: none
+    box-shadow: none
 
 
 .sign_in
