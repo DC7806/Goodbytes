@@ -5,17 +5,16 @@ module ApplicationHelper
     # 這樣碰到欄位要新增時我只需要來改這邊就好
     # 現有的一堆template都可以不被影響
     # 算是為了方便管理樣板而誕生的method
-    form_pattern = {
-      content: content,
+    form_options = {
       title: false,
       desc: false,
       url: false,
       image: false
     }
     keys.each do |key|
-      form_pattern[key] = true
+      form_options[key] = true
     end
-    render "shared/template/edit_form", **form_pattern
+    render "shared/template/edit_form",content: content, **form_options
   end
 
   def render_drag_bar(content, display)
