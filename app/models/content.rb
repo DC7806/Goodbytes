@@ -19,17 +19,18 @@ class Content < ApplicationRecord
   
   LINE_LIMIT = 90
 
-  def display_on_page(origin_text, show_if_no_text)
-    origin_text.present? ? origin_text : show_if_no_text
-  end
-
   def display_title
     display_on_page(title, "Title").line_break(LINE_LIMIT)
   end
-
+  
   def display_desc
     display_on_page(desc, "Text").line_break(LINE_LIMIT)
   end
+
+  private
+    def display_on_page(origin_text, default_text)
+      origin_text.present? ? origin_text : default_text
+    end
 
   # 擺上面會出錯，擺下面就正常，不懂為什麼
   mount_uploader :image, ImageUploader
