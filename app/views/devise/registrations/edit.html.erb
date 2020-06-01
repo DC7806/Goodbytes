@@ -35,8 +35,8 @@
               <td><%= invite.sender.email %></td>
               <td><%= invite.type_in_chinese %></td>
               <td><%= invite.item.name %></td>
-              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-light" %>
-                  <%= link_to "不同意", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn-light" %></td>
+              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-outline-secondary" %>
+                  <%= link_to "拒絕", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn btn-outline-info" %></td>
             </tr>
             <% end %>
           </tbody>
@@ -48,7 +48,6 @@
         <h6 class="card-title m-0">編輯個人資料</h6>
       </div>
       <div class="card-body user_form">
-          <h5 class="card-title text-center"></h5>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
           
@@ -58,7 +57,7 @@
             </div>
           
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <div>此信箱確認中<%= resource.unconfirmed_email %></div>
             <% end %>
           
             <div class="field">
@@ -79,7 +78,7 @@
             </div>
           
             <p class="actions">
-              <%= f.submit "送出", class:"btn btn-light" %>
+              <%= f.submit "送出", class:"btn btn-outline-secondary" %>
             </p>
           <% end %>
         </div>

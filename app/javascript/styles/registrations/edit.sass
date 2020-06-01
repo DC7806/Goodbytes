@@ -9,19 +9,19 @@
   .card
     margin-bottom: 1.5rem
   .subtitle
-    padding: .5em
+    padding: .6em
     margin: 0
     h6
       font-size: 18px
 
   .card-header
-    background-color: $primary-color
-    color: $text-color
+    background-color: $text-color
+    color: white
     border: 1px solid rgba(0, 0, 0, 0.125)
     .nav-link.active:hover
       background-color: $bg-color
-      filter: brightness(95%)
-      color: $text-color
+      filter: brightness(90%)
+      color: black
       transition: .2s ease
     .nav-link:hover
       background-color: $bg-color
@@ -29,6 +29,7 @@
       transition: .2s ease
 
   .card-body
+    padding: 1.25rem 1.25rem 0
     .table .thead-light th
       background-color: $bg-color
       border-color: $bg-color
@@ -36,18 +37,15 @@
     .table td
       vertical-align: middle
       .btn
-        border: 0 1em
-        border: 1px solid $secondary-color
-        background-color: white
-        border-radius: .25em
-      .btn:hover
-        transition: .2s
-        color: inhert
-        border: 1px solid $primary-color
-        background-color: $primary-color
+        margin-left: .7em
+        padding: .25rem .65rem
+      .btn-outline-info
+        filter: brightness(90%)
+
     .field
       font-weight: bolder
       margin-bottom: 1em
+      margin-top: .7em
 
   .user_form
     margin: auto
@@ -55,13 +53,6 @@
     color: $text-color
     line-height: 1.5
     .btn
-      border: 0 1em
-      border: 1px solid $secondary-color - 25%
-      background-color: white
-      border-radius: .25em
-      color: $text-color
-    .btn:hover
-      transition: .2s
-      color: $text-color
-      border: 1px solid $primary-color
-      background-color: $primary-color
+      margin-top: .5em
+      margin-bottom: .5em
+      margin-left: 0
