@@ -3,5 +3,61 @@
   margin: $top-bar-height + 20px auto
   width: 80%
 
-  .card-body
-    // width: 80%
+.card-header
+  background-color: rgba(0, 0, 0, 0.03)
+  .nav-link.active:hover
+    color: $secondary-color
+    transition: .2s ease
+  .nav-link:hover
+    background-color: #fff
+    color: $secondary-color
+    transition: .2s ease
+
+.card-body
+  .card-title
+    font-weight: bolder
+    margin-bottom: 1em
+
+  .table .thead-light th
+    background-color: $bg-color
+    border-color: $bg-color
+
+  .table td
+    vertical-align: middle
+
+    .btn
+      border: 0 1em
+      border: 1px solid $secondary-color - 25%
+      background-color: white
+      border-radius: .25em
+      color: $text-color
+    .btn:hover
+      transition: .2s
+      color: $secondary-color
+      font-size: larger
+
+  .field
+    font-weight: bolder
+    margin-bottom: 1em
+    .btn
+      width: 100%
+      margin: 1em 0
+      .btn-dark
+        color: $text-color
+        background-color: $primary-color
+        border-color: $primary-color
+
+.user_card
+  margin: auto
+  width: 70%
+  line-height: 1.5
+  .btn
+    border: 0 1em
+    border: 1px solid $secondary-color - 25%
+    background-color: white
+    border-radius: .25em
+    color: $text-color
+  .btn:hover
+    transition: .2s
+    font-size: larger
+    color: $secondary-color

@@ -1,6 +1,6 @@
 <section class="account_setting_wrapper">
-  <div class="card text-center">
-    <div class="card-header">
+  <div class="card">
+    <div class="card-header  text-center">
       <ul class="nav nav-tabs">
         <li class="nav-item">
         <%= link_to "個人資料", edit_user_registration_path, class:"nav-link active" %>
@@ -13,67 +13,69 @@
         </li>
       </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body text-center">
       <h5 class="card-title">您收到的邀請</h5>
       <p class="card-text">
         <table class="table">
+          <thead class="thead-light">
             <tr>
-              <th>寄件者</th>
-              <th>組織類別</th>
-              <th>組織名稱</th>
-              <th>動作</th>
+              <th scope="col">寄件者</th>
+              <th scope="col">邀請來源</th>
+              <th scope="col">組織/頻道名稱</th>
+              <th scope="col">動作</th>
             </tr>
-          <% @messages.each do |invite| %>
+          </thead>
+          <tbody>
+            <% @messages.each do |invite| %>
             <tr>
               <td><%= invite.sender.email %></td>
               <td><%= invite.type_in_chinese %></td>
               <td><%= invite.item.name %></td>
-              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-light" %></td>
-              <td><%= link_to "不同意", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn-light" %></td>
+              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-light" %>
+                  <%= link_to "不同意", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn-light" %></td>
             </tr>
-          <% end %>
+            <% end %>
+          </tbody>
         </table>
       </p>
     </div>
-  </div>
- <div class="card">
-    <div class="card-body">
-      <h5 class="card-title text-center">編輯個人資料</h5>
-      <p class="card-text">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
-        
-          <div class="field">
-            <%= f.label :email, "電子信箱" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-          </div>
-        
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+     <div class="card-body user_card">
+        <h5 class="card-title text-center">編輯個人資料</h5>
+        <p class="">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+          
+            <div class="field">
+              <%= f.label :email, "電子信箱" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            </div>
+          
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+          
+            <div class="field">
+              <%= f.label :password, " 輸入新密碼" %> (如不修改請留白)<br />
+              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %> <small id="emailHelp" class="form-text text-muted"><% if @minimum_password_length %>
+                (長度至少<%= @minimum_password_length %>位)
+              <% end %></small>
+            </div>
+          
+            <div class="field">
+              <%= f.label :password_confirmation, "確認新密碼" %> (如不修改請留白)<br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :current_password, "輸入原密碼" %> <br />
+              <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
+            </div>
+          
+            <p class="actions">
+              <%= f.submit "送出", class:"btn btn-light" %>
+            </p>
           <% end %>
-        
-          <div class="field">
-            <%= f.label :password, " 輸入新密碼" %> (如不修改請留白)<br />
-            <%= f.password_field :password, autocomplete: "new-password" %>  <small id="emailHelp" class="form-text text-muted"><% if @minimum_password_length %>
-              (長度至少<%= @minimum_password_length %>位)
-            <% end %></small>
-          </div>
-        
-          <div class="field">
-            <%= f.label :password_confirmation, "確認新密碼" %> (如不修改請留白)<br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-          </div>
-        
-          <div class="field">
-            <%= f.label :current_password, "輸入原密碼" %> <br />
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
-          </div>
-        
-          <p class="actions">
-            <%= f.submit "送出", class:"btn btn-light" %>
-          </p>
-        <% end %>
-      </p>
-    </div>
-  </div> 
+        </p>
+      </div>
+  </div>
 </section>
