@@ -19,10 +19,10 @@
       <aside class="sidebar content-sidebar p-0 bg-white">
         <% if user_signed_in? %>
           <nav class="sidebar__menu article__menu">
-            <div class="card rounded-0">
-              <div class="card-header">
-                <%= link_to "Back to Articles list", root_path %>
-              </div>
+            <div class="card border-0">
+                <div class="card-header article-back-list  rounded-0">
+                  <%= link_to "Back to Articles list", root_path %>
+                </div>
               <ul class="list-group list-group-flush">
                 
                 <%= yield :side_bar %>
