@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_100446) do
+ActiveRecord::Schema.define(version: 2020_05_31_054600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_100446) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "layout"
+    t.string "image"
     t.index ["deleted_at"], name: "index_contents_on_deleted_at"
   end
 
@@ -107,6 +108,14 @@ ActiveRecord::Schema.define(version: 2020_05_27_100446) do
     t.integer "position", default: 0
   end
 
+  create_table "subscribers", force: :cascade do |t|
+    t.string "email"
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_subscribers_on_channel_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -131,4 +140,5 @@ ActiveRecord::Schema.define(version: 2020_05_27_100446) do
   add_foreign_key "channels_org_users", "organizations_users"
   add_foreign_key "organizations_users", "organizations"
   add_foreign_key "organizations_users", "users"
+  add_foreign_key "subscribers", "channels"
 end
