@@ -1,21 +1,25 @@
-<section class="account_setting_wrapper">
-  <div class="card">
-    <div class="card-header  text-center">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-        <%= link_to "個人資料", edit_user_registration_path, class:"nav-link active" %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "團隊資料", edit_organization_path, class:"nav-link" %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "頻道資料", edit_channel_path, class:"nav-link" %>
-        </li>
-      </ul>
+<div class="wrapper">
+  <section class="account_setting_wrapper">
+    <div class="card">
+      <div class="card-header text-center">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+          <%= link_to "個人資料", edit_user_registration_path, class:"nav-link active" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "組織資料", edit_organization_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "頻道資料", edit_channel_path, class:"nav-link" %>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="card-body text-center">
-      <h5 class="card-title">您收到的邀請</h5>
-      <p class="card-text">
+    <div class="card">
+      <div class="card-header text-center subtitle">
+        <h6 class="card-title m-0">您收到的邀請</h6>
+      </div>
+      <div class="card-body text-center">
         <table class="table">
           <thead class="thead-light">
             <tr>
@@ -37,11 +41,14 @@
             <% end %>
           </tbody>
         </table>
-      </p>
+      </div> 
     </div>
-     <div class="card-body user_card">
-        <h5 class="card-title text-center">編輯個人資料</h5>
-        <p class="">
+    <div class="card">
+      <div class="card-header text-center subtitle">
+        <h6 class="card-title m-0">編輯個人資料</h6>
+      </div>
+      <div class="card-body user_form">
+          <h5 class="card-title text-center"></h5>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
           
@@ -75,7 +82,8 @@
               <%= f.submit "送出", class:"btn btn-light" %>
             </p>
           <% end %>
-        </p>
+        </div>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
+</div>
