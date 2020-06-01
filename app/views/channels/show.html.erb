@@ -24,7 +24,7 @@
           <%= button_to article_path(article), class:"w-100 border-0 bg-white", method: "get" do %>
             <div class="card py-4 px-2 row flex-row justify-content-between rounded-0"  style="border-left:3px solid #41A9A4">
               <div class="col-1 d-flex justify-content-center align-items-center">
-                <%# TODO判斷是否寄出，icon先放好了 %>
+<%# TODO判斷是否寄出，icon先放好了 %>
                 <i class="far fa-circle">
                 </i>
                 <i class="fas fa-paper-plane">
@@ -40,7 +40,8 @@
               </div>
   
               <div class="card-do col-4 d-flex justify-content-end align-items-center">
-                <%= link_to "Edit name", edit_article_path(article), method: :GET, class:"btn btn-primary btn-sm mx-2 edit" %>
+<%# TODO 送信路徑還要改!!! %>
+                <%= link_to "Send", root_path, class:"btn btn-primary btn-sm mx-2 edit" %>
                 <%= 
                   link_to "Delete", article_path(article), class:"btn-sm delete" , 
                                     method: :delete, 

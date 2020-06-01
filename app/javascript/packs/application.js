@@ -8,11 +8,10 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap";
 import "../styles/index.sass";
+import "controllers";
 
 window.$ = $;
 
-import "controllers";
-import "@fortawesome/fontawesome-free/css/all.css";
 
 import "parallax-js";
 import Parallax from 'parallax-js'
