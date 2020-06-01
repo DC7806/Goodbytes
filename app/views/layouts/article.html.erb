@@ -18,7 +18,7 @@
     <div class="layout">
       <aside class="sidebar content-sidebar p-0 bg-white">
         <% if user_signed_in? %>
-          <nav class="sidebar__menu">
+          <nav class="sidebar__menu article__menu">
             <div class="card rounded-0">
               <div class="card-header">
                 <%= link_to "Back to Articles list", root_path %>
@@ -32,14 +32,14 @@
         <% end %>
       </aside>
 
-      <div class="sidebar-blank"></div>
+      <div class="article-sidebar-blank"></div>
       
       <main>
         <div class="container-fluid">
           <div class="wrap">
             <%= render "shared/flash" %>
 
-              <div class="replace">
+              <div class="replace replace-article">
                 <%= yield %>
               </div>
 
