@@ -1,12 +1,18 @@
 <%#<!-- 此為template列表，切版的話hidden input都別動 -->%>
-<ul id="templates" style="padding-inline-start: 0px;">
+<ul id="templates" class="flex-wrap p-1" style="padding-inline-start: 0px;">
   <% Content.layouts.each do |name, layout| %>
-    <li class="list-group-item" data-controller="content">
+    <li class="col-4 p-1" data-controller="content">
       <%= hidden_field_tag "content[layout]", layout , data: {target: "content.layout" }%>
       <%= hidden_field_tag "content[title]", "" , data: {target: "content.title" }%>
       <%= hidden_field_tag "content[desc]", "" , data: {target: "content.desc" }%>
       <%= hidden_field_tag "content[url]", "" , data: {target: "content.url" }%>
-      <a href="#" data-action="click->content#create"><%= name %></a>
+      <a class="template-card card" href="#" data-action="click->content#create">
+        <div class="list-box">
+          <div class="content-txt">
+            <%= name %>
+          </div>
+        </div>
+      </a>
     </li>
 
   <% end %>
