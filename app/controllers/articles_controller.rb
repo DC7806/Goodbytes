@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
   before_action :find_article, except: [:new, :create]
   before_action :find_channel, except: [:show]
+  before_action :channel_admin?, only: [:destroy]
   before_action :channel_member?, except: [:show]
 
   def new
@@ -16,7 +17,7 @@ class ArticlesController < ApplicationController
     @article.footer = render_to_string "shared/template/footer", layout: false
     
     if @article.save
-      redirect_to article_path(@article), notice: "The article has been created."
+      redirect_to edit_article_path(@article), notice: "The article has been created."
     else
       render :new
     end
