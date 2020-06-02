@@ -29,7 +29,7 @@
               <input type="hidden" name="organization_id" value="<%= @organization.id %>">
               <input type="email" class="form-control col-auto" id="colFormLabel" placeholder="請輸入收件者電子信箱">
               </div>
-              <input class="btn btn-outline-info" type="submit" value="寄送邀請">
+              <input class="btn btn-outline-secondary" type="submit" value="寄送邀請">
             <% end %>
           </form>
         </div>
@@ -113,12 +113,11 @@
           <div class="form-row align-items-center">
             <%= form_for(@organization, url: organization_path, method: 'post') do |f| %>
               <div class="field">
-              <%= f.label :name, "名稱："%>
+              <%= f.label :name, "名稱：", class:"col-auto col-form-label"%>
               <%= f.text_field :name, placeholder: "請輸入新增組織名稱"%>
-              <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-outline-info" %>
-            <% end %>
+              <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-outline-secondary" %>
               </div>
-            
+            <% end %>
           </div>
         </form>
       </div>
@@ -130,13 +129,13 @@
       <div class="card-body">
         <div class="org-form">
           <div class="form-row align-items-center">
-            <h6>目前所在組織：<%= @organization.name %></h6>
+            <h6 class="col-auto col-form-label">目前所在組織：<%= @organization.name %></h6>
           </div>
         </div>
         <div class="org-form">
           <div class="form-row align-items-center">
-            <h6>組織改名：</h6><%= form_tag(organization_path, method: 'patch') do %><input type="text" name="organization[name]" placeholder="請輸入新名稱">
-            <input type="submit" value="送出" class="btn btn-outline-info">
+            <h6 class="col-auto col-form-label">組織改名：</h6><%= form_tag(organization_path, method: 'patch') do %><input type="text" name="organization[name]" placeholder="請輸入新名稱">
+            <input type="submit" value="送出" class="btn btn-outline-secondary">
             <% end %>
           </div>
         </div>
