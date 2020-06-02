@@ -69,6 +69,9 @@
       <div>
         <%= link_to "連結", link_group_index_path %>
       </div>
+      <div>
+        <%=  link_to "Landing Page", landing_channel_path(current_channel) if current_channel_id.present? %>
+      </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">

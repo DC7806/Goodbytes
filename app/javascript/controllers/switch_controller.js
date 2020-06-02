@@ -84,5 +84,16 @@ export default class extends Controller {
     })
   }
 
+  toEditSubject(evt){
+    evt.preventDefault()
+    $(".card-header h3").toggle()
+    $(".card-header a.edit").toggle()
+    $(".card-header a.submit").toggle()
+    $(".card-header a.cancel").toggle()
+    $("#subject-editor").toggle()
+    if($("#subject-editor").is(":visible")){
+      $("#subject-editor").focus()
+    }
+  }
 
 }

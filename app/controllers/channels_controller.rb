@@ -1,8 +1,9 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel,  except: [:new, :create]
-  before_action :find_organization
+  skip_before_action :authenticate_user!, only: [:landing]
+  before_action :find_channel,  except: [:new, :create, :landing]
+  before_action :find_organization, except: [:landing]
   before_action :org_admin?,      only: [:new, :create, :destroy]
-  before_action :channel_admin?,  only: [:edit, :update]
+  before_action :channel_admin?,  only: [:edit, :update, :deliver]
   before_action :channel_member?, only: [:show]
 
   def new
@@ -51,6 +52,29 @@ class ChannelsController < ApplicationController
       @notice = "channel刪除失敗"
     end
     redirect_to(root_path, notice: @notice) and return
+  end
+
+  def deliver
+    @channel.articles.where(deliver_time: nil).each do |article|
+      @channel.subscribers.each do |subscriber|
+        ArticleMailerJob.perform_later(
+          subscriber.email,
+          article.id
+        )
+      end
+      article.deliver_time = Time.now
+      article.save
+    end
+    render js: 'alert("信件已寄出")'
+  end
+
+  def landing
+    @channel = Channel.find(params[:id])
+    @articles = @channel.articles.limit(5).order(created_at: :desc)
+    @subscriber = Subscriber.new
+    @email = current_user.email
+    render layout: "landing"
+
   end
 
   private

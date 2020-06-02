@@ -5,6 +5,8 @@ import Sortable from 'sortablejs';
 export default class extends Controller {
   static targets = ["drag_area"] 
   connect(){
+    // 這行等到navbar更新完成記得拿掉
+    $(".header_navbar").hide()
     window.sortable = Sortable.create(drag_area,{
       group: "shared",
       animation: 250,
