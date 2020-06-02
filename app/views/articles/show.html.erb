@@ -27,9 +27,7 @@
         <!-- 拖拉區域 -->
         <div class="card-body p-0" id="drag_area" data-controller="drag" data-target="drag_area">
           <% @contents.each do |content| %>
-            <div class="each-content" data-id="<%= content.id %>">
-              <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
-            </div>
+            <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
           <% end %>
         </div>
 
@@ -68,9 +66,9 @@
 
       <!-- template選單（切換鈕） -->
       <div id="menu-area" style="display: none;">
-        <div class="d-flex" data-controller="switch">
-          <div class="card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >Template</a></div>
-          <div class="card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >Saved_link</a></div>
+        <div class="d-flex menu-select" data-controller="switch">
+          <div class="templates card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >Template</a></div>
+          <div class="saved_links card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >Saved_link</a></div>
         </div>  
 
         <!-- 樣板選單 -->

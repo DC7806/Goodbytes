@@ -69,8 +69,65 @@
                   filter: brightness(110%)
                   transition: .3s
 
+            #edit-area
+              
+
+            #form-area
+
+            #menu-area
+              background-color: $bg-color
+              min-height: calc( 100vh - #{$top-bar-height} - 81.6px )
+
+
+              .menu-select
+                background-color: #fff
+
+                .card
+                  border: none
+                  border-radius: 0
+                  border-bottom: 1px solid $border-color
+
+                .card-menu-active
+                  border-bottom: 2px solid $primary-color
+                  color: $dark-primary-color
+
+                .templates
+
+                .saved_links
+
+              #templates
+                
+                li
+                  list-style-type: none
+
+                  .template-card
+                    height: 90px
+                    position: relative
+
+                    .list-box
+                      .content-txt
+                        position: absolute
+                        right: 0
+                        left: 0
+                        bottom: 5px
+                        font-size: .8rem
+                        line-height: 1rem
+                        text-align: center
+
+              #saved_links
+                padding-bottom: 1rem
+
+                .group-name
+                  text-align: left
+                  background-color: $dark-color
+                  color: $button-text-color
+
+
   .each-content
     margin: .8rem
+
+    .fa-arrows-alt-v
+      color: $dark-primary-color
 
                   
 
@@ -86,3 +143,6 @@
 
           .article-content
             min-height: calc( 100vh - #{$top-bar-height} )
+
+
+    
