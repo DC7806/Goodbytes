@@ -1,11 +1,14 @@
 // $primary-color: #39adad
 $primary-color: #66cccc
-$secondary-color: #8ba8ba 
+$dark-primary-color: #41A9A4
+$secondary-color: #7aa7aa 
+$dark-color: #4a5559
 $button-color: #ffcc33
 $button-text-color: #ffffff
 $text-color: #333333
-$bg-color: #f5f7f9
-$border-color: #d6dce0
+$bg-color: #e0f1f3
+$light-bg-color: #f2f6f6
+$border-color: #dce0e0
 $chinese-font: Noto Sans CJK TC, Source Han Sans TW, Source Han Sans SC, Hiragino Sans GB W3, Droid Sans Fallback, Microsoft Yahei, Microsoft JhengHei, \5FAE软雅黑, PingFang TC, Noto Sans TC, STXihei, \534E文细黑
 $font-size: 16px
 .font-large
@@ -15,7 +18,8 @@ $font-size: 16px
 .font-small
   font-size: $font-size / 2
 $sidebar-width: 250px
-$top-bar-height: 50px
+$article-sidebar-width: 320px
+$top-bar-height: 60px
 $footer-height: 9rem
 
 html,
@@ -65,17 +69,10 @@ a
     &:active
       color: $primary-color
 
-  .sidebar__menu
-    display: flex
-    flex-direction: column
-
-    div
-      text-align: right
-      line-height: 2rem
-
-    //side bar hover border line
-    a
-      position: relative
+  &:hover, &:focus, &:not(:disabled):not(.disabled):active,&:not(:disabled):not(.disabled):active:focus
+    background-color: $primary-color
+    border: none
+    box-shadow: none
 
     a::after
       content: ""
@@ -216,3 +213,8 @@ a
 
   .close
     cursor: pointer
+
+// 按鈕色調統一
+.btn-primary
+  background-color: $dark-primary-color
+  border: none

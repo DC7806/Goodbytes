@@ -1,15 +1,10 @@
-$create-bar-height: 40px //TODO 之後要記得換掉
-
 .all-link
   width: calc(100vw - #{$sidebar-width} )
   height: calc(100vh - #{$top-bar-height} )
 
-  .create-bar
-    height: $create-bar-height //TODO 新增按鈕暫放此bar
-
   .link
     width: calc(100vw - #{$sidebar-width} )
-    height: calc(100vh - #{$top-bar-height} - #{$create-bar-height} )
+    height: calc(100vh - #{$top-bar-height} )
     overflow-x: scroll
     overflow-y: hidden
     display: flex
@@ -20,7 +15,8 @@ $create-bar-height: 40px //TODO 之後要記得換掉
         width: 250px
 
         .subject_bar
-          background-color: #ccc
+          background-color: $dark-color
+          color: $button-text-color
 
           .link_group_name
             display: flex
@@ -32,8 +28,11 @@ $create-bar-height: 40px //TODO 之後要記得換掉
 
             .btn
               padding: 0 0.2rem
+              svg
+                color: $button-text-color
               &:hover
-                background-color: #33333333
+                background-color: #ffffff33
+
 
             .dropdown-menu
               min-width: 1rem

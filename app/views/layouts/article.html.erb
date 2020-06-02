@@ -16,11 +16,11 @@
   </head>
   <body>
     <div class="layout">
-      <aside id="sidebar_content">
+      <aside class="sidebar content-sidebar p-0 bg-white">
         <% if user_signed_in? %>
-          <nav class="sidebar__menu">
-            <div class="card" style="width: 15rem;">
-              <div class="card-header">
+          <nav class="sidebar__menu article__menu">
+            <div class="card border-0">
+              <div class="card-header article-back-list  rounded-0">
                 <%= link_to "Back to Articles list", root_path %>
               </div>
               <ul class="list-group list-group-flush">
@@ -31,18 +31,23 @@
           </nav>
         <% end %>
       </aside>
+
+      <div class="article-sidebar-blank"></div>
+      
       <main>
         <div class="container-fluid">
           <div class="wrap">
-            <div class="header_navbar">
-              <%= render "shared/article_user_section" %>
-              <%= render "shared/flash" %>
-            </div>
-            <div>
-              <%= yield %>
+            <%= render "shared/flash" %>
+
+              <div class="replace replace-article">
+                <%= yield %>
+              </div>
+
           </div>
         </div>
       </main>
+      
     </div>
+
   </body>
 </html>

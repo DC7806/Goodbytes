@@ -26,22 +26,31 @@ export default class extends Controller {
     $("#add").hide()
     $("#back").show()
     $("#menu-area").show()
+    $("#templates").addClass('d-flex')
+    $("#menu-area > .d-flex > .templates").addClass('card-menu-active')
   }
   
   toContentList(evt){
     evt.preventDefault()
     $("#saved_links").hide()
     $("#templates").show()
+    $("#templates").addClass('d-flex')
+    $("#menu-area > .d-flex > .templates").addClass('card-menu-active')
+    $("#menu-area > .d-flex > .saved_links").removeClass('card-menu-active')
   }
 
   toSavedLinks(evt){
     evt.preventDefault()
     $("#saved_links").show()
     $("#templates").hide()
+    $("#templates").removeClass('d-flex')
+    $("#menu-area > .d-flex > .saved_links").addClass('card-menu-active')
+    $("#menu-area > .d-flex > .templates").removeClass('card-menu-active')
   }
   
   toggleList(evt){
     evt.preventDefault()
+    console.log($("#" + this.objectIdTarget.value))
     let targetObject = $("#" + this.objectIdTarget.value)
     targetObject.fadeToggle("fast")
     this.switcherTarget.focus()

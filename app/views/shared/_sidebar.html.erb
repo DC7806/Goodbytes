@@ -1,11 +1,13 @@
-<aside id="sidebar">
+<aside class="sidebar">
   <%= link_to root_path, class: "sidebar__logo" do %>
     <h3>
       Goodbytes
     </h3>
   <% end %>
+  <hr class="logo_hr">
+
   <% if user_signed_in? %>
-    <nav class="sidebar__menu sidebar__menu--push-up">
+    <nav class="sidebar__menu sidebar__menu--push-up sidebar-line">
 
       <div>組織列表</div>
       <div class="border pr-2" data-controller="switch">
