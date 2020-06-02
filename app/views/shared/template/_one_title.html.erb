@@ -1,0 +1,19 @@
+
+<% case type %>
+<% when :show %>
+  <div class="content" data-id="<%= content.id %>">
+    <div>
+      <h3 class="content-title"><%= content.display_title %></h3>
+    </div>
+  </div>
+
+<% when :form %>
+  <%= render_edit_form content,
+                      :title
+  %>
+
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      content.display_title.limit(7)
+  %>
+<% end %>
