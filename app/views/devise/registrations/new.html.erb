@@ -6,7 +6,6 @@
   </div>
   <div class="card">
     <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%# 不要問為什麼這段不放controller %>
         <%# 因為放controller沒用，不管是放在super前面還是後面都沒用 %>
         <%# 因為render頁面這件事在super那一行就已經送出去了 %>
@@ -15,13 +14,14 @@
           <% flash.alert = resource.errors.full_messages.join("\n") %>
         <% end %>
 
-        <% if @email %>
-          <%= f.hidden_field :email, value: @email %>
-        <% else %>
-          <div class="field">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <% if @email %>
+            <%= f.hidden_field :email, value: @email %>
+          <% else %>
+            <div class="field">
             <%= f.label :email, "電子信箱", class: "" %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請設定您的電子信箱", class:"form-control" %>
-        <% end %>
+          <% end %>
         <% if @invite_token %>
           <input type="hidden" name="invite_token" value="<%= @invite_token %>">
         <% end %>
