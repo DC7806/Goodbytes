@@ -33,31 +33,33 @@
         </div>
       </div>
 
-      <div>頻道列表</div>
-      <div class="border pr-2" data-controller="switch">
-        <input type="hidden" data-target="switch.objectId" value="channel_list">
-        <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#toggleList">
-          <div>
-            <i class="fas fa-bars"></i>
-          </div>
-          <p class="mb-0">
-            <%= current_channel.name %>
-          </p>
-        </a>
-      </div>
-      <div class="position-relative" id="channel_list" style="display: none;z-index:1">
-        <div class="position-absolute w-100 bg-light border rounded-lg">
-          <% current_channels.each do |channel| %>
-            <% if channel.id != current_channel_id %>
-              <a href="#" class="d-block pr-2" data-controller="switch" data-action="click->switch#movePlace">
-                <input type="hidden" data-target="switch.url" value="/switch_channel">
-                <input type="hidden" data-target="switch.toId" value="<%= channel.id %>">
-                <%= channel.name %>
-              </a>
-            <% end %>
-          <% end %>
+      <% if current_channel_id %>
+        <div>頻道列表</div>
+        <div class="border pr-2" data-controller="switch">
+          <input type="hidden" data-target="switch.objectId" value="channel_list">
+          <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#toggleList">
+            <div>
+              <i class="fas fa-bars"></i>
+            </div>
+            <p class="mb-0">
+              <%= current_channel.name %>
+            </p>
+          </a>
         </div>
-      </div>
+        <div class="position-relative" id="channel_list" style="display: none;z-index:1">
+          <div class="position-absolute w-100 bg-light border rounded-lg">
+            <% current_channels.each do |channel| %>
+              <% if channel.id != current_channel_id %>
+                <a href="#" class="d-block pr-2" data-controller="switch" data-action="click->switch#movePlace">
+                  <input type="hidden" data-target="switch.url" value="/switch_channel">
+                  <input type="hidden" data-target="switch.toId" value="<%= channel.id %>">
+                  <%= channel.name %>
+                </a>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
       <div>
         <%= link_to "電子報列表", root_path %>

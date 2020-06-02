@@ -1,0 +1,17 @@
+<!-- 這裡有inline css，因為跟原有設定衝突到 -->
+<div id="saved_links" style="display: none;">
+  <% @channel.link_groups.includes(:saved_links).each do |group| %>
+    <p class="list-group-item" style="margin-bottom: 0">
+      group - <%= group.name %>
+    </p>
+    <% group.saved_links.each do |link| %>
+      <li class="list-group-item" data-controller="content">
+        <%= hidden_field_tag "content[layout]", 3 , data: {target: "content.layout" }%>
+        <%= hidden_field_tag "content[title]", link.subject , data: {target: "content.title" }%>
+        <%= hidden_field_tag "content[desc]", link.summary , data: {target: "content.desc" }%>
+        <%= hidden_field_tag "content[url]", link.url , data: {target: "content.url" }%>
+        <a href="#" data-action="click->content#create"><%= link.subject %></a>
+      </li>
+    <% end %>
+<% end %>
+</div>
