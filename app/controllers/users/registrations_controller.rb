@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @invite_token = params[:invite_token]
     super
     user = resource
+    return if user.errors.any?
     if @invite_token.present?
       invite = Invite.find_by(token: @invite_token)
       if invite
@@ -27,6 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     self_org = Organization.new(name: user.email)
     self_org.save
+
 
     orgs  = []
     orgs << [self_org, admin ]
