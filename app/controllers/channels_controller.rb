@@ -72,7 +72,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     @articles = @channel.articles.limit(5).order(created_at: :desc)
     @subscriber = Subscriber.new
-    @email = current_user.email
+    # @email = current_user.email
     render layout: "landing"
 
   end
