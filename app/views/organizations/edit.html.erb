@@ -20,18 +20,15 @@
           <h6 class="card-title m-0">組織邀請名單</h6>
         </div>
         <div class="card-body text-center">
-          <form class="org-form">
-            <%= form_tag(new_organization_role_path, method: "post") do %>
-              <div class="form-row align-items-center">
-              <h6 class="col-auto col-form-label">寄送邀請信</h6>
-              <div class="col-sm-8">
-              <% email_field_tag :email %>
-              <input type="hidden" name="organization_id" value="<%= @organization.id %>">
-              <input type="email" class="form-control col-auto" id="colFormLabel" placeholder="請輸入收件者電子信箱">
-              </div>
-              <input class="btn btn-outline-secondary" type="submit" value="寄送邀請">
-            <% end %>
-          </form>
+          <%= form_tag(new_organization_role_path,class: "org-form", method: "post") do %>
+            <div class="form-row align-items-center">
+            <h6 class="col-auto col-form-label">寄送邀請信</h6>
+            <div class="col-sm-8">
+            <%= email_field_tag :email, nil, class: "form-control col-auto",placeholder: "請輸入收件者電子信箱" %>
+            <input type="hidden" name="organization_id" value="<%= @organization.id %>">
+            </div>
+            <input class="btn btn-outline-secondary" type="submit" value="寄送邀請">
+          <% end %>
         </div>
         <div class="card-body text-center">
           <table class="table">
@@ -109,17 +106,15 @@
         <h6 class="card-title m-0">新增組織</h6>
       </div>
       <div class="card-body text-center">
-        <form class="org-form">
-          <div class="form-row align-items-center">
-            <%= form_for(@organization, url: organization_path, method: 'post') do |f| %>
-              <div class="field">
-              <%= f.label :name, "名稱：", class:"col-auto col-form-label"%>
-              <%= f.text_field :name, placeholder: "請輸入新增組織名稱"%>
-              <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-outline-secondary" %>
-              </div>
-            <% end %>
-          </div>
-        </form>
+        <div class="form-row align-items-center">
+          <%= form_for(Organization.new, url: organization_path, class: "org-form", method: 'post') do |f| %>
+            <div class="field">
+            <%= f.label :name, "名稱：", class:"col-auto col-form-label"%>
+            <%= f.text_field :name, placeholder: "請輸入新增組織名稱"%>
+            <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-outline-secondary" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="card">
@@ -134,8 +129,10 @@
         </div>
         <div class="org-form">
           <div class="form-row align-items-center">
-            <h6 class="col-auto col-form-label">組織改名：</h6><%= form_tag(organization_path, method: 'patch') do %><input type="text" name="organization[name]" placeholder="請輸入新名稱">
-            <input type="submit" value="送出" class="btn btn-outline-secondary">
+            <h6 class="col-auto col-form-label">組織改名：</h6>
+            <%= form_for(@organization, url: organization_path, method: 'patch') do |f| %>
+            <%= f.text_field :name, placeholder: "請輸入新名稱" %>
+            <%= f.submit "送出", class: "btn btn-outline-secondary" %>
             <% end %>
           </div>
         </div>

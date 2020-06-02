@@ -20,20 +20,17 @@
         <h6 class="card-title m-0">頻道邀請名單</h6>
       </div>
       <div class="card-body text-center">
-        <form class="org-form">
-          <%= form_tag(new_channel_role_path, method: "post") do %>
+          <%= form_tag(new_channel_role_path, method: "post", class: "org-form") do %>
             <div class="form-row align-items-center">
                 <h6 class="col-auto col-form-label">寄送邀請信</h6>
                 <div class="col-sm-8">
-                  <% email_field_tag :email %>
+                  <%= email_field_tag :email, nil, class: "form-control col-auto", placeholder: "請輸入收件者電子信箱" %>
                   <input type="hidden" name="organization_id" value="<%= @organization.id %>">
                   <input type="hidden" name="channel_id" value="<%= @channel.id %>">
-                  <input type="email" class="form-control col-auto" id="colFormLabel" placeholder="請輸入收件者電子信箱">
                 </div>
                 <input class="btn btn-outline-secondary" type="submit" value="寄送邀請">
             </div>
           <% end %>
-        </form>
       </div>
         <div class="card-body text-center">
           <table class="table">
@@ -52,7 +49,7 @@
                     <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
                     <input type="hidden" name="email" value="<%= invite.receiver %>">
                     <input class="btn btn-outline-secondary" type="submit" value="再次邀請">
-                    <%= link_to "取消邀請", cancel_invite_path(invite_token: invite.token), data: {confirm: "確定？"}, class: "btn btn-outline-info" %>
+                    <%= link_to "取消邀請", cancel_invite_path(invite_token: invite.token),method: "delete", data: {confirm: "確定？"}, class: "btn btn-outline-info" %>
                   </td>
                   <% end %>
                 </tr>
@@ -109,15 +106,13 @@
         <h6 class="card-title m-0">新增頻道</h6>
       </div>
       <div class="card-body text-center">
-        <form class="org-form">
-          <div class="form-row align-items-center">
-            <%= form_tag(channel_path, method: 'post') do %>
+        <div class="form-row align-items-center">
+          <%= form_tag(channel_path, method: 'post', class: "org-form") do %>
             <input type="hidden" name="channel[organization_id]" value="<%= @organization.id %>">
             <input type="text" name="channel[name]" placeholder="輸入新頻道名稱">
             <input type="submit" class="btn btn-outline-secondary" value="新增頻道">
-            <% end %>
-          </div>
-        </form>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="card">
