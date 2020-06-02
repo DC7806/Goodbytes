@@ -1,3 +1,6 @@
+<% if resource.errors.any? %>
+  <% flash.alert = resource.errors.full_messages.join("\n") %>
+<% end %>
 <div class="edit wrapper"> 
   <section class="account_setting_wrapper">
     <div class="card">
@@ -48,8 +51,9 @@
         <h6 class="card-title m-0">編輯個人資料</h6>
       </div>
       <div class="card-body user_form">
+      
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
+            
           
             <div class="field">
               <%= f.label :email, "電子信箱" %><br />
