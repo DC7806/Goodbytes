@@ -1,3 +1,16 @@
+<nav class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Settings" %>
+      </li>
+    </ol>
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+  </div>
+</nav>
+
 <% if resource.errors.any? %>
   <% flash.alert = resource.errors.full_messages.join("\n") %>
 <% end %>
