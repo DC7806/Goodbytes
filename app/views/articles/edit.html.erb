@@ -103,27 +103,28 @@
     </div>
   </nav>
 
-<div class="card-body container w-75">
+<div class="card-body container">
 
   <section class="article-content">
+  
+    <!-- 文章內容 -->
 
-  <!-- 文章內容 -->
+    <div class="card-body container">
 
-  <div class="card-body container w-75">
+      <!-- 頁首 -->
+      <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
+      <%= @article.header.html_safe %>
 
-    <!-- 頁首 -->
-    <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
-    <%= @article.header.html_safe %>
+      <!-- 文章 -->
+      <div id="contents" data-articleId="<%= @article.id %>" >
+        <% @contents.each do |content| %>
+          <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+        <% end %>
+      </div>
 
-    <!-- 文章 -->
-    <div id="contents" data-articleId="<%= @article.id %>" >
-      <% @contents.each do |content| %>
-        <%= render "shared/template/#{content.layout}",type: :show, content: content %>
-      <% end %>
+      <!-- 頁尾 -->
+      <%= @article.footer.html_safe %>
+
     </div>
-
-    <!-- 頁尾 -->
-    <%= @article.footer.html_safe %>
-
-  </div>
+  </section>
 </div>
