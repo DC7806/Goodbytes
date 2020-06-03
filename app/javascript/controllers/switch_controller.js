@@ -48,7 +48,7 @@ export default class extends Controller {
     $("#menu-area > .d-flex > .templates").removeClass('card-menu-active')
   }
   
-  toggleList(evt){
+  sideListToggle(evt){
     evt.preventDefault()
     console.log($("#" + this.objectIdTarget.value))
     let targetObject = $("#" + this.objectIdTarget.value)
@@ -94,6 +94,28 @@ export default class extends Controller {
     if($("#subject-editor").is(":visible")){
       $("#subject-editor").focus()
     }
+  }
+
+  groupListToggle(evt){
+    evt.preventDefault()
+    $(".group-list").toggle()
+  }
+
+  linkGroup(evt){
+    evt.preventDefault()
+    let target = evt.target
+    let current = $(".current-group").get(0)
+    let targetName = target.innerText
+    let targetId = target.dataset.id
+    let currentGroup = $(`#link-group-${current.dataset.id}`) 
+    let targetGroup = $(`#link-group-${targetId}`) 
+    currentGroup.toggle()
+    targetGroup.toggle()
+    target.innerText = current.innerText
+    target.dataset.id = current.dataset.id
+    current.innerText = targetName
+    current.dataset.id = targetId
+    $(".group-list").toggle()
   }
 
 }

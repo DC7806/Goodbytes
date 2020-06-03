@@ -116,11 +116,33 @@
 
               #saved_links
                 padding-bottom: 1rem
-
+                
                 .group-name
                   text-align: left
                   background-color: $dark-color
                   color: $button-text-color
+                  margin: 0
+                  margin-left: .8rem
+                  margin-right: .8rem
+                  cursor: pointer
+                    
+                  &:hover
+                    transition: .3s
+                    background-color: white !important
+                    color: black
+
+                .group-list
+                  margin-left: .8rem
+                  margin-right: .8rem
+                  background-color: $dark-color
+                  width: calc(320px - 2rem)
+                  position: absolute
+                  z-index: 2
+
+                  .group-name
+                    background-color: transparent
+                    margin: 0
+                    
 
 
   .each-content
