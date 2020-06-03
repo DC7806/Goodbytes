@@ -43,16 +43,61 @@ a
   &:hover
     text-decoration: none
 
-// 按鈕色調統一
-.btn-primary
-  background-color: $dark-primary-color
-  border: none
+#sidebar
+  width: $sidebar-width
+  height: 100vh
+  background: $bg-color
+  box-shadow: 0 1px .1rem .05rem $border-color
+  padding: 2rem
+  text-align: center
+  position: fixed
+  z-index: 3
+
+  .sidebar__logo
+    color: $text-color
+    display: inline-block
+    margin-bottom: 1.5rem
+
+  a
+    text-decoration: none
+    transition: .4s ease
+
+    &:hover
+      color: $text-color
+      cursor: pointer
+
+    &:active
+      color: $primary-color
 
   &:hover, &:focus, &:not(:disabled):not(.disabled):active,&:not(:disabled):not(.disabled):active:focus
     background-color: $primary-color
     border: none
     box-shadow: none
 
+    a::after
+      content: ""
+      width: 0
+      height: 1.5px
+      position: absolute
+      margin-bottom: 1px
+      transition: .3s ease-out
+      background: $text-color
+
+    a:hover::after
+      width: 100%
+
+    a::after
+      right: 0
+      bottom: 0
+      transition-duration: .3s
+
+  .sidebar__menu--push-up
+    margin: auto
+
+  .sidebar__menu--push-down
+    position: absolute
+    bottom: 2rem
+    right: 3.5rem
 
 .sign_in
   position: absolute
@@ -143,3 +188,33 @@ a
       color: $secondary-color
       margin: .5em 0 2em 0
 
+  //警示訊息
+
+.alert
+  margin-bottom: 0
+  position: absolute
+  right: 20px
+  top: $top-bar-height + 20px
+  z-index: 999
+  width: 240px
+  height: 80px
+  padding: .5rem
+
+  ul
+    padding: 0
+    margin-bottom: 0
+    list-style: none
+    position: absolute
+    top: 35%
+    bottom: 50%
+    left: .5rem
+    right: 0
+    margin: auto
+
+  .close
+    cursor: pointer
+
+// 按鈕色調統一
+.btn-primary
+  background-color: $dark-primary-color
+  border: none

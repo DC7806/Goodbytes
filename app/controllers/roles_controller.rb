@@ -16,20 +16,12 @@ class RolesController < ApplicationController
     invite = Invite.find_by(token: params[:token])
     if invite && invite.item.update_role(current_user.id, member)
       path = "/switch_#{invite.item_type.downcase}"
-      options = {	
-        method: :post,                  	
-        authenticity_token: 'auto',                  	
-        autosubmit: true	
-      }
-      redirect_post(	
-        path,	
-        params: {id: invite.item_id},	
-        options: options
-      )
       invite.destroy
+      @notice = "歡迎加入"
     else
-      redirect_to channel_path, notice: "無效的操作"
+      @notice = "無效的操作"
     end
+    redirect_to channel_path, notice: @notice
   end
 
   def update
@@ -42,7 +34,7 @@ class RolesController < ApplicationController
   end
 
   def destroy
-    relationship = @model_object.relationship(params[:user_id])
+    relationship = @model_object.relationship(params[:user_id].to_i)
     if relationship.role == admin
       @notice = "不能開除admin"
     else

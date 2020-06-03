@@ -64,25 +64,28 @@
       <% end %>
 
       <div>
-        <%= link_to "Articles", root_path %>
+        <%= link_to "電子報列表", root_path %>
       </div>
       <div>
-        <%= link_to "Links", link_group_index_path %>
+        <%= link_to "連結", link_group_index_path %>
+      </div>
+      <div>
+        <%=  link_to "Landing Page", landing_channel_path(current_channel) if current_channel_id.present? %>
       </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
       <div>
-        <%= link_to "New Newsletter" %>
+        <%= link_to "新增頻道" %>
       </div>
       <div>
-        <a>Billing</a>
+        <a>付款資訊</a>
       </div>
       <div>
-        <%= link_to "Account Settings", edit_user_registration_path %>
+        <%= link_to "帳戶資訊", edit_user_registration_path %>
       </div>
       <div>
-        <%= link_to "Sign Out", destroy_user_session_path,method: :delete %>
+        <%= link_to "登出", destroy_user_session_path,method: :delete %>
       </div>
     </nav>
   <% end %>
