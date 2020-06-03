@@ -66,6 +66,6 @@ Rails.application.routes.draw do
     resources :contents, only: :index
   end
   resources   :contents, except: [:new, :create, :index]
-  post   "/subscribe", as: "subscribe",   to: "subscribers#create"
-  post "/unsubscribe", as: "unsubscribe", to: "subscribers#destroy"
+  post "/subscribe",                      as: "subscribe",   to: "subscribers#create"
+  get  "/unsubscribe/:channel_id/", as: "unsubscribe", to: "subscribers#destroy"
 end  
