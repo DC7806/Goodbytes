@@ -2,14 +2,14 @@
 <div id="saved_links" style="display: none;">
 
   <% if @link_groups.first %>
-    <div data-id="<%= @link_groups.first.id %>" class="group-name list-group-item border current-group" data-controller="switch" data-action="click->switch#groupListToggle">
-      group - <%= @link_groups.first.name %>
-    </div>
+    <a href="#" data-id="<%= @link_groups.first.id %>" class="group-name list-group-item border current-group" data-controller="switch" data-action="click->switch#groupListToggle">
+      <%= @link_groups.first.name %>
+    </a>
     <div class="position-relative">
       <div class="group-list" style="display:none" data-controller="switch">
         <% @link_groups[1..-1].each do |group| %>
           <div class="group-name px-4 py-1" data-id="<%= group.id %>" data-action="click->switch#linkGroup">
-            group - <%= group.name %>
+            <%= group.name %>
           </div>
         <% end %>
       </div>

@@ -98,7 +98,11 @@ export default class extends Controller {
 
   groupListToggle(evt){
     evt.preventDefault()
-    $(".group-list").toggle()
+    $(".group-list").fadeToggle("fast")
+    evt.target.focus()
+    $(evt.target).on("focusout", (evt)=>{
+      $(".group-list").fadeOut()
+    })
   }
 
   linkGroup(evt){
@@ -115,7 +119,6 @@ export default class extends Controller {
     target.dataset.id = current.dataset.id
     current.innerText = targetName
     current.dataset.id = targetId
-    $(".group-list").toggle()
   }
 
 }
