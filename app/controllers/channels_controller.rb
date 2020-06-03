@@ -62,8 +62,8 @@ class ChannelsController < ApplicationController
           article.id
         )
       end
-      article.deliver_time = Time.now
-      article.save
+      # article.deliver_time = Time.now
+      # article.save
     end
     render js: 'alert("信件已寄出")'
   end
