@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     collection do
       post :link_move_in_group
       post :link_change_group
+      post :crawler
     end
   end
   resources   :articles,      as: 'article',    path: 'article',  except: :index do

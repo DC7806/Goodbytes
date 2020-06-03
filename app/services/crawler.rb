@@ -30,9 +30,9 @@ class Crawler
 
 end
 
-# # 把以下整串取消一層井字號即可正常做單檔案測試
-# # 專案中只要在controller內直接使用即可。
-# # 以下是用法：
+# 把以下整串取消一層井字號即可正常做單檔案測試
+# 專案中只要在controller內直接使用即可。
+# 以下是用法：
 # url = "https://5xruby.tw/"
 # crawler = Crawler.new(url)
 # p crawler.subject# => "五倍紅寶石｜專業程式教育機構｜實戰轉職訓練"

@@ -1,10 +1,23 @@
 class SavedLinksController < ApplicationController
-  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group]
+  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group, :crawler]
   before_action :find_channel
   before_action :channel_member?
   before_action :find_link_groups, only: [:create, :update, :destroy]
   
   def new
+  end
+
+  def crawler
+    begin
+      @crawler = Crawler.new(params[:saved_link][:url])
+      @saved_link = SavedLink.new(saved_link_params)
+    rescue => exception
+      render js: "$(`.error-txt`).removeClass('hidden');
+                  $('.modal').on('hidden.bs.modal', function (e) {
+                    $(`.error-txt`).addClass('hidden')
+                  });
+                  "
+    end
   end
 
   def create
