@@ -20,9 +20,13 @@
         <% if user_signed_in? %>
           <nav class="sidebar__menu article__menu">
             <div class="card border-0">
-              <div class="card-header article-back-list  rounded-0">
-                <%= link_to "Back to Articles list", root_path %>
-              </div>
+              
+                <%= link_to root_path do %>
+                  <div class="card-header article-back-list  rounded-0">
+                    回到文章列表
+                  </div>
+                <% end %>
+              
               <ul class="list-group list-group-flush">
                 
                 <%= yield :side_bar %>

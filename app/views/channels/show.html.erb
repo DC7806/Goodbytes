@@ -8,8 +8,8 @@
   </div>
   <div class="right-section">
     <%= render "shared/user_section" %>
-    <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
-    <%= link_to "Deliver", deliver_channel_path, class: "btn btn-primary", remote: true %>
+    <%= link_to "新增文章", new_article_path, class:"btn btn-primary"%>
+    <%= link_to "全部寄出", deliver_channel_path, class: "btn btn-primary", remote: true %>
   </div>
 </nav>
 
@@ -17,7 +17,7 @@
 <section class="channel-show p-4">
   <div class="card">
     <div class="card-header">
-      Articales
+      文章列表
     </div>
     <div class="card-body p-2">
       <% @articles.each do |article| %>
@@ -42,9 +42,9 @@
   
               <div class="card-do col-4 d-flex justify-content-end align-items-center">
 <%# TODO 送信路徑還要改!!! %>
-                <%= link_to "Send", root_path, class:"btn btn-primary btn-sm mx-2 edit" %>
+                <%= link_to "寄出", root_path, class:"btn btn-primary btn-sm mx-2 edit" %>
                 <%= 
-                  link_to "Delete", article_path(article), class:"btn-sm delete" , 
+                  link_to "刪除", article_path(article), class:"btn-sm delete" , 
                                     method: :delete, 
                                     data: { 
                                       confirm: "Are you sure you want to delete this aritcle?", 

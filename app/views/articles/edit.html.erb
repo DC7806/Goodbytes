@@ -4,9 +4,9 @@
     <div class="article-sidebar">
       <div data-controller="switch" id="switch-area">
         <!-- 新增鈕 -->
-        <a href="#" data-action="click->switch#toAddContent" id="add" class="list-group-item border-0">+ Add Content</a>
+        <a href="#" data-action="click->switch#toAddContent" id="add" class="list-group-item border-0">+ 文章段落</a>
         <!-- 返回鈕 -->
-        <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;" class="list-group-item">Go back</a>
+        <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;" class="list-group-item">返回</a>
       </div>
       
       <div id="edit-area">
@@ -15,7 +15,7 @@
         <div data-controller="switch" class="border list-group-item d-flex justify-content-between">
           <%= hidden_field_tag :edit_form, "edit_header", data: {target: "switch.form"} %>
           <div>
-            Header
+            頁首
           </div>
           <div>
             <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
@@ -35,7 +35,7 @@
         <div data-controller="switch" class="list-group-item d-flex justify-content-between border">
           <%= hidden_field_tag :edit_form, "edit_footer", data: {target: "switch.form"} %>
           <div>
-            Footer
+            頁尾
           </div>
           <div>
             <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
@@ -96,10 +96,10 @@
       </ol>
     </div>
     <div class="right-section" data-controller="switch">
-      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">Edit subject</a>
-      <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">OK</a>
-      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">Cancel</a>
-      <%= link_to "Sending Email", class:"btn btn-primary btn-sm" %>
+      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
+      <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
+      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
+      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
     </div>
   </nav>
 
