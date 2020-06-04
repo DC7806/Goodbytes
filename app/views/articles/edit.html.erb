@@ -89,16 +89,15 @@
         </li>
         <li class="breadcrumb-item" aria-current="page">
           <a class="title" href=""><%= @article.subject %></a>
-          <%# 你已經寫好的文章名稱，我是想說放在這，看你要怎麼放 %>
           <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
           
         </li>
       </ol>
     </div>
     <div class="right-section" data-controller="switch">
-      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">Edit subject</a>
+      <a href="#" class="btn btn-primary btn-sm edit mr-2" data-action="click->switch#toEditSubject">更換電子報名稱</a>
       <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">OK</a>
-      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">Cancel</a>
+      <a href="#" class="btn btn-light btn-sm cancel mr-2" style="display: none;" data-action="click->switch#toEditSubject">Cancel</a>
       <%= link_to "Sending Email", class:"btn btn-primary btn-sm" %>
     </div>
   </nav>
