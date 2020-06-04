@@ -9,6 +9,7 @@
   <div class="right-section">
     <%= render "shared/user_section" %>
     <%= link_to "Create Article", new_article_path, class:"btn btn-primary"%>
+    <%= link_to "Deliver", deliver_channel_path, class: "btn btn-primary", remote: true %>
   </div>
 </nav>
 
@@ -21,7 +22,7 @@
     <div class="card-body p-2">
       <% @articles.each do |article| %>
         <div class="m-3">
-          <%= button_to article_path(article), class:"w-100 border-0 bg-white", method: "get" do %>
+          <%= button_to edit_article_path(article), class:"w-100 border-0 bg-white", method: "get" do %>
             <div class="card py-4 px-2 row flex-row justify-content-between rounded-0"  style="border-left:3px solid #41A9A4">
               <div class="col-1 d-flex justify-content-center align-items-center">
 <%# TODO判斷是否寄出，icon先放好了 %>
