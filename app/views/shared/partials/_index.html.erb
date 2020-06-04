@@ -1,17 +1,33 @@
 <!-- 這裡有inline css，因為跟原有設定衝突到 -->
 <div id="saved_links" style="display: none;">
-  <% @channel.link_groups.includes(:saved_links).each do |group| %>
-    <p class="group-name list-group-item border" style="margin-bottom: 0">
-      group - <%= group.name %>
-    </p>
-    <% group.saved_links.each do |link| %>
-      <li class="" data-controller="content">
-        <%= hidden_field_tag "content[layout]", 3 , data: {target: "content.layout" }%>
-        <%= hidden_field_tag "content[title]", link.subject , data: {target: "content.title" }%>
-        <%= hidden_field_tag "content[desc]", link.summary , data: {target: "content.desc" }%>
-        <%= hidden_field_tag "content[url]", link.url , data: {target: "content.url" }%>
-        <a class="list-group-item border" href="#" data-action="click->content#create"><%= link.subject %></a>
-      </li>
+
+  <% if @link_groups.first %>
+    <a href="#" data-id="<%= @link_groups.first.id %>" class="group-name list-group-item border current-group" data-controller="switch" data-action="click->switch#groupListToggle">
+      <%= @link_groups.first.name %>
+    </a>
+    <div class="position-relative">
+      <div class="group-list" style="display:none" data-controller="switch">
+        <% @link_groups[1..-1].each do |group| %>
+          <div class="group-name px-4 py-1" data-id="<%= group.id %>" data-action="click->switch#linkGroup">
+            <%= group.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% @link_groups.each do |group| %>
+      <div id="link-group-<%= group.id %>" <%= "style=display:none" if group != @link_groups.first %>>
+        <% group.saved_links.each do |link| %>
+          <li class="" data-controller="content">
+            <%= hidden_field_tag "content[layout]", 3 , data: {target: "content.layout" }%>
+            <%= hidden_field_tag "content[title]", link.subject , data: {target: "content.title" }%>
+            <%= hidden_field_tag "content[desc]", link.summary , data: {target: "content.desc" }%>
+            <%= hidden_field_tag "content[url]", link.url , data: {target: "content.url" }%>
+            <a class="list-group-item border" href="#" data-action="click->content#create"><%= link.subject %></a>
+          </li>
+        <% end %>
+      </div>
     <% end %>
-<% end %>
+  <% end %>
+
 </div>
