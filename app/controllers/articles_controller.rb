@@ -10,11 +10,21 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # 判斷頻道有沒有寫過文章？如果有則抓最後一篇的header跟footer來塞
+    last_article = @channel.articles.last
+    if last_article.present?
+      header = last_article.header
+      footer = last_article.footer
+    else
+      header = render_to_string "shared/template/header", layout: false
+      footer = render_to_string "shared/template/footer", layout: false
+    end
+
     @article = @channel.articles.new(article_params)
 
     # 把樣板render後的結果轉成純字串並存入article
-    @article.header = render_to_string "shared/template/header", layout: false
-    @article.footer = render_to_string "shared/template/footer", layout: false
+    @article.header = header
+    @article.footer = footer
     
     if @article.save
       redirect_to edit_article_path(@article), notice: "The article has been created."

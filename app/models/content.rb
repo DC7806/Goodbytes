@@ -19,12 +19,24 @@ class Content < ApplicationRecord
   
   LINE_LIMIT = 90
 
+  def self.display_layout
+    {
+      0 => "標題/內文",
+      1 => "標題",
+      2 => "內文",
+      3 => "超連結",
+      4 => "標題/圖片",
+      5 => "左圖右文",
+      6 => "左文右圖"
+    }
+  end
+
   def display_title
-    display_on_page(title, "Title").line_break(LINE_LIMIT)
+    display_on_page(title, "段落標題").line_break(LINE_LIMIT)
   end
   
   def display_desc
-    display_on_page(desc, "Text").line_break(LINE_LIMIT)
+    display_on_page(desc, "段落內文，在此處多撰寫一些具有您風格的文章，以使您的文章內容更加豐富～！").line_break(LINE_LIMIT)
   end
 
   private

@@ -7,7 +7,11 @@
     </div>
     <div class="border w-25"></div>
     <div class="mx-auto">
-      <%= image_tag content.image.url, style: "max-width: 100%" if content.image.present? %>
+      <% if content.image.present? %>
+        <%= image_tag content.image.url, style: "max-width: 100%"  %>
+      <% else %>
+        <%= image_tag "img_cover_big.jpg", style: "max-width: 100%" %>
+      <% end %>
     </div>
   </div>
 
@@ -17,6 +21,6 @@
   %>
 <% when :drag %>
   <%= render_drag_bar content, 
-                      content.display_title.limit(7)
+                      "Image: " + content.display_title.limit(7)
   %>
 <% end %>
