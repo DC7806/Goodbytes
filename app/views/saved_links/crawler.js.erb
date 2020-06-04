@@ -1,15 +1,28 @@
 (function () {
-    let group_id = '<%= @saved_link.link_group_id %>'
+  let ok = '<%= @crawler_link[:ok] %>' === 'true'
 
-    let url = $(`#crawler-link-${group_id} .link_url`).val()
-    let subject = '<%= @crawler.subject %>'
-    let summary = '<%= @crawler.summary %>'
+  if (ok) {
 
-    $(`#crawler-link-${group_id}`).modal('hide')
+    let group_id = '<%= @saved_link&.link_group_id %>'
+
+    let url = $(`#crawler-link-${group_id} .link_url`).val();
+    let subject = '<%= @crawler&.subject %>'
+    let summary = '<%= @crawler&.summary %>'
+
+    $(`#crawler-link-${group_id}`).modal('hide');
 
     $(`#create-link-${group_id} .link_url`).val(`${url}`);
     $(`#create-link-${group_id} .link_subject`).val(`${subject}`);
     $(`#create-link-${group_id} .link_summary`).val(`${summary}`);
 
     $(`#create-link-${group_id}`).modal('show');
+
+  } else {
+
+    $(`.error-txt`).removeClass('hidden');
+    $('.modal').on('hidden.bs.modal', function (e) {
+      $(`.error-txt`).addClass('hidden')
+    });
+
+  }
 })()

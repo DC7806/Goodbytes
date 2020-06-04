@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ["drag_area"] 
   connect(){
     window.sortable = Sortable.create(drag_area,{
-      group: "shared",
+      group: "shared", 
       animation: 250,
       ghostClass: "blue-background-class",
       onUpdate: function (e) {

@@ -8,15 +8,15 @@ class SavedLinksController < ApplicationController
   end
 
   def crawler
-    begin
-      @crawler = Crawler.new(params[:saved_link][:url])
+    crawler = Crawler.new(params[:saved_link][:url])
+
+    if crawler.validate_url
+      @crawler = crawler
       @saved_link = SavedLink.new(saved_link_params)
-    rescue => exception
-      render js: "$(`.error-txt`).removeClass('hidden');
-                  $('.modal').on('hidden.bs.modal', function (e) {
-                    $(`.error-txt`).addClass('hidden')
-                  });
-                  "
+      @crawler_link = { ok: true }
+    else
+      @crawler_link = { ok: false }
+
     end
   end
 

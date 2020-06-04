@@ -2,7 +2,17 @@ class Crawler
   require "open-uri"
   
   def initialize(url)
-    @page = Nokogiri::HTML(open(url, headers).read)
+    @url = url
+  end
+
+
+  def validate_url
+    begin
+      @page = Nokogiri::HTML(open(@url, headers).read)
+      true
+    rescue
+      false
+    end
   end
 
   def subject
@@ -24,6 +34,7 @@ class Crawler
   end
 
   private
+
   def headers
     {'User-Agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Mobile Safari/537.36'}
   end
