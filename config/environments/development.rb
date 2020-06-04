@@ -42,8 +42,8 @@ Rails.application.configure do
     address:              'smtp.mailgun.org',
     port:                 587,
     domain:               'mailby.goodbyt.es',
-    user_name:            ENV["MG_INVITE_ID"],
-    password:             ENV["MG_INVITE_PASSWORD"],
+    user_name:            ENV["MG_ID"],
+    password:             ENV["MG_PASSWORD"],
     authentication:       'plain',
     enable_starttls_auto: true 
   }

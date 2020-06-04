@@ -1,7 +1,7 @@
 class Subscriber < ApplicationRecord
   belongs_to :channel
   validates :email, format: { 
-    with: /\A[a-z]+[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z]+(\.[a-z]+){1,3}\z/ 
+    with: /\A[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z]+(\.[a-z]+){1,3}\z/ 
   }
   # 詳請參考user model
 

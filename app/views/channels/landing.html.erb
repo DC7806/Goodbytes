@@ -22,11 +22,6 @@
       <%= f.submit "訂閱我們！", class: "btn btn-danger" %>
     </div>
   <% end %>
-  <%# 因為寄信功能暫時不能用，退訂功能暫時在這邊測試，mailgun恢復後這邊要拿掉 %>
-  <%= form_tag unsubscribe_url, method: "post", remote: true do %>
-    <%= hidden_field_tag :email, @email %>
-    <%= hidden_field_tag :channel_id, @channel.id %>
-    <%= submit_tag "取消訂閱", class: "btn btn-secondary", data: {confirm: "確定要退訂嗎？"} %>
-  <% end %> 
+  <%= link_to "取消訂閱", unsubscribe_path(channel_id: @channel.id, email: "koten@gmail.com"), class: "btn btn-secondary" %>
   
 </div>

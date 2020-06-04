@@ -71,13 +71,22 @@
           .saved_link
             position: relative
             background-color: #eee
-            margin: .5rem
-            padding: 1rem
+            margin: .8rem
+            padding: .16rem .8rem .16rem .4rem
+            line-height: 1.6rem
+            height: 4rem
+            overflow: hidden
+            cursor: default
+
             &:hover .set_link
               display: flex
               cursor: pointer
-            .subject
 
+
+            .subject
+              margin: .4rem
+
+              
             .set_link
               display: none
               height: 56px
@@ -89,6 +98,11 @@
 
               .edit-icon, .destroy-icon
                 padding: 0.05rem 0.15rem
+                transition: .3s
+
+              .edit-icon:hover, .destroy-icon:hover
+                color: $dark-primary-color
+                transition: .3s
 
 // for modal
 html
@@ -103,6 +117,12 @@ html
           textarea
             max-height: 298px
             resize: none
+          
+          .link_url:read-only
+            opacity: .6
+            background-color: $bg-color
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: .1rem
 
         .modal-header, .modal-footer
           border: none

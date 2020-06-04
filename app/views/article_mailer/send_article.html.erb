@@ -1,9 +1,12 @@
 
 <%= render "articles/show" %>
 
-<%= form_tag unsubscribe_url, method: "post", remote: true do %>
-  <%= hidden_field_tag :email, @email %>
-  <%= hidden_field_tag :channel_id, @channel.id %>
-  <%= submit_tag "取消訂閱", class: "btn btn-secondary", data: {confirm: "確定要退訂嗎？"} %>
-<% end %> 
+<div>
+  <%= link_to "原文網址", article_url(@article) %>
+</div>
 
+<%= link_to(unsubscribe_url(channel_id: @channel.id, email: @email), class: "btn btn-secondary") do %>
+  <button>
+    取消訂閱
+  </button>
+<% end %>

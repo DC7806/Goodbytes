@@ -9,12 +9,12 @@
   <% if user_signed_in? %>
     <nav class="sidebar__menu sidebar__menu--push-up sidebar-line">
 
-      <div>組織列表</div>
+      <div>組織</div>
       <div class="border pr-2" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
         <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#sideListToggle">
           <div>
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-caret-down"></i>
           </div>
           <p class="mb-0">
             <%= current_organization.name %>
@@ -36,12 +36,12 @@
       </div>
 
       <% if current_channel_id %>
-        <div>頻道列表</div>
+        <div>頻道</div>
         <div class="border pr-2" data-controller="switch">
           <input type="hidden" data-target="switch.objectId" value="channel_list">
           <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#sideListToggle">
             <div>
-              <i class="fas fa-bars"></i>
+              <i class="fas fa-caret-down"></i>
             </div>
             <p class="mb-0">
               <%= current_channel.name %>
@@ -64,10 +64,10 @@
       <% end %>
 
       <div>
-        <%= link_to "電子報列表", root_path %>
+        <%= link_to "文章列表", root_path %>
       </div>
       <div>
-        <%= link_to "連結", link_group_index_path %>
+        <%= link_to "儲存連結", link_group_index_path %>
       </div>
       <div>
         <%=  link_to "公開頁面", landing_channel_path(current_channel) if current_channel_id.present? %>
