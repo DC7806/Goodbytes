@@ -2,13 +2,9 @@ class RolesController < ApplicationController
   # around_action :redirect_back_to_edit_page, except: [:create]
   
   def new
-    if current_user.send_invitation
-                   .from(@model_object)
-                   .to(params[:email])
-      @notice = "邀請信件已寄出"
-    else
-      @notice = "此成員已加入！"
-    end
+    @notice = current_user.send_invitation
+                          .from(@model_object)
+                          .to(params[:email])
     redirect_back_to_edit_page
   end
 

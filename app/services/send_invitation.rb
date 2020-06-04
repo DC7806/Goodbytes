@@ -27,6 +27,10 @@ class SendInvitation
       # 還沒定義好model object就想送信是不行的唷～揪咪～＊
       raise NameError, 'SendInvitation: model_object undefine yet.'
     end
+
+    unless email.match(/^[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z]+(\.[a-z]+){1,3}$/)
+      return "email格式不正確"
+    end
     
     relationship = @model_object.users
                                 .find_by(email: email)
@@ -63,9 +67,9 @@ class SendInvitation
         !!User.find_by(email: email)
       )
       # return true or false來提供controller判斷是否寄送成功，再讓他進行後續動作
-      return true
+      return "邀請信件已寄出"
     end
-    return false
+    return "此成員已加入！"
   end
 
   private

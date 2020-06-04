@@ -18,10 +18,14 @@ class SubscribersController < ApplicationController
     #   channel id: 頻道id
     #   email: 訂閱者email
     channel = Channel.find(params[:channel_id])
-    subscriber = channel.subscribers.find_by(email: params[:email])
+    email = params[:email]
+    subscriber = channel.subscribers.find_by(email: email)
     if subscriber and subscriber.destroy
-      render js: 'alert("成功取消訂閱！")'
+      @notice = "#{email}\n成功取消訂閱！"
+    else
+      @notice = "#{email}\n退訂失敗！"
     end
+    redirect_to landing_channel_path(channel), notice: @notice
 
   end
 
