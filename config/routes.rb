@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     collection do
       post :link_move_in_group
       post :link_change_group
+      post :crawler
     end
   end
   

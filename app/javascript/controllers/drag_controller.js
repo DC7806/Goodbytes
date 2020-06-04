@@ -8,7 +8,7 @@ export default class extends Controller {
     // 這行等到navbar更新完成記得拿掉
     $(".header_navbar").hide()
     window.sortable = Sortable.create(drag_area,{
-      group: "shared",
+      group: "shared", 
       animation: 250,
       ghostClass: "blue-background-class",
       onUpdate: function (e) {
