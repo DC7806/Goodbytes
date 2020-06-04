@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
   before_action :find_channel, except: [:show]
   before_action :channel_admin?, only: [:destroy]
   before_action :channel_member?, except: [:show]
+  before_action :give_default_header_and_footer, only: [:edit, :show]
 
   def new
     @article = @channel.articles.new
@@ -66,14 +67,6 @@ class ArticlesController < ApplicationController
     redirect_to channel_path, notice: "This article has been deleted."
   end
 
-  def header
-    
-  end
-
-  def footer
-
-  end
-
   private
   def article_params
     params.require(:article).permit(:subject, :header, :footer)
@@ -82,5 +75,13 @@ class ArticlesController < ApplicationController
   def find_article
     @article = Article.find(params[:id])
     @subobject = @article
+  end
+
+  def give_default_header_and_footer
+    unless @article.header and @article.footer
+      @article.header = File.open("app/views/shared/template/header.html.erb").read
+      @article.footer = File.open("app/views/shared/template/footer.html.erb").read
+      @article.save
+    end
   end
 end
