@@ -2,7 +2,7 @@ class InvitesController < ApplicationController
 
   def cancel # 刪除邀請
     invite = Invite.find_by(token: params[:invite_token])
-    if invite && invite.receiver == current_user.email
+    if invite
       invite.destroy
       @notice = "刪除成功！"
     else

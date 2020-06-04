@@ -1,0 +1,57 @@
+body
+  .login_wrapper
+    background-color: #fafafa
+    height: calc(100vh - #{$footer-height})
+    overflow: hidden
+
+    .logo
+      height: 4rem
+      width: 250px
+      margin: 2.5em auto 1em
+      .img
+        height: 100%
+        width: auto
+
+    .card
+      min-width: 300px
+      max-width: 35%
+      line-height: 1.5
+      box-shadow: 0 0 5px rgba(0,0,0,.08)
+      border-color: transparentize(black, .9)
+      .card-body
+        .field
+          font-weight: bolder
+          margin-bottom: 1em
+        .btn
+          width: 100%
+          margin: 1em 0
+        .btn-primary
+          color: $text-color
+          background-color: $button-color
+          border-color: $button-color
+          transition: .3s
+          &:hover
+            transition: .3s
+            filter: brightness(80%)
+            filter: contrast(120%)
+
+        .btn-dark
+          color: #333333
+          background-color: #66cccc
+          border: 2px solid #66cccc
+          transition: .3s
+          &:hover
+            border: 2px solid $secondary-color
+            background-color: #fff
+            transition: .3s
+
+.login_wrapper
+  .bottom-card
+    margin-top: 1em
+    text-align: center
+    .card-body
+      padding: .5em 0
+      a
+        font-size: 14px
+        color: #007bff
+        font-weight: bolder

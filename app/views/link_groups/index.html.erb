@@ -1,10 +1,21 @@
+<header class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Links", link_group_index_path %>
+      </li>
+    </ol>
+  </div>
+  <div class="right-section create-bar">
+    <%= render "shared/user_section" %>
+    <%# AJAX create group %>
+      <div data-toggle="modal" data-target="#create-group" class="d-inline-block">
+        <%= link_to "新增群組", new_link_group_path, remote: true, class:"btn btn-primary" %>
+      </div>
+  </div>
+</header>
+
 <div class="all-link">
-    <div class="create-bar w-100">
-      <%# AJAX create group %>
-        <div data-toggle="modal" data-target="#create-group" class="d-inline-block">
-          <%= link_to "新增群組", new_link_group_path, remote: true, class:"btn btn-primary" %>
-        </div>
-    </div>
   <div class="link">
     <%# AJAX create group modal %>
     <%= form_for(@link_group, url: link_group_index_path, method: "POST", remote: true) do |f| %>

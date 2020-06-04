@@ -1,2 +1,22 @@
-<div class="noticed"><%= notice %></div>
-<div class="alerted"><%= alert %></div>
+<div class="col-xs-10 col-xs-offset-1 fixed-top">
+  <% flash.each do |type, msg| %>
+      <% case type %>
+      <% when "notice" %>
+        <% alert_css = "warning" %>
+      <% when "alert" %>
+        <% alert_css = "danger" %>
+      <% else %>
+        <% alert_css = "#{type}" %>
+      <% end %>
+    <div class="alert alert-<%= alert_css %>">  
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <ul>
+        <% msg.split("\n").each do |sub_msg| %>
+          <li>
+            <%= sub_msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

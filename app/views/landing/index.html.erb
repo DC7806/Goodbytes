@@ -1,71 +1,137 @@
-<nav class="landing_navbar">
-  <%= image_tag("goodbytes-logo.png", :alt => "branding logo", class:"landing_navbar__logo") %>
-  <div class="landing_navbar__menu">
-    <%= link_to "註冊", new_user_registration_path, class:"landing_navbar__menu__item landing_navbar__menu__item--opaque" %>
-    <%= link_to "登入", new_user_session_path, class:"landing_navbar__menu__item" %>
-  </div>
-</nav>
-<div class="landing__hero">
-  <div class="wrapper">
-    <h3 class="landing__hero__text">
-      還在尋覓好上手的電子報編輯器嗎？ 
-    </h3>
-    <h3 class="landing__hero__text">
-      快來Goodbytes一起聰明寄信吧！  
-    </h3>
-      <%= link_to "開始編輯電子報", new_user_registration_path, class:"landing__hero__cta"
-       %>
-  </div>
-</div>
+<section class="landing-page">
+    <nav class="landing_navbar navbar navbar-expand-sm px-5">
+      <a class="navbar-brand" href="#">
+        <%=image_tag("goodbytes-logo.png", :alt=> "branding logo", class:"landing_navbar__logo") %>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#user-section">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="user-section">
+        <div class="navbar-nav landing_navbar__menu d-flex align-items-end">
+          <%=link_to "註冊", new_user_registration_path, class:"col-5 nav-item nav-link landing_navbar__menu__item landing_navbar__menu__item--opaque"%>
+          <%=link_to "登入", new_user_session_path,  class:"col-5 nav-item nav-link landing_navbar__menu__item sign-in"%>
+        </div>
+      </div>
+    </nav>
 
-<section class="landing__section">
-  <div class="landing__section__wrapper">
-    <h1 class="landing__section__header">
-      Goodbytes</h1>
-    <hr />
-    <p class="landing__section__description">
-      能帶給您什麼樣Email行銷體驗？
-    </p>
+  <div class="landing__hero">
+    <div class="container">
+      <div class="wrapper row">
+        <div class="wrapper-top-blank col-12 p-0">
+        </div>
+          <div class="pic">
+            <%=image_tag("landing-bg.svg") %>
+          </div>
+        <div class="txt col-md-5  col-sm-12 order-md-1 order-sm-2 order-2 p-3">
+          <h3 class="landing__hero__text">還在尋覓好上手的電子報編輯器嗎？</h3>
+          <h3 class="landing__hero__text">快來Goodbytes一起聰明寄信吧！</h3>
+          <%=link_to "開始編輯電子報", new_user_registration_path, class:"landing__hero__cta" %>
+        </div>
+        <div class="wrapper-right-blank col-md-7 col-sm-12 order-md-2 order-sm-1 order-1">
 
-    <section class="four-columns">
-      <div class="card">
-        <div class="round"><i class="far fa-edit"></i></div>
-        <div class="card-body">
-          <h5 class="card-title">拖放式編輯</h5>
-          <p class="card-text">不需要學HTML、CSS，讓您設計Email得心應手</p>
         </div>
       </div>
-      <div class="card">
-        <div class="round"><i class="fas fa-link"></i></div>
-        <div class="card-body">
-          <h5 class="card-title">儲存網站連結</h5>
-          <p class="card-text">遠離瀏覽器書籤黑洞，我要的網站連結都在Goodbytes!</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="round"><i class="far fa-paper-plane"></i></div>
-        <div class="card-body">
-          <h5 class="card-title">串接Mailgun</h5>
-          <p class="card-text">省去您寄信遇到的所有麻煩事，還能追蹤各項數據，及時回饋</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="round"><i class="fas fa-shopping-basket"></i></div>
-        <div class="card-body">
-          <h5 class="card-title">一站式服務</h5>
-          <p class="card-text">聽說您需要的服務，Goodbytes都有了</p>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
+
+  <section class="landing__section">
+    <div class="landing__section__wrapper">
+      <h1 class="landing__section__header pt-4">Goodbytes</h1>
+      <hr />
+      <h3 class="landing__section__description">您能獲得什麼樣的體驗？</h3>
+      <div class="container">
+        <section class="row">
+          <div class="col-lg-3 col-md-6 col-sm-12 my-4">
+            <div class="card h-100">
+              <div class="round"><i class="far fa-edit"></i></div>
+              <div class="card-body px-2 py-3">
+                <h5 class="card-title">拖放式編輯</h5>
+                <p class="card-text">不需要學程式語言<br>讓您設計Email得心應手</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 my-4">
+            <div class="card h-100">
+              <div class="round"><i class="fas fa-link"></i></div>
+              <div class="card-body px-2 py-3">
+                <h5 class="card-title">儲存網站連結</h5>
+                <p class="card-text">遠離瀏覽器書籤黑洞<br>您想要的網站連結都在<br>Goodbytes !</p>
+              </div>
+            </div>
+          </div>
+          <div class=" col-lg-3 col-md-6 col-sm-12 my-4">
+            <div class="card h-100">
+              <div class="round"><i class="far fa-paper-plane"></i></div>
+              <div class="card-body px-2 py-3">
+                <h5 class="card-title">串接寄信服務</h5>
+                <p class="card-text">自動化寄信<br>免串接API<br>省去寄信的所有麻煩事</p>
+              </div>
+            </div>
+          </div>
+          <div class=" col-lg-3 col-md-6 col-sm-12 my-4">
+            <div class="card h-100">
+              <div class="round"><i class="fas fa-shopping-basket"></i></div>
+              <div class="card-body px-2 py-3">
+                <h5 class="card-title">一站式服務</h5>
+                <p class="card-text">聽說您有需要的服務？<br>Goodbytes都有了</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__pic">
+    <div class="pic-txt mx-auto text-center">
+      <h3>讓更多人知道您想傳達的訊息</h3>
+    </div>
+    <div id="scene">
+      <div data-depth="0.3" class="back">
+        <%=image_tag("back.svg") %>
+      </div>
+      <div data-depth="0.2" class="bot">
+        <%=image_tag("bot.svg") %>
+      </div>
+      <div data-depth="0.3" class="people">
+        <%=image_tag("people.svg") %>
+      </div>
+      <div data-depth="0.9" class="fly">
+        <%=image_tag("fly.svg") %>
+      </div>
+      <div data-depth="0.4" class="msg1">
+        <h4 class="shadow">快速編輯</h4>
+      </div>
+      <div data-depth="0.3" class="msg2">
+        <h4 class="shadow">電子報發送</h4>
+      </div>
+      <div data-depth="0.3" class="msg3">
+        <h4 class="shadow">使用者訂閱</h4>
+      </div>
+      <div data-depth="0.3" class="msg4">
+        <h4 class="shadow">邀請共同編輯</h4>
+      </div>
+      <div data-depth="0.3" class="msg5">
+        <h4 class="shadow">儲存連結</h4>
+      </div>
+      <div data-depth="0.6" class="msg">
+        <%=image_tag("msg.svg") %>
+      </div>
+      <div data-depth="0.7" class="mail">
+        <i class="fas fa-mail-bulk"></i>
+      </div>
+      <div data-depth="0.6" class="website1">
+        <%=image_tag("website1.svg") %>
+      </div>
+      <div data-depth="0.7" class="website2">
+        <%=image_tag("website2.svg") %>
+      </div>
+    </div>
+  </section>
+  
 </section>
 
-<footer class="landing__footer">
-  <nav class="landing__footer__nav">
-    <%= link_to "聯絡我們" %>
-    <%= link_to "隱私權政策" %>
-    <%= link_to "使用條款" %>
-    <div class="landing__footer__nav__copyright">
-  Goodbytes © 2020版權所有</div>
-  </nav>
-</footer>
+<script>
+  var scene = document.getElementById('scene');
+  var parallaxInstance = new Parallax(scene);
+</script>

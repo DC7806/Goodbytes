@@ -1,0 +1,22 @@
+<%# 各樣板共用之drag bar樣板 %>
+<div class="drag-bar" data-id="<%= content.id %>">
+  <div data-controller="switch" class="border d-flex  flex-nowrap justify-content-between list-group-item m-0" >
+    <div class="d-flex">
+      <div class="px-1">
+        <i class="fas fa-arrows-alt-v"></i>
+      </div>
+      <div class="px-1" name="title">
+        <%= display %>
+      </div>
+    </div>
+      <%= hidden_field_tag :edit_form, "edit_content_"+content.id.to_s, data: {target: "switch.form"} %>
+    <div>
+      <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+        <i class="far fa-edit"></i>
+      <% end %>
+      <%= link_to content_path(content), method: 'delete', data: {confirm: "確定刪除此內容？" }, remote: true do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

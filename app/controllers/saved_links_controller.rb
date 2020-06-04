@@ -1,10 +1,23 @@
 class SavedLinksController < ApplicationController
-  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group]
+  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group, :crawler]
   before_action :find_channel
   before_action :channel_member?
   before_action :find_link_groups, only: [:create, :update, :destroy]
   
   def new
+  end
+
+  def crawler
+    crawler = Crawler.new(params[:saved_link][:url])
+
+    if crawler.validate_url
+      @crawler = crawler
+      @saved_link = SavedLink.new(saved_link_params)
+      @crawler_link = { ok: true }
+    else
+      @crawler_link = { ok: false }
+
+    end
   end
 
   def create
