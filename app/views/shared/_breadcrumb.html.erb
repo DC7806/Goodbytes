@@ -3,7 +3,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item" aria-current="page">
-    <%= link_to current_channel.name, channel_path %>
+    <%= link_to current_channel.name, channel_path if current_channel_id.present? %>
   </li>
 
 

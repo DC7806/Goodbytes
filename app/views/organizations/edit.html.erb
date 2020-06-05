@@ -25,6 +25,11 @@
           <li class="nav-item">
           <%= link_to "頻道資料", edit_channel_path, class:"nav-link" %>
           </li>
+          <div class="org-form pl-5">
+            <div class="form-row align-items-center">
+              <h4>組織：<%= @organization.name %></h4>
+            </div>
+          </div>
         </ul>
       </div>
     </div>
@@ -165,15 +170,16 @@
       <div class="card-body">
         <div class="org-form">
           <div class="form-row align-items-center">
-            <h6 class="col-auto col-form-label">目前所在組織：<%= @organization.name %></h6>
-          </div>
-        </div>
-        <div class="org-form">
-          <div class="form-row align-items-center">
             <h6 class="col-auto col-form-label">組織改名：</h6>
             <%= form_for(@organization, url: organization_path, method: 'patch') do |f| %>
-            <%= f.text_field :name, placeholder: "請輸入新名稱" %>
+            <%= f.text_field :name, value: "", placeholder: "請輸入新名稱" %>
             <%= f.submit "送出", class: "btn btn-outline-secondary" %>
+            <% end %>
+          </div>
+          <div class="form-row align-items-center">
+            <h6 class="col-auto col-form-label">刪除組織</h6>
+            <%= form_tag(organization_path, method: 'delete') do %>
+              <%= submit_tag "刪除組織", class: "btn btn-outline-info", data: {confirm: "確定要刪除組織 #{@organization.name} ?"} %>
             <% end %>
           </div>
         </div>
