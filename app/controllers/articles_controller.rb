@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @contents = @article.contents.order(:position)
+    @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
     render layout: "article"
   end
 

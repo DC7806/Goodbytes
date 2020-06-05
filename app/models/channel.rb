@@ -20,7 +20,7 @@ class Channel < ApplicationRecord
   # 在organization身上呼叫就是organization的關係鏈
   def relationship(user_id)
     channels_org_users.includes(:organizations_user).find do |rel|
-      rel.organizations_user.user_id == user_id
+      rel.organizations_user.user_id == user_id.to_i
     end
   end
 
