@@ -14,8 +14,9 @@
 <% if resource.errors.any? %>
   <% flash.alert = resource.errors.full_messages.join("\n") %>
 <% end %>
-<div class="edit wrapper"> 
-  <section class="account_setting_wrapper">
+
+<div class="edit-wrapper"> 
+  <section class="account_setting_wrapper user-edit">
     <div class="card">
       <div class="card-header text-center">
         <ul class="nav nav-tabs">
@@ -31,6 +32,7 @@
         </ul>
       </div>
     </div>
+
     <div class="card">
       <div class="card-header text-center subtitle">
         <h6 class="card-title m-0">您收到的邀請</h6>
@@ -59,6 +61,7 @@
         </table>
       </div> 
     </div>
+
     <div class="card">
       <div class="card-header text-center subtitle">
         <h6 class="card-title m-0">編輯個人資料</h6>
@@ -70,7 +73,7 @@
           
             <div class="field">
               <%= f.label :email, "電子信箱" %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", readonly: "true" %>
             </div>
           
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -78,14 +81,14 @@
             <% end %>
           
             <div class="field">
-              <%= f.label :password, " 輸入新密碼" %> (如不修改請留白)<br />
+              <%= f.label :password, " 輸入新密碼" %>（如不修改請留白）<br />
               <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %> <small id="emailHelp" class="form-text text-muted"><% if @minimum_password_length %>
                 (長度至少<%= @minimum_password_length %>位)
               <% end %></small>
             </div>
           
             <div class="field">
-              <%= f.label :password_confirmation, "確認新密碼" %> (如不修改請留白)<br />
+              <%= f.label :password_confirmation, "確認新密碼" %>（如不修改請留白）<br />
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
             </div>
           
@@ -101,5 +104,6 @@
         </div>
       </div>
     </div>
+
   </section>
 </div>

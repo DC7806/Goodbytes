@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
     @article.footer = render_to_string "shared/template/footer", layout: false
     
     if @article.save
-      redirect_to edit_article_path(@article), notice: "The article has been created."
+      redirect_to edit_article_path(@article), notice: "電子報新增成功。"
     else
       render :new
     end
@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy  
-    redirect_to channel_path, notice: "This article has been deleted."
+    redirect_to channel_path, notice: "電子報刪除成功。"
   end
 
   def header
