@@ -12,13 +12,13 @@ module ApplicationHelper
     tomorrow = today.tomorrow
   
     if (morning..noon).cover? now
-      'Good morning'
+      '早安'
     elsif (noon..evening).cover? now
-      'Good afternoon'
+      '午安'
     elsif (evening..night).cover? now
-      'Good evening'
+      '晚安'
     elsif (night..tomorrow).cover? now
-      'Good night'
+      '晚安'
     end
   end
 

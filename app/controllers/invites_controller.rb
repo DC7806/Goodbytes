@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
     invite = Invite.find_by(token: params[:invite_token])
     if invite
       invite.destroy
-      @notice = "刪除成功！"
+      @notice = "邀請刪除成功！"
     else
       @notice = "操作失敗！"
     end
