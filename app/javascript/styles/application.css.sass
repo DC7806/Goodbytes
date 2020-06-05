@@ -3,6 +3,8 @@ $primary-color: #66cccc
 $dark-primary-color: #41A9A4
 $secondary-color: #7aa7aa 
 $dark-color: #4a5559
+$dark-color-blue: #566274
+$dark-color-green: #526362
 $button-color: #ffcc33
 $button-text-color: #ffffff
 $text-color: #333333
@@ -21,6 +23,9 @@ $sidebar-width: 250px
 $article-sidebar-width: 320px
 $top-bar-height: 60px
 $footer-height: 9rem
+
+.field_with_errors
+  display: inline  
 
 .hidden
   visibility: hidden
@@ -228,33 +233,3 @@ a
       color: $secondary-color
       margin: .5em 0 2em 0
 
-  //警示訊息
-
-.alert
-  margin-bottom: 0
-  position: absolute
-  right: 20px
-  top: $top-bar-height + 20px
-  z-index: 999
-  width: 240px
-  height: 80px
-  padding: .5rem
-
-  ul
-    padding: 0
-    margin-bottom: 0
-    list-style: none
-    position: absolute
-    top: 35%
-    bottom: 50%
-    left: .5rem
-    right: 0
-    margin: auto
-
-  .close
-    cursor: pointer
-
-// 按鈕色調統一
-.btn-primary
-  background-color: $dark-primary-color
-  border: none

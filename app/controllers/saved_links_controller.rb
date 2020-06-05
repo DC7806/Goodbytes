@@ -23,13 +23,13 @@ class SavedLinksController < ApplicationController
   def create
     @saved_link = SavedLink.new(saved_link_params)
 
-    @saved_link.position = SavedLink.minimum(:position) - 1
+    @saved_link.position = (SavedLink.minimum(:position) || 0) - 1
     # 讓新增的@saved_link永遠排在最上面第一個
 
     if @saved_link.save
       @ajax_create_link = { ok: true }
     else
-      @ajax_create_link = { ok: false, message: 'Create Error!' }
+      @ajax_create_link = { ok: false, message: '創建失敗!' }
     end
   end
 
@@ -41,7 +41,7 @@ class SavedLinksController < ApplicationController
       @link_group = LinkGroup.new
       @ajax_update_link = { ok: true }
     else
-      @ajax_update_link = { ok: false, message: 'Update Error!' }
+      @ajax_update_link = { ok: false, message: '更新失敗!' }
     end
   end
 

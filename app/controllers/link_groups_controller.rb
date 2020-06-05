@@ -14,13 +14,13 @@ class LinkGroupsController < ApplicationController
   def create
     @link_group = @channel.link_groups.build(link_group_params)
 
-    @link_group.position = @channel.link_groups.minimum(:position) - 1
+    @link_group.position = (@channel.link_groups.minimum(:position) || 0) - 1
     # 讓新增的@link_group永遠排在最前面第一個
 
     if @link_group.save
       @ajax_create_group = { ok: true }
     else
-      @ajax_create_group = { ok: false, message: 'Create Error!' }
+      @ajax_create_group = { ok: false, message: '創建失敗!' }
     end
   end
 
@@ -32,7 +32,7 @@ class LinkGroupsController < ApplicationController
 
       @ajax_update_group = { ok: true }
     else
-      @ajax_update_group = { ok: false, message: 'Update Error!' }
+      @ajax_update_group = { ok: false, message: '更新失敗!' }
     end
   end
 

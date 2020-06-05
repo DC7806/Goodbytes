@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
   def redirect_if_not_found
     clean_session
-    @notice = "Sorry we cannot find this #{@model_name}." if !@notice
+    @notice = "對不起我們找不到 #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
   end
 
