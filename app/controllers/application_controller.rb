@@ -90,7 +90,11 @@ class ApplicationController < ActionController::Base
   def redirect_if_not_allow(model_object, *purview)
     unless purview_check(model_object, *purview)
       clean_session
-      redirect_to root_path, notice: '沒有權限進行此操作！'
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: '沒有權限進行此操作！' }
+        format.json { head :no }
+      end
+      
       return false
     end
     return true

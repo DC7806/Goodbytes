@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resource    :channels,      as: 'channel',  path: '/channel', except: :index do
     get 'landing/:id',      as: 'landing',    to: 'channels#landing'
-    get :deliver
+    post :deliver
     resource  :channel_roles, as: 'role',     path: '/role',    only: [:update, :destroy] do
       post :new,            as: 'new',        path: '/new'
       get :create,          as: 'accept',     path: '/:token'
