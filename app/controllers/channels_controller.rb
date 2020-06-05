@@ -24,13 +24,13 @@ class ChannelsController < ApplicationController
   def create
     channel = Channel.new(channel_params)
     if channel.save
-      @notice = "channel新增成功"
+      @notice = "頻道新增成功"
       channel.update_role(current_user.id, admin)
       channel.link_groups.create(name: "INBOX")
       session["goodbytes7788"]["channel_id"] = channel.id
       path = channel_path
     else
-      @notice = "channel新增失敗"
+      @notice = "頻道新增失敗"
       path = root_path
     end
     redirect_to(path, notice: @notice) and return
@@ -38,18 +38,18 @@ class ChannelsController < ApplicationController
 
   def update
     if @channel.update(channel_params)
-      @notice = "channel更新成功"
+      @notice = "頻道更新成功"
     else
-      @notice = "channel更新失敗"
+      @notice = "頻道更新失敗"
     end
-    redirect_to(root_path, notice: @notice) and return
+    redirect_to(edit_channel_path, notice: @notice) and return
   end
 
   def destroy
     if @channel.destroy
-      @notice = "channel刪除成功"
+      @notice = "頻道刪除成功"
     else
-      @notice = "channel刪除失敗"
+      @notice = "頻道刪除失敗"
     end
     redirect_to(root_path, notice: @notice) and return
   end
