@@ -63,16 +63,14 @@
         </div>
       <% end %>
 
-      <div class="pt-4">
-        <div>
-          <%= link_to "電子報", root_path %>
-        </div>
-        <div>
-          <%= link_to "連結", link_group_index_path %>
-        </div>
-        <div>
-          <%=  link_to "發布平台", landing_channel_path(current_channel) if current_channel_id.present? %>
-        </div>
+      <div>
+        <%= link_to "文章列表", root_path %>
+      </div>
+      <div>
+        <%= link_to "儲存連結", link_group_index_path %>
+      </div>
+      <div>
+        <%=  link_to "公開頁面", landing_channel_path(current_channel) if current_channel_id.present? %>
       </div>
     </nav>
 
