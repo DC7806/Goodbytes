@@ -8,6 +8,10 @@ export default class extends Controller {
   // 而在template則除了layout外都是空值
   create(evt){
     evt.preventDefault()
+    let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
+    $(contents).append(loaderTemplate)
+    let currentLoader = $(contents).children().get(-1)
+    console.log(currentLoader)
     let data = JSON.stringify({
       layout: this.layoutTarget.value,
       title: this.titleTarget.value,
@@ -25,7 +29,7 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        
+        $(currentLoader).remove()
       }, 
       error: err => {
         console.log(err);
