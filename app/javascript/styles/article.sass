@@ -270,19 +270,20 @@
   position: relative
 
   .width-icon
-    position: absolute
-    left: 0
-    top: 0
-    margin: 1.5rem
+    position: fixed
+    z-index: 999
 
     .mobile, .desktop
+      background-color: #fff
       width: 2rem
       height: 2rem
       padding: 0
       position: relative
+      transition: .3s
 
       &:hover
         color: $dark-primary-color
+        transition: .3s
     
       .fa-mobile-alt, .fa-desktop
         position: absolute
