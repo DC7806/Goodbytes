@@ -5,7 +5,7 @@
     <div class="col-6">
       <p class="content-desc"><%= content.display_desc %></p>
     </div>
-    <div class="col-6 my-auto">
+    <div class="col-6 my-auto content-img">
       <% if content.image.present? %>
         <%= image_tag content.image.url, style: "max-width: 100%"  %>
       <% else %>

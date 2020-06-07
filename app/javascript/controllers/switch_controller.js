@@ -13,6 +13,7 @@ export default class extends Controller {
   }
 
   toDrag(evt){
+    evt.preventDefault()
     $("#add").show()
     $("#back").hide()
     $(".edit_content").hide()

@@ -8,7 +8,7 @@ show就是文章裡的樣子，form就是文章的編輯器，drag就是側邊�
 <% case type %>
 <% when :show %>
   <div class="content d-flex" data-id="<%= content.id %>">
-    <div class="col-6 my-auto">
+    <div class="col-6 my-auto content-img">
       <% if content.image.present? %>
         <%= image_tag content.image.url, style: "max-width: 100%"  %>
       <% else %>
