@@ -6,11 +6,13 @@ class OrganizationsController < ApplicationController
     organization = Organization.new(organization_params)
     if organization.save
       organization.update_role(current_user.id, admin)
+      session["goodbytes7788"]["organization_id"] = organization.id
+      session["goodbytes7788"]["channel_id"] = nil
       @notice = '組織新增成功'
     else
       @notice = "組織新增失敗"
     end
-    redirect_to root_path, notice: @notice
+    redirect_to channel_path, notice: @notice
   end
   def edit
     # organization後台頁面
@@ -28,6 +30,7 @@ class OrganizationsController < ApplicationController
 
   def destroy
     if @organization.destroy
+      clean_session
       @notice = "組織刪除成功"
     else
       @notice = "組織刪除失敗"

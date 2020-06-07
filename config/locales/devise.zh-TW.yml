@@ -113,9 +113,9 @@ zh-TW:
       signed_up_but_inactive: 您已註冊成功。然而因為您的帳號尚未啓動，暫時無法登入，抱歉！
       signed_up_but_locked: 您已註冊成功。 然而因為您的帳號已被鎖定，暫時無法登入，抱歉！
       signed_up_but_unconfirmed: 確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。
-      update_needs_confirmation: 您已經成功的更新帳號資訊，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。
-      updated: 您已經成功的更新帳號資訊。
-      updated_but_not_signed_in: 您已經成功的更新帳號資訊。但因為您變更了密碼，請重新登入。
+      update_needs_confirmation: 您已成功更新帳戶資料，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。
+      updated: 您已成功更新帳戶資料。
+      updated_but_not_signed_in: 您已成功更新帳戶資料。但因為您變更了密碼，請重新登入。
     sessions:
       already_signed_out: 登出成功。
       new:

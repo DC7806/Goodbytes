@@ -33,7 +33,7 @@ class ChannelsController < ApplicationController
       @notice = "頻道新增失敗"
       path = root_path
     end
-    redirect_to(path, notice: @notice) and return
+    redirect_to(path, notice: @notice)
   end
 
   def update
@@ -42,16 +42,17 @@ class ChannelsController < ApplicationController
     else
       @notice = "頻道更新失敗"
     end
-    redirect_to(edit_channel_path, notice: @notice) and return
+    redirect_to(edit_channel_path, notice: @notice)
   end
 
   def destroy
     if @channel.destroy
+      session["goodbytes7788"]["channel_id"] = @organization.channels.first&.id
       @notice = "頻道刪除成功"
     else
       @notice = "頻道刪除失敗"
     end
-    redirect_to(root_path, notice: @notice) and return
+    redirect_to(channel_path, notice: @notice)
   end
 
   def deliver
