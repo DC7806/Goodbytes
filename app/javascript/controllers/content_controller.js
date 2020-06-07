@@ -48,8 +48,6 @@ export default class extends Controller {
     let thisLoader = contentTarget.find(".content-insert-loader").get(0)
     thisLoader.style.position = "absolute"
     thisLoader.style.margin = 0
-    let height = contentTarget.height()
-    thisLoader.style.height = `${height}px`
 
     $("#add").show()
     $("#back").hide()
