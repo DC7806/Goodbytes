@@ -251,4 +251,46 @@
               margin-top: 2rem
               margin-bottom: 2rem
 
+.layout 
+  main 
+    .container-fluid 
+      .wrap 
+        .replace
+          .article-show
+            .top-bar
+              .right-section
+                .submit
+                  background-color: $dark-primary-color
+                  color: $button-text-color
+                  &:hover
+                    background-color: $primary-color 
+                .cancel
 
+.article-body
+  position: relative
+
+  .width-icon
+    position: absolute
+    left: 0
+    top: 0
+    margin: 1.5rem
+
+    .mobile, .desktop
+      width: 2rem
+      height: 2rem
+      padding: 0
+      position: relative
+
+      &:hover
+        color: $dark-primary-color
+    
+      .fa-mobile-alt, .fa-desktop
+        position: absolute
+        top: calc( 50% - .5rem )
+        right: 0
+        left: 0
+        margin: auto
+
+  .article-content
+    #article-part
+      width: 600px

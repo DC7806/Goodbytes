@@ -95,20 +95,26 @@
       </ol>
     </div>
     <div class="right-section" data-controller="switch">
-      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
-      <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
-      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
+      <a href="#" class="mr-2 btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
+      <a href="#" class="mr-1 btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
+      <a href="#" class="mr-2 btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
       <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
     </div>
   </nav>
 
-<div class="card-body container">
+<div class="article-body card-body container" data-controller="article">
+  <div class="width-icon">
+    <div class="btn border mobile" data-action="click->article#mobile">
+      <i class="fas fa-mobile-alt"></i>
+    </div>
+    <div class="btn border desktop" data-action="click->article#desktop">
+      <i class="fas fa-desktop"></i>
+    </div>
+  </div>
 
   <section class="article-content">
-  
     <!-- 文章內容 -->
-
-    <div class="card-body container">
+    <div class="card-body container" id="article-part">
 
       <!-- 頁首 -->
       <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>

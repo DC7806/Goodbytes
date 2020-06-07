@@ -37,4 +37,16 @@ export default class extends Controller {
     
   }
 
+  mobile(evt){
+    evt.preventDefault()
+    $('#article-part').width(340)
+    
+  }
+
+  desktop(evt){
+    evt.preventDefault()
+    $('#article-part').width(600)
+    
+  }
+
 }
