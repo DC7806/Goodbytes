@@ -1,0 +1,295 @@
+<html>
+
+  <body>
+    <div style="background-color: #e0f1f3 ;margin: 0;padding: 0;font-family: 'Microsoft YaHei';">
+      <!-- header -->
+      <div id="header" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div id="header-preheader" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;">preheader</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div id="header-title" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#626262;">Title</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div id="header-desc" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;">description</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 標題文字 -->
+      <div   data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#626262;"><%= content.display_title %></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- saved_link連結 -->
+      <div   data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <a href="<%= content.url %>" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#41A9A4;"><%= content.display_title %></a
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 標題 -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#626262;"><%= content.display_title %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 內文 -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 左圖右文 -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="border-collapse: collapse;direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="max-width: 50%;min-width:300px; font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="center" style="border-collapse: collapse;font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                          <tbody>
+                            <tr>
+                              <td style="border-collapse: collapse;"> <img height="auto" src="https://designspell.files.wordpress.com/2012/01/sciolino-paris-bw.jpg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"/> </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="min-width:300px; max-width: 50%; font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="border-collapse: collapse;font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 右圖左文 -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="border-collapse: collapse;direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="min-width:300px; max-width: 50%; font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="border-collapse: collapse;font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="max-width: 50%;min-width:300px; font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="center" style="border-collapse: collapse;font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                          <tbody>
+                            <tr>
+                              <td style="border-collapse: collapse;"> <img height="auto" src="https://designspell.files.wordpress.com/2012/01/sciolino-paris-bw.jpg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"/> </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- 上標中圖下文，用tr去做分隔，不要再拿掉就好了，padding可以做調整 -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0 10px;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                          <tbody>
+                <!-- 用tr分開 -->
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:20px 0;word-break:break-word;">
+                                <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#626262;"><%= content.display_title %></div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="width:550px;"> <img height="auto" src="http://1.bp.blogspot.com/-TPrfhxbYpDY/Uh3Refzk02I/AAAAAAAALw8/5sUJ0UUGYuw/s1600/New+York+in+The+1960's+-+70's+(2).jpg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"
+                                  width="550" /> </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:20px 0;word-break:break-word;">
+                                <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 按鈕  -->
+      <div data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                          <tr>
+                            <td align="center" bgcolor="#f45e43" role="presentation" style="border:none;border-radius:3px;cursor:auto;background:#41A9A4;" valign="middle">
+                              <a style="display:inline-block;background:#41A9A4;color:white;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px;">
+                              訂閱</a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- footer -->
+      <div id="footer" style="margin:0px auto;max-width:600px;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div id="footer-outro" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;">outro</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </body>
+
+</html>
