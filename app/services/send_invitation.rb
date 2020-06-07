@@ -28,7 +28,7 @@ class SendInvitation
       raise NameError, 'SendInvitation: model_object undefine yet.'
     end
 
-    unless email.match(/^[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z]+(\.[a-z]+){1,3}$/)
+    unless email.match(/^[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z0-9]+(\.[a-z]+){1,3}$/)
       return "email格式不正確"
     end
     

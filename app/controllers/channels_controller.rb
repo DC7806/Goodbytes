@@ -56,17 +56,21 @@ class ChannelsController < ApplicationController
   end
 
   def deliver
-    @channel.articles.where(deliver_time: nil).each do |article|
+    sending_articles = @channel.articles.where(id: params[:articles])
+    unless sending_articles.first
+      head :no
+    end
+    sending_articles.each do |article|
       @channel.subscribers.each do |subscriber|
         ArticleMailerJob.perform_later(
           subscriber.email,
           article.id
         )
       end
-      # article.deliver_time = Time.now
-      # article.save
+      article.deliver_time = Time.now
+      article.save
     end
-    render js: 'alert("信件已寄出")'
+    head :ok
   end
 
   def landing
