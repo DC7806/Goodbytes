@@ -4,43 +4,46 @@
 <!-- 預設是一定會有最後一個submit按鈕 -->
 %>
 <%= form_for( content , remote: true, html: {style: "display: none"}) do |f| %>
-  <%= f.hidden_field :layout , value: Content.layouts[content.layout] %>
 
-  <% if title %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-  <% end %>
-
-  <% if desc %>
-    <div class="form-group">
-      <%= f.label :desc %>
-      <%= f.text_area :desc, class: "form-control", style: "height: 200px;resize: none" %>
-    </div>
-  <% end %>
-
-  <% if url %>
-    <div class="form-group">
-      <%= f.label :url %>
-      <%= f.text_field :url, class: "form-control" %>
-    </div>
-  <% end %>
-
-  <% if image %>
-    <div class="form-group">
-      <%= f.label :image %>
-      <div class="d-flex justify-content-center">
-        <div>
-          <%= image_tag content.image.form.url if content.image.present? %>
-        </div>
+  <div class="edit-content">
+    <%= f.hidden_field :layout , value: Content.layouts[content.layout] %>
+  
+    <% if title %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
       </div>
-      <%= f.file_field :image, class: "form-control" %>
+    <% end %>
+  
+    <% if desc %>
+      <div class="form-group">
+        <%= f.label :desc %>
+        <%= f.text_area :desc, class: "form-control", style: "height: 200px;resize: none" %>
+      </div>
+    <% end %>
+  
+    <% if url %>
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :url, class: "form-control" %>
+      </div>
+    <% end %>
+  
+    <% if image %>
+      <div class="form-group">
+        <%= f.label :image %>
+        <div class="d-flex justify-content-center">
+          <div>
+            <%= image_tag content.image.form.url if content.image.present? %>
+          </div>
+        </div>
+        <%= f.file_field :image, class: "form-control" %>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.submit "OK", data: {controller: "switch", action: "click->switch#toDrag"}, class: "form-control" %>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.submit "OK", data: {controller: "switch", action: "click->switch#toDrag"}, class: "form-control" %>
   </div>
   
 <% end %>

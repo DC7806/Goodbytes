@@ -1,10 +1,18 @@
 <div style="display: none;" class="edit_content" id="edit_footer" data-controller="footer">
+
   <div class="form-group">
-    <div class="d-flex justify-content-between">
-      <div><label for="edit-outro">outro</label></div>
-      <div class="col-2"><input data-target="footer.showOutro" type="checkbox"></div>
+    <div class="d-flex justify-content-between custom-control custom-switch">
+      <div>
+        結尾
+      </div>
+      <div>
+        <input data-target="footer.showOutro" type="checkbox" class="custom-control-input" id="edit-outro">
+        <label for="edit-outro" class="custom-control-label" ></label>
+      </div>
     </div>
-    <textarea style="height: 200px;resize: none" data-target="footer.outro" class="form-control" id="edit-outro"></textarea>
+    <textarea style="height: 200px;resize: none" data-target="footer.outro" class="form-control" id="edit-outro">
+    </textarea>
   </div>
-  <button class="form-control" data-action="click->footer#submit">OK</button>
+
+  <button class="form-control ok-button" data-action="click->footer#submit">OK</button>
 </div>

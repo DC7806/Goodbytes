@@ -25,7 +25,7 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        
+        alert('none')
       }, 
       error: err => {
         console.log(err);

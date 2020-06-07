@@ -15,11 +15,11 @@
 <div class="card border-info mb-3" >
   <%= form_for @article, url: article_index_path	 do |f| %>
     <div class="card-header">
-      <%= f.label :subject, "Subject" %>
+      <%= f.label :subject, "標題" %>
       <%= f.text_field :subject %>
     </div>
     <div class="card-body text-info">
-      <%= f.submit "Create Article" %>
+      <%= f.submit "新增電子報" %>
     </div>
   <% end %>
 </div>
