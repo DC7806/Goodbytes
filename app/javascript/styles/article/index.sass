@@ -96,6 +96,7 @@
                 .saved_links
 
               #templates
+                display: flex
                 
                 li
                   list-style-type: none
@@ -189,8 +190,26 @@
             min-height: calc( 100vh - #{$top-bar-height} )
 
             .content
+              position: relative
               margin-top: 2rem
               margin-bottom: 2rem
 
+  .sort-loader
+    position: fixed
+    top: 100px
+    right: 150px
+    z-index: 3
+
+  .content-insert-loader
+    z-index: 3
+    display: flex
+    align-items: center
+    width: 100%
+    min-height: 150px
+    height: 100%
+    margin: 10px 0
+    background-color: rgba(0, 0, 0, .3)
 
     
+@import sort_loader
+@import content_insert_loader

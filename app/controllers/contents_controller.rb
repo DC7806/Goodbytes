@@ -13,7 +13,13 @@ class ContentsController < ApplicationController
     @content = Content.new(content_params)
     @content.article_id = @article.id
     
-    unless @content.save
+    if @content.save
+      render json: {
+        show: render_to_string("/shared/template/_#{@content.layout}",layout: false, locals: {type: :show, content: @content}),
+        form: render_to_string("/shared/template/_#{@content.layout}",layout: false, locals: {type: :form, content: @content}),
+        drag: render_to_string("/shared/template/_#{@content.layout}",layout: false, locals: {type: :drag, content: @content})
+      }
+    else
       # 參考資料：
       # https://edgeguides.rubyonrails.org/layouts_and_rendering.html#the-status-option
       # https://edgeguides.rubyonrails.org/layouts_and_rendering.html#using-head-to-build-header-only-responses
@@ -34,6 +40,7 @@ class ContentsController < ApplicationController
       @article.contents.order(:position).each.with_index do |content, index|
         content.update(position: index)
       end
+      head :ok
     else
       head :bad_request
     end
