@@ -48,7 +48,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-
+    [:name, :password, :password_confirmation].each do |col|
+      params[col] = nil unless params[col].present?
+    end
     @organization = Organization.new
     @messages = current_user.receive_invites.includes(:item).includes(:sender)
     super

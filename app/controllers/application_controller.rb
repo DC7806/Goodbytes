@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
   def redirect_if_not_found
     clean_session
-    @notice = "Sorry we cannot find this #{@model_name}." if !@notice
+    @notice = "對不起我們找不到 #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
   end
 
@@ -90,7 +90,11 @@ class ApplicationController < ActionController::Base
   def redirect_if_not_allow(model_object, *purview)
     unless purview_check(model_object, *purview)
       clean_session
-      redirect_to root_path, notice: '沒有權限進行此操作！'
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: '沒有權限進行此操作！' }
+        format.json { head :no }
+      end
+      
       return false
     end
     return true

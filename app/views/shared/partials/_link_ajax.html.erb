@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                   <%= f.submit class:"btn btn-primary" %>
                 </div>
               </div>
@@ -103,8 +103,11 @@
       <%# AJAX crawler create link modal %>
         <div class="modal fade" id="crawler-link-<%= link_group.id %>" tabindex="-1" role="dialog" aria-labelledby="create_link" aria-hidden="true">
           <div class="modal-dialog" role="document">
-            <%= form_for(SavedLink.new, url: crawler_saved_link_index_path, method: "POST", remote: true ) do |f| %>
+            <%= form_for(SavedLink.new, url: crawler_saved_link_index_path, method: "POST",data: {controller: "crawler", target: "crawler.form"}, remote: true ) do |f| %>
               <div class="modal-content">
+                <div class="crawler-loader" style="display: none;" data-target="crawler.loader">
+                  <%= render "shared/partials/crawler_loader" %>
+                </div>
                 <div class="modal-header">
                   <h5 class="modal-title" id="crawler-link-title">請填入連結</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -122,8 +125,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <%= f.submit "Next", class:"btn btn-primary" %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <%= f.submit "Next", class:"btn btn-primary", data: {action: "click->crawler#preSubmit"} %>
                 </div>
               </div>
             <% end %>
@@ -159,7 +162,7 @@
                       </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                     <%= f.submit class:"btn btn-primary" %>
                   </div>
                 </div>
@@ -184,8 +187,8 @@
                   確定要刪除？
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <%= button_to "Delete Saved Link" , saved_link_path(saved_link),  method: 'delete', remote: true, class:"btn btn-primary" %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <%= button_to "刪除連結" , saved_link_path(saved_link),  method: 'delete', remote: true, class:"btn btn-primary" %>
                 </div>
               </div>
             </div>
@@ -211,7 +214,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                   <div>
                     <%= f.submit class:"btn btn-primary" %>
                   </div>
@@ -234,11 +237,11 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  確定要刪除？
+                  確定要刪除？（所有連結將一同刪除）
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <%= button_to "Delete Link Group", link_group_path(id: link_group.id), method: 'delete', remote: true, class:"btn btn-primary" %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <%= button_to "刪除群組", link_group_path(id: link_group.id), method: 'delete', remote: true, class:"btn btn-primary" %>
                 </div>
               </div>
             </div>

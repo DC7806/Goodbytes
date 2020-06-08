@@ -5,8 +5,12 @@
     <div class="col-6">
       <p class="content-desc"><%= content.display_desc %></p>
     </div>
-    <div class="col-6 my-auto">
-      <%= image_tag content.image.url, style: "max-width: 100%" if content.image.present? %>
+    <div class="col-6 my-auto content-img">
+      <% if content.image.present? %>
+        <%= image_tag content.image.url, class: "w-100"  %>
+      <% else %>
+        <%= image_tag "img_cover_big.jpg", class: "w-100" %>
+      <% end %>
     </div>
   </div>
 
@@ -16,6 +20,6 @@
   %>
 <% when :drag %>
   <%= render_drag_bar content, 
-                      content.display_desc.limit(7)
+                      "Image: " + content.display_desc.limit(7)
   %>
 <% end %>

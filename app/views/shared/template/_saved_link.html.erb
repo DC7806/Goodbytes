@@ -17,6 +17,6 @@
   %>
 <% when :drag %>
   <%= render_drag_bar content, 
-                      content.display_title.limit(7)
+                      "Link: " + content.display_title.limit(7)
   %>
 <% end %>

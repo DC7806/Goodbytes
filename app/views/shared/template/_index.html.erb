@@ -8,8 +8,11 @@
       <%= hidden_field_tag "content[url]", "" , data: {target: "content.url" }%>
       <a class="template-card card" href="#" data-action="click->content#create">
         <div class="list-box">
+          <div class="content-icon">
+            <%= render "shared/template/icon/#{name}" %>
+          </div>
           <div class="content-txt">
-            <%= name %>
+            <%= Content.display_layout[layout] %>
           </div>
         </div>
       </a>

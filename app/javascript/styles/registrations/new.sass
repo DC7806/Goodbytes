@@ -34,6 +34,11 @@ body
             transition: .3s
             filter: brightness(80%)
             filter: contrast(120%)
+          &:hover, &:focus, &:not(:disabled):not(.disabled):active,&:not(:disabled):not(.disabled):active:focus
+            color: $text-color
+            background-color: $button-color
+            border-color: $button-color
+          
 
         .btn-dark
           color: #333333
