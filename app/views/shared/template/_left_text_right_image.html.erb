@@ -5,11 +5,11 @@
     <div class="col-6">
       <p class="content-desc"><%= content.display_desc %></p>
     </div>
-    <div class="col-6 my-auto">
+    <div class="col-6 my-auto content-img">
       <% if content.image.present? %>
-        <%= image_tag content.image.url, style: "max-width: 100%"  %>
+        <%= image_tag content.image.url, class: "w-100"  %>
       <% else %>
-        <%= image_tag "img_cover_big.jpg", style: "max-width: 100%" %>
+        <%= image_tag "img_cover_big.jpg", class: "w-100" %>
       <% end %>
     </div>
   </div>

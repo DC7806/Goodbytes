@@ -12,6 +12,7 @@ export default class extends Controller {
       animation: 250,
       ghostClass: "blue-background-class",
       onUpdate: function (e) {
+        $(".sort-loader").toggle()
         let ids =  $(drag_area).children().toArray().map(obj => obj.dataset.id)
         let data = JSON.stringify({contents_ids: ids})
         let articleId = contents.dataset.articleid
@@ -25,7 +26,7 @@ export default class extends Controller {
             return true
           },
           success: resp => {
-            
+            $(".sort-loader").toggle()
           }, 
           error: err => {
             console.log(err);
