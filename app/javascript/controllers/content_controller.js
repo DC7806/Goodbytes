@@ -25,7 +25,18 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        alert('none')
+        $('.flash').append(
+          `<div class="alert alert-success">
+            <a class="close" data-dismiss="warning">&#215;</a>
+              <ul>
+                <li>
+                  已新增樣板
+                </li>
+              </ul>
+          </div>`)
+        let notify = $($(".flash").find(".alert").get(-1))
+        notify.delay(2000).fadeOut("slow")
+        setTimeout(()=>{that.remove()},3000)
       }, 
       error: err => {
         console.log(err);
@@ -33,5 +44,5 @@ export default class extends Controller {
     })
   }
 
-  
+
 }
