@@ -11,7 +11,6 @@ export default class extends Controller {
     let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
     $(contents).append(loaderTemplate)
     let thisLoader = $(contents).children().get(-1)
-    console.log(thisLoader)
     let data = JSON.stringify({
       layout: this.layoutTarget.value,
       title: this.titleTarget.value,
