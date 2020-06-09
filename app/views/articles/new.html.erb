@@ -8,23 +8,17 @@
   </div>
   <div class="right-section">
     <%= render "shared/user_section" %>
-    <%= link_to "新增電子報", new_article_path, class:"btn btn-primary"%>
+    <%= link_to "返回列表", root_path , class:"btn btn-primary btn-sm"%>
   </div>
 </nav>
 
-<div class="card border-info mb-3" >
+<div class="card-header mb-3" >
   <%= form_for @article, url: article_index_path	 do |f| %>
-    <div class="card-header">
+    <div>
       <%= f.label :subject, "標題" %>
       <%= f.text_field :subject %>
-    </div>
-    <div class="card-body text-info">
+
       <%= f.submit "新增電子報" %>
     </div>
   <% end %>
 </div>
-
-<%= 
-  link_to "回到電子報列表", channel_path, 
-                                class:"button" 
-%>
