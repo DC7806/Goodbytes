@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   post "/subscribe",                as: "subscribe",   to: "subscribers#create"
   get  "/unsubscribe/:channel_id/", as: "unsubscribe", to: "subscribers#destroy"
 
+  get '/users', to: "landing#index", as: "regist_refresh_error"
 end  

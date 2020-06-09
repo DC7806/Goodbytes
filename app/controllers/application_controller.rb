@@ -5,8 +5,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_organization_id, :current_channel_id, 
                 :current_organization,    :current_channel,
                                           :current_channels
+  before_action :check_session, only: [:current_channel_id, :current_organization_id]                                        
 
   private
+
+  def check_session
+    unless session["goodbytes7788"]
+      redirect_to dashboard_path
+    end
+  end
+
   def current_channel_id
     session["goodbytes7788"]["channel_id"]
   end
