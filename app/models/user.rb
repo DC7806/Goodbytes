@@ -31,7 +31,12 @@ class User < ApplicationRecord
                                     length: { 
                                       minimum: 1, 
                                       maximum: 100 
+                                    },
+                                    format: { 
+                                      with: /\A[a-z0-9]+((_|\.)[a-z0-9]+)*@[a-z0-9]+(\.[a-z]+){1,3}\z/ 
                                     }
+  # ＠前只允許小寫英文開頭、可接底線或點號，＠後小寫英文開頭、後面可接點號接域名等等，最多不超過三組
+
   validates    :encrypted_password, presence: true, 
                                     length: { 
                                       minimum: 6, 

@@ -1,5 +1,5 @@
 class SavedLinksController < ApplicationController
-  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group]
+  before_action :find_saved_link, except: [:new, :create, :link_move_in_group, :link_change_group, :crawler]
   before_action :find_channel
   before_action :channel_member?
   before_action :find_link_groups, only: [:create, :update, :destroy]
@@ -7,16 +7,29 @@ class SavedLinksController < ApplicationController
   def new
   end
 
+  def crawler
+    crawler = Crawler.new(params[:saved_link][:url])
+
+    if crawler.validate_url
+      @crawler = crawler
+      @saved_link = SavedLink.new(saved_link_params)
+      @crawler_link = { ok: true }
+    else
+      @crawler_link = { ok: false }
+
+    end
+  end
+
   def create
     @saved_link = SavedLink.new(saved_link_params)
 
-    @saved_link.position = SavedLink.minimum(:position) - 1
+    @saved_link.position = (SavedLink.minimum(:position) || 0) - 1
     # 讓新增的@saved_link永遠排在最上面第一個
 
     if @saved_link.save
       @ajax_create_link = { ok: true }
     else
-      @ajax_create_link = { ok: false, message: 'Create Error!' }
+      @ajax_create_link = { ok: false, message: '創建失敗!' }
     end
   end
 
@@ -28,7 +41,7 @@ class SavedLinksController < ApplicationController
       @link_group = LinkGroup.new
       @ajax_update_link = { ok: true }
     else
-      @ajax_update_link = { ok: false, message: 'Update Error!' }
+      @ajax_update_link = { ok: false, message: '更新失敗!' }
     end
   end
 

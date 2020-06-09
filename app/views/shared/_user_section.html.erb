@@ -1,9 +1,13 @@
 
-<header class="user_section">
-  <% if user_signed_in? %>Hello, <strong><%= current_user.email %></strong>
+<div class="user-section">
+  <% if user_signed_in? %>
+    <%# 和使用者打招呼 %>
+    <%= greet %> ,
+    <strong><%= current_user.name.present? ? current_user.name : current_user.email %></strong>
   <% else %>
     <%= link_to "Sign up", new_user_registration_path %> |
-    <%= link_to "Sign in", new_user_session_path, :class => 'navbar-link'  %>
+    <%= link_to "Sign in", new_user_session_path, class: 'navbar-link'  %>
   <% end %>
-</header>
+</div>
+
 

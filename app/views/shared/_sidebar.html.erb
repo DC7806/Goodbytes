@@ -1,62 +1,91 @@
-<aside id="sidebar">
+<aside class="sidebar">
   <%= link_to root_path, class: "sidebar__logo" do %>
     <h3>
       Goodbytes
     </h3>
   <% end %>
+  <hr class="logo_hr">
+
   <% if user_signed_in? %>
-    <nav class="sidebar__menu sidebar__menu--push-up">
-      <div>
-        <%= form_tag(switch_organization_path, method: 'post') do %>
-          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
-            <% current_user.organizations.each do |org| %>
-              <option value="<%= org.id %>" 
-                <% if org.id == current_organization_id %>
-                  selected
-                <% end %>
-              >
+    <nav class="sidebar__menu sidebar__menu--push-up sidebar-line">
+
+      <div>組織</div>
+      <div class="border pr-2" data-controller="switch">
+        <input type="hidden" data-target="switch.objectId" value="organization_list">
+        <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#sideListToggle">
+          <div>
+            <i class="fas fa-caret-down"></i>
+          </div>
+          <p class="mb-0">
+            <%= current_organization.name %>
+          </p>
+        </a>
+      </div>
+      <div class="position-relative" id="organization_list" style="display: none;z-index:1">
+        <div class="position-absolute w-100 bg-light border rounded-lg">
+          <% current_user.organizations.each do |org| %>
+            <% if org.id != current_organization_id %>
+              <a href="#" class="d-block pr-2" data-controller="switch" data-action="click->switch#movePlace">
+                <input type="hidden" data-target="switch.url" value="/switch_organization">
+                <input type="hidden" data-target="switch.toId" value="<%= org.id %>">
                 <%= org.name %>
-              </option> 
+              </a>
             <% end %>
-          </select>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-      <div>
-        <%= form_tag(switch_channel_path, method: 'post') do %>
-          <select name="id"  onchange="this.form.submit();" style="text-align-last: right;">
-            <% current_channels.each do |ch| %>
-              <option value="<%= ch.id %>"
-                
-                <% if ch.id == current_channel_id %>
-                  selected
-                <% end %>
-              >
-                <%= ch.name %>
-              </option> 
+
+      <% if current_channel_id %>
+        <div>頻道</div>
+        <div class="border pr-2" data-controller="switch">
+          <input type="hidden" data-target="switch.objectId" value="channel_list">
+          <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#sideListToggle">
+            <div>
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <p class="mb-0">
+              <%= current_channel.name %>
+            </p>
+          </a>
+        </div>
+        <div class="position-relative" id="channel_list" style="display: none;z-index:1">
+          <div class="position-absolute w-100 bg-light border rounded-lg">
+            <% current_channels.each do |channel| %>
+              <% if channel.id != current_channel_id %>
+                <a href="#" class="d-block pr-2" data-controller="switch" data-action="click->switch#movePlace">
+                  <input type="hidden" data-target="switch.url" value="/switch_channel">
+                  <input type="hidden" data-target="switch.toId" value="<%= channel.id %>">
+                  <%= channel.name %>
+                </a>
+              <% end %>
             <% end %>
-          </select>
-        <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div>
+        <%= link_to "文章列表", root_path %>
       </div>
       <div>
-        <%= link_to "Articles", root_path %>
+        <%= link_to "儲存連結", link_group_index_path %>
       </div>
       <div>
-        <%= link_to "Link", link_group_index_path %>
+        <%=  link_to "公開頁面", landing_channel_path(current_channel) if current_channel_id.present? %>
       </div>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down">
       <div>
-        <%= link_to "New Newsletter" %>
+        <%= link_to "新增頻道" %>
       </div>
       <div>
-        <a>Billing</a>
+        <a>付款資訊</a>
       </div>
       <div>
-        <%= link_to "Account Settings", edit_user_registration_path %>
+        <%= link_to "帳戶資訊", edit_user_registration_path %>
       </div>
       <div>
-        <%= link_to "Log Out", destroy_user_session_path,method: :delete %>
+        <%= link_to "登出", destroy_user_session_path,method: :delete %>
       </div>
     </nav>
   <% end %>

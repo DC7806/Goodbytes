@@ -1,24 +1,140 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to @channel.name, channel_path %> 
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <%= @article.subject %>
-    </li>
-  </ol>
-</nav>
-<div class="card border-info mb-3" >
-  <%= form_for @article, url: article_path(@article) do |f| %>
-    <div class="card-header">
-      <%= f.label :subject, "Subject" %>
-      <%= f.text_field :subject %>
-    </div>
-    <div class="card-body text-info">
-      <%= f.submit "Edit Article" %>
+
+<div class="article-show">
+  <%= content_for :side_bar do %>
+    <div class="article-sidebar">
+      <div data-controller="switch" id="switch-area">
+        <!-- 新增鈕 -->
+        <a href="#" data-action="click->switch#toAddContent" id="add" class="list-group-item border-0">+ 文章段落</a>
+        <!-- 返回鈕 -->
+        <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;" class="list-group-item">返回</a>
+      </div>
+      
+      <div id="edit-area">
+
+        <!-- header bar -->
+        <div data-controller="switch" class="border list-group-item d-flex justify-content-between">
+          <%= hidden_field_tag :edit_form, "edit_header", data: {target: "switch.form"} %>
+          <div>
+            頁首
+          </div>
+          <div>
+            <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- 拖拉區域 -->
+        <div class="card-body p-0" id="drag_area" data-controller="drag" data-target="drag_area">
+          <% @contents.each do |content| %>
+            <%= render "/shared/template/#{content.layout}",type: :drag, content: content %>
+          <% end %>
+        </div>
+
+        <!-- footer bar -->
+        <div data-controller="switch" class="list-group-item d-flex justify-content-between border">
+          <%= hidden_field_tag :edit_form, "edit_footer", data: {target: "switch.form"} %>
+          <div>
+            頁尾
+          </div>
+          <div>
+            <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+      
+      
+      <!-- 隱藏表單 -->
+      <div id="form-area">
+
+        <!-- contents編輯器 -->
+        <% @contents.each do |content| %>
+          <%= render "shared/template/#{content.layout}",type: :form, content: content %>
+        <% end %>
+
+        <!-- header編輯器 -->
+        <%= render "shared/template/header_form" %>
+
+        <!-- footer編輯器 -->
+        <%= render "shared/template/footer_form" %>
+
+
+      </div>
+
+      <!-- template選單（切換鈕） -->
+      <div id="menu-area" style="display: none;">
+        <div class="d-flex menu-select" data-controller="switch">
+          <div class="templates card col-6 card-menu-active" data-action="click->switch#toContentList"><a class="text-center" href="#" >使用樣板</a></div>
+          <div class="saved_links card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >已存連結</a></div>
+        </div>  
+
+        <!-- 樣板選單 -->
+        <%= render "shared/template/index" %>
+
+        <!-- saved link選單 -->
+        <%= render "shared/partials/index" %>
+      </div>
     </div>
   <% end %>
+
+
+  <nav class="top-bar article-top-bar">
+    <div class="left-section">
+      <%= render "shared/breadcrumb" %>
+        <li class="breadcrumb-item" aria-current="page">
+          <%= link_to "Articles" %>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">
+          <a class="title" href=""><%= @article.subject %></a>
+          <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
+          
+        </li>
+      </ol>
+    </div>
+    <div class="right-section" data-controller="switch">
+      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
+      <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
+      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
+      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
+    </div>
+  </nav>
+  <div class="sort-loader" style="display: none">
+    <%= render "shared/loader/sort_loader" %>
+  </div>
+
+  <div class="card-body container">
+
+    <section class="article-content">
+    
+      <!-- 文章內容 -->
+
+      <div class="card-body container">
+
+        <!-- 頁首 -->
+        <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
+        <%= @article.header.html_safe %>
+
+        <!-- 文章 -->
+        <div id="contents" data-articleId="<%= @article.id %>" >
+          <% @contents.each do |content| %>
+            <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+          <% end %>
+        </div>
+
+        <!-- 頁尾 -->
+        <%= @article.footer.html_safe %>
+
+      </div>
+    </section>
+  </div>
 </div>
 
-
-<%= link_to "Back to article list", channel_path, class:"button" %>
+<!-- css loader區 -->
+<template id="content-insert-loader">
+  <div class="content-insert-loader">
+    <%= render "shared/loader/content_insert_loader" %>
+  </div>
+</template>

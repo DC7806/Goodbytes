@@ -10,6 +10,7 @@
     $(`#create-link-${group_id} .link_url`).val('');
     $(`#create-link-${group_id} .link_subject`).val('');
     $(`#create-link-${group_id} .link_summary`).val('');
+    $(`#crawler-link-${group_id} .link_url`).val('');
 
     $(`.link_group`).replaceWith("<%= j render('shared/partials/link_ajax') %>")
   } else {

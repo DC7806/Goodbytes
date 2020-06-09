@@ -1,0 +1,31 @@
+<!-- 
+<%#
+在呼叫render時指定的type會作為變數帶到這邊，控制要render哪個區塊
+show就是文章裡的樣子，form就是文章的編輯器，drag就是側邊的拉動bar
+%>
+ -->
+
+<% case type %>
+<% when :show %>
+  <div class="content d-flex" data-id="<%= content.id %>">
+    <div class="col-6 my-auto content-img">
+      <% if content.image.present? %>
+        <%= image_tag content.image.url, class: "w-100"  %>
+      <% else %>
+        <%= image_tag "img_cover_big.jpg", class: "w-100" %>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <p class="content-desc"><%= content.display_desc %></p>
+    </div>
+  </div>
+
+<% when :form %>
+  <%= render_edit_form content,
+                      :desc, :image
+  %>
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      "Image: " + content.display_desc.limit(7)
+  %>
+<% end %>

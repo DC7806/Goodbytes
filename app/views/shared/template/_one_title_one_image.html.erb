@@ -1,0 +1,26 @@
+
+<% case type %>
+<% when :show %>
+  <div class="content" data-id="<%= content.id %>">
+    <div>
+      <h3 class="content-title"><%= content.display_title %></h3>
+    </div>
+    <div class="border w-25"></div>
+    <div class="mx-auto content-img">
+      <% if content.image.present? %>
+        <%= image_tag content.image.url, class: "w-100"  %>
+      <% else %>
+        <%= image_tag "img_cover_big.jpg", class: "w-100" %>
+      <% end %>
+    </div>
+  </div>
+
+<% when :form %>
+  <%= render_edit_form content,
+                      :title, :image
+  %>
+<% when :drag %>
+  <%= render_drag_bar content, 
+                      "Image: " + content.display_title.limit(7)
+  %>
+<% end %>

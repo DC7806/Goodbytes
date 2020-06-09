@@ -1,0 +1,14 @@
+
+<%# 麵包屑沒有關死，要加東西可以接尾巴 %>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item" aria-current="page">
+    <%= link_to current_channel.name, channel_path if current_channel_id.present? %>
+  </li>
+
+
+<%# 目前路徑是寫死的，如果有機會可以把路徑規劃好，用下面這個方法在麵包屑顯示 %>
+<%# <script>
+  var breadCrumbPath = `${location.pathname}`.replace("/","")
+  document.querySelector('#path').innerHTML = breadCrumbPath
+</script> %>

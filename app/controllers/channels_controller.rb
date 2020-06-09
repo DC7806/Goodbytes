@@ -1,8 +1,9 @@
 class ChannelsController < ApplicationController
-  before_action :find_channel,  except: [:new, :create]
-  before_action :find_organization
+  skip_before_action :authenticate_user!, only: [:landing]
+  before_action :find_channel,  except: [:new, :create, :landing]
+  before_action :find_organization, except: [:landing]
   before_action :org_admin?,      only: [:new, :create, :destroy]
-  before_action :channel_admin?,  only: [:edit, :update]
+  before_action :channel_admin?,  only: [:edit, :update, :deliver]
   before_action :channel_member?, only: [:show]
 
   def new
@@ -23,34 +24,61 @@ class ChannelsController < ApplicationController
   def create
     channel = Channel.new(channel_params)
     if channel.save
-      @notice = "channel新增成功"
+      @notice = "頻道新增成功"
       channel.update_role(current_user.id, admin)
       channel.link_groups.create(name: "INBOX")
       session["goodbytes7788"]["channel_id"] = channel.id
       path = channel_path
     else
-      @notice = "channel新增失敗"
+      @notice = "頻道新增失敗"
       path = root_path
     end
-    redirect_to(path, notice: @notice) and return
+    redirect_to(path, notice: @notice)
   end
 
   def update
     if @channel.update(channel_params)
-      @notice = "channel更新成功"
+      @notice = "頻道更新成功"
     else
-      @notice = "channel更新失敗"
+      @notice = "頻道更新失敗"
     end
-    redirect_to(root_path, notice: @notice) and return
+    redirect_to(edit_channel_path, notice: @notice)
   end
 
   def destroy
     if @channel.destroy
-      @notice = "channel刪除成功"
+      session["goodbytes7788"]["channel_id"] = @organization.channels.first&.id
+      @notice = "頻道刪除成功"
     else
-      @notice = "channel刪除失敗"
+      @notice = "頻道刪除失敗"
     end
-    redirect_to(root_path, notice: @notice) and return
+    redirect_to(channel_path, notice: @notice)
+  end
+
+  def deliver
+    sending_articles = @channel.articles.where(id: params[:articles])
+    unless sending_articles.first
+      head :no
+    end
+    sending_articles.each do |article|
+      @channel.subscribers.each do |subscriber|
+        ArticleMailerJob.perform_later(
+          subscriber.email,
+          article.id
+        )
+      end
+      article.deliver_time = Time.now
+      article.save
+    end
+    head :ok
+  end
+
+  def landing
+    @channel = Channel.find(params[:id])
+    @articles = @channel.articles.limit(5).order(created_at: :desc)
+    @subscriber = Subscriber.new
+    render layout: "landing"
+
   end
 
   private

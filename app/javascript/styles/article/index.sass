@@ -1,0 +1,215 @@
+.layout
+  width: calc(100vw-18px) //扣掉滾動條寬度
+  display: flex
+  flex-wrap: nowrap
+
+  .sidebar-blank //sidebar flex 浮動後協助佔位
+    min-width: $sidebar-width
+    height: 100vh
+
+  .article-sidebar-blank
+    min-width: $article-sidebar-width
+    height: 100vh
+
+  .sidebar
+
+    .sidebar__menu
+      // 
+    .article__menu
+      width: $article-sidebar-width
+
+      .card
+
+        .article-back-list
+          min-height: $top-bar-height
+          max-height: $top-bar-height
+          background-color: $light-bg-color
+          border-left: 5px solid $dark-primary-color
+          border-right: 6px solid rgba(0, 0, 0, 0.1)
+          text-align: left
+
+          a
+            border-bottom: 1px solid transparent
+            transition: .3s
+            &:hover
+              border-bottom: 1px solid $primary-color
+              transition: .3s
+
+        .list-group
+          height: calc( 100vh - #{$top-bar-height} )
+          overflow-y: scroll
+
+          &::-webkit-scrollbar
+            width: 6px
+
+          &::-webkit-scrollbar-track
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1)
+
+          &::-webkit-scrollbar-thumb
+            background-color: #bbb
+            outline: 1px solid #ccc
+
+          // 所有文章部分
+          .article-sidebar
+            min-height: calc( 100vh - #{$top-bar-height} )
+            
+            .list-group-item
+              margin: .8rem
+              border-radius: .2rem
+
+            #switch-area
+              .list-group-item
+                margin: .8rem
+                border-radius: .2rem
+                background-color: $dark-primary-color
+                color: $button-text-color
+                transition: .3s
+
+                &:hover
+                  filter: brightness(110%)
+                  transition: .3s
+
+            #edit-area
+              
+
+            #form-area
+
+            #menu-area
+              background-color: $bg-color
+              min-height: calc( 100vh - #{$top-bar-height} - 81.6px )
+
+
+              .menu-select
+                background-color: #fff
+
+                .card
+                  border: none
+                  border-radius: 0
+                  border-bottom: 1px solid $border-color
+
+                .card-menu-active
+                  border-bottom: 2px solid $primary-color
+                  color: $dark-primary-color
+
+                .templates
+
+                .saved_links
+
+              #templates
+                display: flex
+                
+                li
+                  list-style-type: none
+
+                  .template-card
+                    height: 90px
+                    position: relative
+
+                    .list-box
+                      .content-icon
+                        position: absolute
+                        right: 0
+                        left: 0
+                        top: 5px
+                        text-align: center
+                        line-height: 4rem
+
+                        .title-dash
+                          transition: .4s ease
+                          width: 40px
+                          border-width: 3px;
+                          border-color: black;
+                          border-radius: 3px;
+                          border-style: solid;
+
+                        .top-icon
+                          margin-top: -15px
+                        .bottom-icon
+                          margin-top: 3px
+                          
+
+                      .content-txt
+                        position: absolute
+                        right: 0
+                        left: 0
+                        bottom: 5px
+                        font-size: .8rem
+                        line-height: 1rem
+                        text-align: center
+
+              #saved_links
+                padding-bottom: 1rem
+                
+                .group-name
+                  text-align: left
+                  background-color: $dark-color
+                  color: $button-text-color
+                  margin: 0
+                  margin-left: .8rem
+                  margin-right: .8rem
+                  cursor: pointer
+                    
+                  &:hover
+                    transition: .3s
+                    background-color: white !important
+                    color: black
+
+                .group-list
+                  margin-left: .8rem
+                  margin-right: .8rem
+                  background-color: $dark-color
+                  width: calc(320px - 2rem)
+                  position: absolute
+                  z-index: 2
+
+                  .group-name
+                    background-color: transparent
+                    margin: 0
+                    
+
+
+  .drag-bar
+    margin: .8rem
+
+    .fa-arrows-alt-v
+      color: $dark-primary-color
+
+                  
+
+
+  main
+    .container-fluid
+      .wrap
+        .replace-article
+          width: calc( 100vw - #{$article-sidebar-width} - 18px )
+
+          .article-top-bar
+            width: calc( 100vw - #{$article-sidebar-width} )
+
+          .article-content
+            min-height: calc( 100vh - #{$top-bar-height} )
+
+            .content
+              position: relative
+              margin-top: 2rem
+              margin-bottom: 2rem
+
+  .sort-loader
+    position: fixed
+    top: 100px
+    right: 150px
+    z-index: 3
+
+  .content-insert-loader
+    z-index: 3
+    display: flex
+    align-items: center
+    width: 100%
+    min-height: 150px
+    height: 100%
+    margin: 10px 0
+    background-color: rgba(0, 0, 0, .3)
+
+    
+@import sort_loader
+@import content_insert_loader

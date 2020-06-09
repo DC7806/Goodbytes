@@ -1,14 +1,17 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to "Home", root_path %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <%= @channel.name %> 
-      email list
-    </li>
-  </ol>
+<nav class="top-bar">
+  <div class="left-section">
+    <%= render "shared/breadcrumb" %>
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Articles" %>
+      </li>
+    </ol>
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+    <%= link_to "新增電子報", new_article_path, class:"btn btn-primary"%>
+  </div>
 </nav>
+
 <div class="card border-info mb-3" >
   <%= form_for @article, url: article_index_path	 do |f| %>
     <div class="card-header">
@@ -22,6 +25,6 @@
 </div>
 
 <%= 
-  link_to "Back to Email list", channel_path, 
+  link_to "回到文章列表", channel_path, 
                                 class:"button" 
 %>
