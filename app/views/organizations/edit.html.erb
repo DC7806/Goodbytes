@@ -68,7 +68,7 @@
                     <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
                     <input type="hidden" name="email" value="<%= invite.receiver %>">
                     <input class="btn btn-outline-secondary" type="submit" value="再次邀請">
-                    <%= link_to "取消邀請", cancel_invite_path(invite_token: invite.token), data: {confirm: "確定？"}, method: 'delete' , class: "btn btn-outline-info"
+                    <%= link_to "取消邀請", cancel_invite_path(token: invite.token), data: {confirm: "確定？"}, method: 'delete' , class: "btn btn-outline-info"
                     %>
                   </td>
                 <% end %>

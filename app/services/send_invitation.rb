@@ -57,7 +57,7 @@ class SendInvitation
       end
 
       # 到了這邊，就是寄出啦
-      # mailer方法參數格式： name, email, invite_token, user_exist
+      # mailer方法參數格式： name, email, token, user_exist
       # 第四個user_exist是『使用者是否存在』，用來控制郵件樣板的呈現方式
       # 對於未註冊跟已註冊的email就可以是兩種連結，甚至是兩種格式
       InviteMailerJob.perform_later(

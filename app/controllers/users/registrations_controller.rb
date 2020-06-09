@@ -8,18 +8,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     @email = params[:email]
-    @invite_token = params[:invite_token]
+    @token = params[:token]
     super
   end
 
   # POST /resource
   def create
-    @invite_token = params[:invite_token]
+    @token = params[:token]
     super
     user = resource
     return if user.errors.any?
-    if @invite_token.present?
-      invite = Invite.find_by(token: @invite_token)
+    if @token.present?
+      invite = Invite.find_by(token: @token)
       if invite
         @org = Organization.find(invite.item_id) 
         invite.destroy

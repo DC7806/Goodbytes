@@ -1,8 +1,8 @@
 class InviteMailerJob < ApplicationJob
   queue_as :default
 
-  def perform(name, email, invite_token, user_exist)
+  def perform(name, email, token, user_exist)
     # Do something later
-    InviteMailer.send_invite(name, email, invite_token, user_exist).deliver
+    InviteMailer.send_invite(name, email, token, user_exist).deliver
   end
 end
