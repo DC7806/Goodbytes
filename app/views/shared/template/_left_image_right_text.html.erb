@@ -7,6 +7,9 @@ show就是文章裡的樣子，form就是文章的編輯器，drag就是側邊�
 
 <% case type %>
 <% when :show %>
+<%
+=begin%>
+ 
   <div class="content d-flex" data-id="<%= content.id %>">
     <div class="col-6 my-auto content-img">
       <% if content.image.present? %>
@@ -18,6 +21,29 @@ show就是文章裡的樣子，form就是文章的編輯器，drag就是側邊�
     <div class="col-6">
       <p class="content-desc"><%= content.display_desc %></p>
     </div>
+  </div>
+ 
+<%
+=end%>
+
+  <!-- 左圖右文2 -->
+  <div data-id="<%= content.id %>" style="margin:0px auto">
+    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+      <tbody>
+        <tr>
+          <td align="left" valign="top">
+            <% if content.image.present? %>
+              <%= image_tag content.image.url, class: "content-image", style: "padding-bottom: 20px;padding-right: 20px; max-width: 340px", align: "left", border: 0  %>
+            <% else %>
+              <%= image_tag "img_cover.jpg", class: "content-image", style: "padding-bottom: 20px;padding-right: 20px; max-width: 340px", align: "left", border: 0 %>
+            <% end %>  
+            <div class="content-desc" style="color:#525252;display: block;font-size: 18px; line-height: 2; margin:auto 0; word-break: break-word">
+              <%= content.display_desc %>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 <% when :form %>
