@@ -10,28 +10,28 @@
   
     <% if title %>
       <div class="form-group">
-        <%= f.label :title %>
+        <%= f.label :title, "標題" %>
         <%= f.text_field :title, class: "form-control" %>
       </div>
     <% end %>
   
     <% if desc %>
       <div class="form-group">
-        <%= f.label :desc %>
+        <%= f.label :desc, "內文" %>
         <%= f.text_area :desc, class: "form-control", style: "height: 200px;resize: none" %>
       </div>
     <% end %>
   
     <% if url %>
       <div class="form-group">
-        <%= f.label :url %>
+        <%= f.label :url, "連結" %>
         <%= f.text_field :url, class: "form-control" %>
       </div>
     <% end %>
   
     <% if image %>
       <div class="form-group">
-        <%= f.label :image %>
+        <%= f.label :image, "圖片" %>
         <div class="d-flex justify-content-center">
           <div>
             <%= image_tag content.image.form.url if content.image.present? %>
@@ -42,7 +42,7 @@
     <% end %>
   
     <div class="form-group">
-      <%= f.submit "OK", data: {controller: "switch", action: "click->switch#toDrag"}, class: "form-control" %>
+      <%= f.submit "OK", data: {controller: "content", action: "click->content#update"}, class: "form-control ok-button" %>
     </div>
   </div>
   

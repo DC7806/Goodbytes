@@ -71,11 +71,26 @@
 
             #edit-area
               
+              
 
             #form-area
               .edit_content
                 padding: 1rem
                 border-top: 1px solid $border-color
+                .ok-button
+                  background-color: $dark-primary-color
+                  color: $button-text-color
+                  transition: .3s
+                  &:hover
+                    transition: .3s
+                    background-color: $primary-color
+
+              #content_image
+                
+                #file-upload-button
+                  
+                    
+
 
               #edit_header, #edit_footer
                 .form-group
@@ -135,6 +150,7 @@
                 .saved_links
 
               #templates
+                display: flex
                 
                 li
                   list-style-type: none
@@ -248,6 +264,7 @@
             min-height: calc( 100vh - #{$top-bar-height} )
 
             .content
+              position: relative
               margin-top: 2rem
               margin-bottom: 2rem
 
@@ -295,3 +312,23 @@
   .article-content
     #article-part
       width: 600px
+      
+.sort-loader
+  position: fixed
+  top: 100px
+  right: 150px
+  z-index: 3
+
+.content-insert-loader
+  z-index: 3
+  display: flex
+  align-items: center
+  width: 100%
+  min-height: 150px
+  height: 100%
+  margin: 10px 0
+  background-color: rgba(0, 0, 0, .3)
+
+    
+@import sort_loader
+@import content_insert_loader

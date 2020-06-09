@@ -67,7 +67,7 @@
       <!-- template選單（切換鈕） -->
       <div id="menu-area" style="display: none;">
         <div class="d-flex menu-select" data-controller="switch">
-          <div class="templates card col-6" data-action="click->switch#toContentList"><a class="text-center" href="#" >使用樣板</a></div>
+          <div class="templates card col-6 card-menu-active" data-action="click->switch#toContentList"><a class="text-center" href="#" >使用樣板</a></div>
           <div class="saved_links card col-6" data-action="click->switch#toSavedLinks"><a class="text-center" href="#" >已存連結</a></div>
         </div>  
 
@@ -101,6 +101,9 @@
       <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
     </div>
   </nav>
+  <div class="sort-loader" style="display: none">
+    <%= render "shared/loader/sort_loader" %>
+  </div>
 
 <div class="article-body card-body container" data-controller="article">
   <div class="width-icon">
@@ -116,20 +119,28 @@
     <!-- 文章內容 -->
     <div class="card-body container" id="article-part">
 
-      <!-- 頁首 -->
-      <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
-      <%= @article.header.html_safe %>
+        <!-- 頁首 -->
+        <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
+        <%= @article.header.html_safe %>
 
-      <!-- 文章 -->
-      <div id="contents" data-articleId="<%= @article.id %>" >
-        <% @contents.each do |content| %>
-          <%= render "shared/template/#{content.layout}",type: :show, content: content %>
-        <% end %>
+        <!-- 文章 -->
+        <div id="contents" data-articleId="<%= @article.id %>" >
+          <% @contents.each do |content| %>
+            <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+          <% end %>
+        </div>
+
+        <!-- 頁尾 -->
+        <%= @article.footer.html_safe %>
+
       </div>
-
-      <!-- 頁尾 -->
-      <%= @article.footer.html_safe %>
-
-    </div>
-  </section>
+    </section>
+  </div>
 </div>
+
+<!-- css loader區 -->
+<template id="content-insert-loader">
+  <div class="content-insert-loader">
+    <%= render "shared/loader/content_insert_loader" %>
+  </div>
+</template>

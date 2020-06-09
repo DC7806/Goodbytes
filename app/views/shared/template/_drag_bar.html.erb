@@ -14,7 +14,8 @@
       <%= link_to "#", data: {action: "click->switch#toEdit"} do %>
         <i class="far fa-edit"></i>
       <% end %>
-      <%= link_to content_path(content), method: 'delete', data: {confirm: "確定刪除此內容？" }, remote: true do %>
+      <%= link_to "#", data: {target: "content.deleteBtn", controller: "content", action: "click->content#delete"}, remote: true do %>
+        <%= hidden_field_tag :url, content_path(content), id: content.id, data: {target: "content.url"} %>
         <i class="far fa-trash-alt"></i>
       <% end %>
     </div>

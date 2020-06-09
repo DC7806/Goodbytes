@@ -113,6 +113,7 @@ html
           min-width: 100%
 
         .modal-content
+          position: relative
           max-height: calc(100vh - 56px)
           textarea
             max-height: 298px
@@ -124,5 +125,18 @@ html
             border: 1px solid rgba(0, 0, 0, 0.2);
             border-radius: .1rem
 
+          .crawler-loader
+            z-index: 3
+            position: absolute
+            display: flex
+            justify-content: center
+            align-items: center
+            width: 100%
+            height: 100%
+            background-color: rgba(0, 0, 0, .3)
+
         .modal-header, .modal-footer
           border: none
+
+
+  @import loader
