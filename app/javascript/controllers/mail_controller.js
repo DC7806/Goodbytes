@@ -4,6 +4,7 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   deliver(evt){
     evt.preventDefault()
+    if (!confirm("確定要寄出嗎？")) return 
     let mailTarget
     if(evt.target.dataset.value === "all"){
       mailTarget = $("input[name=article]").get().filter((x)=>{return x.dataset.delivered==="false"}).map((x)=>{return x.value})
