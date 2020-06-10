@@ -57,7 +57,7 @@ class ChannelsController < ApplicationController
 
   def deliver
     sending_articles = @channel.articles.where(id: params[:articles])
-    unless sending_articles.first
+    unless sending_articles.first && @channel.subscribers.first
       head :no
     end
     sending_articles.each do |article|
