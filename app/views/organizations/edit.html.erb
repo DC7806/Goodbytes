@@ -99,24 +99,30 @@
               <tr>
                 <td><%= user.email %></td>
                 <td><%= user.name %></td>
-                <td>
-                  <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
-                    <%= hidden_field_tag :user_id, user.id %>
-                    <select class="btn btn-outline-dark" name="role"  onchange="this.form.submit();">
-                      <% [member, admin].each do |role| %>
-                        <option value="<%= role %>"
-                          <% if role == user.role %>
-                            selected
-                          <% end %>
-                          ><%= role %>
-                        </option> 
-                      <% end %>
-                    </select>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn btn-outline-info" %>
-                </td>
+                <% if user == current_user %>
+                  <td>
+                    <%= user.role %>
+                  </td>
+                <% else %>
+                  <td>
+                    <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
+                      <%= hidden_field_tag :user_id, user.id %>
+                      <select class="btn btn-outline-dark" name="role"  onchange="this.form.submit();">
+                        <% [member, admin].each do |role| %>
+                          <option value="<%= role %>"
+                            <% if role == user.role %>
+                              selected
+                            <% end %>
+                            ><%= role %>
+                          </option> 
+                        <% end %>
+                      </select>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn btn-outline-info" %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
