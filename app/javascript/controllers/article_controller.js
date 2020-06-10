@@ -39,13 +39,13 @@ export default class extends Controller {
 
   mobile(evt){
     evt.preventDefault()
-    $('#article-part').width(300)
+    $('#article-part').width(340)
     // 總寬340
   }
 
   desktop(evt){
     evt.preventDefault()
-    $('#article-part').width(560)
+    $('#article-part').width(600)
     // 總寬600
   }
 

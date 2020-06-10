@@ -1,3 +1,4 @@
+
 <div class="article-show">
   
 
@@ -22,34 +23,36 @@
 
   </nav>
 
-<div class="article-body card-body container" data-controller="article">
-  <div class="width-icon">
-    <div class="btn border mobile" data-action="click->article#mobile">
-      <i class="fas fa-mobile-alt"></i>
-    </div>
-    <div class="btn border desktop" data-action="click->article#desktop">
-      <i class="fas fa-desktop"></i>
-    </div>
-  </div>
 
-  <section class="article-content">
-    <!-- 文章內容 -->
-    <div class="card-body container" id="article-part">
+  <div class="article-body card-body container" data-controller="article">
 
-      <!-- 頁首 -->
-      <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
-      <%= @article.header.html_safe %>
-
-      <!-- 文章 -->
-      <div id="contents" data-articleId="<%= @article.id %>" >
-        <% @contents.each do |content| %>
-          <%= render "shared/template/#{content.layout}",type: :show, content: content %>
-        <% end %>
+    <section class="article-content">
+      <div class="width-icon">
+        <div class="btn border mobile" data-action="click->article#mobile">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="btn border desktop" data-action="click->article#desktop">
+          <i class="fas fa-desktop"></i>
+        </div>
       </div>
+      <!-- 文章內容 -->
+      <div class="card-body container" id="article-part">
 
-      <!-- 頁尾 -->
-      <%= @article.footer.html_safe %>
+        <!-- 頁首 -->
+        <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
+        <%= @article.header.html_safe %>
 
-    </div>
-  </section>
+        <!-- 文章 -->
+        <div id="contents" data-articleId="<%= @article.id %>" >
+          <% @contents.each do |content| %>
+            <%= render "shared/template/#{content.layout}",type: :show, content: content %>
+          <% end %>
+        </div>
+
+        <!-- 頁尾 -->
+        <%= @article.footer.html_safe %>
+
+      </div>
+    </section>
+  </div>
 </div>

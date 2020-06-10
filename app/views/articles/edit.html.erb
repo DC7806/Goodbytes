@@ -105,19 +105,19 @@
     <%= render "shared/loader/sort_loader" %>
   </div>
 
-<div class="article-body card-body container" data-controller="article">
-  <div class="width-icon">
-    <div class="btn border mobile" data-action="click->article#mobile">
-      <i class="fas fa-mobile-alt"></i>
-    </div>
-    <div class="btn border desktop" data-action="click->article#desktop">
-      <i class="fas fa-desktop"></i>
-    </div>
-  </div>
+  <div class="article-body card-body container" data-controller="article">
 
-  <section class="article-content">
-    <!-- 文章內容 -->
-    <div class="card-body container" id="article-part">
+    <section class="article-content">
+      <div class="width-icon">
+        <div class="btn border mobile" data-action="click->article#mobile">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="btn border desktop" data-action="click->article#desktop">
+          <i class="fas fa-desktop"></i>
+        </div>
+      </div>
+      <!-- 文章內容 -->
+      <div class="card-body container" id="article-part">
 
         <!-- 頁首 -->
         <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>

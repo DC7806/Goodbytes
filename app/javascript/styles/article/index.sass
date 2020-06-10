@@ -1,276 +1,311 @@
-.layout
-  width: calc(100vw-18px) //扣掉滾動條寬度
-  display: flex
-  flex-wrap: nowrap
+body
+  .layout
+    width: calc(100vw-18px) //扣掉滾動條寬度
+    display: flex
+    flex-wrap: nowrap
 
-  .sidebar-blank //sidebar flex 浮動後協助佔位
-    min-width: $sidebar-width
-    height: 100vh
+    .sidebar-blank //sidebar flex 浮動後協助佔位
+      min-width: $sidebar-width
+      height: 100vh
 
-  .article-sidebar-blank
-    min-width: $article-sidebar-width
-    height: 100vh
+    .article-sidebar-blank
+      min-width: $article-sidebar-width
+      height: 100vh
 
-  .sidebar
+    .sidebar
 
-    .sidebar__menu
-      // 
-    .article__menu
-      width: $article-sidebar-width
+      .sidebar__menu
+        // 
+      .article__menu
+        width: $article-sidebar-width
 
-      .card
+        .card
+          width: 100%
 
-        .article-back-list
-          min-height: $top-bar-height
-          max-height: $top-bar-height
-          background-color: $light-bg-color
-          border-left: 5px solid $dark-primary-color
-          border-right: 6px solid rgba(0, 0, 0, 0.1)
-          text-align: left
+          .article-back-list
+            min-height: $top-bar-height
+            max-height: $top-bar-height
+            background-color: $light-bg-color
+            border-left: 5px solid $dark-primary-color
+            border-right: 6px solid rgba(0, 0, 0, 0.1)
+            text-align: left
 
-          a
-            border-bottom: 1px solid transparent
-            transition: .3s
-            &:hover
-              border-bottom: 1px solid $primary-color
+            a
+              border-bottom: 1px solid transparent
               transition: .3s
+              &:hover
+                border-bottom: 1px solid $primary-color
+                transition: .3s
 
-        .list-group
-          height: calc( 100vh - #{$top-bar-height} )
-          overflow-y: scroll
+          .list-group
+            height: calc( 100vh - #{$top-bar-height} )
+            overflow-y: scroll
 
-          &::-webkit-scrollbar
-            width: 6px
+            &::-webkit-scrollbar
+              width: 6px
 
-          &::-webkit-scrollbar-track
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1)
+            &::-webkit-scrollbar-track
+              box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1)
 
-          &::-webkit-scrollbar-thumb
-            background-color: #bbb
-            outline: 1px solid #ccc
+            &::-webkit-scrollbar-thumb
+              background-color: #bbb
+              outline: 1px solid #ccc
 
-          // 所有文章部分
-          .article-sidebar
-            min-height: calc( 100vh - #{$top-bar-height} )
-            
-            .list-group-item
-              margin: .8rem
-              border-radius: .2rem
-
-            #switch-area
+            // 所有文章部分
+            .article-sidebar
+              min-height: calc( 100vh - #{$top-bar-height} )
+              
               .list-group-item
                 margin: .8rem
                 border-radius: .2rem
-                background-color: $dark-primary-color
-                color: $button-text-color
-                transition: .3s
 
-                &:hover
-                  filter: brightness(110%)
-                  transition: .3s
-
-            #edit-area
-              
-              
-
-            #form-area
-              .edit_content
-                padding: 1rem
-                border-top: 1px solid $border-color
-                .ok-button
+              #switch-area
+                .list-group-item
+                  margin: .8rem
+                  border-radius: .2rem
                   background-color: $dark-primary-color
                   color: $button-text-color
                   transition: .3s
-                  &:hover
-                    transition: .3s
-                    background-color: $primary-color
 
-              #content_image
+                  &:hover
+                    filter: brightness(110%)
+                    transition: .3s
+
+              #edit-area
                 
-                #file-upload-button
+                
+
+              #form-area
+                .edit_content
+                  padding: 1rem
+                  border-top: 1px solid $border-color
+                  .ok-button
+                    background-color: $dark-primary-color
+                    color: $button-text-color
+                    transition: .3s
+                    &:hover
+                      transition: .3s
+                      background-color: $primary-color
+
+                #content_image
                   
+                  #file-upload-button
                     
+                      
 
 
-              #edit_header, #edit_footer
-                .form-group
+                #edit_header, #edit_footer
+                  .form-group
 
-                  .custom-control-input:checked ~ .custom-control-label::before
-                    color: #fff
-                    border-color: $dark-primary-color
+                    .custom-control-input:checked ~ .custom-control-label::before
+                      color: #fff
+                      border-color: $dark-primary-color
+                      background-color: $dark-primary-color
+                      box-shadow: none
+                    .custom-control-input:focus:not(:checked)~.custom-control-label::before 
+                      border-color: #adb5bd
+                      box-shadow: none
+
+                    .custom-switch .custom-control-label::after
+                      top: 0.35rem
+
+                    .custom-control
+                      padding-left: 0
+                    .custom-control-label
+                      position: absolute !important
+                      right: -0.5rem
+                      top: calc( 50% - 1rem )
+                      margin-bottom: 0
+                      vertical-align: bottom
+                    input:focus
+                      border-color: none
+                      outline: 0;
+                      box-shadow: none
+
+                  .ok-button
                     background-color: $dark-primary-color
-                    box-shadow: none
-                  .custom-control-input:focus:not(:checked)~.custom-control-label::before 
-                    border-color: #adb5bd
-                    box-shadow: none
-
-                  .custom-switch .custom-control-label::after
-                    top: 0.35rem
-
-                  .custom-control
-                    padding-left: 0
-                  .custom-control-label
-                    position: absolute !important
-                    right: -0.5rem
-                    top: calc( 50% - 1rem )
-                    margin-bottom: 0
-                    vertical-align: bottom
-                  input:focus
-                    border-color: none
-                    outline: 0;
-                    box-shadow: none
-
-                .ok-button
-                  background-color: $dark-primary-color
-                  color: $button-text-color
-                  transition: .3s
-                  &:hover
+                    color: $button-text-color
                     transition: .3s
-                    background-color: $primary-color
+                    &:hover
+                      transition: .3s
+                      background-color: $primary-color
 
-            #menu-area
-              background-color: $bg-color
-              min-height: calc( 100vh - #{$top-bar-height} - 81.6px )
+              #menu-area
+                background-color: $bg-color
+                min-height: calc( 100vh - #{$top-bar-height} - 81.6px )
 
 
-              .menu-select
-                background-color: #fff
+                .menu-select
+                  background-color: #fff
 
-                .card
-                  border: none
-                  border-radius: 0
-                  border-bottom: 1px solid $border-color
+                  .card
+                    border: none
+                    border-radius: 0
+                    border-bottom: 1px solid $border-color
 
-                .card-menu-active
-                  border-bottom: 2px solid $primary-color
-                  color: $dark-primary-color
+                  .card-menu-active
+                    border-bottom: 2px solid $primary-color
+                    color: $dark-primary-color
 
-                .templates
+                  .templates
 
-                .saved_links
+                  .saved_links
 
-              #templates
-                display: flex
-                
-                li
-                  list-style-type: none
+                #templates
+                  display: flex
+                  
+                  li
+                    list-style-type: none
 
-                  .template-card
-                    height: 90px
-                    position: relative
+                    .template-card
+                      height: 90px
+                      position: relative
 
-                    .list-box
-                      .content-icon
-                        position: absolute
-                        right: 0
-                        left: 0
-                        top: 5px
-                        text-align: center
-                        line-height: 4rem
+                      .list-box
+                        .content-icon
+                          position: absolute
+                          right: 0
+                          left: 0
+                          top: 5px
+                          text-align: center
+                          line-height: 4rem
 
-                        .title-dash
-                          transition: .4s ease
-                          width: 40px
-                          border-width: 3px;
-                          border-color: black;
-                          border-radius: 3px;
-                          border-style: solid;
+                          .title-dash
+                            transition: .4s ease
+                            width: 40px
+                            border-width: 3px;
+                            border-color: black;
+                            border-radius: 3px;
+                            border-style: solid;
 
-                        .top-icon
-                          margin-top: -15px
-                        .bottom-icon
-                          margin-top: 3px
-                          
+                          .top-icon
+                            margin-top: -15px
+                          .bottom-icon
+                            margin-top: 3px
+                            
 
-                      .content-txt
-                        position: absolute
-                        right: 0
-                        left: 0
-                        bottom: 5px
-                        font-size: .8rem
-                        line-height: 1rem
-                        text-align: center
+                        .content-txt
+                          position: absolute
+                          right: 0
+                          left: 0
+                          bottom: 5px
+                          font-size: .8rem
+                          line-height: 1rem
+                          text-align: center
 
-              #saved_links
-                padding-bottom: 1rem
-                position: relative
-                
-                .group-name
-                  text-align: left
-                  background-color: $dark-color
-                  color: $button-text-color
-                  margin: 0
-                  margin-left: .8rem
-                  margin-right: .8rem
-                  cursor: pointer
+                #saved_links
+                  padding-bottom: 1rem
                   position: relative
+                  
 
-                  &::after
-                    content: '\25BC'
-                    position: absolute
-                    top: calc( 50% - 1rem )
-                    font-size: .5rem
-                    right: 1.2rem
+                  .current-group
+                    height: 4rem
                     
-                  &:hover
-                    transition: .3s
-                    background-color: $dark-primary-color
-
-                .group-list
-                  margin-left: .8rem
-                  margin-right: .8rem
-                  background-color: $dark-color
-                  width: calc(320px - 2rem)
-                  position: absolute
-                  z-index: 2
-
+                  
                   .group-name
-                    margin: 0
+                    vertical-align: middle
+                    display: block
+                    text-align: left
+                    background-color: $dark-color
+                    color: $button-text-color
+                    margin: 0 .8rem
+                    padding-right: 2rem
+                    padding-top: 20px 
+                    cursor: pointer
+                    position: relative
+                    line-height: 1.5rem
 
                     &::after
-                      content: none
-                
-                .link
+                      content: '\25BC'
+                      position: absolute
+                      top: calc( 50% - .7rem )
+                      font-size: .5rem
+                      right: 1.2rem
+                      
+                    &:hover
+                      transition: .3s
+                      background-color: $dark-primary-color
 
-                  .list-group-item
-                    text-align: left
-                    margin: .8rem
-                    padding: .4rem .8rem
-                    line-height: 1.6rem
-                    height: 4rem
-                    overflow: hidden
-                    
+                  .group-list
+                    margin-left: .8rem
+                    margin-right: .8rem
+                    background-color: $dark-color
+                    width: calc(320px - 2rem)
+                    position: absolute
+                    z-index: 2
+
+                    .group-name
+                      margin: 0
+
+                      &::after
+                        content: none
+                  
+                  .link
+
+                    .list-group-item
+                      text-align: left
+                      margin: .8rem
+                      padding: .4rem .8rem
+                      line-height: 1.6rem
+                      height: 4rem
+                      overflow: hidden
+                      
 
 
-  .drag-bar
-    margin: .8rem
+    .drag-bar
+      margin: .8rem
 
-    .fa-arrows-alt-v
-      color: $dark-primary-color
+      .fa-arrows-alt-v
+        color: $dark-primary-color
 
                   
 
-
+body
   main
     .container-fluid
       .wrap
         .replace-article
-          width: calc( 100vw - #{$article-sidebar-width} - 18px )
-
           .article-top-bar
-            width: calc( 100vw - #{$article-sidebar-width} )
+            width: calc( 100vw - #{$article-sidebar-width} ) !important
+          
+.article-show
+  position: relative
 
-          .article-content
-            min-height: calc( 100vh - #{$top-bar-height} )
+  .article-body
+    padding: 1.25rem
+    word-break: break-word
+    overflow-wrap: break-word
+    
 
-            .content
-              position: relative
-              margin-top: 2rem
-              margin-bottom: 2rem
+    .article-content
+
+      .width-icon
+        position: fixed
+        z-index: 999
+
+        .mobile, .desktop
+          background-color: #fff
+          width: 2rem
+          height: 2rem
+          padding: 0
+          position: relative
+          transition: .3s
+
+          &:hover
+            color: $dark-primary-color
+            transition: .3s
+        
+          .fa-mobile-alt, .fa-desktop
+            position: absolute
+            top: calc( 50% - .5rem )
+            right: 0
+            left: 0
+            margin: auto
+
 
 .layout 
   main 
-    .container-fluid 
+    .container-fluid
       .wrap 
         .replace
           .article-show
@@ -283,35 +318,11 @@
                     background-color: $primary-color 
                 .cancel
 
-.article-body
-  position: relative
+          
+#article-part
+  width: 600px
+  padding: 2rem 0
 
-  .width-icon
-    position: fixed
-    z-index: 999
-
-    .mobile, .desktop
-      background-color: #fff
-      width: 2rem
-      height: 2rem
-      padding: 0
-      position: relative
-      transition: .3s
-
-      &:hover
-        color: $dark-primary-color
-        transition: .3s
-    
-      .fa-mobile-alt, .fa-desktop
-        position: absolute
-        top: calc( 50% - .5rem )
-        right: 0
-        left: 0
-        margin: auto
-
-  .article-content
-    #article-part
-      width: 600px
       
 .sort-loader
   position: fixed
