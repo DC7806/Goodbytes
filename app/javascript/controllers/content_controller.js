@@ -11,6 +11,7 @@ export default class extends Controller {
     let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
     $(contents).append(loaderTemplate)
     let thisLoader = $(contents).children().get(-1)
+    thisLoader.style.height = "150px"
     let data = JSON.stringify({
       layout: this.layoutTarget.value,
       title: this.titleTarget.value,
@@ -70,12 +71,16 @@ export default class extends Controller {
 
   delete(evt){
     evt.preventDefault()
-    let method = $(this.deleteBtnTarget).attr("data-method")
     let url = $(this.urlTarget).val()
     let id = this.urlTarget.id
     
     if(confirm("確定刪除此內容？")){
-      $(`.content[data-id=${id}]`).get(0).innerHTML = $("#content-insert-loader").get(0).innerHTML
+      let contentTarget = $(`.content[data-id=${id}]`)
+      let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
+      contentTarget.prepend(loaderTemplate)
+      let thisLoader = contentTarget.find(".content-insert-loader").get(0)
+      thisLoader.style.position = "absolute"
+      thisLoader.style.margin = 0
       Rails.ajax({
         url: url,
         type: "DELETE", 
