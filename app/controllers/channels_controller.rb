@@ -75,7 +75,7 @@ class ChannelsController < ApplicationController
 
   def landing
     @channel = Channel.find(params[:id])
-    @articles = @channel.articles.limit(5).order(created_at: :desc)
+    @articles = @channel.articles.where.not(deliver_time: nil).limit(5).order(created_at: :desc)
     @subscriber = Subscriber.new
     render layout: "landing"
 
