@@ -1,36 +1,45 @@
 
 <%= render "articles/show" %>
 
-<div style="display: flex;justify-content:space-evenly ;">
-
-  <div>
-    <%= link_to "原文網址", article_url(@article), style: "font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#41A9A4;" %>
-  </div>
-
-  <div style="margin:0px auto;max-width:600px;">
-    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
-      <tbody>
-        <tr>
-          <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
-            <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                <tr>
-                  <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
-                      <tr>
-                        <td align="center" bgcolor="#4a5559" role="presentation" style="border:none;border-radius:3px;cursor:auto;background:#41A9A4;" valign="middle">
-                          <%= link_to("取消訂閱", unsubscribe_url(channel_id: @channel.id, email: @email), style: "display:inline-block;background:#41A9A4;color:white;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px;") %>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+<div style="margin:0px auto;max-width:600px;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+    <tbody>
+      <tr>
+        <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+          <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+              <tr>
+                <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                    <tr>
+                      <td align="center" bgcolor="#4a5559" role="presentation" style="border:none;border-radius:3px;cursor:auto;background:#41A9A4;" valign="middle">
+                        <%= link_to "原文網址", article_url(@article), style: "display:inline-block;background:#41A9A4;color:white;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px;" %>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+          <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+              <tr>
+                <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                    <tr>
+                      <td align="center" bgcolor="#4a5559" role="presentation" style="border:none;border-radius:3px;cursor:auto;background:#777777;" valign="middle">
+                        <%= link_to("取消訂閱", unsubscribe_url(channel_id: @channel.id, email: @email), style: "display:inline-block;background:#41A9A4;color:white;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px;") %>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

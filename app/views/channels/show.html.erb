@@ -8,8 +8,8 @@
   </div>
   <div class="right-section">
     <%= render "shared/user_section" %>
-    <%= link_to "新增文章", new_article_path, class:"btn btn-primary"%>
-    <%= link_to "全部寄出", "#", class: "btn btn-primary", data: {value: "all", controller: "mail", action: "click->mail#deliver"} %>
+    <%= link_to "全部寄出", "#", class:"btn btn-sm send-all mr-2", data: {value: "all", controller: "mail", action: "click->mail#deliver"} %>
+    <%= link_to "新增電子報", new_article_path, class:"btn btn-sm btn-primary"%>
 
   </div>
 </nav>
@@ -18,22 +18,26 @@
 <section class="channel-show p-4">
   <div class="card">
     <div class="card-header">
-      文章列表
+      電子報列表
     </div>
     <div class="card-body p-2">
       <% @articles.each do |article| %>
         <div class="m-3">
           <%= hidden_field_tag :article, article.id, data: {delivered: !!article.deliver_time} %>
+       
           <%= button_to edit_article_path(article), class:"w-100 border-0 bg-white", method: "get" do %>
-            <div class="card py-4 px-2 row flex-row justify-content-between rounded-0" style="border-left:3px solid #41A9A4">
+
+            <% if article.deliver_time %>
+            <div class="card py-4 px-2 row flex-row justify-content-between rounded-0" style="border-left:3px solid #ffcc33;">
+            <% else %>
+            <div class="card py-4 px-2 row flex-row justify-content-between rounded-0" style="border-left:3px solid #66cccc;">
+            <% end %>
               <div class="col-1 d-flex justify-content-center align-items-center">
                 <% if article.deliver_time %>
-                  <% i_class = "fas fa-paper-plane" %>
+                  <i class="fas fa-paper-plane" style="color:#ffcc33;"></i>
                 <% else %>
-                  <% i_class = "far fa-circle" %>
+                  <i class="far fa-circle" style="color:#66cccc;"></i>
                 <% end %>
-                <i class="<%= i_class %>">
-                </i>
               </div>
               <div class="card-name col-7 d-flex flex-column align-items-start">
                 <h5 class="card-title m-0">
@@ -45,8 +49,11 @@
               </div>
   
               <div class="card-do col-4 d-flex justify-content-end align-items-center">
-<%# TODO 送信路徑還要改!!! %>
+                <% if article.deliver_time %>
+                <%= link_to "查看", read_article_path(id: article.id), class:"btn btn-primary btn-sm mx-2 view" %>
+                <% else %>
                 <%= link_to "寄出", "#", class:"btn btn-primary btn-sm mx-2 edit", data: {value: article.id, controller: "mail", action: "click->mail#deliver"} %>
+                <% end %>
                 <%= 
                   link_to "刪除", article_path(article), class:"btn-sm delete" , 
                                     method: :delete, 

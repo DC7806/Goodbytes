@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       post :sort
       post :header
       post :footer
+      get :read
     end
     resources :contents, only: [:create, :index]
   end
