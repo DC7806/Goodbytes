@@ -3,12 +3,18 @@
     <h3 class="text-center">
      頻道：<%= @channel.name %>
     </h3>
-    <%= form_for @subscriber, url: subscribe_path, method: "post", html: {class: "d-flex"}, remote: true do |f| %>
-      <div class="mx-auto">
-        <%= f.email_field :email , placeholder: "請輸入您的信箱", class:"form-input" %>
-        <%= f.hidden_field :channel_id, value: @channel.id, class: "input" %>
-        <%= f.submit "訂閱我們", class: "btn btn-warning" %>
-      </div>
+    <%= form_for @subscriber, url: subscribe_path, method: "post", html: {class: "d-flex flex-wrap"}, remote: true do |f| %>
+        <div class="col-md-3 col-sm-0"></div>
+        <div class="col-md-6 col-sm-12 d-flex flex-wrap">
+          <div class="col-md-9 col-sm-12 p-1">
+            <%= f.email_field :email , placeholder: "請輸入您的信箱", class:"form-input" %>
+            <%= f.hidden_field :channel_id, value: @channel.id, class: "input" %>
+          </div>
+          <div class="col-md-3 col-sm-12 p-1">
+            <%= f.submit "訂閱我們", class: "btn btn-warning" %>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-0"></div>
     <% end %>
   </div>
   <div class="w-50 mx-auto mt-5">
