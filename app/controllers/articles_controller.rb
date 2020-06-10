@@ -67,6 +67,12 @@ class ArticlesController < ApplicationController
     redirect_to channel_path, notice: "電子報刪除成功。"
   end
 
+  def read
+    @contents = @article.contents.order(:position)
+    @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
+
+  end
+
   private
   def article_params
     params.require(:article).permit(:subject, :header, :footer)

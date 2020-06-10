@@ -23,7 +23,7 @@
               
                 <%= link_to root_path do %>
                   <div class="card-header article-back-list  rounded-0">
-                    回到文章列表
+                    回到電子報列表
                   </div>
                 <% end %>
               
@@ -39,9 +39,9 @@
       <div class="article-sidebar-blank"></div>
       
       <main>
+            <%= render "shared/flash" %>
         <div class="container-fluid">
           <div class="wrap">
-            <%= render "shared/flash" %>
 
               <div class="replace replace-article">
                 <%= yield %>
