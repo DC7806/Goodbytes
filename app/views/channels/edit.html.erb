@@ -26,7 +26,7 @@
           <%= link_to "頻道資料", edit_channel_path, class:"nav-link active" %>
           </li>
           <div class="org-form">
-            <h4 class="">頻道：<%= @channel.name %></h4>
+            <h4 class="">頻道：<%= @channel.name.limit(30) %></h4>
           </div>
         </ul>
       </div>
@@ -94,7 +94,7 @@
             <% @users.each do |user| %>
               <tr>
                 <td><%= user.email %></td>
-                <td><%= user.name %></td>
+                <td><%= user.name.limit(30) %></td>
                 <td>
                   <%= form_tag(channel_role_path, method: 'patch') do %>
                     <%= hidden_field_tag :user_id, user.id %>

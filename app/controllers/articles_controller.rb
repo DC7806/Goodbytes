@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to edit_article_path(@article), notice: "電子報新增成功。"
     else
-      render :new
+      redirect_to new_article_path, alert: "電子報必須有名稱"
     end
   end
 

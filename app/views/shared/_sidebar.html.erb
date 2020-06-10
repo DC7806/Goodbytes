@@ -13,7 +13,7 @@
       <div class="border pr-2 w-100" data-controller="switch">
         <input type="hidden" data-target="switch.objectId" value="organization_list">
         <a data-target="switch.switcher" class="d-flex justify-content-between pl-2" href="#" data-action="click->switch#sideListToggle">
-          <p class="mb-0">
+          <p class="mb-0 text-truncate text-break">
             <%= current_organization.name %>
           </p>
           <div>
@@ -22,7 +22,7 @@
         </a>
       </div>
       <div class="position-relative w-100" id="organization_list" style="display:none;z-index:1">
-        <div class="position-absolute w-100 bg-light border text-left">
+        <div class="text-truncate text-break position-absolute w-100 bg-light border text-left">
           <% current_user.organizations.each do |org| %>
             <% if org.id != current_organization_id %>
               <a href="#" class="d-block pl-2" data-controller="switch" data-action="click->switch#movePlace">
@@ -64,10 +64,10 @@
       <% end %>
 
       <div class="pt-4">
-        <%= link_to "電子報列表", root_path %>
+        <%= link_to "電子報列表", root_path if current_channel_id.present?  %>
       </div>
       <div>
-        <%= link_to "儲存連結", link_group_index_path %>
+        <%= link_to "儲存連結", link_group_index_path if current_channel_id.present?  %>
       </div>
       <div>
         <%=  link_to "公開平台", landing_channel_path(current_channel) if current_channel_id.present? %>
@@ -75,6 +75,9 @@
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down sidebar-line">
+      <div>
+        <%= link_to "新增頻道", new_channel_path %>
+      </div>
       <div>
         <%= link_to "帳戶設定", edit_user_registration_path %>
       </div>

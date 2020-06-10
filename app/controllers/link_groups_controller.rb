@@ -20,7 +20,7 @@ class LinkGroupsController < ApplicationController
     if @link_group.save
       @ajax_create_group = { ok: true }
     else
-      @ajax_create_group = { ok: false, message: '創建失敗!' }
+      @ajax_create_group = { ok: false }
     end
   end
 

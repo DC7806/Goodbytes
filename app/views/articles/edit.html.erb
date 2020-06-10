@@ -88,7 +88,7 @@
           <%= link_to "Articles" %>
         </li>
         <li class="breadcrumb-item" aria-current="page">
-          <a class="title" href=""><%= @article.subject %></a>
+          <a class="title" href=""><%= @article.subject.limit(30) %></a>
           <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
           
         </li>
