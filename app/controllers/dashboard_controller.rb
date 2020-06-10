@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :regist_error
+  ]
   def index
     give_a_session_when_first_time_come
     if session_has_no_current_channel
@@ -29,6 +31,10 @@ class DashboardController < ApplicationController
     # 設置session內的organization_id，因為從html form傳來的值是字串所以to_i
     session["goodbytes7788"]["channel_id"] = params[:id].to_i
     redirect_to channel_path
+  end
+
+  def regist_error
+    redirect_to new_user_registration_path
   end
 
   # 方法名稱都寫的粉清楚了，應該....不用再多說明了吧？qq
