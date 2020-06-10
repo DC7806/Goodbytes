@@ -28,6 +28,19 @@ export default class extends Controller {
         return true
       },
       success: resp => {
+        $('.flash').append(
+          `<div class="alert alert-success">
+            <a class="close" data-dismiss="warning">&#215;</a>
+              <ul>
+                <li>
+                  已新增樣板
+                </li>
+              </ul>
+          </div>`)
+        let notify = $($(".flash").find(".alert").get(-1))
+        notify.delay(2000).fadeOut("slow")
+        setTimeout(()=>{notify.remove()},3000)
+        
         $("#form-area").append(resp.form)
         $("#drag_area").append(resp.drag)
         $(thisLoader).replaceWith(resp.show)
