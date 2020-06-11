@@ -3,8 +3,8 @@
   <% @link_groups.each do |link_group| %>
     <div class="m-2 a_group" data-groupId="<%= link_group.id %>">
       <div class="subject_bar p-2 d-flex justify-content-between">
-        <div class="link_group_name">
-          <div class="name">
+        <div class="link_group_name text-truncate">
+          <div class="name text-truncate">
             <%= link_group.name %>
           </div>
         </div>
@@ -78,16 +78,16 @@
                 <div class="modal-body">
                       <%= f.hidden_field :link_group_id, value: link_group.id %>
                     <div class="form-group">
-                      <%= f.label :url %>
+                      <%= f.label :url, "連結" %>
                       <%= f.text_field :url, class: "link_url link_url-#{link_group.id}", readonly: "true" %>
                     </div>
                     <div class="form-group">
-                      <%= f.label :subject %>
+                      <%= f.label :subject, "標題" %>
                       <%= f.text_field :subject, class: "link_subject link_subject-#{link_group.id}" %>
                     </div>
                     <div class="form-group">
-                      <%= f.label :summary %>
-                      <%= f.text_area :summary, class: "link_summary link_summary-#{link_group.id}", rows:"12" %>
+                      <%= f.label :summary, "內文" %>
+                      <%= f.text_area :summary, class: "link_summary link_summary-#{link_group.id}", rows:"11" %>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -118,7 +118,7 @@
                       <%= f.hidden_field :link_group_id, value: link_group.id %>
                     <div class="form-group">
                       <div class="d-flex justify-content-between">
-                        <%= f.label :url %>
+                        <%= f.label :url, "連結" %>
                         <div class="error-txt text-right hidden">請填入有效的網址</div>
                       </div>
                       <%= f.text_field :url, class: "link_url link_url-#{link_group.id} " %>
@@ -149,16 +149,16 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
-                        <%= f.label :url %>
+                        <%= f.label :url, "連結" %>
                         <%= f.text_field :url, class: "link_url link_url-#{saved_link.id}", readonly: "true" %>
                       </div>
                       <div class="form-group">
-                        <%= f.label :subject %>
+                        <%= f.label :subject, "標題" %>
                         <%= f.text_field :subject, class: "link_subject link_subject-#{saved_link.id}" %>
                       </div>
                       <div class="form-group">
-                        <%= f.label :summary %>
-                        <%= f.text_area :summary, class: "link_summary link_summary-#{saved_link.id}", rows:"12" %>
+                        <%= f.label :summary, "內文" %>
+                        <%= f.text_area :summary, class: "link_summary link_summary-#{saved_link.id}", rows:"11" %>
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -209,7 +209,7 @@
                 </div>
                 <div class="modal-body">
                   <div>
-                    <%= f.label :name %>
+                    <%= f.label :name, "群組名稱" %>
                     <%= f.text_field :name, class: "group_name" %>
                   </div>
                 </div>

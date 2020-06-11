@@ -3,7 +3,7 @@
   height: 100vh
   background: $bg-color
   box-shadow: 0 1px .05rem .02rem $border-color
-  padding: 1.5rem 2rem
+  padding: 1.5rem 1rem
   text-align: center
   position: fixed
   z-index: 3
@@ -33,17 +33,23 @@
   .sidebar__menu
     display: flex
     flex-direction: column
+    align-items: start
 
     div
       text-align: right
       line-height: 2rem
+    
+    .sidebar-selector
+      font-size: .9rem
+      margin-bottom: -.4rem
+      margin-top: .5rem
 
     //side bar hover border line
   .sidebar-line
     a
       position: relative
 
-    a::after
+    a::before
       content: ""
       width: 0
       height: 1.5px
@@ -52,11 +58,11 @@
       transition: .3s ease-out
       background: $primary-color
 
-    a:hover::after
+    a:hover::before
       width: 100%
 
-    a::after
-      right: 0
+    a::before
+      left: 0
       bottom: 0
       transition-duration: .3s
 
@@ -66,4 +72,4 @@
   .sidebar__menu--push-down
     position: absolute
     bottom: 2rem
-    right: 3rem
+    left: 2rem

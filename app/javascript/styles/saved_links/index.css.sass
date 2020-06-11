@@ -17,6 +17,12 @@
         .subject_bar
           background-color: $dark-color
           color: $button-text-color
+          transition: .3s
+
+          &:hover
+            background-color: $dark-color-blue
+            transition: .3s  
+            cursor: pointer          
 
           .link_group_name
             display: flex
@@ -51,7 +57,7 @@
                 border-top: .5px solid #ccc
 
         .saved_links
-          min-height: 74px
+          min-height: 91.1px
           max-height: calc(100vh - #{$top-bar-height} - 150px)
           overflow-y: auto
           overflow-x: hidden
@@ -71,16 +77,24 @@
           .saved_link
             position: relative
             background-color: #eee
+            box-shadow: 2px 2px 2px #d9d9d9, -2px -2px 2px #ffffff
             margin: .8rem
             padding: .16rem .8rem .16rem .4rem
             line-height: 1.6rem
             height: 4rem
             overflow: hidden
             cursor: default
+            transition: .3s
+
+            &:hover
+
+              transition: .3s
+              cursor: pointer
 
             &:hover .set_link
               display: flex
               cursor: pointer
+              
 
 
             .subject
@@ -114,9 +128,10 @@ html
 
         .modal-content
           position: relative
-          max-height: calc(100vh - 56px)
+          max-height: calc(100% - 56px)
+          background-color: #fff
           textarea
-            max-height: 298px
+            max-height: 268px
             resize: none
           
           .link_url:read-only
