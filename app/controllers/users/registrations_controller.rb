@@ -4,22 +4,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout "landing", except: [:edit, :update]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  skip_before_action :check_session_empty
 
   # GET /resource/sign_up
   def new
     @email = params[:email]
-    @invite_token = params[:invite_token]
+    @token = params[:token]
     super
   end
 
   # POST /resource
   def create
-    @invite_token = params[:invite_token]
+    @token = params[:token]
     super
     user = resource
     return if user.errors.any?
-    if @invite_token.present?
-      invite = Invite.find_by(token: @invite_token)
+    if @token.present?
+      invite = Invite.find_by(token: @token)
       if invite
         @org = Organization.find(invite.item_id) 
         invite.destroy
@@ -62,14 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+  
 
   # protected
 
@@ -82,15 +76,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:email, :name])
   end
-
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
   
 end

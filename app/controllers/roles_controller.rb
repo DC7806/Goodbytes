@@ -11,7 +11,6 @@ class RolesController < ApplicationController
   def create
     invite = Invite.find_by(token: params[:token])
     if invite && invite.item.update_role(current_user.id, member)
-      path = "/switch_#{invite.item_type.downcase}"
       invite.destroy
       @notice = "歡迎加入"
     else

@@ -66,7 +66,7 @@
                     <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
                     <input type="hidden" name="email" value="<%= invite.receiver %>">
                     <input class="btn btn-outline-secondary" type="submit" value="再次邀請">
-                    <%= link_to "取消邀請", cancel_invite_path(invite_token: invite.token),method: "delete", data: {confirm: "確定？"}, class: "btn btn-outline-info" %>
+                    <%= link_to "取消邀請", cancel_invite_path(token: invite.token),method: "delete", data: {confirm: "確定？"}, class: "btn btn-outline-info" %>
                   </td>
                   <% end %>
                 </tr>
@@ -95,24 +95,30 @@
               <tr>
                 <td><%= user.email %></td>
                 <td><%= user.name.limit(30) %></td>
-                <td>
-                  <%= form_tag(channel_role_path, method: 'patch') do %>
-                    <%= hidden_field_tag :user_id, user.id %>
-                    <select class="btn btn-outline-dark" name="role"  onchange="this.form.submit();">
-                      <% [member, admin].each do |role| %>
-                        <option value="<%= role %>"
-                          <% if role == user.role %>
-                            selected
-                          <% end %>
-                          ><%= role %>
-                        </option> 
-                      <% end %>
-                    </select>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to "刪除", channel_role_path(user_id: user.id), data: {confirm: "確定？"}, method: "delete", class:"btn btn-outline-info" %>
-                </td>
+                <% if user == current_user %>
+                  <td>
+                    <%= user.role %>
+                  </td>
+                <% else %>
+                  <td>
+                    <%= form_tag(channel_role_path, method: 'patch') do %>
+                      <%= hidden_field_tag :user_id, user.id %>
+                      <select class="btn btn-outline-dark" name="role"  onchange="this.form.submit();">
+                        <% [member, admin].each do |role| %>
+                          <option value="<%= role %>"
+                            <% if role == user.role %>
+                              selected
+                            <% end %>
+                            ><%= role %>
+                          </option> 
+                        <% end %>
+                      </select>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to "刪除", channel_role_path(user_id: user.id), data: {confirm: "確定？"}, method: "delete", class:"btn btn-outline-info" %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
