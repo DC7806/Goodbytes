@@ -1,19 +1,17 @@
-<!-- 
-<%#
-在新創article時預設要塞的內容
-如果想變更header跟footer內容會比較麻煩
-更新這邊的檔案後要在rails console run以下程式碼才能把新的header跟footer塞到article裡
-（請copy到console使用）
-
-Article.all.each do |article|
-  article.header = File.open("app/views/shared/template/header.html.erb").read
-  article.footer = File.open("app/views/shared/template/footer.html.erb").read
-  article.save
-end
-
-（請copy到console使用） 
-%>
--->
+<% comment do %>
+  在新創article時預設要塞的內容
+  如果想變更header跟footer內容會比較麻煩
+  更新這邊的檔案後要在rails console run以下程式碼才能把新的header跟footer塞到article裡
+  （請copy到console使用）
+  <%
+  Article.all.each do |article|
+    article.header = File.open("app/views/shared/template/header.html.erb").read
+    article.footer = File.open("app/views/shared/template/footer.html.erb").read
+    article.save
+  end
+  %>
+  （請copy到console使用） 
+<% end %>
 
 <div id="footer" class="content" style="margin:0px auto;max-width:600px;">
   <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">

@@ -2,20 +2,17 @@
 <% case type %>
 <% when :show %>
 
-<%
-=begin%>
- 
-  <div class="content" data-id="<%= content.id %>">
-    <div>
-      <a href="<%= content.url %>"><h3 class="content-title"><%= content.display_title %></h3></a>
-    </div>
-    <div class="border w-25"></div>
-    <div>
-      <p class="content-desc"><%= content.display_desc %></p>
-    </div>
-  </div> 
-<%
-=end%>
+  <% comment do %>
+    <div class="content" data-id="<%= content.id %>">
+      <div>
+        <a href="<%= content.url %>"><h3 class="content-title"><%= content.display_title %></h3></a>
+      </div>
+      <div class="border w-25"></div>
+      <div>
+        <p class="content-desc"><%= content.display_desc %></p>
+      </div>
+    </div> 
+  <% end %>
 
   <div class="content" data-id="<%= content.id %>" style="margin:0px auto;max-width:600px;">
     <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
@@ -25,17 +22,17 @@
             <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                 <tr>
-                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  <td align="left" style="font-size:0px;padding:10px 0;word-break:break-word;">
                     <a href="<%= content.url %>" style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:30px;line-height:1;text-align:left;color:#41A9A4;"><%= content.display_title %></a
                   </td>
                 </tr>
                 <tr>
-                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  <td align="left" style="font-size:0px;padding:10px 0;word-break:break-word;">
                     <div style="border: 1px solid #dee2e6 ;width: 25%"></div>
                   </td>
                 </tr>
                 <tr>
-                  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                  <td align="left" style="font-size:0px;padding:10px 0;word-break:break-word;">
                     <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
                   </td>
                 </tr>
