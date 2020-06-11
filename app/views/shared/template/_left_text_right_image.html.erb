@@ -19,17 +19,24 @@
 
 <!-- 右圖左文2 -->
   <div class="content" data-id="<%= content.id %>" style="padding: 1rem 0;margin:0px auto;max-width:600px;">
-    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
       <tbody>
         <tr>
-          <td align="left" valign="top" >
-            <% if content.image.present? %>
-              <%= image_tag content.image.url, style: "padding-bottom: 20px; max-width: 340px", align: "right", border: 0  %>
-            <% else %>
-              <%= image_tag "img_cover.jpg", style: "padding-bottom: 20px; max-width: 340px", align: "right", border: 0 %>
-            <% end %>
-            <div style="color:#525252;display: block;font-size: 18px; line-height: 2; margin-bottom: 15px; margin-top: 0; word-break: break-word">
-              <%= content.display_desc %>
+          <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+            <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                <tr>
+                  <td align="left" style="font-size:0px;word-break:break-word;">
+                    <% img_style =  "padding-bottom: 20px;padding-right: 20px; max-width: 340px" %>
+                    <% if content.image.present? %>
+                      <%= image_tag content.image.url, class: "content-image", style: img_style, align: "right", border: 0  %>
+                    <% else %>
+                      <%= image_tag "img_cover.jpg", class: "content-image", style: img_style , align: "right", border: 0 %>
+                    <% end %> 
+                    <div style="font-family:PingFangTC-Regular, sans-serif, Microsoft YaHei;font-size:18px;line-height:25px;text-align:left;color:#525252;"><%= content.display_desc %></div>
+                  </td>
+                </tr>
+              </table>
             </div>
           </td>
         </tr>
