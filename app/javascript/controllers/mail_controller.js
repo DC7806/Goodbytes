@@ -22,12 +22,13 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        window.location.replace("/channel");
-        alert("已成功寄出！")
+        console.log(resp)
+        alert(resp.message)
+        if(resp.success){
+          window.location.replace("/channel");
+        }
       }, 
       error: err => {
-        window.location.replace("/channel");
-        alert("寄送失敗！請聯絡頻道管理者！")
       } 
     })
 

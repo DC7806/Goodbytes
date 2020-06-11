@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout "landing", except: [:edit, :update]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  skip_before_action :check_session_empty
 
   # GET /resource/sign_up
   def new

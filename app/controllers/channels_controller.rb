@@ -57,20 +57,23 @@ class ChannelsController < ApplicationController
 
   def deliver
     sending_articles = @channel.articles.where(id: params[:articles])
-    unless sending_articles.first && @channel.subscribers.first
-      head :no
-    end
-    sending_articles.each do |article|
-      @channel.subscribers.each do |subscriber|
-        ArticleMailerJob.perform_later(
-          subscriber.email,
-          article.id
-        )
+    if !sending_articles.first
+      render json: {message: '沒有可寄出的文章！', success: false}
+    elsif !@channel.subscribers.first
+      render json: {message: '沒有訂閱者！', success: false}
+    else
+      sending_articles.each do |article|
+        @channel.subscribers.each do |subscriber|
+          ArticleMailerJob.perform_later(
+            subscriber.email,
+            article.id
+          )
+        end
+        article.deliver_time = Time.now
+        article.save
       end
-      article.deliver_time = Time.now
-      article.save
+      render json: {message: '信件已寄出！', success: true}
     end
-    head :ok
   end
 
   def landing
