@@ -22,7 +22,6 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        console.log(resp)
         alert(resp.message)
         if(resp.success){
           window.location.replace("/channel");
