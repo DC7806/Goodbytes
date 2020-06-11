@@ -98,7 +98,7 @@
       <a href="#" class="mr-2 btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
       <a href="#" class="mr-1 btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
       <a href="#" class="mr-2 btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
-      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
+      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm", data: {value: @article.id, controller: "mail", action: "click->mail#deliver"} %>
     </div>
   </nav>
   <div class="sort-loader" style="display: none">

@@ -40,9 +40,13 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @contents = @article.contents.order(:position)
-    @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
-    render layout: "article"
+    if @article.deliver_time
+      redirect_to read_article_path
+    else
+      @contents = @article.contents.order(:position)
+      @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
+      render layout: "article"
+    end
   end
 
   def update

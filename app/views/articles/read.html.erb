@@ -1,7 +1,4 @@
 <div class="article-show">
-  
-
-
   <nav class="top-bar article-top-bar">
     <div class="left-section">
       <%= render "shared/breadcrumb" %>
@@ -11,7 +8,6 @@
         <li class="breadcrumb-item" aria-current="page">
           <a class="title" href=""><%= @article.subject %></a>
           <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
-          
         </li>
       </ol>
     </div>
@@ -19,7 +15,6 @@
       <%= render "shared/user_section" %>
       <%= link_to "返回列表", root_path , class:"btn btn-primary btn-sm"%>
     </div>
-
   </nav>
 
 <div class="article-body card-body container" data-controller="article">
@@ -37,7 +32,6 @@
     <div class="card-body container" id="article-part">
 
       <!-- 頁首 -->
-      <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>
       <%= @article.header.html_safe %>
 
       <!-- 文章 -->
