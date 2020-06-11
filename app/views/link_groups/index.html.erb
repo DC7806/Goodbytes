@@ -29,8 +29,11 @@
               </button>
             </div>
             <div class="modal-body">
+              <div class="d-flex justify-content-between">
+                <%= f.label :name, "群組名稱" %>
+                <div class="error-txt text-right hidden">必須填入名稱</div>
+              </div>
               <div>
-                <%= f.label :name %>
                 <%= f.text_field :name, class: "group_name" %>
               </div>
             </div>

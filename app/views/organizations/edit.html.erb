@@ -27,7 +27,7 @@
           </li>
           <div class="org-form pl-5">
             <div class="form-row align-items-center">
-              <h4>組織：<%= @organization.name %></h4>
+              <h4>組織：<%= @organization.name.limit(30) %></h4>
             </div>
           </div>
         </ul>
@@ -98,7 +98,7 @@
             <% @users.each do |user| %>
               <tr>
                 <td><%= user.email %></td>
-                <td><%= user.name %></td>
+                <td><%= user.name.limit(30) %></td>
                 <td>
                   <%= form_tag(organization_role_path(organization_id: @organization.id, id: 'aha'), method: 'patch') do %>
                     <%= hidden_field_tag :user_id, user.id %>
@@ -138,7 +138,7 @@
           <tbody>
             <% current_organization.channels.each do |channel| %>
               <tr>
-                <td class="text-left px-4"><%= channel.name %></td>
+                <td class="text-left px-4 text-truncate"><%= channel.name.limit(40) %></td>
               </tr>
             <% end %>
           </tbody>

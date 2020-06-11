@@ -9,6 +9,9 @@
 
     $(`.link_group`).replaceWith("<%= j render('shared/partials/link_ajax') %>")
   } else {
-    alert('<%= @ajax_create_group[:message] %>')
+    $(`.error-txt`).removeClass('hidden');
+    $('.modal').on('hidden.bs.modal', function (e) {
+      $(`.error-txt`).addClass('hidden')
+    });
   }
 })()
