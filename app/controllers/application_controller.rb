@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :check_session_empty
   rescue_from ActiveRecord::RecordNotFound, 
               with: :redirect_if_not_found
-  helper_method :current_organization_id, :current_channel_id, 
-                :current_organization,    :current_channel,
-                                          :current_channels                                      
+  helper_method :current_channel,   :current_organization,
+                :current_channels,  :current_organization_id,
+                :current_channel_id                                  
 
   private
 
