@@ -1,8 +1,9 @@
-<%#
+<% comment do %>
 <!-- 各樣板共用之edit form樣板 -->
 <!-- 經由render_edit_form 的helper來到這裡後，會帶入各項變數來控制這邊的欄位開關 -->
 <!-- 預設是一定會有最後一個submit按鈕 -->
-%>
+<% end %>
+
 <%= form_for( content , remote: true, html: {style: "display: none"}) do |f| %>
 
   <div class="edit-content">

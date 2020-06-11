@@ -43,6 +43,10 @@ module ApplicationHelper
   def render_drag_bar(content, display)
     render "shared/template/drag_bar",content: content, display: display
   end
+
+  def comment
+    # 註解用空method
+  end
   
 end
 
