@@ -1,8 +1,23 @@
 section
   .landing-header
+    position: relative
     background-color: $text-color
     color: white
     padding: 85px 0
+    .home
+      position: fixed
+      left: 30px
+      top: 10px
+      font-size: 15px
+      a:hover
+        color: black
+      &.btn-outline-light
+        color: $primary-color
+        border-color: $primary-color
+        &:hover
+          color: $text-color
+          background-color: $primary-color
+          border-color: $primary-color
     h3
       padding: 0 0 30px
     form
@@ -26,3 +41,6 @@ section
       width: 100%
       // padding: 12px 20px
       padding: 0.75rem 1.25rem
+
+      &:hover
+        background-color:#f9f9f9

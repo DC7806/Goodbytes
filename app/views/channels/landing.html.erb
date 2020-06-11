@@ -1,5 +1,11 @@
 <section>
   <div class="landing-header">
+    <div class="home btn btn-outline-light">
+      <a href="/">
+        <i class="fas fa-home"></i>
+        Goodbytes
+      </a>
+    </div>
     <h3 class="text-center">
      頻道：<%= @channel.name %>
     </h3>
@@ -20,10 +26,10 @@
   <div class="w-50 mx-auto mt-5">
     <div style="min-height: 40vh">
       <div>
-        <h5>已發送文章列表：</h5>
+        <h5>最新電子報</h5>
       </div>
       <% @articles.each do |article| %>
-        <p class="list-group-item mb-0">
+        <p class="list-group-item border-bottom mb-0">
           <%= link_to article.subject, article_path(article) %>
         </p>
       <% end %>
