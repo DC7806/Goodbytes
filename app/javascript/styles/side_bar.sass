@@ -6,8 +6,8 @@
   padding: 1.5rem 1rem
   text-align: center
   position: fixed
-  z-index: 3
-  overflow: auto
+  z-index: 99
+  
 
   .sidebar__logo
     color: $text-color
@@ -73,3 +73,5 @@
   .sidebar__menu--push-down
     position: relative
     margin: 12rem 1rem 2rem 
+aside.sidebar:not(.content-sidebar)
+  overflow-y: scroll
