@@ -24,14 +24,23 @@
     <% end %>
   </div>
   <div class="w-50 mx-auto mt-5">
-    <div style="min-height: 40vh">
+    <div style="min-height: 40vh" class="pb-5">
       <div>
         <h5>最新電子報</h5>
       </div>
-      <% @articles.each do |article| %>
-        <p class="list-group-item border-bottom mb-0">
-          <%= link_to article.subject, article_path(article) %>
-        </p>
+      <% @articles.sort{ |obj1,obj2| obj2.deliver_time <=> obj1.deliver_time }.each do |article| %>
+        <div class="list-group-item border rounded mb-0 my-3">
+          <%= link_to article_path(article) do %>
+            <div>
+              <h3 class="subject">
+                <%= article.subject %>
+              </h3>
+              <div>
+                <small class="text-muted"><%= article.deliver_time.strftime('%Y-%m-%d') %></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

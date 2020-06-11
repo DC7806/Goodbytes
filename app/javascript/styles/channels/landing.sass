@@ -1,4 +1,5 @@
 section
+  min-height: calc( 100vh - #{$footer-height} )
   .landing-header
     position: relative
     background-color: $text-color
@@ -41,6 +42,8 @@ section
       width: 100%
       // padding: 12px 20px
       padding: 0.75rem 1.25rem
+      transition: .3s
+      color: $dark-primary-color
 
       &:hover
-        background-color:#f9f9f9
+        background-color: $bg-color
