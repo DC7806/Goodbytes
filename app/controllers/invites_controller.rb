@@ -1,7 +1,7 @@
 class InvitesController < ApplicationController
 
   def cancel # 刪除邀請
-    invite = Invite.find_by(token: params[:invite_token])
+    invite = Invite.find_by(token: params[:token])
     if invite
       invite.destroy
       @notice = "邀請刪除成功！"

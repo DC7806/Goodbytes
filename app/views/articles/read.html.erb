@@ -1,8 +1,5 @@
 
 <div class="article-show">
-  
-
-
   <nav class="top-bar article-top-bar">
     <div class="left-section">
       <%= render "shared/breadcrumb" %>
@@ -12,7 +9,6 @@
         <li class="breadcrumb-item" aria-current="page">
           <a class="title" href=""><%= @article.subject.limit(30) %></a>
           <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
-          
         </li>
       </ol>
     </div>
@@ -20,7 +16,6 @@
       <%= render "shared/user_section" %>
       <%= link_to "返回列表", root_path , class:"btn btn-primary btn-sm"%>
     </div>
-
   </nav>
 
 

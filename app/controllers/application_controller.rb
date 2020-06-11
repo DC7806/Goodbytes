@@ -1,12 +1,20 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :check_session_empty
   rescue_from ActiveRecord::RecordNotFound, 
               with: :redirect_if_not_found
-  helper_method :current_organization_id, :current_channel_id, 
-                :current_organization,    :current_channel,
-                                          :current_channels
+  helper_method :current_channel,   :current_organization,
+                :current_channels,  :current_organization_id,
+                :current_channel_id                                  
 
   private
+
+  def check_session_empty
+    unless session["goodbytes7788"]
+      redirect_to dashboard_path
+    end
+  end
+
   def current_channel_id
     session["goodbytes7788"]["channel_id"]
   end
@@ -68,7 +76,7 @@ class ApplicationController < ActionController::Base
   # 如果找不到channel或organization，就把session裡的兩個current id 設為nil
   # 並轉回root，讓dashboard #index去重新抓使用者的organization跟channel
   def redirect_if_not_found
-    clean_session
+    # clean_session
     @notice = "對不起我們找不到 #{@model_name}." if !@notice
     redirect_to root_path, notice: @notice
   end
@@ -89,10 +97,10 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_not_allow(model_object, *purview)
     unless purview_check(model_object, *purview)
-      clean_session
+      # clean_session
       respond_to do |format|
         format.html { redirect_to root_path, notice: '沒有權限進行此操作！' }
-        format.json { head :no }
+        format.json { render json: {message: '沒有權限進行此操作！', success: false} }
       end
       
       return false
