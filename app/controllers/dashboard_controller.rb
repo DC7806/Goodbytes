@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :regist_error
   ]
-  skip_before_action :check_session_empty
+  skip_before_action :check_session_empty, only: [:index, :regist_error
+]
   def index
     give_a_session_when_first_time_come
     if session_has_no_current_channel

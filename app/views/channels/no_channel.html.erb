@@ -1,0 +1,18 @@
+<nav class="top-bar">
+  <div class="left-section">
+  </div>
+  <div class="right-section">
+    <%= render "shared/user_section" %>
+    <%= link_to "全部寄出", "#", class:"btn btn-sm send-all mr-2 disabled" %>
+    <%= link_to "新增電子報", new_article_path, class:"btn btn-sm btn-primary disabled" %>
+
+  </div>
+</nav>
+
+<section class="pt-5">
+  <div class="mt-5">
+    <p style="font-size: 20px;text-align: center;">
+      此組織目前沒有可供編輯的頻道
+    </p>
+  </div>
+</section>

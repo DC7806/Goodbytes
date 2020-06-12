@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:landing]
+  skip_before_action :check_session_empty, only: [:landing]
   before_action :find_channel,  except: [:new, :create, :landing]
   before_action :find_organization, except: [:landing]
   before_action :org_admin?,      only: [:new, :create, :destroy]
