@@ -6,7 +6,6 @@ class InvitesController < ApplicationController
       invite.destroy
       @notice = "邀請刪除成功！"
     else
-      byebug
       @notice = "操作失敗！"
     end
     redirect_to root_path, notice: @notice
