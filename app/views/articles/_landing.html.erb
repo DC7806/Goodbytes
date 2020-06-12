@@ -1,3 +1,13 @@
-<section class="pb-5">
+<section class="pb-5 article-landing">
   <%= render 'articles/show' %>
+  <%=  link_to landing_channel_path(current_channel) do %>
+    <div class="back-to btn btn-primary">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+  <% end %>
+  <div data-controller="article">
+    <a id="totop" data-action="click->article#to_top">
+      <i class="fas fa-arrow-alt-circle-up"></i>
+    </a>
+  </div>
 </section>

@@ -2,24 +2,10 @@ module ApplicationHelper
 
   # 根據當前時間來打招呼
   def greet
-    now = Time.now
-    today = Date.today.to_time
-  
-    morning = today.beginning_of_day
-    noon = today.noon
-    evening = today.change( hour: 17 )
-    night = today.change( hour: 20 )
-    tomorrow = today.tomorrow
-  
-    if (morning..noon).cover? now
-      '早安'
-    elsif (noon..evening).cover? now
-      '午安'
-    elsif (evening..night).cover? now
-      '晚安'
-    elsif (night..tomorrow).cover? now
-      '晚安'
-    end
+    current_hour = Time.zone.now.hour
+    return '早安' if current_hour.in?(5..11)
+    return '午安' if current_hour.in?(12..18)
+    '晚安'
   end
 
   def render_edit_form(content, *keys)
