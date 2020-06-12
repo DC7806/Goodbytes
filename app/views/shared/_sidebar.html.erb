@@ -87,7 +87,7 @@
         <%= link_to "電子報列表", root_path if current_channel_id.present?  %>
       </div>
       <div>
-        <%= link_to "儲存連結", link_group_index_path if current_channel_id.present?  %>
+        <%= link_to "文案產生器", link_group_index_path if current_channel_id.present?  %>
       </div>
       <div>
         <%=  link_to "公開平台", landing_channel_path(current_channel) if current_channel_id.present? %>

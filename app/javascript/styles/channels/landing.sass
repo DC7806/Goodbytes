@@ -1,17 +1,24 @@
 section
   min-height: calc( 100vh - #{$footer-height} )
+  .post
+    width: 50%
+    min-width: 300px
   .landing-header
     position: relative
     background-color: $text-color
     color: white
     padding: 85px 0
     .home
+      background-color: $text-color
       position: fixed
       left: 30px
       top: 10px
       font-size: 15px
-      a:hover
+      z-index: 999
+      &:hover
         color: black
+        box-shadow: none
+      
       &.btn-outline-light
         color: $primary-color
         border-color: $primary-color
@@ -19,6 +26,8 @@ section
           color: $text-color
           background-color: $primary-color
           border-color: $primary-color
+        &:focus
+          box-shadow: none
     h3
       padding: 0 0 30px
     form

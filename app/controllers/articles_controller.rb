@@ -36,7 +36,7 @@ class ArticlesController < ApplicationController
 
   def show
     @contents = @article.contents.order(:position)
-    render "articles/_show", layout: "landing"
+    render "articles/_landing", layout: "landing"
   end
 
   def edit
