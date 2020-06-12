@@ -39,8 +39,7 @@ export default class extends Controller {
               </ul>
           </div>`)
         let notify = $($(".flash").find(".alert").get(-1))
-        notify.delay(2000).fadeOut("slow")
-        setTimeout(()=>{notify.remove()},3000)
+        fadeOut(notify)
         
         $("#form-area").append(resp.form)
         $("#drag_area").append(resp.drag)
@@ -61,6 +60,8 @@ export default class extends Controller {
     let thisLoader = contentTarget.find(".content-insert-loader").get(0)
     thisLoader.style.position = "absolute"
     thisLoader.style.margin = 0
+    thisLoader.style.height = contentTarget.height() + "px"
+    thisLoader.style.width = contentTarget.width() + "px"
 
     $("#add").show()
     $("#back").hide()
@@ -81,6 +82,8 @@ export default class extends Controller {
       let thisLoader = contentTarget.find(".content-insert-loader").get(0)
       thisLoader.style.position = "absolute"
       thisLoader.style.margin = 0
+      thisLoader.style.height = contentTarget.height() + "px"
+      thisLoader.style.width = contentTarget.width() + "px"
       Rails.ajax({
         url: url,
         type: "DELETE", 

@@ -89,8 +89,8 @@ class ArticlesController < ApplicationController
 
   def give_default_header_and_footer
     unless @article.header and @article.footer
-      @article.header = File.open("app/views/shared/template/header.html.erb").read
-      @article.footer = File.open("app/views/shared/template/footer.html.erb").read
+      @article.header = render_to_string "shared/template/header", layout: false
+      @article.footer = render_to_string "shared/template/footer", layout: false
       @article.save
     end
   end

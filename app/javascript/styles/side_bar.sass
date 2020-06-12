@@ -6,7 +6,8 @@
   padding: 1.5rem 1rem
   text-align: center
   position: fixed
-  z-index: 3
+  z-index: 99
+  
 
   .sidebar__logo
     color: $dark-primary-color
@@ -73,6 +74,7 @@
     margin: 0 1rem
 
   .sidebar__menu--push-down
-    position: absolute
-    bottom: 2rem
-    left: 2rem
+    position: relative
+    margin: 12rem 1rem 2rem 
+aside.sidebar:not(.content-sidebar)
+  overflow-y: auto
