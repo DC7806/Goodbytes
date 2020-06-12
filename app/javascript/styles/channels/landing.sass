@@ -1,0 +1,58 @@
+section
+  min-height: calc( 100vh - #{$footer-height} )
+  .post
+    width: 50%
+    min-width: 300px
+  .landing-header
+    position: relative
+    background-color: $text-color
+    color: white
+    padding: 85px 0
+    .home
+      background-color: $text-color
+      position: fixed
+      left: 30px
+      top: 10px
+      font-size: 15px
+      z-index: 999
+      &:hover
+        color: black
+        box-shadow: none
+
+      &.btn-outline-light
+        color: $primary-color
+        border-color: $primary-color
+        &:hover
+          color: $text-color
+          background-color: $primary-color
+          border-color: $primary-color
+        &:focus
+          box-shadow: none
+    h3
+      padding: 0 0 30px
+    form
+      .form-input
+        width: 100%
+        padding: 5px 6px
+        border: 1px solid $text-color
+        border-radius: .25rem
+      .btn
+        background-color: $dark-primary-color
+        border-color: $primary-color
+        border: 0
+        width: 100%
+        font-weight: bolder
+      .btn:hover
+        background-color: $primary-color
+  .list-group-item
+    padding: 0
+    a
+      display: inline-block
+      width: 100%
+      // padding: 12px 20px
+      padding: 0.75rem 1.25rem
+      transition: .3s
+      color: $dark-primary-color
+
+      &:hover
+        background-color: $bg-color

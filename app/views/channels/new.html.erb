@@ -6,10 +6,21 @@
   </div>
 </nav>
 
-<%= form_for @channel, url: channel_path do |f| %>
-  <%= f.hidden_field :organization_id, value: current_organization_id %>
-  <%= f.label :name, "頻道名稱" %>
-  <%= f.text_field :name %>
-  <%= f.submit "送出", disable_with: '送出中...' %>
-  
-<% end %>
+<section class="channel-show py-4">
+  <div class="card">
+    <div class="card-header">
+      新增頻道
+    </div>
+    <div class="card-body p-2">
+      <%= form_for @channel, url: channel_path do |f| %>
+        <div class="px-3 py-2">
+          <%= f.hidden_field :organization_id, value: current_organization_id %>
+          <%= f.label :name, "頻道名稱", class:"mx-2" %>
+          <%= f.text_field :name, style:"width:30%;min-width:200px;" %>
+
+          <%= f.submit "送出", class:"btn-sm btn-primary mx-2", style:"transition:.3s", disable_with: '送出中...' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,14 +1,14 @@
 .edit-wrapper
   background: #fafafa
   min-height: calc( 100vh - #{$top-bar-height} )
-  padding-top: 3rem
+  padding-top: 1.5rem
   padding-bottom: 2rem
 
   .user-edit
 
   .account_setting_wrapper
     margin: auto
-    width: 90%
+    width: 95%
 
     .card
       margin-bottom: 1.5rem
@@ -62,3 +62,23 @@
         margin-top: .5em
         margin-bottom: .5em
         margin-left: 0
+
+      .nav-tabs .nav-link.active
+        background-color: #E0F1F3
+        color: $dark-color
+        font-weight: bold
+
+        &:hover
+          color: $dark-color
+          cursor: default
+          
+      
+      .nav-tabs .nav-link
+        border-color: #E0F1F3 !important
+        border-radius: 0
+        transition: .3s
+        font-weight: bold
+        
+        &:hover
+          color: $dark-primary-color
+          transition: .3s

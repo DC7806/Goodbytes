@@ -47,7 +47,6 @@ export default class extends Controller {
   
   sideListToggle(evt){
     evt.preventDefault()
-    console.log($("#" + this.objectIdTarget.value))
     let targetObject = $("#" + this.objectIdTarget.value)
     targetObject.fadeToggle("fast")
     this.switcherTarget.focus()

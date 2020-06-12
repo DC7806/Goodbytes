@@ -2,29 +2,30 @@
   <div class="left-section">
     <%= render "shared/breadcrumb" %>
       <li class="breadcrumb-item" aria-current="page">
-        <%= link_to "Articles" %>
+        <%= link_to "新增電子報" %>
       </li>
     </ol>
   </div>
   <div class="right-section">
     <%= render "shared/user_section" %>
-    <%= link_to "新增電子報", new_article_path, class:"btn btn-primary"%>
+    <%= link_to "返回列表", root_path , class:"btn btn-primary btn-sm"%>
   </div>
 </nav>
 
-<div class="card border-info mb-3" >
-  <%= form_for @article, url: article_index_path	 do |f| %>
+<section class="channel-show py-4">
+  <div class="card">
     <div class="card-header">
-      <%= f.label :subject, "Subject" %>
-      <%= f.text_field :subject %>
+      新增電子報
     </div>
-    <div class="card-body text-info">
-      <%= f.submit "Create Article" %>
-    </div>
-  <% end %>
-</div>
+    <div class="card-body p-2">
+      <%= form_for @article, url: article_index_path	 do |f| %>
+        <div class="px-3 py-2">
+          <%= f.label :subject, "標題", class:"mx-2" %>
+          <%= f.text_field :subject, style:"width:30%;min-width:200px;" %>
 
-<%= 
-  link_to "回到文章列表", channel_path, 
-                                class:"button" 
-%>
+          <%= f.submit "新增", class:"btn-sm btn-primary mx-2", style:"transition:.3s" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

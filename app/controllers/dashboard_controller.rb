@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :regist_error
+  ]
+  skip_before_action :check_session_empty
   def index
     give_a_session_when_first_time_come
     if session_has_no_current_channel
@@ -31,6 +34,10 @@ class DashboardController < ApplicationController
     redirect_to channel_path
   end
 
+  def regist_error
+    redirect_to new_user_registration_path
+  end
+
   # 方法名稱都寫的粉清楚了，應該....不用再多說明了吧？qq
   private
   def give_a_session_when_first_time_come
@@ -45,7 +52,7 @@ class DashboardController < ApplicationController
   def new_user_go_create_channel
     @channel = current_user.channels.first
     unless @channel
-      org_id = current_user.organizations.find_by(name: current_user.email).id
+      org_id = current_user.organizations.find_by(name: current_user.email)&.id
       session["goodbytes7788"]["organization_id"] = org_id
       redirect_to new_channel_path, notice: "新增你的第一個頻道～"
       # 這邊要回傳true or false以供上方的存取介面做判斷

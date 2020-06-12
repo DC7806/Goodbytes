@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       post :sort
       post :header
       post :footer
+      get :read
     end
     resources :contents, only: [:create, :index]
   end
@@ -60,4 +61,5 @@ Rails.application.routes.draw do
   post "/subscribe",                as: "subscribe",   to: "subscribers#create"
   get  "/unsubscribe/:channel_id/", as: "unsubscribe", to: "subscribers#destroy"
 
+  get '/users', to: "dashboard#regist_error", as: "regist_refresh_error"
 end  

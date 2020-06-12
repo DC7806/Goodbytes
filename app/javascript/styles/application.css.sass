@@ -5,6 +5,7 @@ $secondary-color: #7aa7aa
 $dark-color: #4a5559
 $dark-color-blue: #566274
 $dark-color-green: #526362
+$dark-color-yellow: #9b6500
 $button-color: #ffcc33
 $button-text-color: #ffffff
 $text-color: #333333
@@ -22,7 +23,8 @@ $font-size: 16px
 $sidebar-width: 250px
 $article-sidebar-width: 320px
 $top-bar-height: 60px
-$footer-height: 9rem
+$footer-height: 5rem
+
 
 .field_with_errors
   display: inline  
@@ -34,6 +36,19 @@ $footer-height: 9rem
   color: #f66e84
   font-weight: 500
 
+html
+  body
+    .text-danger
+      transition: .3s
+      &:hover
+        transition: .3s
+        background-color: #d45965 !important
+        color: #ffffff !important
+    .input .text-danger
+      &:hover
+        transition: .3s
+        background-color: #d45965 !important
+        color: #ffffff !important
 
 
 html,
@@ -232,4 +247,3 @@ a
     .date_and_author
       color: $secondary-color
       margin: .5em 0 2em 0
-

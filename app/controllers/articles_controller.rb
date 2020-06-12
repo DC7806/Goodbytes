@@ -30,19 +30,23 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to edit_article_path(@article), notice: "電子報新增成功。"
     else
-      render :new
+      redirect_to new_article_path, alert: "電子報必須有名稱"
     end
   end
 
   def show
     @contents = @article.contents.order(:position)
-    render "articles/_show", layout: "landing"
+    render "articles/_landing", layout: "landing"
   end
 
   def edit
-    @contents = @article.contents.order(:position)
-    @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
-    render layout: "article"
+    if @article.deliver_time
+      redirect_to read_article_path
+    else
+      @contents = @article.contents.order(:position)
+      @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
+      render layout: "article"
+    end
   end
 
   def update
@@ -67,6 +71,12 @@ class ArticlesController < ApplicationController
     redirect_to channel_path, notice: "電子報刪除成功。"
   end
 
+  def read
+    @contents = @article.contents.order(:position)
+    @link_groups = @channel.link_groups.includes(:saved_links).order(:position)
+
+  end
+
   private
   def article_params
     params.require(:article).permit(:subject, :header, :footer)
@@ -79,8 +89,8 @@ class ArticlesController < ApplicationController
 
   def give_default_header_and_footer
     unless @article.header and @article.footer
-      @article.header = File.open("app/views/shared/template/header.html.erb").read
-      @article.footer = File.open("app/views/shared/template/footer.html.erb").read
+      @article.header = render_to_string "shared/template/header", layout: false
+      @article.footer = render_to_string "shared/template/footer", layout: false
       @article.save
     end
   end

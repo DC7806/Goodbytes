@@ -3,18 +3,21 @@
   height: 100vh
   background: $bg-color
   box-shadow: 0 1px .05rem .02rem $border-color
-  padding: 1.5rem 2rem
+  padding: 1.5rem 1rem
   text-align: center
   position: fixed
-  z-index: 3
+  z-index: 99
 
   .sidebar__logo
-    color: $text-color
+    color: $dark-primary-color
     display: inline-block
+    transition: .3s
+    &:hover
+      color: $primary-color
 
   .logo_hr
     background-color: $primary-color
-    margin: 0 1.5rem 1.5rem 
+    margin: 0 1.5rem 1.5rem
 
   a
     text-decoration: none
@@ -30,40 +33,28 @@
     &:active
       color: $primary-color
 
+  .bg-select
+    background-color: $bg-color
+    filter: brightness(115%)
   .sidebar__menu
     display: flex
     flex-direction: column
+    align-items: start
 
     div
       text-align: right
       line-height: 2rem
 
-    //side bar hover border line
-  .sidebar-line
-    a
-      position: relative
-
-    a::after
-      content: ""
-      width: 0
-      height: 1.5px
-      position: absolute
-      margin-bottom: 1px
-      transition: .3s ease-out
-      background: $primary-color
-
-    a:hover::after
-      width: 100%
-
-    a::after
-      right: 0
-      bottom: 0
-      transition-duration: .3s
+    .sidebar-selector
+      font-size: .9rem
+      margin-bottom: -.4rem
+      margin-top: .5rem
 
   .sidebar__menu--push-up
     margin: 0 1rem
 
   .sidebar__menu--push-down
-    position: absolute
-    bottom: 2rem
-    right: 3rem
+    position: relative
+    margin: 15rem 1rem 2rem
+aside.sidebar:not(.content-sidebar)
+  overflow-y: auto

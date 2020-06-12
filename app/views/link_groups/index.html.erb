@@ -2,7 +2,7 @@
   <div class="left-section">
     <%= render "shared/breadcrumb" %>
       <li class="breadcrumb-item" aria-current="page">
-        <%= link_to "Links", link_group_index_path %>
+        <%= link_to "文案產生器", link_group_index_path %>
       </li>
     </ol>
   </div>
@@ -10,7 +10,7 @@
     <%= render "shared/user_section" %>
     <%# AJAX create group %>
       <div data-toggle="modal" data-target="#create-group" class="d-inline-block">
-        <%= link_to "新增群組", new_link_group_path, remote: true, class:"btn btn-primary btn-sm" %>
+        <%= link_to "新增群組", new_link_group_path, remote: true, class:"btn btn-primary btn-sm link-btn" %>
       </div>
   </div>
 </header>
@@ -29,8 +29,11 @@
               </button>
             </div>
             <div class="modal-body">
+              <div class="d-flex justify-content-between">
+                <%= f.label :name, "群組名稱" %>
+                <div class="error-txt text-right hidden">必須填入名稱</div>
+              </div>
               <div>
-                <%= f.label :name %>
                 <%= f.text_field :name, class: "group_name" %>
               </div>
             </div>

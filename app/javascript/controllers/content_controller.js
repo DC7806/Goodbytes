@@ -11,6 +11,7 @@ export default class extends Controller {
     let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
     $(contents).append(loaderTemplate)
     let thisLoader = $(contents).children().get(-1)
+    thisLoader.style.height = "150px"
     let data = JSON.stringify({
       layout: this.layoutTarget.value,
       title: this.titleTarget.value,
@@ -28,6 +29,18 @@ export default class extends Controller {
         return true
       },
       success: resp => {
+        $('.flash').append(
+          `<div class="alert alert-success">
+            <a class="close" data-dismiss="warning">&#215;</a>
+              <ul>
+                <li>
+                  已新增樣板
+                </li>
+              </ul>
+          </div>`)
+        let notify = $($(".flash").find(".alert").get(-1))
+        fadeOut(notify)
+        
         $("#form-area").append(resp.form)
         $("#drag_area").append(resp.drag)
         $(thisLoader).replaceWith(resp.show)
@@ -47,6 +60,8 @@ export default class extends Controller {
     let thisLoader = contentTarget.find(".content-insert-loader").get(0)
     thisLoader.style.position = "absolute"
     thisLoader.style.margin = 0
+    thisLoader.style.height = contentTarget.height() + "px"
+    thisLoader.style.width = contentTarget.width() + "px"
 
     $("#add").show()
     $("#back").hide()
@@ -57,12 +72,18 @@ export default class extends Controller {
 
   delete(evt){
     evt.preventDefault()
-    let method = $(this.deleteBtnTarget).attr("data-method")
     let url = $(this.urlTarget).val()
     let id = this.urlTarget.id
     
     if(confirm("確定刪除此內容？")){
-      $(`.content[data-id=${id}]`).get(0).innerHTML = $("#content-insert-loader").get(0).innerHTML
+      let contentTarget = $(`.content[data-id=${id}]`)
+      let loaderTemplate = $("#content-insert-loader").get(0).innerHTML
+      contentTarget.prepend(loaderTemplate)
+      let thisLoader = contentTarget.find(".content-insert-loader").get(0)
+      thisLoader.style.position = "absolute"
+      thisLoader.style.margin = 0
+      thisLoader.style.height = contentTarget.height() + "px"
+      thisLoader.style.width = contentTarget.width() + "px"
       Rails.ajax({
         url: url,
         type: "DELETE", 

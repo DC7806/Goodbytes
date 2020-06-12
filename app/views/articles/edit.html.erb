@@ -4,7 +4,7 @@
     <div class="article-sidebar">
       <div data-controller="switch" id="switch-area">
         <!-- 新增鈕 -->
-        <a href="#" data-action="click->switch#toAddContent" id="add" class="list-group-item border-0">+ 文章段落</a>
+        <a href="#" data-action="click->switch#toAddContent" id="add" class="list-group-item border-0">+ 段落</a>
         <!-- 返回鈕 -->
         <a href="#" data-action="click->switch#toDrag" id="back" style="display: none;" class="list-group-item">返回</a>
       </div>
@@ -85,33 +85,39 @@
     <div class="left-section">
       <%= render "shared/breadcrumb" %>
         <li class="breadcrumb-item" aria-current="page">
-          <%= link_to "Articles" %>
+          <%= link_to "電子報編輯" %>
         </li>
         <li class="breadcrumb-item" aria-current="page">
-          <a class="title" href=""><%= @article.subject %></a>
+          <a class="title" href=""><%= @article.subject.limit(30) %></a>
           <%= text_field_tag :subject, @article.subject, id: "subject-editor",class: "w-75 form-controll", style: "display: none" %>
           
         </li>
       </ol>
     </div>
     <div class="right-section" data-controller="switch">
-      <a href="#" class="btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">編輯標題</a>
-      <a href="#" class="btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
-      <a href="#" class="btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
-      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm" %>
+      <a href="#" class="mr-2 btn btn-primary btn-sm edit" data-action="click->switch#toEditSubject">修改標題</a>
+      <a href="#" class="mr-1 btn btn-success btn-sm submit" style="display: none;" data-controller="article" data-action="click->article#submit">確認</a>
+      <a href="#" class="mr-2 btn btn-light btn-sm cancel" style="display: none;" data-action="click->switch#toEditSubject">取消</a>
+      <%= link_to "寄送電子報", "#", class: "btn btn-success btn-sm", data: {value: @article.id, controller: "mail", action: "click->mail#deliver"} %>
     </div>
   </nav>
   <div class="sort-loader" style="display: none">
     <%= render "shared/loader/sort_loader" %>
   </div>
 
-  <div class="card-body container">
+  <div class="article-body card-body container" data-controller="article">
 
     <section class="article-content">
-    
+      <div class="width-icon">
+        <div class="btn border mobile" data-action="click->article#mobile">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="btn border desktop" data-action="click->article#desktop">
+          <i class="fas fa-desktop"></i>
+        </div>
+      </div>
       <!-- 文章內容 -->
-
-      <div class="card-body container">
+      <div class="card-body container" id="article-part">
 
         <!-- 頁首 -->
         <%#<!-- 要加上html_safe才能讓純字串被渲染成html頁面 -->%>

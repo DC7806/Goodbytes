@@ -15,12 +15,12 @@ export default class extends Controller {
 
     // 從html讀出文字
     let preheader = $("#header-preheader").text()
-    let title = $("#header-title h3").text()
+    let title = $("#header-title").text()
     let desc = $("#header-desc").text()
 
     // 從html讀出顯示狀態
     let showPreheader = $("#header-preheader").is(":visible")
-    let showTitle = $("#header-title h3").is(":visible")
+    let showTitle = $("#header-title").is(":visible")
     let showDesc = $("#header-desc").is(":visible")
 
     // 把值塞入表格
@@ -45,7 +45,7 @@ export default class extends Controller {
 
     // 把文字塞回html
     $("#header-preheader").text(preheader)
-    $("#header-title h3").text(title)
+    $("#header-title").text(title)
     $("#header-desc").text(desc)
 
     // 依true or false控制顯示

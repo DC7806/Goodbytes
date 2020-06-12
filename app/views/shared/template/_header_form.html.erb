@@ -1,25 +1,44 @@
+<% comment do %>
 <!-- <%#header跟footer比較特別，他們要各自獨立一個檔案%> -->
+<% end %>
+
 <div style="display: none;" class="edit_content" id="edit_header" data-controller="header">
   <div class="form-group">
-    <div class="d-flex justify-content-between">
-      <div><label for="edit-preheader">preheader</label></div>
-      <div class="col-2"><input data-target="header.showPreheader" type="checkbox"></div>
+    <div class="d-flex justify-content-between custom-control custom-switch">
+      <div>
+        前文
+      </div>
+      <div>
+        <input data-target="header.showPreheader" type="checkbox" class="custom-control-input" id="edit-preheader">
+        <label for="edit-preheader" class="custom-control-label" ></label>
+      </div>
     </div>
     <input data-target="header.preheader" class="form-control" type="text" id="edit-preheader">
   </div>
   <div class="form-group">
-    <div class="d-flex justify-content-between">
-      <div><label for="edit-title">title</label></div>
-      <div class="col-2"><input data-target="header.showTitle" type="checkbox"></div>
+    <div class="d-flex justify-content-between custom-control custom-switch">
+      <div>
+        標題
+      </div>
+      <div>
+        <input data-target="header.showTitle" type="checkbox" class="custom-control-input" id="edit-title">
+        <label for="edit-title" class="custom-control-label" ></label>
+      </div>
     </div>
     <input data-target="header.title" class="form-control" type="text" id="edit-title">
   </div>
   <div class="form-group">
-    <div class="d-flex justify-content-between">
-      <div><label for="edit-desc">desc</label></div>
-      <div class="col-2"><input data-target="header.showDesc" type="checkbox"></div>
+    <div class="d-flex justify-content-between custom-control custom-switch">
+        <div>
+          簡述
+        </div>
+        <div>
+          <input data-target="header.showDesc" type="checkbox" class="custom-control-input" id="edit-desc">
+          <label for="edit-desc" class="custom-control-label" ></label>
+        </div>
     </div>
-    <textarea style="height: 200px;resize: none" data-target="header.desc" class="form-control" id="edit-desc"></textarea>
+    <textarea style="height: 200px;resize: none" data-target="header.desc" class="form-control" id="edit-desc">
+    </textarea>
   </div>
-  <button class="form-control" data-action="click->header#submit">OK</button>
+  <button class="form-control ok-button" data-action="click->header#submit">OK</button>
 </div>
