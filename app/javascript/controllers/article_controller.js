@@ -49,4 +49,9 @@ export default class extends Controller {
     // 總寬600
   }
 
+  to_top(evt){
+    evt.preventDefault()
+    $('html').animate({scrollTop: 0}, 500);
+  }
+
 }

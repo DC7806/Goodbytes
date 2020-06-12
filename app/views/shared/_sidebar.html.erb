@@ -36,7 +36,7 @@
           </div>
         </div>
       <% else %>
-        <div class="border pr-2 w-100">
+        <div class="border pr-2 w-100 bg-select">
           <div class="d-flex justify-content-between pl-2" href="#">
             <p class="mb-0 text-truncate text-break">
               <%= current_organization.name %>
@@ -73,7 +73,7 @@
             </div>
           </div>
         <% else %>
-        <div class="border pr-2 w-100">
+        <div class="border pr-2 w-100 bg-select">
           <div class="d-flex justify-content-between pl-2" href="#">
             <p class="mb-0 text-truncate text-break">
                 <%= current_channel.name %>
@@ -92,6 +92,9 @@
       <div>
         <%=  link_to "公開平台", landing_channel_path(current_channel) if current_channel_id.present? %>
       </div>
+      <% unless current_channel_id %>
+        <div class="first_channel_blank"></div>
+      <% end %>
     </nav>
 
     <nav class="sidebar__menu sidebar__menu--push-down sidebar-line">
