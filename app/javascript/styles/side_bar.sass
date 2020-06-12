@@ -10,8 +10,11 @@
   
 
   .sidebar__logo
-    color: $text-color
+    color: $dark-primary-color
     display: inline-block
+    transition: .3s
+    &:hover
+      color: $primary-color
 
   .logo_hr
     background-color: $primary-color
@@ -74,4 +77,4 @@
     position: relative
     margin: 12rem 1rem 2rem 
 aside.sidebar:not(.content-sidebar)
-  overflow-y: scroll
+  overflow-y: auto

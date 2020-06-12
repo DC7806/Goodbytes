@@ -47,7 +47,7 @@
             <%= email_field_tag :email, nil, class: "form-control col-auto",placeholder: "請輸入收件者電子信箱" %>
             <input type="hidden" name="organization_id" value="<%= @organization.id %>">
           </div>
-          <input class="btn btn-outline-secondary" type="submit" value="寄送邀請">
+          <input class="btn btn-primary" type="submit" value="寄送邀請">
           </div>
         <% end %>
       </div>
@@ -67,8 +67,8 @@
                   <td class="row">
                     <input type="hidden" name="organization_id" value="<%= invite.item_id %>">
                     <input type="hidden" name="email" value="<%= invite.receiver %>">
-                    <input class="btn btn-outline-secondary" type="submit" value="再次邀請">
-                    <%= link_to "取消邀請", cancel_invite_path(token: invite.token), data: {confirm: "確定？"}, method: 'delete' , class: "btn btn-outline-info"
+                    <input class="btn btn-primary" type="submit" value="再次邀請">
+                    <%= link_to "取消邀請", cancel_invite_path(invite_token: invite.token), data: {confirm: "確定？"}, method: 'delete' , class: "btn  btn-outline-secondary"
                     %>
                   </td>
                 <% end %>
@@ -97,8 +97,8 @@
           <tbody>
             <% @users.each do |user| %>
               <tr>
-                <td><%= user.email %></td>
-                <td><%= user.name.limit(30) %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.name %></td>
                 <% if user == current_user %>
                   <td>
                     <%= user.role %>
@@ -120,7 +120,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn btn-outline-info" %>
+                    <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn border-danger text-danger" %>
                   </td>
                 <% end %>
               </tr>
@@ -157,12 +157,12 @@
         <h6 class="card-title m-0">新增組織</h6>
       </div>
       <div class="card-body text-center">
-        <div class="form-row align-items-center">
-          <%= form_for(Organization.new, url: organization_path, class: "org-form", method: 'post') do |f| %>
+        <div class="form-row align-items-center p-4">
+          <%= form_for(Organization.new, url: organization_path, class: "org-form m-0 p-0", method: 'post') do |f| %>
             <div class="field">
-            <%= f.label :name, "名稱：", class:"col-auto col-form-label"%>
+            <%= f.label :name, "新增頻道：", class:"col-auto col-form-label p-0"%>
             <%= f.text_field :name, placeholder: "請輸入新增組織名稱" %>
-            <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-outline-secondary" %>
+            <%= f.submit "新增", data: {disable_with: "請稍等.."}, class:"btn btn-primary" %>
             </div>
           <% end %>
         </div>
@@ -179,13 +179,13 @@
             <h6 class="col-auto col-form-label">組織改名：</h6>
             <%= form_for(@organization, url: organization_path, method: 'patch') do |f| %>
             <%= f.text_field :name, value: "", placeholder: "請輸入新名稱" %>
-            <%= f.submit "送出", class: "btn btn-outline-secondary" %>
+            <%= f.submit "送出", class: "btn btn-primary" %>
             <% end %>
           </div>
           <div class="form-row align-items-center">
-            <h6 class="col-auto col-form-label">刪除組織</h6>
+            <h6 class="my-4 col-auto col-form-label">刪除組織：</h6>
             <%= form_tag(organization_path, method: 'delete') do %>
-              <%= submit_tag "刪除組織", class: "btn btn-outline-info", data: {confirm: "確定要刪除組織 #{@organization.name} ?"} %>
+              <%= submit_tag "刪除組織", class: "m-0 btn border-danger text-danger", data: {confirm: "確定要刪除組織 #{@organization.name} ?"} %>
             <% end %>
           </div>
         </div>

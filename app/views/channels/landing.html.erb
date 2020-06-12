@@ -1,17 +1,17 @@
 <section>
   <div class="landing-header">
-    <div class="home btn btn-outline-light">
-      <a href="/">
+    <a class="home btn btn-outline-light" href="/">
+      <div>
         <i class="fas fa-home"></i>
-        Goodbytes
-      </a>
-    </div>
+        <span class="d-none d-sm-inline">Goodbytes</span>
+      </div>
+    </a>
     <h3 class="text-center">
      頻道：<%= @channel.name %>
     </h3>
     <%= form_for @subscriber, url: subscribe_path, method: "post", html: {class: "d-flex flex-wrap"}, remote: true do |f| %>
-        <div class="col-md-3 col-sm-0"></div>
-        <div class="col-md-6 col-sm-12 d-flex flex-wrap">
+        <div class="col-md-3 col-sm-1 col-1"></div>
+        <div class="col-md-6 col-sm-10 col-10 d-flex flex-wrap">
           <div class="col-md-9 col-sm-12 p-1">
             <%= f.email_field :email , placeholder: "請輸入您的信箱", class:"form-input" %>
             <%= f.hidden_field :channel_id, value: @channel.id, class: "input" %>
@@ -20,18 +20,27 @@
             <%= f.submit "訂閱我們", class: "btn btn-warning" %>
           </div>
         </div>
-        <div class="col-md-3 col-sm-0"></div>
+        <div class="col-md-3 col-sm-1 col-1"></div>
     <% end %>
   </div>
-  <div class="w-50 mx-auto mt-5">
-    <div style="min-height: 40vh">
+  <div class="post mx-auto mt-5">
+    <div style="min-height: 40vh" class="pb-5">
       <div>
         <h5>最新電子報</h5>
       </div>
-      <% @articles.each do |article| %>
-        <p class="list-group-item border-bottom mb-0">
-          <%= link_to article.subject, article_path(article) %>
-        </p>
+      <% @articles.sort{ |obj1,obj2| obj2.deliver_time <=> obj1.deliver_time }.each do |article| %>
+        <div class="list-group-item border rounded mb-0 my-3">
+          <%= link_to article_path(article) do %>
+            <div>
+              <h3 class="subject">
+                <%= article.subject %>
+              </h3>
+              <div>
+                <small class="text-muted"><%= article.deliver_time.strftime('%Y-%m-%d') %></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
