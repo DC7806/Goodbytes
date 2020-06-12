@@ -31,7 +31,7 @@
             height: $top-bar-height
             display: block
             width: calc(100% - #{$sidebar-width})
-          
+
           .top-bar  //浮動定位top-bar
             position: fixed
             z-index: 2
@@ -48,15 +48,14 @@
 
             .btn
               color: $text-color
-              background-color: $bg-color
+              background-color: white
               border: none
               box-sizing: border-box
 
-
               &:hover
-                background-color: $primary-color
+                border: 1px solid $dark-primary-color
+                color: $dark-primary-color
 
-            
             .user-section
               color: #ffffff
               display: inline
