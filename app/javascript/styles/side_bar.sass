@@ -1,6 +1,7 @@
 .sidebar
   width: $sidebar-width
   height: 100vh
+  min-height: 500px
   background: $bg-color
   box-shadow: 0 1px .05rem .02rem $border-color
   padding: 1.5rem 1rem
@@ -40,6 +41,7 @@
     display: flex
     flex-direction: column
     align-items: start
+    overflow-y: auto
 
     div
       text-align: right
@@ -55,6 +57,7 @@
 
   .sidebar__menu--push-down
     position: relative
-    margin: 15rem 1rem 2rem
+    margin: 15rem 1rem 0
+
 aside.sidebar:not(.content-sidebar)
   overflow-y: auto
