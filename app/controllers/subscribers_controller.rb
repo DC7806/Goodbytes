@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController
   skip_before_action :authenticate_user!
-
+  skip_before_action :check_session_empty
   def create
     # 傳入參數預期應該會有
     #   channel id: 頻道id

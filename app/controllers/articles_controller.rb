@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :check_session_empty, only: [:show]
   before_action :find_article, except: [:new, :create]
   before_action :find_channel, except: [:show]
   before_action :channel_admin?, only: [:destroy]
