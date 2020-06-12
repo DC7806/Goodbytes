@@ -17,3 +17,8 @@ require("@rails/activestorage").start();
 require("channels");
 require("scripts");
 require("popper.js");
+
+window.fadeOut = function(notify){
+  notify.delay(2000).fadeOut("slow")
+  setTimeout(()=>{notify.remove()},3000)
+}
