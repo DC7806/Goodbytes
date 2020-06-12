@@ -119,10 +119,10 @@
                       </select>
                     <% end %>
                   </td>
+                  <td>
+                    <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn border-danger text-danger" %>
+                  </td>
                 <% end %>
-                <td>
-                  <%= link_to "刪除", organization_role_path(@organization, user_id: user.id, id: 'd'),data: {confirm: "確定？"}, method: "delete", class:"btn border-danger text-danger" %>
-                </td>
               </tr>
             <% end %>
           </tbody>
