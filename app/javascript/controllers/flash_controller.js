@@ -7,10 +7,6 @@ export default class extends Controller {
     for(let obj of flash.children()){
       fadeOut($(obj))
     }
-    flash.on("change", evt => {
-      console.log(this)
-      console.log(evt.target)
-    })
   }
 
 }
