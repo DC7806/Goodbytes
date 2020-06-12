@@ -1,13 +1,13 @@
 .sidebar
   width: $sidebar-width
   height: 100vh
+  min-height: 500px
   background: $bg-color
   box-shadow: 0 1px .05rem .02rem $border-color
   padding: 1.5rem 1rem
   text-align: center
   position: fixed
   z-index: 99
-  
 
   .sidebar__logo
     color: $dark-primary-color
@@ -18,7 +18,7 @@
 
   .logo_hr
     background-color: $primary-color
-    margin: 0 1.5rem 1.5rem 
+    margin: 0 1.5rem 1.5rem
 
   a
     text-decoration: none
@@ -34,47 +34,30 @@
     &:active
       color: $primary-color
 
+  .bg-select
+    background-color: $bg-color
+    filter: brightness(115%)
   .sidebar__menu
     display: flex
     flex-direction: column
     align-items: start
+    overflow-y: auto
 
     div
       text-align: right
       line-height: 2rem
-    
+
     .sidebar-selector
       font-size: .9rem
       margin-bottom: -.4rem
       margin-top: .5rem
-
-    //side bar hover border line
-  .sidebar-line
-    a
-      position: relative
-
-    a::before
-      content: ""
-      width: 0
-      height: 1.5px
-      position: absolute
-      margin-bottom: 1px
-      transition: .3s ease-out
-      background: $primary-color
-
-    a:hover::before
-      width: 100%
-
-    a::before
-      left: 0
-      bottom: 0
-      transition-duration: .3s
 
   .sidebar__menu--push-up
     margin: 0 1rem
 
   .sidebar__menu--push-down
     position: relative
-    margin: 12rem 1rem 2rem 
+    margin: 15rem 1rem 0
+
 aside.sidebar:not(.content-sidebar)
   overflow-y: auto
