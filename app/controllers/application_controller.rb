@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     elsif purview_check(current_organization, member)
       # 而如果是organization member代表此組織沒有可以給你編輯的channel
       # TODO: 這邊的render應該之後要有個模版可以給他render，暫時先這樣
-      render html: "此組織目前沒有可供編輯的頻道～", layout: true
+      render "channels/no_channel"
     else
       redirect_to root_path, notice: '沒有權限進行此操作！'
     end
