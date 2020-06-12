@@ -51,10 +51,10 @@
             <% @messages.each do |invite| %>
             <tr>
               <td><%= invite.sender.email %></td>
-              <td><%= invite.type_in_chinese %></td>
-              <td><%= invite.item.name %></td>
-              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-outline-secondary" %>
-                  <%= link_to "拒絕", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn btn-outline-info" %></td>
+              <td><%= invite.type_in_chinese.limit(20) %></td>
+              <td><%= invite.item.name.limit(20) %></td>
+              <td><%= link_to "同意", "/#{invite.item_type.downcase}/role/#{invite.token}", class:"btn btn-primary" %>
+                  <%= link_to "拒絕", cancel_invite_path(token: invite.token), method: 'delete', class:"btn btn btn-outline-secondary" %></td>
             </tr>
             <% end %>
           </tbody>
@@ -71,30 +71,41 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             
           
-            <div class="field">
-              <%= f.label :email, "電子信箱" %><br />
+            <div class="field border text-muted px-3 pt-2 rounded w-100 bg-light">
+              <%= f.label :email, "電子信箱：" %>
               <label><%= resource.email %></label>
             </div>
           
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>此信箱確認中<%= resource.unconfirmed_email %></div>
             <% end %>
-            
-            <div class="field">
-              <%= f.label :name, "更改顯示名稱" %>（如不修改請留白）<br />
-              <%= f.text_field :name, class:"form-control" %> 
-            </div>
 
-            <div class="field">
-              <%= f.label :password, " 輸入新密碼" %>（如不修改請留白）<br />
-              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %> <small id="emailHelp" class="form-text text-muted"><% if @minimum_password_length %>
-                (長度至少<%= @minimum_password_length %>位)
-              <% end %></small>
-            </div>
-          
-            <div class="field">
-              <%= f.label :password_confirmation, "確認新密碼" %>（如不修改請留白）<br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+            <nav class="pt-2 pb-3">
+              <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
+                <a class="col-6 text-center nav-item nav-link active" id="change-name" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">更改顯示名稱</a>
+                <a class="col-6 text-center nav-item nav-link" id="change-password" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">重設密碼</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="change-name">
+                <div class="field">
+                  <%= f.label :name, "更改顯示名稱" %><br />
+                  <%= f.text_field :name, class:"form-control" %> 
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="change-password">
+                <div class="field">
+                  <%= f.label :password, " 新密碼" %><br />
+                  <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %> <small id="emailHelp" class="form-text text-muted"><% if @minimum_password_length %>
+                    (長度至少<%= @minimum_password_length %>位)
+                  <% end %></small>
+                </div>
+              
+                <div class="field">
+                  <%= f.label :password_confirmation, "確認新密碼" %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+                </div>
+              </div>
             </div>
           
             <div class="field">
@@ -103,7 +114,7 @@
             </div>
           
             <p class="actions">
-              <%= f.submit "送出", class:"btn btn-outline-secondary" %>
+              <%= f.submit "送出", class:"btn btn-primary px-3 mx-0 my-2" %>
             </p>
           <% end %>
         </div>

@@ -25,6 +25,7 @@ $article-sidebar-width: 320px
 $top-bar-height: 60px
 $footer-height: 5rem
 
+
 .field_with_errors
   display: inline  
 
@@ -35,6 +36,19 @@ $footer-height: 5rem
   color: #f66e84
   font-weight: 500
 
+html
+  body
+    .text-danger
+      transition: .3s
+      &:hover
+        transition: .3s
+        background-color: #d45965 !important
+        color: #ffffff !important
+    .input .text-danger
+      &:hover
+        transition: .3s
+        background-color: #d45965 !important
+        color: #ffffff !important
 
 
 html,
