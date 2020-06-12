@@ -31,7 +31,7 @@
             height: $top-bar-height
             display: block
             width: calc(100% - #{$sidebar-width})
-          
+
           .top-bar  //浮動定位top-bar
             position: fixed
             z-index: 2
@@ -47,16 +47,27 @@
             color: $secondary-color
 
             .btn
+              border: 1px solid #00000000 !important
               color: $text-color
-              background-color: $bg-color
+              background-color: white
               border: none
               box-sizing: border-box
-
-
               &:hover
-                background-color: $primary-color
+                border: 1px solid $dark-primary-color !important
+                color: $dark-primary-color
+            .link-btn
+              background-color: $dark-primary-color
+              color: white
+              &:hover
+                border: 1px solid $primary-color
+                color: $primary-color
+                background-color: #fff
 
-            
+            .btn-success
+              background-color: $dark-primary-color
+              color: white
+              &:hover
+                background-color: #fff
             .user-section
               color: #ffffff
               display: inline

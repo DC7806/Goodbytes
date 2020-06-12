@@ -6,10 +6,10 @@
     .card-header
       background-color: $dark-color
       color: $button-text-color
-    
+
     .card-body
       button
-    
+
         &:focus
           border: none
           outline: none
@@ -21,15 +21,14 @@
           .card-name
             line-height: 1.2rem
 
-
           &:hover
             transition: .3s
-            box-shadow: 1px 1px 3px $secondary-color 
+            box-shadow: 1px 1px 3px $secondary-color
 
           &:focus
             border: none
             outline: none
-          
+
           .card-do
             .view
               background-color: $button-color
@@ -41,19 +40,23 @@
                 filter: contrast(120%)
 
             .edit
-              border: 1px solid $primary-color
+              border: 1px solid $dark-primary-color
               transition: .3s
+              &:hover
+                transition: .3s
+                background-color: white
+                border: 1px solid $dark-primary-color
+                color: $dark-primary-color
 
             .delete
+              color: #6c757d
               border: 1px solid $border-color
               transition: .3s
 
               &:hover
                 transition: .3s
-                background-color: $primary-color
-                border: 1px solid $primary-color
-                color: $text-color
-
+                border: 1px solid #d45965
+                color: #d45965
 
 .send-all
   background-color: $dark-primary-color !important
@@ -61,4 +64,5 @@
   transition: .3s
   &:hover
     transition: .3s
+    border: none !important
     background-color: $primary-color !important
