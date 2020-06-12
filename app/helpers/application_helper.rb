@@ -3,8 +3,8 @@ module ApplicationHelper
   # 根據當前時間來打招呼
   def greet
     current_hour = Time.zone.now.hour
-    return '早安' if current_hour.in?(5..12)
-    return '午安' if current_hour.in?(13..18)
+    return '早安' if current_hour.in?(5..11)
+    return '午安' if current_hour.in?(12..18)
     '晚安'
   end
 
