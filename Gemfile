@@ -33,7 +33,7 @@ gem 'devise', '~> 4.2'
 gem 'repost'
 gem "paranoia", "~> 2.2"
 gem 'figaro', '~> 1.0'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem "fog-aws"
 gem 'rails-i18n', '~> 6.0.0'
 
